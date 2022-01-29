@@ -20,6 +20,7 @@ namespace PatientClass
 
         public float GetHealth() { return health; }
 
+        public Bodypart[] GetBodyparts() { return bodyparts; }
         // The cumulative health of all Bodyparts is 180, but the effective health of the Patient is this subtracted by 80 (to have it be 100); 
         // this ensures that vital Bodyparts are prioritized 
         public float UpdateHealth()
@@ -33,11 +34,6 @@ namespace PatientClass
             if (health < 0)
                 health = 0;
             return health;
-        }
-
-        public Bodypart[] GetBodyparts()
-        {
-            return bodyparts; 
         }
     }
 }
