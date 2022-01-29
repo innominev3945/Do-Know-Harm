@@ -34,7 +34,7 @@ public class Gauze_Script : MonoBehaviour
         transform.position = Vector2.Lerp(transform.position, mousePosition, 1);
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         // Debug.Log("Collision happened");
         if (collision.gameObject.tag == "Bleeding Wound")
@@ -52,8 +52,10 @@ public class Gauze_Script : MonoBehaviour
                 if (numClicks >= totalClicks)
                 {
                     healed = true;
-                    Debug.Log("Successfully stopped bleeding by applying pressure on wound");
                     // TODO: change wound sprite to indicate less blood
+                    GameObject wound = GameObject.Find("Bleeding Wound");
+                    wound.GetComponent<SpriteRenderer>().color = Color.grey;
+                    Debug.Log("Successfully stopped bleeding by applying pressure on wound");
                 }
                 else
                 {

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bleeding Wound
+  - Trigger 1 (TO)
+  - Trigger 2 (TO)
   layers:
   - Default
   - TransparentFX
