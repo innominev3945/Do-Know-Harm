@@ -38,6 +38,6 @@ public class PatientFunctionality : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Health: " + hero.GetHealth());
+        //Debug.Log("Health: " + hero.GetHealth());
     }
 }
