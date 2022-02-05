@@ -20,7 +20,6 @@ public class ZoomOnWound : MonoBehaviour
         camTransform = GetComponent<Transform>();
     }
 
-    // Update is called once per frame
     private void ZoomIn()
     {
         zoomedIn = !zoomedIn;
