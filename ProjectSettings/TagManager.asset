@@ -7,6 +7,8 @@ TagManager:
   - Bleeding Wound
   - Trigger 1 (TO)
   - Trigger 2 (TO)
+  - Blood Pool
+  - Gauze_Image
   layers:
   - Default
   - TransparentFX

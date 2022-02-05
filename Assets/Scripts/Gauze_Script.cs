@@ -14,6 +14,10 @@ public class Gauze_Script : MonoBehaviour
     [SerializeField] float timeLimit;
     private bool mouseButtonDown;
     private bool mouseHeldDown;
+    private int mouseHeldInBloodPoolCounter;
+    private bool mouseHeldBloodPool;
+    private bool mouseHeldInBloodPoolCollider;
+    [SerializeField] float shrinkScale;
 
     public bool healed;
 
@@ -29,6 +33,12 @@ public class Gauze_Script : MonoBehaviour
         mouseButtonDown = false;
         mouseHeldDown = false;
 
+        mouseHeldInBloodPoolCounter = 0;
+        mouseHeldBloodPool = false;
+        mouseHeldInBloodPoolCollider = false;
+
+        shrinkScale = -0.3f;
+
         healed = false;
     }
 
@@ -38,6 +48,14 @@ public class Gauze_Script : MonoBehaviour
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         transform.position = Vector2.Lerp(transform.position, mousePosition, 1);
+
+        if (mouseHeldBloodPool)
+        {
+            if (mouseHeldInBloodPoolCounter < 5)
+            {
+                mouseHeldInBloodPoolCounter++;
+            }
+        }
     }
 
     public void StopBleeding(InputAction.CallbackContext context)
@@ -51,6 +69,20 @@ public class Gauze_Script : MonoBehaviour
         {
             mouseButtonDown = false;
             mouseHeldDown = false;
+        }
+    }
+
+    public void AbsorbBlood(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            mouseHeldBloodPool = true;
+        }
+        else if (/*context.performed || */context.canceled)
+        {
+            mouseHeldBloodPool = false;
+            mouseHeldInBloodPoolCounter = 0;
+            mouseHeldInBloodPoolCollider = false;
         }
     }
 
@@ -81,6 +113,30 @@ public class Gauze_Script : MonoBehaviour
                 {
                     numClicks = 0;
                     timePassed = 0;
+                }
+            }
+        }
+
+        if (collision.gameObject.tag == "Blood Pool")
+        {
+            Debug.Log("Inside Blood Pool Collider");
+            if (mouseHeldBloodPool && (mouseHeldInBloodPoolCounter >= 1 && mouseHeldInBloodPoolCounter <= 4))
+            {
+                mouseHeldInBloodPoolCollider = true;
+                Debug.Log("Mouse held down inside blood pool collider");
+            }
+            if (mouseHeldInBloodPoolCollider)
+            {
+                // shrink blood pool sprite
+                Debug.Log("Blood pool shrinking");
+                // just need to check length of one dimension (object as whole decreases in size)
+                if (collision.gameObject.transform.localScale.x >= 0.2f)
+                {
+                    collision.gameObject.transform.localScale += new Vector3(shrinkScale, shrinkScale, shrinkScale) * Time.deltaTime;
+                }
+                else
+                {
+                    Destroy(collision.gameObject);
                 }
             }
         }

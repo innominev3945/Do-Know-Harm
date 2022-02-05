@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Thermal_Ointment_Script : MonoBehaviour
 {
@@ -8,10 +9,12 @@ public class Thermal_Ointment_Script : MonoBehaviour
 
     private bool mouseHeldDown;
     private bool enteredOtherTrigger;
+    private bool getTriggerTag;
     private bool exit;
     private int numTimes;
     [SerializeField] int totalNumTimes;
     private string triggerTag;
+    private int mouseHeldInTriggerCounter;
 
     public bool healed;
 
@@ -20,20 +23,31 @@ public class Thermal_Ointment_Script : MonoBehaviour
     {
         mouseHeldDown = false;
         enteredOtherTrigger = false;
+        getTriggerTag = false;
         exit = false;
         numTimes = 0;
         totalNumTimes = 3;
         triggerTag = "";
+        mouseHeldInTriggerCounter = 0;
+
         healed = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        mousePosition = Input.mousePosition;
+        mousePosition = Mouse.current.position.ReadValue();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         transform.position = Vector2.Lerp(transform.position, mousePosition, 1);
 
+        if (getTriggerTag)
+        {
+            if (mouseHeldInTriggerCounter < 5)
+            {
+                mouseHeldInTriggerCounter++;
+            }
+        }
+        /*
         if (Input.GetMouseButtonUp(0))
         {
             // reset if mouse button released
@@ -44,6 +58,29 @@ public class Thermal_Ointment_Script : MonoBehaviour
             triggerTag = "";
             Debug.Log("mouseHeldDown = false");
         }
+        */
+    }
+
+    public void ApplyOintment(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            getTriggerTag = true;
+
+            Debug.Log("Started");
+        }
+        else if (context.canceled)
+        {
+            // reset if mouse button released
+            mouseHeldDown = false;
+            enteredOtherTrigger = false;
+            exit = false;
+            numTimes = 0;
+            triggerTag = "";
+            getTriggerTag = false;
+            mouseHeldInTriggerCounter = 0;
+            Debug.Log("mouseHeldDown = false");
+        }
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -52,11 +89,12 @@ public class Thermal_Ointment_Script : MonoBehaviour
         if (collision.gameObject.tag == "Trigger 1 (TO)" || collision.gameObject.tag == "Trigger 2 (TO)")
         {
             // first time mouse is pressed down inside a trigger
-            if (/*!mouseHeldDown &&*/ Input.GetMouseButtonDown(0))
+            if (getTriggerTag && (mouseHeldInTriggerCounter >= 1 && mouseHeldInTriggerCounter <= 4)/*!mouseHeldDown &&*/ /*Input.GetMouseButtonDown(0)*/)
             {
                 triggerTag = collision.gameObject.tag;
                 mouseHeldDown = true;
                 Debug.Log("mouseHeldDown = true");
+                getTriggerTag = false;
             }
             // when entering trigger while mouse continues to be held down
             else if (mouseHeldDown && exit)
