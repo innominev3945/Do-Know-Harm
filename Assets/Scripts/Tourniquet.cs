@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class dragSprite : MonoBehaviour
+public class Tourniquet : MonoBehaviour
 {
     // see: https://youtu.be/eUWmiV4jRgU
 
@@ -11,23 +12,34 @@ public class dragSprite : MonoBehaviour
     private bool isBeingHeld = false;
     [SerializeField] private GameObject arm;
     private bool isOnArm = false;
+    private Vector2 mousePosition;
 
     void Update()
     {
-        if (isBeingHeld)
+        /*if (isBeingHeld)
         {
-            Vector3 mousePos = Input.mousePosition;
+            Vector3 mousePos = Input.mousePosition; // how to change to new input?
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-            this.gameObject.transform.localPosition = new Vector3(mousePos.x - startPosX, mousePos.y - startPosY, 0);
-        }
+            this.gameObject.transform.localPosition = new Vector3(mousePosition.x - startPosX, mousePosition.y - startPosY, 0); // previously mousePos instead of mousePosition
+        }*/
 
         
     }
 
-    private void OnMouseDown()
+ /*   private void OnMouseMove(InputAction.CallbackContext context)
     {
-        if (Input.GetMouseButtonDown(0))
+        mousePosition = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
+    }
+
+    public void Drag(InputAction.CallbackContext context)
+    {
+        Debug.Log(Mouse.current.position.ReadValue());
+    }*/
+
+    /*private void OnMouseDown()
+    {
+        if (Mouse.current.leftButton.wasPressedThisFrame) // Input.GetMouseButtonDown(0) previously
         {
             Vector3 mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -75,5 +87,5 @@ public class dragSprite : MonoBehaviour
         {
             arm.GetComponentInChildren<WoundBleeding>().isBleeding = true;
         }
-    }
+    }*/
 }
