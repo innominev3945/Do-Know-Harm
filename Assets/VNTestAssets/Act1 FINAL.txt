@@ -1,0 +1,258 @@
+﻿[SCENE]Act 1 - Appetizer
+[MUSIC]3
+[BG]1
+
+
+[ENTER]0
+[Stuart]
+[EXPRESSION]12
+
+
+[THOUGHT]
+It's a pretty day. Beautiful even. Birds are singing. Flowers are blooming. Christmas lights are glowing. 
+
+
+On any other day, I'd be content. Smiling even.
+
+
+But that's impossible. After all, it's almost Christmas dinner, and two dunces who haven't the slightest idea how to cook are in charge of feeding two entire families.
+
+
+[Stuart]
+[EXPRESSION]0
+
+
+[THOUGHT]
+I'm one of them.
+
+
+[ENTER]1
+[Toa]
+[EXPRESSION]3
+STUAAART, WHERE DID YOU PUT THE MEASURING CUPS?
+
+
+[THOUGHT]
+She's the other.
+
+
+[Toa]
+[EXPRESSION]0
+[Stuart]
+[EXPRESSION]3
+I don't know, you were the last one using them.
+
+
+[Stuart]
+[EXPRESSION]0
+[Toa]
+[EXPRESSION]3
+I was?
+
+
+[THOUGHT]
+She pauses. I can almost hear the clockwork gears grinding inside that head of hers.
+
+
+[Toa]
+[EXPRESSION]15
+I was!
+
+
+[Toa]
+[EXPRESSION]4
+
+
+[THOUGHT]
+She hops on her feet and trots over to the stovetop, where I see the measuring cups scattered haphazardly.
+
+
+She hums a happy christmas tune to herself as she scoops up the cups and scrambles off in another direction.
+
+
+That's Toa, my best friend for what feels like forever. Our families have been incredibly tight knit, even before we were born.
+
+
+I honestly can't recall a memory where she wasn't there by my side. Every gathering, every vacation, every holiday, we'd spend together.
+
+
+In a way, she's almost like a sister to me.
+
+
+[SFX]2
+
+
+[Toa]
+[EXPRESSION]11
+AGH-
+
+
+[THOUGHT]
+A clumsy one at that.
+
+
+[Toa]
+[EXPRESSION]8
+[Stuart]
+[EXPRESSION]3
+Toa? Are you okay?
+
+
+[Stuart]
+[EXPRESSION]0
+[Toa]
+[EXPRESSION]11
+I'm alright! Just tripped over the rug~
+
+
+[Toa]
+[EXPRESSION]12
+[THOUGHT]
+She pops up and dusts herself off, ready to zoom back to work.
+
+
+[Stuart]
+[EXPRESSION]3
+Jeez, be more careful. I don't wanna have to watch these cooking tutorials and you at the same time.
+
+
+[Stuart]
+[EXPRESSION]0
+[Toa]
+[EXPRESSION]20
+
+
+[Toa]
+I'm fine, don't worry about me! Are <i>you</i> okay?
+
+
+[Toa]
+[EXPRESSION]16
+
+
+[THOUGHT]
+Am I? God, I've been so wound up this entire day. How are we supposed to cook dinner for two whole families by tonight?
+
+
+The clock's ticking until our parents come back from last minute Christmas shopping.
+
+
+[Stuart]
+[EXPRESSION]20
+
+
+[Stuart]
+I'm alive and my heart's still beating. I'll survive. Thanks for asking.
+
+
+[Stuart]
+[EXPRESSION]16
+[Toa]
+[EXPRESSION]7
+
+
+[Toa]
+Always!
+
+
+[Toa]
+[EXPRESSION]0
+
+
+[THOUGHT]
+She pauses and leans in, studying my face for a few seconds.
+
+
+[Stuart]
+[EXPRESSION]1
+
+
+[THOUGHT]
+She's... quite close.
+
+
+[Toa]
+[EXPRESSION]20
+Hey, I know you're worried about tonight. I am too... but try and keep your chin up, okay? I promise it'll be okay!
+
+
+[Toa]
+[EXPRESSION]12
+[Stuart]
+[EXPRESSION]17
+
+
+[THOUGHT]
+She beams a sheepish smile at me. Maybe the reason she keeps tripping is because the weight of her golden heart keeps pulling her down.
+
+
+[Stuart]
+[EXPRESSION]1
+
+
+[THOUGHT]
+Oh my god, what's wrong with me? That sounded like a line out of a low-budget hallmark movie. I'm really losing it, aren't I?
+
+
+But, I can't help but notice again how close she is. I'm not opposed to it.
+On the contrary, actually...
+
+
+Christ. Snap out of it, Stuart. You have potatoes to mash.
+
+
+[Stuart]
+[EXPRESSION]2
+
+
+[Stuart]
+Yeah, you're right.
+
+
+[THOUGHT]
+No use in standing around. The first in the itinerary is mashed potatoes. A classic. 
+
+
+Hard to screw up unless you mash your finger, in which case you'd probably have bigger things to worry about.
+
+
+I grab the pot near me and start filling it with water to boil. I put it down on the stove and watch as the blue flames lick the bottom of the pot.
+
+
+[Stuart]
+[EXPRESSION]15
+
+
+[Stuart]
+Alright Toa, let's get down to business.
+
+
+[Stuart]
+[EXPRESSION]12
+[Toa]
+[EXPRESSION]15
+
+
+[Toa]
+To defeat the Huns?
+
+
+[Stuart]
+[EXPRESSION]20
+[Toa]
+[EXPRESSION]16
+
+
+[Stuart]
+Oh, shush.
+
+
+[Stuart]
+[EXPRESSION]16
+
+
+[THOUGHT]
+We giggle. Maybe we really can pull this off.
+
+
+[END]

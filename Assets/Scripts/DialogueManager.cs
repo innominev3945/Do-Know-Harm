@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using System;
+using UnityEngine.InputSystem;
 //plays script
 
 public class DialogueManager : MonoBehaviour
 {
-    private SceneManager m_SceneManager;
+    //private SceneManager m_SceneManager;
+    //DialogueSystem dialogue;
+
     DialogueSystem dialogue;
+    
 
     //script stores text to be displayed
-    new List <string> script = new List<string>();
+    List <string> script = new List<string>();
     //lineType stores what kind of line it is (music, bg, scene, name of cahracter, action, etc.)
-    new List <char> lineType = new List<char>();
+    List <char> lineType = new List<char>();
     //speaking stores who is speaking
-    new List <string> speaking = new List<string>();
+    List <string> speaking = new List<string>();
 
     [SerializeField] private TextAsset txtAsset;
     private string txt;
@@ -22,13 +27,16 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dialogue = DialogueSystem.instance;
+
+        dialogue = GetComponent<DialogueSystem>();
         txt = txtAsset.ToString();
         ReadTextFile();
+        
     }
     /**********************************************************************************************
                             READS TEXT FILE INTO 3 LISTS
     ***********************************************************************************************/
+    
     
     private void ReadTextFile()
     {
@@ -160,17 +168,17 @@ public class DialogueManager : MonoBehaviour
     int temp;
     bool isLine = false; //used to make sure a line is shown after each input
     // Update is called once per frame
-    void Update()
+
+
+    void OnClick(InputValue value)
     {
-        /**********************************************************************************************
-                            Next lines/things to do in VN based on mouse button click
-    ***********************************************************************************************/
-        if (Input.GetMouseButtonDown(0))
+
+        if (value.isPressed)
         {
-            isLine = false;
-            while (!isLine){
-                if (!dialogue.isSpeaking || dialogue.isWaitingForUserInput)
-                {
+           
+            if (!dialogue.isSpeaking || dialogue.isWaitingForUserInput)
+            {
+                while (!isLine){
                     //END OF SCRIPT
                     if (index >= script.Count)
                     {
@@ -263,13 +271,19 @@ public class DialogueManager : MonoBehaviour
                         print(temp);
                         //m_SceneManager.LoadBackground(temp);
                     }
-                    
-                    
-                                                     
                     index++;
-                    
-                }
+                }   
+                isLine = false;  
+            }else if(dialogue.isSpeaking){
+                dialogue.finishSpeaking();
             }
+            
         }
+        
+            
     }
+    /*void Update()
+    {
+     
+    }*/
 }
