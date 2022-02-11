@@ -523,7 +523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speechText: {fileID: 833670581}
   speakerName: {fileID: 111213419}
-  textSpeed: 0.2
+  textSpeed: 0
   isWaitingForUserInput: 0
 --- !u!1 &833670579
 GameObject:
