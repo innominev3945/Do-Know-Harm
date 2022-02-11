@@ -9,6 +9,7 @@ TagManager:
   - Trigger 2 (TO)
   - Blood Pool
   - Gauze_Image
+  - Foreign Object
   layers:
   - Default
   - TransparentFX
