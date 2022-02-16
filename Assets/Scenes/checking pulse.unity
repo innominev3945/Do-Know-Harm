@@ -542,8 +542,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247163103}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.34, y: 2.4, z: 29.737743}
-  m_LocalScale: {x: 0.310464, y: 0.53797275, z: 1}
+  m_LocalPosition: {x: -0.1611, y: 1.902, z: 29.737743}
+  m_LocalScale: {x: 0.46213594, y: 0.536388, z: 1}
   m_Children: []
   m_Father: {fileID: 1016840333}
   m_RootOrder: 7
@@ -588,7 +588,7 @@ SpriteRenderer:
   m_SortingLayerID: 1323200207
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 0a8c58c60105b17409c41c26f1a118d7, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -596,7 +596,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &1247163106
@@ -638,8 +638,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 1865551419}
-  pulseHand: {fileID: -2413806693520163455, guid: 210b316a6a1e8f24fb576e7e68b515be, type: 3}
-  defaultHand: {fileID: 7482667652216324306, guid: 0a8c58c60105b17409c41c26f1a118d7, type: 3}
+  pulseHand: {fileID: 21300000, guid: 20d38a23595c7bc4abbca8daddff7111, type: 3}
+  defaultHand: {fileID: 21300000, guid: b0f93e6b9d1523145bc1f1bbed21fb22, type: 3}
   heartPanel: {fileID: 1090348843}
   videoPlayer: {fileID: 1090348845}
 --- !u!1 &1301330741
@@ -1202,7 +1202,7 @@ SpriteRenderer:
   m_SortingLayerID: -256841017
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 0a8c58c60105b17409c41c26f1a118d7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b0f93e6b9d1523145bc1f1bbed21fb22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1221,7 +1221,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865551417}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.37, y: 0.22, z: 0}
+  m_LocalPosition: {x: 11.04, y: -0.46, z: 0}
   m_LocalScale: {x: 1.0239133, y: 0.99893224, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
