@@ -38,12 +38,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Neck
+    uniqueID: 2360319731
+    locked: 0
   - name: Body
     uniqueID: 1323200207
     locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Over Body
+  - name: Head
     uniqueID: 2731245263
+    locked: 0
+  - name: Over Body
+    uniqueID: 1930378543
+    locked: 0
+  - name: Cursor
+    uniqueID: 4038126279
     locked: 0

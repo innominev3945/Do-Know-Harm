@@ -1,20 +1,21 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Video;
 
-public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+
+public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
     public SpriteRenderer hand;
     public Sprite pulseHand;
     public Sprite defaultHand;
+    public GameObject heartPanel;
+    public VideoPlayer videoPlayer;
 
-    void checkPulse()
+    void Start()
     {
-        hand.sprite = pulseHand;
-    }
-
-    void returnToDefault()
-    {
-        hand.sprite = defaultHand;
+        heartPanel.SetActive(false);
     }
 
     //Detect if the Cursor starts to pass over the GameObject
@@ -23,6 +24,26 @@ public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         //Output to console the GameObject's name and the following message
         Debug.Log("Cursor Entering " + name + " GameObject");
         hand.sprite = pulseHand;
+
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        hand.sortingLayerName = "Default";
+        hand.sortingOrder = 0;
+        heartPanel.SetActive(true);
+        RenderTexture.active = videoPlayer.targetTexture;
+        GL.Clear(true, true, Color.black);
+        RenderTexture.active = null;
+
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        hand.sortingLayerName = "Cursor";
+        hand.sortingOrder = 0;
+        heartPanel.SetActive(false);
+
     }
 
     //Detect when Cursor leaves the GameObject
@@ -31,6 +52,9 @@ public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         //Output the following message with the GameObject's name
         Debug.Log("Cursor Exiting " + name + " GameObject");
         hand.sprite = defaultHand;
+        hand.sortingLayerName = "Cursor";
+        hand.sortingOrder = 0;
+
 
     }
 }
