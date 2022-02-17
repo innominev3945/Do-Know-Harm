@@ -1,23 +1,23 @@
 {
-    "name": "New Controls",
+    "name": "PlayerInput",
     "maps": [
         {
-            "name": "TreatmentGP",
-            "id": "c0ceb4c6-1c7b-422e-a98c-63cfb792de4d",
+            "name": "Treatment",
+            "id": "f1030bd0-40b8-45c6-993e-951628f6d099",
             "actions": [
                 {
-                    "name": "MouseDrag",
+                    "name": "Mouse",
                     "type": "Button",
-                    "id": "68379c06-2db3-4217-8020-0055296545f7",
+                    "id": "6a4d2c13-cee9-46d5-b04d-cdf1caee68fd",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "MousePosition",
-                    "type": "Value",
-                    "id": "35c177c5-66aa-4191-b9b0-575bde4216b0",
-                    "expectedControlType": "Vector2",
+                    "name": "Zoom",
+                    "type": "Button",
+                    "id": "7a56abc4-7ae0-45b5-ba13-cd933f2996a9",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 }
@@ -25,23 +25,23 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "2b83d5b7-9afc-4f3c-bdde-59e588540d29",
+                    "id": "fd8357ce-a8c9-459c-bbdf-ae6716e27540",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "K&M",
-                    "action": "MouseDrag",
+                    "groups": "KB&M",
+                    "action": "Mouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "6c922a22-07c4-4015-8be1-43e177495d6c",
-                    "path": "<Mouse>/position",
+                    "id": "681a096c-8b73-4e43-8235-1b8454594d10",
+                    "path": "<Mouse>/middleButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "K&M",
-                    "action": "MousePosition",
+                    "groups": "KB&M",
+                    "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -50,16 +50,16 @@
     ],
     "controlSchemes": [
         {
-            "name": "K&M",
-            "bindingGroup": "K&M",
+            "name": "KB&M",
+            "bindingGroup": "KB&M",
             "devices": [
                 {
-                    "devicePath": "<Keyboard>",
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 },
                 {
-                    "devicePath": "<Mouse>",
+                    "devicePath": "<Keyboard>",
                     "isOptional": false,
                     "isOR": false
                 }

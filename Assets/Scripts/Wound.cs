@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WoundBleeding : MonoBehaviour
+public class Wound : MonoBehaviour
 {
-
     private SpriteRenderer sprender;
     public bool isBleeding;
 
-    // Start is called before the first frame update
     void Start()
     {
         sprender = GetComponent<SpriteRenderer>();
@@ -16,7 +14,6 @@ public class WoundBleeding : MonoBehaviour
         isBleeding = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isBleeding) // need opacity transition, check Mathf.Lerp and deltaTime thing again

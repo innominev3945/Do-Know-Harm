@@ -1,28 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
-public class ZoomOnWound : MonoBehaviour
+public class Zoom : MonoBehaviour
 {
-    [SerializeField] private Button button;
     private bool zoomedIn;
-    public GameObject wound;
     [SerializeField] private int zoom;
     private Transform camTransform;
+    private Vector2 zoomPoint;
+    private int call = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        Button btn = button.GetComponent<Button>();
-        btn.onClick.AddListener(ZoomIn);
-        zoom = 2;
         camTransform = GetComponent<Transform>();
     }
 
-    private void ZoomIn()
+    public void ZoomIn(InputAction.CallbackContext context)
     {
-        zoomedIn = !zoomedIn;
+        if (context.started)
+        {
+            if (!zoomedIn)
+            {
+                Vector2 pos2D = Mouse.current.position.ReadValue();
+                zoomPoint = Camera.main.ScreenToWorldPoint(pos2D);
+            }
+            Debug.Log("called " + call);
+            call++;
+            zoomedIn = !zoomedIn;
+        }
     }
 
     // Update is called once per frame
@@ -30,8 +37,8 @@ public class ZoomOnWound : MonoBehaviour
     {
         if (zoomedIn)
         {
-            float posTempX = Mathf.Lerp(camTransform.position.x, wound.transform.position.x, Time.deltaTime * 5);
-            float posTempY = Mathf.Lerp(camTransform.position.y, wound.transform.position.y, Time.deltaTime * 5);
+            float posTempX = Mathf.Lerp(camTransform.position.x, zoomPoint.x, Time.deltaTime * 5);
+            float posTempY = Mathf.Lerp(camTransform.position.y, zoomPoint.y, Time.deltaTime * 5);
             camTransform.position = new Vector3(posTempX, posTempY, -10);
             GetComponent<Camera>().orthographicSize = Mathf.Lerp(GetComponent<Camera>().orthographicSize, zoom, Time.deltaTime * 5);
         }

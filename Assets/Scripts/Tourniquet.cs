@@ -5,87 +5,115 @@ using UnityEngine.InputSystem;
 
 public class Tourniquet : MonoBehaviour
 {
-    // see: https://youtu.be/eUWmiV4jRgU
+    private bool holdingMouse;
+    private GameObject arm;
+    public List<GameObject> wounds;
+    private bool isHeld;
+    public bool isSet;
+    public bool isTight;
+    [SerializeField] private GameObject tab;
 
-    private float startPosX;
-    private float startPosY;
-    private bool isBeingHeld = false;
-    [SerializeField] private GameObject arm;
-    private bool isOnArm = false;
-    private Vector2 mousePosition;
+
+    //note: https://forum.unity.com/threads/how-would-you-handle-a-getbuttondown-situaiton-with-the-new-input-system.627184/
+    //may want to look
+
+    void Start()
+    {
+        holdingMouse = false;
+        isHeld = false;
+    }
 
     void Update()
     {
-        /*if (isBeingHeld)
+        if (!isSet)
         {
-            Vector3 mousePos = Input.mousePosition; // how to change to new input?
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
-            this.gameObject.transform.localPosition = new Vector3(mousePosition.x - startPosX, mousePosition.y - startPosY, 0); // previously mousePos instead of mousePosition
-        }*/
-
-        
-    }
-
- /*   private void OnMouseMove(InputAction.CallbackContext context)
-    {
-        mousePosition = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
-    }
-
-    public void Drag(InputAction.CallbackContext context)
-    {
-        Debug.Log(Mouse.current.position.ReadValue());
-    }*/
-
-    /*private void OnMouseDown()
-    {
-        if (Mouse.current.leftButton.wasPressedThisFrame) // Input.GetMouseButtonDown(0) previously
-        {
-            Vector3 mousePos = Input.mousePosition;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
-            startPosX = mousePos.x - this.transform.localPosition.x;
-            startPosY = mousePos.y - this.transform.localPosition.y;
-
-            isBeingHeld = true;
+            isTight = false;
         }
-
-        
+        if (isHeld) // checks if tourniquet is being dragged
+        {
+            Vector2 pos2D = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            transform.position = pos2D;
+        }
+        if (isSet && isTight) // checks if tourniquet is on limb and tightened
+        {
+            foreach (GameObject wound in wounds)
+            {
+                if (wound.transform.position.y < this.transform.position.y)
+                {
+                    wound.GetComponent<Wound>().isBleeding = false;
+                }
+                else
+                {
+                    wound.GetComponent<Wound>().isBleeding = true;
+                }
+            }
+        }
+        else
+        {
+            foreach (GameObject wound in wounds)
+            {
+                wound.GetComponent<Wound>().isBleeding = true;
+            }
+        }
     }
 
-    private void OnMouseUp() // checks if tourniquet placed on arm
+    public void TourniquetDrag(InputAction.CallbackContext context) // formerly MouseDrag
     {
-        isBeingHeld = false;
-        Vector2 pos2D = new Vector2(transform.position.x, transform.position.y);
-        int layerMask = ~(LayerMask.GetMask("Draggable Objects"));
-        RaycastHit2D hit = Physics2D.Raycast(pos2D, -Vector2.up, Mathf.Infinity, layerMask);
-        Debug.Log(layerMask);
-        
-        if (hit.collider != null)
+        Vector2 pos2D = Mouse.current.position.ReadValue(); // is there a way to rid this of mouse dependency? last line left that uses it
+        pos2D = Camera.main.ScreenToWorldPoint(pos2D);
+        RaycastHit2D hit = Physics2D.Raycast(pos2D, Vector2.zero, Mathf.Infinity);
+
+        if (hit.collider != null && hit.collider.gameObject == tab && isSet) // checks if mouse hit tab and tourniquet is on limb
         {
-            if (hit.collider.gameObject == arm)
+            tab.GetComponent<TourniquetTab>().TabDrag();
+        }
+        else if (hit.collider != null && hit.collider.gameObject == this.gameObject) // check if tourniquet was clicked on
+        {
+            isSet = false; // holding tourniquet means it isn't applied
+
+            if (context.performed)
             {
-                Debug.Log("arm hit");
-                this.gameObject.transform.localPosition = new Vector3(arm.transform.position.x, transform.position.y, 0);
-                isOnArm = true;
+                isHeld = true;
             }
             else
             {
-                isOnArm = false;
+                isHeld = false;
+            }
+            if (context.canceled) //formerly !isHeld
+            {
+                int layerMask = ~(LayerMask.GetMask("Draggable Objects"));
+                RaycastHit2D hit2 = Physics2D.Raycast(this.transform.position, Vector2.zero, Mathf.Infinity, layerMask); // detect if/which limb tourniquet is placed on
+                if (hit2.collider != null && hit2.collider.gameObject.tag == "Limb")
+                {
+                    arm = hit2.collider.gameObject;
+                    wounds.Clear();
+                    foreach (Transform child in arm.transform) // fill up wounds list with wounds on selected limb
+                    {
+                        if (child.tag == "Wound")
+                        {
+                            wounds.Add(child.gameObject);
+                        }
+                    }
+
+                    transform.position = new Vector2(arm.transform.position.x, this.transform.position.y);
+                    transform.rotation = arm.transform.rotation;
+
+                    float heightDiff = transform.position.y - arm.transform.position.y;
+                    Vector3 eulerAngles = arm.transform.rotation.eulerAngles;
+                    float xDiff = Mathf.Tan(Mathf.Deg2Rad * eulerAngles.z) * heightDiff;
+                    transform.position = new Vector2(arm.transform.position.x - xDiff, transform.position.y);
+                    isSet = true;
+                }
+                else
+                {
+                    wounds.Clear();
+                    isSet = false;
+                    transform.rotation = Quaternion.Euler(Vector3.zero);
+                }
             }
         }
-        else
-        {
-            isOnArm = false;
+        if (!context.performed) { // bug: moving mouse fast when clicking can keep isHeld on even after released
+            isHeld = false;
         }
-
-        if (isOnArm && arm.GetComponentInChildren<Transform>().position.y < transform.position.y) // checks tourniquet is on arm and is above wound
-        {
-            arm.GetComponentInChildren<WoundBleeding>().isBleeding = false;
-        }
-        else
-        {
-            arm.GetComponentInChildren<WoundBleeding>().isBleeding = true;
-        }
-    }*/
+    }
 }

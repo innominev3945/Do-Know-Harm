@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wound
+  - Tourniquet
+  - Limb
   layers:
   - Default
   - TransparentFX
@@ -46,6 +49,9 @@ TagManager:
     locked: 0
   - name: body
     uniqueID: 1530261687
+    locked: 0
+  - name: wound
+    uniqueID: 1774343361
     locked: 0
   - name: fore
     uniqueID: 848793359
