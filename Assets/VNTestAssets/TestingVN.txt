@@ -1,4 +1,5 @@
 [MC]0
+[BG]0
 [Hannah]
 Hello, my name is Hannah.
 I don't know why I'm here.
@@ -20,6 +21,7 @@ Death beckons me.
 This is Karen testing the entrance of a third character.
 
 [ENTER]3
+[BG]1
 
 [Karen]
 Yeah so I hope that worked. The first character will leave now.

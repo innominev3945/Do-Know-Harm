@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
 
     DialogueSystem dialogue;
     CharacterManager character;
+    VNManager vnmanager;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] private float fadeSpeed;
 
@@ -36,6 +37,7 @@ public class DialogueManager : MonoBehaviour
         isBlack = true;
         dialogue = GetComponent<DialogueSystem>();
         character = GetComponent<CharacterManager>();
+        vnmanager = GetComponent<VNManager>();
         txt = txtAsset.ToString();
         ReadTextFile();
         
@@ -183,7 +185,7 @@ public class DialogueManager : MonoBehaviour
                     lineType.Add('E'); //empty = new dialogue
                     speaking.Add(speaking[speaking.Count-1]);
                     addedAgain = true;
-                    print ("E added");
+                    
                 }
                 addedAgain = true;
             }
@@ -206,21 +208,24 @@ public class DialogueManager : MonoBehaviour
     void OnClick(InputValue value)
     {
         //END OF SCRIPT
-        if(index >= script.Count)
-        {
-            return;
-        }
+        
         if (value.isPressed)
         {
-            //END OF SCRIPT
-            if(index >= script.Count)
+            
+            if (index >= script.Count && !dialogue.isSpeaking)
             {
+                //END OF SCRIPT and there aren't any lines playing
                 return;
             }
 
            
             if (!dialogue.isSpeaking || dialogue.isWaitingForUserInput)
             {
+                if(index >= script.Count)
+                {
+                    //TODO: EXIT SCENE
+                    return;
+                }
                 while (!isLine){
                     
                     if (lineType[index] == 'F')
@@ -258,12 +263,12 @@ public class DialogueManager : MonoBehaviour
                         {
                             if(lineType[index-1] == 'E')
                             {
-                                print("IT DIDNT WORK");
+                                
                                 dialogue.FadedSay(script[index]);
                                 isLine = true;
                             }else
                             {
-                                print("IT SHOULD WORK");
+                                
                                 dialogue.FadedSayAdd(script[index]);
                                 isLine = true;
                             } 
@@ -298,7 +303,6 @@ public class DialogueManager : MonoBehaviour
                     //character expression
                     else if (lineType[index] == 'A')
                     {
-                        print("EXPRESSION CHANGE DETECTED");
                         temp = Int32.Parse(speaking[index]);
                         temp2 = Int32.Parse(script[index]);
                         //changes character number temp to expression number temp2
@@ -314,16 +318,14 @@ public class DialogueManager : MonoBehaviour
                     {
                         temp = Int32.Parse(script[index]);
                         character.loadCharacter(temp);
-                        print("ENTER CHARACTER NUMBER: ");
-                        print(temp);
+                        
                         //m_SceneManager.LoadCharacter(temp);
                     }
                     //exit character
                     else if (lineType[index] == 'X')
                     {
                         temp = Int32.Parse(script[index]);
-                        print("EXIT CHARACTER: ");
-                        print(temp);
+                        
                         character.unloadCharacter(temp);
                         //m_SceneManager.UnloadCharacter(temp);
                     }
@@ -346,12 +348,11 @@ public class DialogueManager : MonoBehaviour
                     else if (lineType[index] == 'B')
                     {
                         temp = Int32.Parse(script[index]);
-                        print("BG LOADED: ");
-                        print(temp);
-                        //m_SceneManager.LoadBackground(temp);
+                        
+                        vnmanager.changeBG(temp);
                     }else if (lineType[index] == 'Z')
                     {
-                        print("MC SHOUDLVE BEEN LOADED");
+                        
                         temp = Int32.Parse(script[index]);
                         character.loadMC(temp);
                     }
@@ -359,6 +360,7 @@ public class DialogueManager : MonoBehaviour
                 }   
                 isLine = false;  
             }else if(dialogue.isSpeaking){
+                
                 dialogue.finishSpeaking(isBlack);
             }
             

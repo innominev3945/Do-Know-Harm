@@ -272,7 +272,7 @@ public class CharacterManager : MonoBehaviour
 
     public void changeExpression(int characterNumber, int expressionNumber)
     {
-        print("EXPRESSION CHANGE ATTEMPTED");
+        
         if (characterNumber == whichMC)
         {
             MC.sprite = MCExpressions[expressionNumber];
@@ -309,7 +309,7 @@ public class CharacterManager : MonoBehaviour
 
         FadeOut(MC);
         MC.sprite = MCExpressions[0];
-        print ("PLEASE WORK PLEASE WORK PLEASE WORK");
+        
         FadeIn(MC);
         return;
     }
