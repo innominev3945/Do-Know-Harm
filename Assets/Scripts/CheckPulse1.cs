@@ -24,6 +24,9 @@ public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public GameObject showText;
     bool timerActive = false;
 
+    bool hasPulse = true;
+    string pulseResult = "";
+
 
     void Start()
     {
@@ -37,6 +40,10 @@ public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     void Update()
     {
+        if (hasPulse)
+            pulseResult = "Pulse detected!";
+        else
+            pulseResult = "No pulse detected";
 
         if(timerActive)
         {
@@ -57,13 +64,11 @@ public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             if (timeStart < 3.5 && timeStart > 3)
                 textbox.text = "Checking pulse..";
             if (timeStart < 4 && timeStart > 3.5)
-                textbox.text = "Checking pulse";
+                textbox.text = "Checking pulse...";
             if (timeStart < 4.5 && timeStart > 4)
-                textbox.text = "Checking pulse.";
-            if (timeStart < 5 && timeStart > 4.5)
-                textbox.text = "Checking pulse..";
-            if (timeStart > 5)
-                textbox.text = "Pulse detected!";
+                textbox.text = "Checking pulse";
+            if (timeStart > 4.5)
+                textbox.text = pulseResult;
         }
 
     }
@@ -83,10 +88,16 @@ public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         hand.sortingLayerName = "Default";
         hand.sortingOrder = 0;
-        heartPanel.SetActive(true);
-        RenderTexture.active = videoPlayer.targetTexture;
-        GL.Clear(true, true, Color.black);
-        RenderTexture.active = null;
+       
+        //probably not needed
+       /* if (hasPulse)
+        {
+            heartPanel.SetActive(true);
+            RenderTexture.active = videoPlayer.targetTexture;
+            GL.Clear(true, true, Color.black);
+            RenderTexture.active = null;
+        }
+       */
 
         showText.SetActive(true);
 
@@ -104,6 +115,8 @@ public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         timerActive = false;
 
         showText.SetActive(false);
+
+        timeStart = 0;
 
     }
 
