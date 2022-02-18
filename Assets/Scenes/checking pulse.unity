@@ -369,6 +369,85 @@ Transform:
   m_Father: {fileID: 1016840333}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &639034557
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639034558}
+  - component: {fileID: 639034560}
+  - component: {fileID: 639034559}
+  m_Layer: 5
+  m_Name: Pulse Checker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &639034558
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639034557}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1629322087}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -681.25, y: -282.84567}
+  m_SizeDelta: {x: 383.9271, y: 50.4699}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &639034559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639034557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &639034560
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639034557}
+  m_CullTransparentMesh: 1
 --- !u!1 &1016840332
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,8 +521,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -655, y: -368}
-  m_SizeDelta: {x: -1483.5681, y: -897.8052}
+  m_AnchoredPosition: {x: -596.8937, y: -383.58948}
+  m_SizeDelta: {x: -1367.3555, y: -928.9841}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!328 &1090348845
 VideoPlayer:
@@ -528,7 +607,7 @@ GameObject:
   - component: {fileID: 1247163106}
   - component: {fileID: 1247163107}
   m_Layer: 0
-  m_Name: Carotid Artery (R)
+  m_Name: Carotid Artery 1 (R)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -542,8 +621,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247163103}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1611, y: 1.902, z: 29.737743}
-  m_LocalScale: {x: 0.46213594, y: 0.536388, z: 1}
+  m_LocalPosition: {x: -0.2365, y: 2.5781, z: 29.737743}
+  m_LocalScale: {x: 0.34512937, y: 0.5035148, z: 1}
   m_Children: []
   m_Father: {fileID: 1016840333}
   m_RootOrder: 7
@@ -642,6 +721,9 @@ MonoBehaviour:
   defaultHand: {fileID: 21300000, guid: b0f93e6b9d1523145bc1f1bbed21fb22, type: 3}
   heartPanel: {fileID: 1090348843}
   videoPlayer: {fileID: 1090348845}
+  timeStart: 0
+  textbox: {fileID: 639034559}
+  showText: {fileID: 639034557}
 --- !u!1 &1301330741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,6 +1124,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1090348844}
+  - {fileID: 639034558}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1221,8 +1304,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865551417}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.04, y: -0.46, z: 0}
-  m_LocalScale: {x: 1.0239133, y: 0.99893224, z: 1}
+  m_LocalPosition: {x: 10.9992, y: -0.4903, z: 0}
+  m_LocalScale: {x: 0.9601234, y: 0.959874, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2

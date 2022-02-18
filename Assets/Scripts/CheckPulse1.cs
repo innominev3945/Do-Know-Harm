@@ -3,19 +3,69 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Video;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.InputSystem.Interactions;
+using UnityEngine.UI;
+
 
 
 public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
+
     public SpriteRenderer hand;
     public Sprite pulseHand;
     public Sprite defaultHand;
     public GameObject heartPanel;
     public VideoPlayer videoPlayer;
 
+    public float timeStart;
+    public Text textbox;
+    public GameObject showText;
+    bool timerActive = false;
+
+
     void Start()
     {
         heartPanel.SetActive(false);
+        showText.SetActive(false);
+
+        textbox.text = "Checking pulse";
+    }
+
+
+
+    void Update()
+    {
+
+        if(timerActive)
+        {
+            timeStart += Time.deltaTime;
+
+            if (timeStart < 0.5)
+                textbox.text = "Checking pulse";
+            if (timeStart < 1 && timeStart > 0.5)
+                textbox.text = "Checking pulse.";
+            if (timeStart < 1.5 && timeStart > 1)
+                textbox.text = "Checking pulse..";
+            if (timeStart < 2 && timeStart > 1.5)
+                textbox.text = "Checking pulse...";
+            if (timeStart < 2.5 && timeStart > 2)
+                textbox.text = "Checking pulse";
+            if (timeStart < 3 && timeStart > 2.5)
+                textbox.text = "Checking pulse.";
+            if (timeStart < 3.5 && timeStart > 3)
+                textbox.text = "Checking pulse..";
+            if (timeStart < 4 && timeStart > 3.5)
+                textbox.text = "Checking pulse";
+            if (timeStart < 4.5 && timeStart > 4)
+                textbox.text = "Checking pulse.";
+            if (timeStart < 5 && timeStart > 4.5)
+                textbox.text = "Checking pulse..";
+            if (timeStart > 5)
+                textbox.text = "Pulse detected!";
+        }
+
     }
 
     //Detect if the Cursor starts to pass over the GameObject
@@ -25,16 +75,24 @@ public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         Debug.Log("Cursor Entering " + name + " GameObject");
         hand.sprite = pulseHand;
 
+
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+
         hand.sortingLayerName = "Default";
         hand.sortingOrder = 0;
         heartPanel.SetActive(true);
         RenderTexture.active = videoPlayer.targetTexture;
         GL.Clear(true, true, Color.black);
         RenderTexture.active = null;
+
+        showText.SetActive(true);
+
+        timerActive = true;
+
+
 
     }
 
@@ -43,6 +101,9 @@ public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         hand.sortingLayerName = "Cursor";
         hand.sortingOrder = 0;
         heartPanel.SetActive(false);
+        timerActive = false;
+
+        showText.SetActive(false);
 
     }
 
@@ -54,7 +115,11 @@ public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         hand.sprite = defaultHand;
         hand.sortingLayerName = "Cursor";
         hand.sortingOrder = 0;
-
+        heartPanel.SetActive(false);
 
     }
+
+
 }
+
+
