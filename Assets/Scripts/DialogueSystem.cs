@@ -16,6 +16,8 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] private TMP_Text speechText;
     [SerializeField] private TMP_Text speakerName;
 
+    [SerializeField] private TMP_Text speechOnBlack;
+
     //public static DialogueSystem instance;
     //private bool addictive = false;
     //private int visibleChars;
@@ -42,16 +44,31 @@ public class DialogueSystem : MonoBehaviour
     }
      // 
 
+    
+    public void FadedSay(string lines)
+    {
+        StopSpeaking();
+        speaking = StartCoroutine(SpeakLine(lines, " ", false, speechOnBlack));
+
+    }
+
+    public void FadedSayAdd(string lines)
+    {
+        StopSpeaking();
+        speaking = StartCoroutine(SpeakLine(lines, " ", true, speechOnBlack));
+    }
+
+
     public void Say(string lines, string speaker)
     {
         StopSpeaking();
-        speaking = StartCoroutine(SpeakLine(lines, speaker, false));
+        speaking = StartCoroutine(SpeakLine(lines, speaker, false, speechText));
     }  
 
     public void SayAdd(string lines, string speaker)
     {
         StopSpeaking();
-        speaking = StartCoroutine(SpeakLine(lines, speaker, true));
+        speaking = StartCoroutine(SpeakLine(lines, speaker, true, speechText));
     }
 
     private void StopSpeaking()
@@ -74,18 +91,25 @@ public class DialogueSystem : MonoBehaviour
         }
     }
 
-    public void finishSpeaking()
+    public void finishSpeaking(bool isFaded)
     {
-        if (isSpeaking)
+        if (isSpeaking && isFaded)
         {
             visibleChars = maxChars;
             speechText.maxVisibleCharacters = visibleChars;
             StopSpeaking();
+            return;
+        }else if (isSpeaking && !isFaded)
+        {
+            visibleChars = maxChars;
+            speechOnBlack.maxVisibleCharacters = visibleChars;
+            StopSpeaking();
+            return;
         }
     }
-    IEnumerator SpeakLine(string lines, string speaker, bool addictive)
+    IEnumerator SpeakLine(string lines, string speaker, bool addictive, TMP_Text speechBox)
     {
-        speechText.ForceMeshUpdate();
+        speechBox.ForceMeshUpdate();
 
         DetermineSpeaker(speaker);
         
@@ -95,18 +119,21 @@ public class DialogueSystem : MonoBehaviour
         {
             visibleChars = 0;
             maxChars = lines.Length;
+            speechBox.text = lines;
         }else
         {
-            visibleChars = speechText.text.Length;
-            maxChars = speechText.text.Length + lines.Length;
+            visibleChars = speechBox.text.Length;
+            
+            speechBox.text = speechBox.text + "\n" + lines;
+            maxChars = speechBox.text.Length;
         }
         isWaitingForUserInput = false;
         
         
-        speechText.text = lines;
-        while (visibleChars < maxChars)
+        
+        while (visibleChars <= maxChars)
         {
-            speechText.maxVisibleCharacters = visibleChars;
+            speechBox.maxVisibleCharacters = visibleChars;
             visibleChars++;
             yield return new WaitForSeconds(textSpeed);
         }
