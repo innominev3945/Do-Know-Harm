@@ -33,6 +33,7 @@ public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         heartPanel.SetActive(false);
         showText.SetActive(false);
 
+        hand.sprite = defaultHand;
         textbox.text = "Checking pulse";
     }
 
@@ -40,6 +41,7 @@ public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     void Update()
     {
+
         if (hasPulse)
             pulseResult = "Pulse detected!";
         else
