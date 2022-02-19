@@ -17,6 +17,7 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] private TMP_Text speakerName;
 
     [SerializeField] private TMP_Text speechOnBlack;
+    
 
     //public static DialogueSystem instance;
     //private bool addictive = false;
@@ -36,12 +37,12 @@ public class DialogueSystem : MonoBehaviour
 
     public bool isSpeaking {get{return speaking != null;}}
     
-    void Awake()
+    /*    void Awake()
     {
         //instance = this;
         //Say(lines, speaker);
         //speechText = GetComponent<TMP_Text>();
-    }
+    }*/
      // 
 
     

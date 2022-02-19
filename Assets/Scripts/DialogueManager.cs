@@ -14,6 +14,7 @@ public class DialogueManager : MonoBehaviour
     DialogueSystem dialogue;
     CharacterManager character;
     VNManager vnmanager;
+    AudioManager audioManager;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] private float fadeSpeed;
 
@@ -38,6 +39,7 @@ public class DialogueManager : MonoBehaviour
         dialogue = GetComponent<DialogueSystem>();
         character = GetComponent<CharacterManager>();
         vnmanager = GetComponent<VNManager>();
+        audioManager = GetComponent<AudioManager>();
         txt = txtAsset.ToString();
         ReadTextFile();
         
@@ -250,8 +252,7 @@ public class DialogueManager : MonoBehaviour
                     if (lineType[index] == 'S')
                     {
                         temp = Int32.Parse(script[index]);
-                        print("SFX: ");
-                        print(temp);
+                        audioManager.PlaySFX(temp);
                         
                         //m_SceneManager.playSFX(temp);
                     }
@@ -345,11 +346,19 @@ public class DialogueManager : MonoBehaviour
                         //m_SceneManager.UnloadAllUI();
 
                     }
+                    //change music
+                    else if(lineType[index] == 'M')
+                    {
+                        temp = Int32.Parse(script[index]);
+                        audioManager.PlayBGM(temp);
+                    }
+                    //load background
                     else if (lineType[index] == 'B')
                     {
                         temp = Int32.Parse(script[index]);
                         
                         vnmanager.changeBG(temp);
+                    //Load main character
                     }else if (lineType[index] == 'Z')
                     {
                         

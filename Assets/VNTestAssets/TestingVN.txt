@@ -1,5 +1,7 @@
 [MC]0
 [BG]0
+[MUSIC]0
+
 [Hannah]
 Hello, my name is Hannah.
 I don't know why I'm here.
@@ -27,6 +29,9 @@ This is Karen testing the entrance of a third character.
 Yeah so I hope that worked. The first character will leave now.
 
 [EXIT]1
+[SFX]0
+[MUSIC]1
+
 
 [Hannah]
 My back hurts... I'm old now.
@@ -49,7 +54,7 @@ If this works, well... There's still more to do...
 
 [Hannah]
 And off we fade into the darkness...
-
+[SFX]1
 [FADE]0
 
 [Hannah]

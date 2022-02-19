@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    Vector3  movement;
-    float inputX;
+    //Vector3  movement;
+    //float inputX;
     private int currCharacterNum = 0;
     //private int newCharacterNum = 0;
 
