@@ -12,41 +12,55 @@ using UnityEngine.UI;
 
 public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
+    bool hasPulse = true;
+    string pulseResult = "";
 
+    //hand tool
     public SpriteRenderer hand;
     public Sprite pulseHand;
     public Sprite defaultHand;
+
+    //checks if hand is over carotid artery
+    public bool isOverArtery;
+
+    //for detecting how long pulse is being taken
+    public float timeStart;
+    bool timerActive = false;
+
+    //in-game text showing pulse result
+    public GameObject showText;
+    public Text textbox;
+
+    //concept
     public GameObject heartPanel;
     public VideoPlayer videoPlayer;
 
-    public float timeStart;
-    public Text textbox;
-    public GameObject showText;
-    bool timerActive = false;
 
-    bool hasPulse = true;
-    string pulseResult = "";
 
 
     void Start()
     {
-        heartPanel.SetActive(false);
-        showText.SetActive(false);
 
-        hand.sprite = defaultHand;
-        textbox.text = "Checking pulse";
+        hand.sprite = defaultHand;      //set to default hand tool at start
+
+        showText.SetActive(false);      //text showing pulse result is hidden at start
+        textbox.text = "Checking pulse";        
+
+        heartPanel.SetActive(false);       //concept
+
     }
 
 
 
     void Update()
     {
-
+       
         if (hasPulse)
             pulseResult = "Pulse detected!";
         else
-            pulseResult = "No pulse detected";
+            pulseResult = "No pulse detected.";
 
+        //counts to five seconds before showing pulse result
         if(timerActive)
         {
             timeStart += Time.deltaTime;
@@ -71,7 +85,9 @@ public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 textbox.text = "Checking pulse";
             if (timeStart > 4.5)
                 textbox.text = pulseResult;
-        }
+        } else
+            showText.SetActive(false);
+
 
     }
 
@@ -80,45 +96,57 @@ public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         //Output to console the GameObject's name and the following message
         Debug.Log("Cursor Entering " + name + " GameObject");
-        hand.sprite = pulseHand;
 
+        isOverArtery = true;
 
+        hand.sprite = pulseHand;    //if cursor hovers over neck, hand sprite changes from default to pulse-checking position
+
+        
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-
-        hand.sortingLayerName = "Default";
-        hand.sortingOrder = 0;
+        //when the player holds down on the left mouse button, sprite sorting order changes so that the "hand" sprite appears under the "head" sprite
+        //makes it appear as if the medic's fingers are under the patient's jaw when checking pulse
+        hand.sortingLayerName = "Default";   
+        hand.sortingOrder = 0;              
        
-        //probably not needed
-       /* if (hasPulse)
-        {
-            heartPanel.SetActive(true);
-            RenderTexture.active = videoPlayer.targetTexture;
-            GL.Clear(true, true, Color.black);
-            RenderTexture.active = null;
-        }
-       */
-
+        //"Checking pulse" indicator text is shown
         showText.SetActive(true);
 
-        timerActive = true;
+        //starts timer to count how long player has been checking the pulse
+        if (isOverArtery)
+            timerActive = true;
+        else
+            timerActive = false;
 
-
+        //concept
+        /* if (hasPulse)
+         {
+             heartPanel.SetActive(true);
+             RenderTexture.active = videoPlayer.targetTexture;
+             GL.Clear(true, true, Color.black);
+             RenderTexture.active = null;
+         }
+        */
 
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        //when player releases the left mouse button after holding it down, the "hand" sprite returns to it's normal layer, appearing over the "head" sprite
         hand.sortingLayerName = "Cursor";
         hand.sortingOrder = 0;
-        heartPanel.SetActive(false);
-        timerActive = false;
 
+        //when player releases the left mouse button, timer for checking pulse is stopped and reset
+        timerActive = false;
+        timeStart = 0;
+
+        //"Checking pulse" indicator text is hidden
         showText.SetActive(false);
 
-        timeStart = 0;
+        //concept
+        heartPanel.SetActive(false);
 
     }
 
@@ -127,9 +155,19 @@ public class CheckPulse1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         //Output the following message with the GameObject's name
         Debug.Log("Cursor Exiting " + name + " GameObject");
+
+        isOverArtery = false;
+        timerActive=false;
+        timeStart = 0;
+
+        //when the player moves the cursor so that it's no longer hovering over the patient's neck, the hand tool returns to it's default hand sprite
         hand.sprite = defaultHand;
+
+        //ensures the hand tool is on the top-most layer
         hand.sortingLayerName = "Cursor";
         hand.sortingOrder = 0;
+
+        //concept
         heartPanel.SetActive(false);
 
     }
