@@ -7,6 +7,7 @@ TagManager:
   - Wound
   - Tourniquet
   - Limb
+  - Scissors
   layers:
   - Default
   - TransparentFX

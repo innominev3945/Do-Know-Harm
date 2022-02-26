@@ -24,6 +24,10 @@ public class PlayerControls : MonoBehaviour
                 hit.collider.gameObject.GetComponent<Tourniquet>().TourniquetDrag(context);
             }
         }
+        else if (hit.collider != null && hit.collider.gameObject.tag == "Scissors")
+        {
+            hit.collider.gameObject.GetComponent<Scissors>().useScissors(context);
+        }
     }
 
     public void Zoom(InputAction.CallbackContext context)
