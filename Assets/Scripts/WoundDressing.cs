@@ -32,10 +32,10 @@ namespace WoundDressingClass
             return ret;
         }
 
-        public override StopTreatment()
+        public override void StopTreatment()
         {
-            renderer.SetPosition(0, 0);
-            renderer.SetPosition(1, 0);
+            renderer.SetPosition(0, new Vector2(0,0));
+            renderer.SetPosition(1, new Vector2(0, 0));
             treatmentStarted = false;
         }
 
