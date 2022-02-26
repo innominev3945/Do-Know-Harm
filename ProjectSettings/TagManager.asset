@@ -44,9 +44,25 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Neck
+    uniqueID: 2360319731
+    locked: 0
+  - name: Body
+    uniqueID: 1323200207
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
+<<<<<<< HEAD
+  - name: Head
+    uniqueID: 2731245263
+    locked: 0
+  - name: Over Body
+    uniqueID: 1930378543
+    locked: 0
+  - name: Cursor
+    uniqueID: 4038126279
+=======
   - name: Character Layer
     uniqueID: 992186971
     locked: 0
@@ -58,4 +74,5 @@ TagManager:
     locked: 0
   - name: Fade Layer
     uniqueID: 2202052007
+>>>>>>> master
     locked: 0
