@@ -18,10 +18,15 @@ public class ApplyingPowder : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public Transform baseDot;   //variable for dot prefab -> storing in variable to instantiate it
 
-    public static string toolType;  //tracks what tool you're using, like powder packet
-
     public bool isTreatingWound = false;
     public bool isOverWound = false;
+
+    //for detecting how long player has watched for breathing
+    public float timeStartPowder;
+    bool timerActivePowder = false;
+
+    //checks whether powder has been applied
+    bool powderApplied = false;
 
     // Start is called before the first frame update
     void Start()
@@ -40,10 +45,23 @@ public class ApplyingPowder : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             packet.sprite = pouringPacket;
             Instantiate(baseDot, mousePosition, baseDot.rotation);
         }
+
+        if(timerActivePowder)
+        {
+            timeStartPowder += Time.deltaTime;
+
+            if (timeStartPowder > 1)
+            {
+                powderApplied = true;
+                timerActivePowder = false;
+         
+            }
+
+        }
     
     }
 
-    //Detect if the Cursor starts to pass over the GameObject
+    //Detect if the Cursor starts to pass over the GameObject (wound)
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
         //Output to console the GameObject's name and the following message
@@ -60,6 +78,7 @@ public class ApplyingPowder : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         packet.sprite = pouringPacket;
 
+        timerActivePowder = true;
 
     }
 
@@ -67,8 +86,13 @@ public class ApplyingPowder : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         isTreatingWound = false;
 
+        timerActivePowder = false;
+
         if (isOverWound)
             packet.sprite = tiltingPacket;
+
+        if (powderApplied)
+            Debug.Log("Powder successfully applied");
 
 
     }
@@ -83,7 +107,6 @@ public class ApplyingPowder : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
 
     }
-
 
 
 
