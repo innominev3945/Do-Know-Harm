@@ -176,6 +176,7 @@ MonoBehaviour:
   currentTime: 0
   startingTime: 100
   countdownText: {fileID: 17460796}
+  player: {fileID: 1494505337}
 --- !u!114 &17460796
 MonoBehaviour:
   m_ObjectHideFlags: 0
