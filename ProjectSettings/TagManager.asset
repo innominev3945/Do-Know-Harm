@@ -3,19 +3,25 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bleeding Wound
+  - Trigger 1 (TO)
+  - Trigger 2 (TO)
+  - Blood Pool
+  - Gauze_Image
+  - Foreign Object
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Character Layer
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - TextBoxes
+  - MainCharacter
+  - Fade Layer
+  - Fade Text Layer
+  - Camera
   - 
   - 
   - 
@@ -40,4 +46,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Character Layer
+    uniqueID: 992186971
+    locked: 0
+  - name: UI Layer
+    uniqueID: 976181001
+    locked: 0
+  - name: MC Layer
+    uniqueID: 2801030167
+    locked: 0
+  - name: Fade Layer
+    uniqueID: 2202052007
     locked: 0
