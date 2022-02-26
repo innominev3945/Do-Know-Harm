@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     [Header("UI Elements")]
     //[SerializeField] Canvas UICanvas; //save UI Canvas for enabling/disabling PLUS saving performance
     [SerializeField] Canvas[] menus; //consider as book pages from front to back
+    public static int uIPageNum = 0; //stores what "page" main ui is on
     int menuCount = 0; //count number of items in menus
     
     bool canvasToggle = false;
@@ -51,7 +52,8 @@ public class UIManager : MonoBehaviour
         {
             //only relevant parts are open
             menus[0].enabled = true; //journal bg open
-            menus[1].enabled = true; //pause panel open
+            menus[1].enabled = true; //journal panel open
+            menus[2].enabled = true; //pause panel open
         }
         else //if toggle is false, close the settings menu
         {
@@ -66,6 +68,7 @@ public class UIManager : MonoBehaviour
 
     public void OpenPage(int pageNum) //open page in journal (actual journal pages should be its own subset of an array separate from bigger array of menus)
     {
+        uIPageNum = pageNum; //set ui page number to the page number
         CloseAll(); //close everything above the background layer
         menus[pageNum].enabled = true;
     }

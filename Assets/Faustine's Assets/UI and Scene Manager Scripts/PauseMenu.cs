@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour //inherit from ui manager
 
     public void Settings()
     {
-       UIManager.Instance.OpenPage(2); //open settings menu
+       UIManager.Instance.OpenPage(3); //open settings menu
     }
 
     public void MainMenu()
