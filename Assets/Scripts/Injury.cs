@@ -1,39 +1,77 @@
+using TreatmentClass; 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /*
-Represents a general, abstract Injury. Specific Injuries (such as bleedings, burn wounds, etc.) are to be derived from the
-Injury class and then specialized. 
+Represents an injury. An injury is defined in terms of the treatments that are required to treat it. 
 */
 namespace InjuryClass
 {
-    public class Injury : MonoBehaviour
+    public class Injury
     {
-        protected float injurySeverity; 
-        protected Vector2 location; // Represents the location of the Injury (for treatment and animation purposes)
-        protected bool beingTreated; // Determines if an injury is currently being treated by the Player 
+        private float injurySeverity; 
+        private Vector2 location; // Represents the location of the Injury (for treatment and animation purposes)
+        private float radius; // An injury is represented as a circle of the given radius centered at location
+        private bool beingTreated; // Determines if an injury is currently being treated by the Player 
+        private Queue<Treatment> treatments; // Queue of treatments - as soon as one treatment is finished, the next one in priority is to be started 
 
-        // Constructor 
-        // Unity, being the helpful engine, doesn't like to have normal Constructors work properly when dealing with
-        // Monobehaviour scripts, so instead of creating a Patient object using the Patient() constructor, use 
-        // the MakePatientObject() method instead 
-        public static Injury MakeInjuryObject(GameObject ob, float severity, Vector2 loc)
+        public Injury(float severity, Vector2 loc, float rad)
         {
-            Injury ret = ob.AddComponent<Injury>();
-            ret.injurySeverity = severity;
-            ret.location = loc;
-            ret.beingTreated = false;
-            return ret;
+            injurySeverity = severity;
+            location = loc;
+            radius = rad;
+            beingTreated = false;
+            treatments = new Queue<Treatment>();
         }
 
         // Acessors 
-        public float GetInjurySeverity() { return injurySeverity; }
+        public float GetInjurySeverity() 
+        {
+            if (treatments.Count != 0)
+                return injurySeverity;
+            return 0f; // If the Queue of treatments is empty, then the injury has been fully treated
+        }
+
         public Vector2 GetLocation() { return location;  }
+        public bool GetBeingTreated() { return beingTreated; }
+        public float GetRadius() { return radius; }
 
-        public void Treat() { beingTreated = true; } // Starts a treatment
-        public void AbortTreatment() { beingTreated = false; } // Ends a treatment
+        public bool IsSelected(Vector2 selectionPosition) // Check if a Vector2 (i.e. mouse cursor position) is selecting an Injury by checking if the selection is within the bounds of the injury's circle 
+        {
+            if ((location - selectionPosition).magnitude <= radius)
+                return true;
+            return false;
+        }
 
-        // Other functionality, such as the specific treatment of injuries, is expected to be extended in classes derived from Injury 
+        // Starts treating an Injury by activating the Treatment of the topmost item in the Queue 
+        public void Treat()
+        {
+            if (treatments.Count != 0)
+            {
+                beingTreated = true;
+                treatments.Peek().StartTreatment();
+            }
+        }
+
+        // Holds the treatment of an Injury by stopping the Treatment of the topmost item in the Queue (this still preserves all progress in treating the injury) 
+        public void AbortTreatment() 
+        { 
+            beingTreated = false;
+            treatments.Peek().StopTreatment();
+        } // Ends a treatment
+
+        public void AddTreatment(Treatment treatment) { treatments.Enqueue(treatment); }
+        public void RemoveTreatment() 
+        {
+            if (treatments.Count != 0)
+            {
+                treatments.Dequeue();
+                if (treatments.Count != 0)
+                    treatments.Peek().StartTreatment();
+                else
+                    beingTreated = false;
+            }
+        }
     }
 }

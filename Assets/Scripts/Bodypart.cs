@@ -12,12 +12,12 @@ namespace BodypartClass
 {
     public class Bodypart : MonoBehaviour
     {
+        private GameObject cursor;
         private float timeInterval;
         private float nextTime;
         private float health; // Health of the body part, not the entire patient 
         private float severityMultiplier; // Weighted importance of body part relative to health of entire patient (i.e. head is higher than legs)
         private List<Injury> injuries; // Injuries that impact the health of the body part 
-        // The injuries array is polymorphic; it will contain injuries derived from the Injury base class 
 
         // Constructor 
         // Unity, being the helpful engine, doesn't like to have normal Constructors work properly when dealing with
@@ -40,23 +40,60 @@ namespace BodypartClass
         public float GetSeverityMultiplier() { return severityMultiplier; }
 
         // Add an injury that the BodyPart is dealing with
-        public void AddInjury(Injury injury) { injuries.Add(injury); }
+        public void AddInjury(Injury injury) 
+        { 
+            injuries.Add(injury);
+        }
 
+
+        void Start()
+        {
+            cursor = GameObject.Find("Cursor");
+        }
         // Update functionality that is called every timeInterval
         void Update()
         {
             if (Time.time >= nextTime)
             {
-                float loss = 0;
-                // The loss of health of a Bodypart is dependent on all of its given injuries 
+                if (injuries.Count != 0)
+                {
+                    float loss = 0;
+                    // The loss of health of a Bodypart is dependent on all of its given injuries 
+                    foreach (Injury injury in injuries)
+                    {
+                        loss += (injury.GetInjurySeverity());
+                    }
+                    health -= loss;
+                    if (health < 0)
+                        health = 0;
+
+                    // Cycle through the Injuries List and remove any that are treated (having a severity of 0)
+                    for (int i = 0; i < injuries.Count; i++)
+                    {
+                        if (injuries[i].GetInjurySeverity() == 0)
+                        {
+                            injuries.RemoveAt(i);
+                            i--;
+                        }
+                    }
+                }
+                nextTime += timeInterval; 
+            }
+
+            // Start treating an Injury that is clicked and abort the treatment of all other injuries (since you can only treat one injury at a time)
+            if (injuries.Count != 0 && cursor.GetComponent<NewCursor>().getSelected())
+            {
+                bool found = false;
                 foreach (Injury injury in injuries)
                 {
-                    loss += (injury.GetInjurySeverity());
+                    if (injury.IsSelected(cursor.transform.position) && !found)
+                    {
+                        injury.Treat();
+                        found = true;
+                    }
+                    else if (!found)
+                        injury.AbortTreatment();
                 }
-                health -= loss;
-                if (health < 0)
-                    health = 0;
-                nextTime += timeInterval; 
             }
         }
     }
