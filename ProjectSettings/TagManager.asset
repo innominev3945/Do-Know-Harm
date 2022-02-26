@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bleeding Wound
+  - Trigger 1 (TO)
+  - Trigger 2 (TO)
+  - Blood Pool
+  - Gauze_Image
+  - Foreign Object
+  - Wound
+  - Tourniquet
+  - Limb
+  - Scissors
   layers:
   - Default
   - TransparentFX
@@ -16,6 +26,11 @@ TagManager:
   - Fade Layer
   - Fade Text Layer
   - Camera
+  - Draggable Objects
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -38,18 +53,33 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Neck
+    uniqueID: 2360319731
+    locked: 0
+  - name: Body
+    uniqueID: 1323200207
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Character Layer
-    uniqueID: 992186971
+  - name: Head
+    uniqueID: 2731245263
     locked: 0
-  - name: UI Layer
-    uniqueID: 976181001
+  - name: Over Body
+    uniqueID: 1930378543
     locked: 0
-  - name: MC Layer
-    uniqueID: 2801030167
+  - name: Cursor
+    uniqueID: 4038126279
     locked: 0
-  - name: Fade Layer
-    uniqueID: 2202052007
+  - name: back
+    uniqueID: 1716867951
+    locked: 0
+  - name: body
+    uniqueID: 1530261687
+    locked: 0
+  - name: wound
+    uniqueID: 1774343361
+    locked: 0
+  - name: fore
+    uniqueID: 848793359
     locked: 0
