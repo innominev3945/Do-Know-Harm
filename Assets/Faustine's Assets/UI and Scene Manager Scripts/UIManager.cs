@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
 
         //CANVAS INFO
         //on by default
+        ToggleSettingsMenu(false); //close all first
         canvasToggle = true;
         ToggleSettingsMenu(canvasToggle);
 

@@ -1894,6 +1894,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -4.9999695
       objectReference: {fileID: 0}
+    - target: {fileID: 1252242085201561114, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252242085201561114, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252242085201561114, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1555103668}
+    - target: {fileID: 1252242085201561114, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252242085201561114, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TextSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252242085201561114, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SettingsScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252242085201561114, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1252242085461051263, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
       propertyPath: m_text
       value: Text Speed
@@ -3082,6 +3110,34 @@ PrefabInstance:
     - target: {fileID: 1252242085036082429, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -4.9999695
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252242085201561114, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252242085201561114, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252242085201561114, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1555103668}
+    - target: {fileID: 1252242085201561114, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252242085201561114, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Volume
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252242085201561114, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SettingsScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252242085201561114, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1252242086050751176, guid: 22177f1964bfc924a9f2fecc06933724, type: 3}
       propertyPath: m_Name
