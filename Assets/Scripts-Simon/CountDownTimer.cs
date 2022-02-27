@@ -23,6 +23,7 @@ public class CountDownTimer : MonoBehaviour
         if (currentTime <= 0 || player.GetCurrentHealth() <= 0)
         {
             countdownText.text = "You've lost!:/";
+            //switch to another scene since game over!!
         }
         else
         {

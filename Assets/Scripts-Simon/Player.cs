@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //the following two lines make health decrease with time
         currentHealth -= 1 * Time.deltaTime;
         healthBar.SetHealth(currentHealth);
         //link this to action!!
