@@ -1,0 +1,69 @@
+{
+    "name": "PlayerInput",
+    "maps": [
+        {
+            "name": "Treatment",
+            "id": "f1030bd0-40b8-45c6-993e-951628f6d099",
+            "actions": [
+                {
+                    "name": "Mouse",
+                    "type": "Button",
+                    "id": "6a4d2c13-cee9-46d5-b04d-cdf1caee68fd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Zoom",
+                    "type": "Button",
+                    "id": "7a56abc4-7ae0-45b5-ba13-cd933f2996a9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fd8357ce-a8c9-459c-bbdf-ae6716e27540",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB&M",
+                    "action": "Mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "681a096c-8b73-4e43-8235-1b8454594d10",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB&M",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "KB&M",
+            "bindingGroup": "KB&M",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
