@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     public float maxHealth = 100f;
     public float currentHealth = 0f;
-
+    public bool isDead = false;
     public HealthBar healthBar;
 
     void Start()
@@ -19,8 +19,16 @@ public class Player : MonoBehaviour
     void Update()
     {
         //the following two lines make health decrease with time
-        currentHealth -= 1 * Time.deltaTime;
-        healthBar.SetHealth(currentHealth);
+        if (currentHealth > 0)
+        {
+            currentHealth -= 1 * Time.deltaTime;
+            healthBar.SetHealth(currentHealth);
+        }
+        else
+        {
+            isDead = true;
+            return;
+        }
         //link this to action!!
         if (Input.GetKeyDown(KeyCode.Space))
         {

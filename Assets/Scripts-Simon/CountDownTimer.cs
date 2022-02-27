@@ -20,7 +20,7 @@ public class CountDownTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentTime <= 0 || player.GetCurrentHealth() <= 0)
+        if (currentTime <= 0 || player.GetCurrentHealth() <= 0 || player.isDead)
         {
             countdownText.text = "You've lost!:/";
             //switch to another scene since game over!!
