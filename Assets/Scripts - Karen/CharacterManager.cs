@@ -154,9 +154,9 @@ public class CharacterManager : MonoBehaviour
             //GameObject.transform(some position)
         }else if (currCharacterNum == 2)
         {
-            CharacterRenderer_1.transform.position += Vector3.left * 200.0f;
+            CharacterRenderer_1.transform.position += Vector3.left * 500.0f;
 
-            CharacterRenderer_2.transform.position += Vector3.right * 200.0f;
+            CharacterRenderer_2.transform.position += Vector3.right * 500.0f;
 
             temp = getCharacterExpressionArray(n);
             characterLoads[n] = 1;
@@ -171,9 +171,9 @@ public class CharacterManager : MonoBehaviour
         }
         else if (currCharacterNum == 3)
         {
-            CharacterRenderer_1.transform.position += Vector3.left * 25.0f;
-            CharacterRenderer_2.transform.position += Vector3.left * 200.0f;
-            CharacterRenderer_3.transform.position += Vector3.right * 225.0f;
+            CharacterRenderer_1.transform.position += Vector3.left * 100.0f;
+            CharacterRenderer_2.transform.position += Vector3.left * 500.0f;
+            CharacterRenderer_3.transform.position += Vector3.right * 600.0f;
 
             temp = getCharacterExpressionArray(n);
             characterLoads[n] = 2;
@@ -206,17 +206,17 @@ public class CharacterManager : MonoBehaviour
         {
             if (characterLocation == 2)
             {
-                CharacterRenderer_1.transform.position += Vector3.right * 25.0f;
-                CharacterRenderer_2.transform.position += Vector3.right * 200.0f;
-                CharacterRenderer_3.transform.position += Vector3.left * 225.0f;
+                CharacterRenderer_1.transform.position += Vector3.right * 100.0f;
+                CharacterRenderer_2.transform.position += Vector3.right * 500.0f;
+                CharacterRenderer_3.transform.position += Vector3.left * 600.0f;
                 CharacterRenderer_3.sprite = null;
                 characterLoads[n] = -1;
                 loadedCharacters[2] = -1;
             }else if (characterLocation == 1)
             {
-                CharacterRenderer_1.transform.position += Vector3.right * 25.0f;
-                CharacterRenderer_2.transform.position += Vector3.right * 200.0f;
-                CharacterRenderer_3.transform.position += Vector3.left * 225.0f;
+                CharacterRenderer_1.transform.position += Vector3.right * 100.0f;
+                CharacterRenderer_2.transform.position += Vector3.right * 500.0f;
+                CharacterRenderer_3.transform.position += Vector3.left * 600.0f;
                 CharacterRenderer_2.sprite = CharacterRenderer_3.sprite;
                 CharacterRenderer_3.sprite = null;
                 characterLoads[loadedCharacters[1]] = -1;
@@ -226,9 +226,9 @@ public class CharacterManager : MonoBehaviour
             }
             else if (characterLocation == 0)
             {
-                CharacterRenderer_1.transform.position += Vector3.right * 25.0f;
-                CharacterRenderer_2.transform.position += Vector3.right * 200.0f;
-                CharacterRenderer_3.transform.position += Vector3.left * 225.0f;
+                CharacterRenderer_1.transform.position += Vector3.right * 100.0f;
+                CharacterRenderer_2.transform.position += Vector3.right * 500.0f;
+                CharacterRenderer_3.transform.position += Vector3.left * 600.0f;
                 CharacterRenderer_1.sprite = CharacterRenderer_2.sprite;
                 CharacterRenderer_2.sprite = CharacterRenderer_3.sprite;
                 CharacterRenderer_3.sprite = null;
@@ -244,15 +244,15 @@ public class CharacterManager : MonoBehaviour
         {
             if (characterLocation == 1)
             {
-                CharacterRenderer_1.transform.position += Vector3.right * 200.0f;
-                CharacterRenderer_2.transform.position += Vector3.left * 200.0f;
+                CharacterRenderer_1.transform.position += Vector3.right * 500.0f;
+                CharacterRenderer_2.transform.position += Vector3.left * 500.0f;
                 CharacterRenderer_2.sprite = null;
                 characterLoads[n] = -1;
                 loadedCharacters[1] = -1;
             }else if (characterLocation == 0)
             {
-                CharacterRenderer_1.transform.position += Vector3.right * 200.0f;
-                CharacterRenderer_2.transform.position += Vector3.left * 200.0f;
+                CharacterRenderer_1.transform.position += Vector3.right * 500.0f;
+                CharacterRenderer_2.transform.position += Vector3.left * 500.0f;
                 CharacterRenderer_1.sprite = CharacterRenderer_2.sprite;
                 CharacterRenderer_2.sprite = null;
                 characterLoads[n] = -1;
