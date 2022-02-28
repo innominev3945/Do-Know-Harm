@@ -153,7 +153,7 @@ Transform:
   - {fileID: 415220502}
   - {fileID: 2134271515}
   m_Father: {fileID: 1276890705}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &102839939
 GameObject:
@@ -670,7 +670,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 381882168}
-  - {fileID: 1526127052}
   - {fileID: 1998278153}
   - {fileID: 38418950}
   m_Father: {fileID: 1517901101}
@@ -811,7 +810,7 @@ MonoBehaviour:
   fadeSpeed: 0
   characters:
   - {fileID: 21300000, guid: 764bd624afa7fe643ae02d5a488b90f0, type: 3}
-  - {fileID: 21300000, guid: c89aa2a6ee705ce408fe795f5c7ca8cd, type: 3}
+  - {fileID: 21300000, guid: 799405e70be4158459791132fbc9220e, type: 3}
   CharacterRenderer: {fileID: 1998278154}
   speakerName: {fileID: 183154218}
   speechText: {fileID: 2127776264}
@@ -825,10 +824,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1526127050}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -37.930725, y: -6.703064, z: -355.67032}
+  m_LocalPosition: {x: 922.0693, y: 533.29694, z: -355.67032}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1276890705}
+  m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1526127053
@@ -902,7 +901,7 @@ RectTransform:
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 1276890705}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
