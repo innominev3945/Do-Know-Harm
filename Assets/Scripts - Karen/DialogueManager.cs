@@ -42,7 +42,7 @@ public class DialogueManager : MonoBehaviour
         audioManager = GetComponent<AudioManager>();
         txt = txtAsset.ToString();
         ReadTextFile();
-        
+        playLine();
     }
     /**********************************************************************************************
                             READS TEXT FILE INTO 3 LISTS
@@ -213,8 +213,15 @@ public class DialogueManager : MonoBehaviour
         
         if (value.isPressed)
         {
+            playLine();
+        }
+        
             
-            if (index >= script.Count && !dialogue.isSpeaking)
+    }
+
+    private void playLine()
+    {
+        if (index >= script.Count && !dialogue.isSpeaking)
             {
                 //END OF SCRIPT and there aren't any lines playing
                 return;
@@ -232,7 +239,7 @@ public class DialogueManager : MonoBehaviour
                     
                     if (lineType[index] == 'F')
                     {
-                        isLine = true;
+                        //isLine = true;
                         temp = Int32.Parse(script[index]);
                         if(temp == 0)
                         {
@@ -372,10 +379,7 @@ public class DialogueManager : MonoBehaviour
                 
                 dialogue.finishSpeaking(isBlack);
             }
-            
-        }
-        
-            
+            return;
     }
     IEnumerator FadeFromBlack(){
         
