@@ -11,8 +11,9 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] AudioSource SFX_Source;
 
-    public float BGM_Volume;
-    public float SFX_Volume;
+    //FAAAAAUUUUSSSSSTIIIIIIIINEEEEEEEEEEEEEEEEEEEEEEEEE HEEEEEEEERRRRRRREEEEEEEEEEEEEEEEEE
+    public float BGM_Volume;// to change background music volume
+    public float SFX_Volume;// to change sound effects volume
     // Start is called before the first frame update
     void Awake()
     {
