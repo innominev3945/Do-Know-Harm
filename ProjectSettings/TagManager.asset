@@ -47,11 +47,6 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
   m_SortingLayers:
   - name: Neck
     uniqueID: 2360319731
@@ -82,4 +77,19 @@ TagManager:
     locked: 0
   - name: fore
     uniqueID: 848793359
+    locked: 0
+  - name: Characters
+    uniqueID: 3415417791
+    locked: 0
+  - name: Text Box
+    uniqueID: 3223919345
+    locked: 0
+  - name: Main Character
+    uniqueID: 106095041
+    locked: 0
+  - name: Fade Effect
+    uniqueID: 204651555
+    locked: 0
+  - name: Text on Fade
+    uniqueID: 2912731401
     locked: 0
