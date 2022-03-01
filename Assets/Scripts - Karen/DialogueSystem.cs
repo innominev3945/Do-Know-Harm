@@ -29,8 +29,16 @@ public class DialogueSystem : MonoBehaviour
     //private TMP_Text targetText;
     // Start is called before the first frame update
 
+    //*************************************************************************************************************
+    //                          YOOHOO FAUSTINE RIGHT DOWN HERE! (textSpeed)
+    //*************************************************************************************************************
+
+
     //TEXT SPEED between 0.0f(fast) and 0.2f(slow)
-    [SerializeField] float textSpeed = 0.0f;
+    public float textSpeed = 0.0f;
+
+
+
     public bool isWaitingForUserInput = false;
 
     /*private Coroutine speaking;*/
