@@ -259,7 +259,7 @@ public class DialogueManager : MonoBehaviour
                     //dialogue/text to display
                     else if (lineType[index] == 'L')
                     {
-                        
+                        audioManager.PlaySFX(0);   
                         if (isBlack)
                         {
                             if(lineType[index-1] == 'E')
