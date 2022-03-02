@@ -20,6 +20,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "LockAndRotate",
+                    "type": "Button",
+                    "id": "63e5dcf7-dff3-4f4d-b6cb-6357f812346f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -42,6 +50,17 @@
                     "processors": "",
                     "groups": "KB&M",
                     "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9cc4b520-e1a0-4ae2-b481-e185ba38fa63",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Hold(duration=0.4)",
+                    "processors": "",
+                    "groups": "KB&M",
+                    "action": "LockAndRotate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

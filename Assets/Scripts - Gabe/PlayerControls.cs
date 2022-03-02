@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
+    private GameObject temp;
 
     public void MouseDrag(InputAction.CallbackContext context)
     {
@@ -12,21 +13,44 @@ public class PlayerControls : MonoBehaviour
         pos2D = Camera.main.ScreenToWorldPoint(pos2D);
         RaycastHit2D hit = Physics2D.Raycast(pos2D, Vector2.zero, Mathf.Infinity);
 
-        //Debug.Log(pos2D);
-        if (hit.collider != null && hit.collider.gameObject.tag == "Tourniquet")
+        if (context.canceled)
         {
-            if (hit.collider.gameObject.name == "Tourniquet Tab")
+            if (temp != null)
             {
-                hit.collider.gameObject.transform.parent.gameObject.GetComponent<Tourniquet>().TourniquetDrag(context);
+                useScript(temp, context);
+            }
+            temp = null;
+        }
+        else if (hit.collider != null)
+        {
+            if (temp == null)
+            {
+                useScript(hit.collider.gameObject, context);
+                temp = hit.collider.gameObject;
             }
             else
             {
-                hit.collider.gameObject.GetComponent<Tourniquet>().TourniquetDrag(context);
+                useScript(temp, context);
             }
         }
-        else if (hit.collider != null && hit.collider.gameObject.tag == "Scissors")
+    }
+
+    private void useScript(GameObject obj, InputAction.CallbackContext context)
+    {
+        if (obj.tag == "Tourniquet")
         {
-            hit.collider.gameObject.GetComponent<Scissors>().useScissors(context);
+            if (obj.name == "Tourniquet Tab")
+            {
+                obj.transform.parent.gameObject.GetComponent<Tourniquet>().TourniquetDrag(context);
+            }
+            else
+            {
+                obj.GetComponent<Tourniquet>().TourniquetDrag(context);
+            }
+        }
+        else if (obj.tag == "Scissors")
+        {
+            //obj.GetComponent<Scissors>().useScissors(context);
         }
     }
 

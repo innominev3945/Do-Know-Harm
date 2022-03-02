@@ -32,7 +32,11 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextAsset txtAsset;
     private string txt;
 
-    // Start is called before the first frame update
+    int index = 0;
+
+    bool readingSave = false;
+
+    // Start is called before the first frame update (DELETE LATER, will need to start externally)
     void Start()
     {
         isBlack = true;
@@ -42,12 +46,32 @@ public class DialogueManager : MonoBehaviour
         audioManager = GetComponent<AudioManager>();
         txt = txtAsset.ToString();
         ReadTextFile();
-        
+        playLine();
+    }
+
+    void StartScene(TextAsset chapter)
+    {
+        isBlack = true;
+        dialogue = GetComponent<DialogueSystem>();
+        character = GetComponent<CharacterManager>();
+        vnmanager = GetComponent<VNManager>();
+        audioManager = GetComponent<AudioManager>();
+        txt = txtAsset.ToString();
+        ReadTextFile();
+        playLine();
     }
     /**********************************************************************************************
                             READS TEXT FILE INTO 3 LISTS
     ***********************************************************************************************/
     
+    void loadVNScene(int savedIndex, TextAsset chapterScript)
+    {
+        txt = chapterScript.ToString();
+        readingSave = true;
+        index = savedIndex;
+        ReadTextFile();
+        playLine();
+    }
     
     private void ReadTextFile()
     {
@@ -156,6 +180,20 @@ public class DialogueManager : MonoBehaviour
                         lineType.Add('F');
                         script.Add(curr);
                         speaking.Add(" ");
+                        if(readingSave)
+                        {
+                            if (counter < index)
+                            {
+                                if(curr == "0")
+                                {
+                                    isBlack = true;
+                                }
+                                else
+                                {
+                                    isBlack = false;
+                                }
+                            }
+                        }
                     }else if (special == "MC")
                     {
                         lineType.Add('Z');
@@ -200,7 +238,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    int index = 0;
+    
     int temp;
     int temp2;
     bool isLine = false; //used to make sure a line is shown after each input
@@ -213,10 +251,21 @@ public class DialogueManager : MonoBehaviour
         
         if (value.isPressed)
         {
+            playLine();
+        }
+        
             
-            if (index >= script.Count && !dialogue.isSpeaking)
+    }
+
+    private void playLine()
+    {
+        if (index >= (script.Count - 1)  && !dialogue.isSpeaking)
             {
+
                 //END OF SCRIPT and there aren't any lines playing
+                //*****************************************************************************
+                //                         TO DO:   EXIT OUT OF SCENE
+                //******************************************************************************
                 return;
             }
 
@@ -232,7 +281,7 @@ public class DialogueManager : MonoBehaviour
                     
                     if (lineType[index] == 'F')
                     {
-                        isLine = true;
+                        //isLine = true;
                         temp = Int32.Parse(script[index]);
                         if(temp == 0)
                         {
@@ -259,7 +308,7 @@ public class DialogueManager : MonoBehaviour
                     //dialogue/text to display
                     else if (lineType[index] == 'L')
                     {
-                        audioManager.PlaySFX(0);   
+                        audioManager.PlayClick();   
                         if (isBlack)
                         {
                             if(lineType[index-1] == 'E')
@@ -372,11 +421,16 @@ public class DialogueManager : MonoBehaviour
                 
                 dialogue.finishSpeaking(isBlack);
             }
-            
-        }
-        
-            
+            return;
     }
+
+
+    public int getSaveLocation()
+    {
+        return index;
+    }
+
+
     IEnumerator FadeFromBlack(){
         
         
