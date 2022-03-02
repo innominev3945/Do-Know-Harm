@@ -19,8 +19,15 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private float fadeSpeed;
 
     private string[] tempNumbers;
+    private int numCharacters;
     
     private bool isBlack = true;
+    private int MCnum;
+    private int startingBGM;
+
+    private int startingBG;
+
+    private bool[] loadedCharacters;
 
     //script stores text to be displayed
     List <string> script = new List<string>();
@@ -35,9 +42,13 @@ public class DialogueManager : MonoBehaviour
     int index = 0;
 
     bool readingSave = false;
+    int temp;
+    int temp2;
+    bool isLine = false; //used to make sure a line is shown after each input
+    // Update is called once per frame
 
     // Start is called before the first frame update (DELETE LATER, will need to start externally)
-    void Start()
+    /*void Start()
     {
         isBlack = true;
         dialogue = GetComponent<DialogueSystem>();
@@ -45,31 +56,77 @@ public class DialogueManager : MonoBehaviour
         vnmanager = GetComponent<VNManager>();
         audioManager = GetComponent<AudioManager>();
         txt = txtAsset.ToString();
+        numCharacters = character.getCharacterNumber();
+        loadedCharacters = new bool[numCharacters];
+        for (int i = 0; i < numCharacters; i++)
+        {
+            loadedCharacters[i] = false;
+        }
         ReadTextFile();
         playLine();
-    }
+    }*/
 
-    void StartScene(TextAsset chapter)
+
+    public void StartScene(TextAsset chapter)
     {
+        script.Clear();
+        lineType.Clear();
+        speaking.Clear();
         isBlack = true;
         dialogue = GetComponent<DialogueSystem>();
         character = GetComponent<CharacterManager>();
         vnmanager = GetComponent<VNManager>();
         audioManager = GetComponent<AudioManager>();
-        txt = txtAsset.ToString();
+        txt = chapter.ToString();
         ReadTextFile();
+        
+        
         playLine();
     }
     /**********************************************************************************************
                             READS TEXT FILE INTO 3 LISTS
     ***********************************************************************************************/
     
-    void loadVNScene(int savedIndex, TextAsset chapterScript)
+    public void loadVNScene(int savedIndex, TextAsset chapterScript)
     {
         txt = chapterScript.ToString();
+        isBlack = false;
+        script.Clear();
+        lineType.Clear();
+        speaking.Clear();
+        dialogue = GetComponent<DialogueSystem>();
+        character = GetComponent<CharacterManager>();
+        vnmanager = GetComponent<VNManager>();
+        audioManager = GetComponent<AudioManager>();
+
+        numCharacters = character.getCharacterNumber();
+        loadedCharacters = new bool[numCharacters];
+        for (int i = 0; i < numCharacters; i++)
+        {
+            loadedCharacters[i] = false;
+        }
+
         readingSave = true;
         index = savedIndex;
         ReadTextFile();
+        character.loadMC(MCnum);
+        Debug.Log(isBlack);
+        if(!isBlack)
+        {
+            StartCoroutine(FadeFromBlack());
+        }
+
+        
+
+        for (int i = 0; i < numCharacters; i++)
+        {
+            if (loadedCharacters[i])
+            {
+                character.loadCharacter(i);
+            }
+        }
+        vnmanager.changeBG(startingBG);
+        audioManager.PlayBGM(startingBGM);
         playLine();
     }
     
@@ -129,6 +186,10 @@ public class DialogueManager : MonoBehaviour
                         lineType.Add('M');
                         script.Add(curr);
                         speaking.Add(" ");
+                        if (readingSave)
+                        {
+                            startingBGM = Int32.Parse(curr);
+                        }
                     }
                     //Display Scene title
                     //Scene in following format:
@@ -147,6 +208,12 @@ public class DialogueManager : MonoBehaviour
                         lineType.Add('N');
                         script.Add(curr);
                         speaking.Add(" ");
+                        if (readingSave)
+                        {
+                            temp = Int32.Parse(curr);
+                            //Debug.Log(loadedCharacters);
+                            loadedCharacters[temp] = true;
+                        }
                     }
                     //Character exits
                     //character exit in following format:
@@ -156,6 +223,12 @@ public class DialogueManager : MonoBehaviour
                         lineType.Add('X');
                         script.Add(curr);
                         speaking.Add(" ");
+                        if (readingSave)
+                        {
+                            temp = Int32.Parse(curr);
+                            //Debug.Log(temp);
+                            loadedCharacters[temp] = false;
+                        }
                     }
                     else if (special == "REPLACE")
                     {
@@ -164,8 +237,10 @@ public class DialogueManager : MonoBehaviour
                         script.Add(tempNumbers[0]);
                         speaking.Add(tempNumbers[1]);
                     }
+                    //DELETE IF UNECESSARY
                     else if (special == "END")
                     {
+                        
                         lineType.Add('D');
                         script.Add("");
                         speaking.Add(" ");
@@ -175,6 +250,10 @@ public class DialogueManager : MonoBehaviour
                         lineType.Add('B');
                         script.Add(curr);
                         speaking.Add(speaking[speaking.Count-1]);
+                        if (readingSave)
+                        {
+                            startingBG = Int32.Parse(curr);
+                        }
                     }else if (special == "FADE")
                     {
                         lineType.Add('F');
@@ -182,7 +261,7 @@ public class DialogueManager : MonoBehaviour
                         speaking.Add(" ");
                         if(readingSave)
                         {
-                            if (counter < index)
+                            if ((counter/2) <= index)
                             {
                                 if(curr == "0")
                                 {
@@ -199,6 +278,10 @@ public class DialogueManager : MonoBehaviour
                         lineType.Add('Z');
                         script.Add(curr);
                         speaking.Add(" ");
+                        if (readingSave)
+                        {
+                            MCnum = Int32.Parse(curr);
+                        }
                     }
                     //a speaker is speaking in following format
                     //[NAME]
@@ -239,10 +322,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     
-    int temp;
-    int temp2;
-    bool isLine = false; //used to make sure a line is shown after each input
-    // Update is called once per frame
+    
 
 
     void OnClick(InputValue value)
@@ -270,6 +350,7 @@ public class DialogueManager : MonoBehaviour
             }
 
            
+          
             if (!dialogue.isSpeaking || dialogue.isWaitingForUserInput)
             {
                 if(index >= script.Count)

@@ -570,6 +570,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300384723}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1284020113}
@@ -801,6 +802,7 @@ GameObject:
   - component: {fileID: 829284126}
   - component: {fileID: 829284127}
   - component: {fileID: 829284128}
+  - component: {fileID: 829284129}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -1007,6 +1009,20 @@ MonoBehaviour:
   BGM_Volume: 1
   SFX_Volume: 1
   Click_Volume: 1
+--- !u!114 &829284129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829284121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b6427c9e5d76e40904d059a5ae9a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txtAssets:
+  - {fileID: 4900000, guid: 57c9224889e999d44857e3a015fc132b, type: 3}
 --- !u!1 &833670579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,7 +1461,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hannah or Eric's inner thoughts
+  m_text: ' '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
