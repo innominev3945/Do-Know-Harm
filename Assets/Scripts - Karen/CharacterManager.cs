@@ -11,6 +11,8 @@ public class CharacterManager : MonoBehaviour
     //private int newCharacterNum = 0;
 
     [SerializeField] private float fadeSpeed;
+
+    //ADJUST AS NEEDED 
     private const int numCharacters = 4;
 
 
@@ -110,7 +112,10 @@ public class CharacterManager : MonoBehaviour
     }
 
     
-
+    public int getCharacterNumber()
+    {
+        return numCharacters;
+    }
 
     private Sprite[] getCharacterExpressionArray(int characterNumber)
     {
@@ -313,6 +318,7 @@ public class CharacterManager : MonoBehaviour
         FadeIn(MC);
         return;
     }
+    
     IEnumerator FadeOut(SpriteRenderer spriteRenderer){
         while (spriteRenderer.color.a > 0)
         {

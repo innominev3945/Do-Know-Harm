@@ -29,7 +29,7 @@ This is Karen testing the entrance of a third character.
 Yeah so I hope that worked. The first character will leave now.
 
 [EXIT]1
-[SFX]0
+[SFX]1
 [MUSIC]1
 
 
@@ -54,7 +54,7 @@ If this works, well... There's still more to do...
 
 [Hannah]
 And off we fade into the darkness...
-[SFX]1
+[SFX]2
 [FADE]0
 
 [Hannah]
