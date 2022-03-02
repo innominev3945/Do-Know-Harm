@@ -5,7 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes - Gabe/TourniquetTest.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scene Manager - Gabe/MainMenu.unity
+    guid: 604b471fb54f4df4085cde08f02af596
+  - enabled: 1
+    path: Assets/Scene Manager - Gabe/VNDummy.unity
+    guid: ef131c883629bd64bba04d4aaf429df5
+  - enabled: 1
+    path: Assets/Scene Manager - Gabe/GPdummy.unity
+    guid: 4ea325c5afafcf34eb93e08517e240ad
+  - enabled: 1
+    path: Assets/Scene Manager - Gabe/LoadingScene.unity
+    guid: 5efdb3a995cad484b94a7e41dd7a2adf
   m_configObjects: {}
