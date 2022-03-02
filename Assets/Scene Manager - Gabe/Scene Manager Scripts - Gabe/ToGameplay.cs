@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ToGameplay : MonoBehaviour
 {
-
     // attach this to a button and set the onclick attribute appropriately to send the game to the GP scene
 
     public void LoadGameplay()
