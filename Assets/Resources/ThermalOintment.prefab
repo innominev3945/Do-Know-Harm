@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7762077886955278409}
   - component: {fileID: 7762077886955278408}
   m_Layer: 0
-  m_Name: Thermal Ointment
+  m_Name: ThermalOintment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,8 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b272174ec0d14539a357e7cc948bf01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mousePosition: {x: 0, y: 0, z: 0}
   totalNumTimes: 0
-  healed: 0
 --- !u!114 &7762077886955278408
 MonoBehaviour:
   m_ObjectHideFlags: 0

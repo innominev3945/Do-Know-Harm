@@ -1,4 +1,4 @@
-using TreatmentClass; 
+using TreatmentClass;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +10,7 @@ namespace InjuryClass
 {
     public class Injury
     {
-        private float injurySeverity; 
+        private float injurySeverity;
         private Vector2 location; // Represents the location of the Injury (for treatment and animation purposes)
         private float radius; // An injury is represented as a circle of the given radius centered at location
         private bool beingTreated; // Determines if an injury is currently being treated by the Player 
@@ -26,23 +26,16 @@ namespace InjuryClass
         }
 
         // Acessors 
-        public float GetInjurySeverity() 
+        public float GetInjurySeverity()
         {
             if (treatments.Count != 0)
                 return injurySeverity;
             return 0f; // If the Queue of treatments is empty, then the injury has been fully treated
         }
 
-        public Vector2 GetLocation() { return location;  }
+        public Vector2 GetLocation() { return location; }
         public bool GetBeingTreated() { return beingTreated; }
         public float GetRadius() { return radius; }
-
-        public bool IsSelected(Vector2 selectionPosition) // Check if a Vector2 (i.e. mouse cursor position) is selecting an Injury by checking if the selection is within the bounds of the injury's circle 
-        {
-            if ((location - selectionPosition).magnitude <= radius)
-                return true;
-            return false;
-        }
 
         // Starts treating an Injury by activating the Treatment of the topmost item in the Queue 
         public void Treat()
@@ -55,16 +48,20 @@ namespace InjuryClass
         }
 
         // Holds the treatment of an Injury by stopping the Treatment of the topmost item in the Queue (this still preserves all progress in treating the injury) 
-        public void AbortTreatment() 
-        { 
+        public void AbortTreatment()
+        {
             beingTreated = false;
             treatments.Peek().StopTreatment();
-        } // Ends a treatment
+        }
 
-        public void AddTreatment(Treatment treatment) { treatments.Enqueue(treatment); }
-        public void RemoveTreatment() 
+        public void AddTreatment(Treatment treatment) 
         {
-            if (treatments.Count != 0)
+            treatments.Enqueue(treatment);
+        }
+
+        public void RemoveTreatment()
+        {
+            if (beingTreated)
             {
                 treatments.Dequeue();
                 if (treatments.Count != 0)

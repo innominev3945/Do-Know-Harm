@@ -10,6 +10,8 @@ TagManager:
   - Blood Pool
   - Gauze_Image
   - Foreign Object
+  - Chest
+  - WoundDress
   layers:
   - Default
   - TransparentFX
