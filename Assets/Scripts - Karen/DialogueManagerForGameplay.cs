@@ -92,9 +92,13 @@ public class DialogueManagerForGameplay : MonoBehaviour
                 {
                     CharacterRenderer.sprite = characters[0];
                 }
-                else
+                else if (speaker[index] == "Eric")
                 {
                     CharacterRenderer.sprite = characters[1];
+                }
+                else
+                {
+                    CharacterRenderer.sprite = characters[2];
                 }
             }
             index++;
