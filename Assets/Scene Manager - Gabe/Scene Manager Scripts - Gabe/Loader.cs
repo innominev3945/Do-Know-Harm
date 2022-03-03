@@ -7,7 +7,7 @@ using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 public static class Loader
 {
-    public enum Scene // enter scene names here, and use these in the To(scene) scripts accordingly
+    public enum Scene // scene names can be entered here OR use the ToScene script and place the desired scene in the inspector fields
     {
         GPdummy,
         LoadingScene,
@@ -27,7 +27,19 @@ public static class Loader
 
         // Load the loading scene
         UnitySceneManager.LoadScene(Scene.LoadingScene.ToString());
-    }    
+    }
+
+    public static void Load(UnityEngine.SceneManagement.Scene scene)
+    {
+        // Set the loader callback action to lead the target scene
+        onLoaderCallback = () =>
+        {
+            UnitySceneManager.LoadScene(scene.name);
+        };
+
+        // Load the loading scene
+        UnitySceneManager.LoadScene(Scene.LoadingScene.ToString());
+    }
 
     public static void LoaderCallback()
     {
