@@ -1,4 +1,3 @@
-[MC]0
 [BG]0
 [MUSIC]0
 
@@ -14,9 +13,8 @@ Who knows.
 
 [Hannah]
 Death beckons me.
-[EXPRESSION]1 1
 
-
+[MC] 0
 [ENTER]2
 
 [Hannah]
