@@ -36,6 +36,7 @@ public class DialogueSystem : MonoBehaviour
 
     //TEXT SPEED between 0.0f(fast) and 0.2f(slow)
     public float textSpeed = 0.0f;
+    private bool isBlack = true;
 
 
 
@@ -56,6 +57,7 @@ public class DialogueSystem : MonoBehaviour
     
     public void FadedSay(string lines)
     {
+        isBlack = true;
         StopSpeaking();
         speaking = StartCoroutine(SpeakLine(lines, " ", false, speechOnBlack));
 
@@ -63,6 +65,7 @@ public class DialogueSystem : MonoBehaviour
 
     public void FadedSayAdd(string lines)
     {
+        isBlack = true;
         StopSpeaking();
         speaking = StartCoroutine(SpeakLine(lines, " ", true, speechOnBlack));
     }
@@ -70,12 +73,14 @@ public class DialogueSystem : MonoBehaviour
 
     public void Say(string lines, string speaker)
     {
+        isBlack = false;
         StopSpeaking();
         speaking = StartCoroutine(SpeakLine(lines, speaker, false, speechText));
     }  
 
     public void SayAdd(string lines, string speaker)
     {
+        isBlack = false;
         StopSpeaking();
         speaking = StartCoroutine(SpeakLine(lines, speaker, true, speechText));
     }
@@ -134,8 +139,14 @@ public class DialogueSystem : MonoBehaviour
         }else
         {
             visibleChars = speechBox.text.Length;
-            
-            speechBox.text = speechBox.text + "\n" + lines;
+            if (isBlack)
+            {
+                speechBox.text = speechBox.text + "\n\n" + lines;
+            }
+            else
+            {
+                speechBox.text = speechBox.text + "\n" + lines;
+            }
             maxChars = speechBox.text.Length;
         }
         isWaitingForUserInput = false;

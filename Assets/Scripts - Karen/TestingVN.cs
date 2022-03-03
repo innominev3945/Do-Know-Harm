@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,23 +8,31 @@ public class TestingVN : MonoBehaviour
     private int saveIndex = 0;
     private int saveChapter = 0;
 
-    [SerializeField] private TextAsset[] txtAssets;
+    
     void Start()
     {
         dialoguer = GetComponent<DialogueManager>();
 
-        //Starts the VN Scene corresponding to the text asset at [0]
-        dialoguer.StartScene(txtAssets[0]);
+        //Starts the VN Scene corresponding to the number (0 is first chapter)
+        //dialoguer.StartScene(0);
 
-        // gets the index in chapter where the player is currently at
-        saveIndex = dialoguer.getSaveLocation(); 
-        //when save, save the text asset number(chapter number)
+        // gets the index in chapter where the player is currently at to add to Save file
+        //saveIndex = dialoguer.getSaveLocation();
+
+        //Saves chapter number in saveChapter to add to PlayerPrefs 
+        //saveChapter = dialoguer.getSaveChapter();
+        
+
+
+
+        //when save, save the text asset number(chapter number) and chapter number
 
         //load a save VN Scene by doing the following:
-        //dialoguer.loadVNScene(savedIndex, txtAssets[saveChapter]);
+        //dialoguer.loadVNScene(savedIndex, saveChapter);
 
 
     }
 
     
 }
+*/

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 //plays script
 
@@ -10,7 +11,11 @@ public class DialogueManager : MonoBehaviour
 {
     //private SceneManager m_SceneManager;
     //DialogueSystem dialogue;
+    static int chapterNumber = 0;
 
+    //CHANGE AS CHAPTERS ADDED
+    private int numChapters = 2;
+    [SerializeField] private TextAsset[] txtAssets;
     DialogueSystem dialogue;
     CharacterManager character;
     VNManager vnmanager;
@@ -36,7 +41,7 @@ public class DialogueManager : MonoBehaviour
     //speaking stores who is speaking
     List <string> speaking = new List<string>();
 
-    [SerializeField] private TextAsset txtAsset;
+    //[SerializeField] private TextAsset txtAsset;
     private string txt;
 
     int index = 0;
@@ -47,15 +52,14 @@ public class DialogueManager : MonoBehaviour
     bool isLine = false; //used to make sure a line is shown after each input
     // Update is called once per frame
 
-    // Start is called before the first frame update (DELETE LATER, will need to start externally)
-    /*void Start()
+    void Start()
     {
         isBlack = true;
         dialogue = GetComponent<DialogueSystem>();
         character = GetComponent<CharacterManager>();
         vnmanager = GetComponent<VNManager>();
         audioManager = GetComponent<AudioManager>();
-        txt = txtAsset.ToString();
+        txt = txtAssets[chapterNumber].ToString();
         numCharacters = character.getCharacterNumber();
         loadedCharacters = new bool[numCharacters];
         for (int i = 0; i < numCharacters; i++)
@@ -64,11 +68,12 @@ public class DialogueManager : MonoBehaviour
         }
         ReadTextFile();
         playLine();
-    }*/
+    }
 
 
-    public void StartScene(TextAsset chapter)
+    public void StartScene(int chapterNum)
     {
+        chapterNumber = chapterNum;
         script.Clear();
         lineType.Clear();
         speaking.Clear();
@@ -77,7 +82,7 @@ public class DialogueManager : MonoBehaviour
         character = GetComponent<CharacterManager>();
         vnmanager = GetComponent<VNManager>();
         audioManager = GetComponent<AudioManager>();
-        txt = chapter.ToString();
+        txt = txtAssets[chapterNumber].ToString();
         ReadTextFile();
         
         
@@ -87,9 +92,10 @@ public class DialogueManager : MonoBehaviour
                             READS TEXT FILE INTO 3 LISTS
     ***********************************************************************************************/
     
-    public void loadVNScene(int savedIndex, TextAsset chapterScript)
+    public void loadVNScene(int savedIndex, int chapterNum)
     {
-        txt = chapterScript.ToString();
+        chapterNumber = chapterNum;
+        txt = txtAssets[chapterNumber].ToString();
         isBlack = false;
         script.Clear();
         lineType.Clear();
@@ -185,7 +191,24 @@ public class DialogueManager : MonoBehaviour
                     {
                         lineType.Add('M');
                         script.Add(curr);
-                        speaking.Add(" ");
+                        if(counter < 3)
+                        {
+                            speaking.Add(" ");
+                        }
+                        else
+                        {
+                            speaking.Add(speaking[speaking.Count-1]);
+                        }
+                        if (readingSave)
+                        {
+                            startingBGM = Int32.Parse(curr);
+                        }
+                    }
+                    else if(special == "AMBIENCE")
+                    {
+                        lineType.Add('M');
+                        script.Add(curr);
+                        speaking.Add(speaking[speaking.Count-1]);
                         if (readingSave)
                         {
                             startingBGM = Int32.Parse(curr);
@@ -207,7 +230,7 @@ public class DialogueManager : MonoBehaviour
                     {
                         lineType.Add('N');
                         script.Add(curr);
-                        speaking.Add(" ");
+                        speaking.Add(speaking[speaking.Count-1]);
                         if (readingSave)
                         {
                             temp = Int32.Parse(curr);
@@ -222,7 +245,7 @@ public class DialogueManager : MonoBehaviour
                     {
                         lineType.Add('X');
                         script.Add(curr);
-                        speaking.Add(" ");
+                        speaking.Add(speaking[speaking.Count-1]);
                         if (readingSave)
                         {
                             temp = Int32.Parse(curr);
@@ -249,7 +272,14 @@ public class DialogueManager : MonoBehaviour
                     {
                         lineType.Add('B');
                         script.Add(curr);
-                        speaking.Add(speaking[speaking.Count-1]);
+                        if(counter < 3)
+                        {
+                            speaking.Add(" ");
+                        }
+                        else
+                        {
+                            speaking.Add(speaking[speaking.Count-1]);
+                        }
                         if (readingSave)
                         {
                             startingBG = Int32.Parse(curr);
@@ -258,7 +288,7 @@ public class DialogueManager : MonoBehaviour
                     {
                         lineType.Add('F');
                         script.Add(curr);
-                        speaking.Add(" ");
+                        speaking.Add(speaking[speaking.Count-1]);
                         if(readingSave)
                         {
                             if ((counter/2) <= index)
@@ -277,7 +307,7 @@ public class DialogueManager : MonoBehaviour
                     {
                         lineType.Add('Z');
                         script.Add(curr);
-                        speaking.Add(" ");
+                        speaking.Add(speaking[speaking.Count-1]);
                         if (readingSave)
                         {
                             MCnum = Int32.Parse(curr);
@@ -306,7 +336,14 @@ public class DialogueManager : MonoBehaviour
                 else{
                     script.Add("");
                     lineType.Add('E'); //empty = new dialogue
-                    speaking.Add(speaking[speaking.Count-1]);
+                    if(counter < 3)
+                    {
+                        speaking.Add(" ");
+                    }
+                    else
+                    {
+                        speaking.Add(speaking[speaking.Count-1]);
+                    }
                     addedAgain = true;
                     
                 }
@@ -332,183 +369,208 @@ public class DialogueManager : MonoBehaviour
         if (value.isPressed)
         {
             playLine();
-        }
-        
-            
+        } 
     }
 
     private void playLine()
     {
-        if (index >= (script.Count - 1)  && !dialogue.isSpeaking)
+        if ((index >= (script.Count - 1))  && !dialogue.isSpeaking)
+        {
+            //CHANGE AS NECESSARY, IF STATEMENTS FOR GAMEPLAY
+            chapterNumber++;
+            if (chapterNumber == 2)
             {
-
-                //END OF SCRIPT and there aren't any lines playing
-                //*****************************************************************************
-                //                         TO DO:   EXIT OUT OF SCENE
-                //******************************************************************************
-                return;
+                Debug.Log("Check");
             }
+            Debug.Log("Step before scene call");
+            
+            if (chapterNumber < 2)
+            {
+                index = 0;
+                Debug.Log("Scene Loading called");
+                SceneManager.LoadScene("VNScene");
+            }
+            //END OF SCRIPT and there aren't any lines playing
+            //*****************************************************************************
+            //                         TO DO:   EXIT OUT OF SCENE
+            //******************************************************************************
+            return;
+        }
 
            
           
-            if (!dialogue.isSpeaking || dialogue.isWaitingForUserInput)
+        if (!dialogue.isSpeaking || dialogue.isWaitingForUserInput)
+        {
+            if(index >= ((script.Count - 1)))
             {
-                if(index >= script.Count)
+                dialogue.finishSpeaking(isBlack);
+                //TODO: EXIT SCENE
+                return;
+            }
+            while (!isLine){
+                
+                if (lineType[index] == 'F')
                 {
-                    //TODO: EXIT SCENE
-                    return;
-                }
-                while (!isLine){
-                    
-                    if (lineType[index] == 'F')
+                    //isLine = true;
+                    temp = Int32.Parse(script[index]);
+                    if(temp == 0)
                     {
-                        //isLine = true;
-                        temp = Int32.Parse(script[index]);
-                        if(temp == 0)
-                        {
-                            StartCoroutine(FadeToBlack());
-                            isBlack = true;
-                            
-                        }
-                        else
-                        {
-                            StartCoroutine(FadeFromBlack());
-                            isBlack = false;
-                            dialogue.FadedSay(" ");
-                        }
-                    }
-                    //play sound effect
-                    //TODO: SOUND SYSTEM
-                    if (lineType[index] == 'S')
-                    {
-                        temp = Int32.Parse(script[index]);
-                        audioManager.PlaySFX(temp);
+                        StartCoroutine(FadeToBlack());
+                        isBlack = true;
                         
-                        //m_SceneManager.playSFX(temp);
                     }
-                    //dialogue/text to display
-                    else if (lineType[index] == 'L')
+                    else
                     {
-                        audioManager.PlayClick();   
-                        if (isBlack)
+                        StartCoroutine(FadeFromBlack());
+                        isBlack = false;
+                        dialogue.FadedSay(" ");
+                    }
+                }
+                //play sound effect
+                //TODO: SOUND SYSTEM
+                if (lineType[index] == 'S')
+                {
+                    temp = Int32.Parse(script[index]);
+                    audioManager.PlaySFX(temp);
+                    
+                    //m_SceneManager.playSFX(temp);
+                }
+                //dialogue/text to display
+                else if (lineType[index] == 'L')
+                {
+                    audioManager.PlayClick();   
+                    if (isBlack)
+                    {
+                        if(lineType[index-1] == 'E')
                         {
-                            if(lineType[index-1] == 'E')
+                            
+                            dialogue.FadedSay(script[index]);
+                            isLine = true;
+                        }else
+                        {
+                            
+                            dialogue.FadedSayAdd(script[index]);
+                            isLine = true;
+                        } 
+                    }
+                    else{
+                        if(lineType[index-1] == 'E')
+                        {
+                            if(speaking[index] == " ")
                             {
-                                
-                                dialogue.FadedSay(script[index]);
-                                isLine = true;
-                            }else
-                            {
-                                
-                                dialogue.FadedSayAdd(script[index]);
-                                isLine = true;
-                            } 
-                        }
-                        else{
-                            if(lineType[index-1] == 'E')
-                            {
-                                if(speaking[index] == " ")
-                                {
-                                    //name disappear
-                                    dialogue.Say(script[index], speaking[index]);
-                                    isLine = true;
-                                }
-                                else
-                                {
-                                    //nameplate appear if not already there
-                                    dialogue.Say(script[index], speaking[index]);
-                                    isLine = true;
-                                }
-                                //clear speech box and output line
+                                //name disappear
                                 dialogue.Say(script[index], speaking[index]);
                                 isLine = true;
-                                
-                            }else
+                            }
+                            else
                             {
-                                dialogue.SayAdd(script[index], speaking[index]);
+                                //nameplate appear if not already there
+                                dialogue.Say(script[index], speaking[index]);
                                 isLine = true;
                             }
-                        }                        
-                        
-                    }
-                    //character expression
-                    else if (lineType[index] == 'A')
-                    {
-                        temp = Int32.Parse(speaking[index]);
-                        temp2 = Int32.Parse(script[index]);
-                        //changes character number temp to expression number temp2
-                        character.changeExpression(temp, temp2);
-                    }
-                    //display title from script
-                    else if (lineType[index] == 'T')
-                    {
-                        //m_SceneManager.DisplaySceneTitle(script[index]);
-                    }
-                    //enter character
-                    else if (lineType[index] == 'N')
-                    {
-                        temp = Int32.Parse(script[index]);
-                        character.loadCharacter(temp);
-                        
-                        //m_SceneManager.LoadCharacter(temp);
-                    }
-                    //exit character
-                    else if (lineType[index] == 'X')
-                    {
-                        temp = Int32.Parse(script[index]);
-                        
-                        character.unloadCharacter(temp);
-                        //m_SceneManager.UnloadCharacter(temp);
-                    }
-                    //replace character
-                    else if (lineType[index] == 'R')
-                    {
-                        temp = Int32.Parse(script[index]);
-                        temp2 = Int32.Parse(speaking[index]);
-                        character.replaceCharacter(temp, temp2);
-                    }
-                    //end scene
-                    else if (lineType[index] == 'D')
-                    {
-                        print("END HAPPENED.");
-                        //m_SceneManager.UnloadAllBackgrounds();
-                        //m_SceneManager.UnloadAllCharacters();
-                        //m_SceneManager.UnloadAllUI();
+                            //clear speech box and output line
+                            dialogue.Say(script[index], speaking[index]);
+                            isLine = true;
+                            
+                        }else
+                        {
+                            dialogue.SayAdd(script[index], speaking[index]);
+                            isLine = true;
+                        }
+                    }                        
+                    
+                }
+                //character expression
+                else if (lineType[index] == 'A')
+                {
+                    temp = Int32.Parse(speaking[index]);
+                    temp2 = Int32.Parse(script[index]);
+                    //changes character number temp to expression number temp2
+                    character.changeExpression(temp, temp2);
+                }
+                //display title from script
+                else if (lineType[index] == 'T')
+                {
+                    //m_SceneManager.DisplaySceneTitle(script[index]);
+                }
+                //enter character
+                else if (lineType[index] == 'N')
+                {
+                    temp = Int32.Parse(script[index]);
+                    character.loadCharacter(temp);
+                    
+                    //m_SceneManager.LoadCharacter(temp);
+                }
+                //exit character
+                else if (lineType[index] == 'X')
+                {
+                    temp = Int32.Parse(script[index]);
+                    
+                    character.unloadCharacter(temp);
+                    //m_SceneManager.UnloadCharacter(temp);
+                }
+                //replace character
+                else if (lineType[index] == 'R')
+                {
+                    temp = Int32.Parse(script[index]);
+                    temp2 = Int32.Parse(speaking[index]);
+                    character.replaceCharacter(temp, temp2);
+                }
+                //end scene
+                else if (lineType[index] == 'D')
+                {
+                    print("END HAPPENED.");
+                    //m_SceneManager.UnloadAllBackgrounds();
+                    //m_SceneManager.UnloadAllCharacters();
+                    //m_SceneManager.UnloadAllUI();
 
-                    }
-                    //change music
-                    else if(lineType[index] == 'M')
-                    {
-                        temp = Int32.Parse(script[index]);
-                        audioManager.PlayBGM(temp);
-                    }
-                    //load background
-                    else if (lineType[index] == 'B')
-                    {
-                        temp = Int32.Parse(script[index]);
-                        
-                        vnmanager.changeBG(temp);
-                    //Load main character
-                    }else if (lineType[index] == 'Z')
-                    {
-                        
-                        temp = Int32.Parse(script[index]);
-                        character.loadMC(temp);
-                    }
-                    index++;
-                }   
-                isLine = false;  
-            }else if(dialogue.isSpeaking){
+                }
+                //change music
+                else if(lineType[index] == 'M')
+                {
+                    temp = Int32.Parse(script[index]);
+                    audioManager.PlayBGM(temp);
+                }
+                else if(lineType[index] == 'C')
+                {
+                    temp = Int32.Parse(script[index]);
+                    audioManager.PlayAmbience(temp);
+                }
+                //load background
+                else if (lineType[index] == 'B')
+                {
+                    temp = Int32.Parse(script[index]);
+                    
+                    vnmanager.changeBG(temp);
+                //Load main character
+                }else if (lineType[index] == 'Z')
+                {
+                    
+                    temp = Int32.Parse(script[index]);
+                    character.loadMC(temp);
+                }
+                else if (lineType[index] == 'E'){
+                }
+                index++;
                 
-                dialogue.finishSpeaking(isBlack);
-            }
-            return;
+            }   
+            isLine = false;  
+        }else if(dialogue.isSpeaking){
+            
+            dialogue.finishSpeaking(isBlack);
+        }
+        return;
     }
 
 
     public int getSaveLocation()
     {
         return index;
+    }
+
+    public int getSaveChapter()
+    {
+        return chapterNumber;
     }
 
 

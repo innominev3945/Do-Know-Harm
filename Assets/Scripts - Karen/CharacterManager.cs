@@ -13,7 +13,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private float fadeSpeed;
 
     //ADJUST AS NEEDED 
-    private const int numCharacters = 4;
+    private const int numCharacters = 5;
 
 
     private int whichMC = 0;
@@ -26,8 +26,8 @@ public class CharacterManager : MonoBehaviour
     public Sprite[] HannahExpressions;
     public Sprite[] EricExpressions;
     public Sprite[] CaptainExpressions;
-    public Sprite[] ElderlyLadyExpressions;
-    public Sprite[] EricFamilyExpressions;
+    public Sprite[] ElderlyLady1Expressions;
+    public Sprite[] AmphiteranMan1Expressions;
 
     //temporary storage to change sprites of a character
     private Sprite[] temp;
@@ -126,9 +126,9 @@ public class CharacterManager : MonoBehaviour
         if (characterNumber == 2)
             return CaptainExpressions;
         if (characterNumber == 3)
-            return ElderlyLadyExpressions;
+            return ElderlyLady1Expressions;
         else
-            return EricFamilyExpressions;
+            return AmphiteranMan1Expressions;
     }
 
     void Awake()
