@@ -6,11 +6,14 @@ using System;
 [CreateAssetMenu(menuName = "Scriptable Objects/Patient")]
 public class patientObject : ScriptableObject
 {
+    //stores intro script, ending script
     [SerializeField] private TextAsset[] txtAssets;
     //[SerializeField] private string[] injuries;
-    [SerializeField] private bool[] isInjury_notText;
-    private int numTextAssets;
+    [SerializeField] private injuryObjects[] injuries;
 
+    //[SerializeField] private string[] injuryLocations;
+    [SerializeField] private bool[] completed_injuries;
+    private int numTextAssets;
     private int numInjuries;
 
     private int currentText = 0;
@@ -19,48 +22,44 @@ public class patientObject : ScriptableObject
 
     private int total_text_and_injury;
 
+    private int numComplete;
+
     private int currentIndex;
 
-    private void Awake() 
+    private async void Awake() 
     {
         numTextAssets = txtAssets.Length;
-        //numInjuries = Injuries.Length;
+        numInjuries = injuries.Length;
+        numComplete = numInjuries;
         //total_text_and_injury = numInjuries + numTextAssets;
     }
 
-    //CALL THIS BEFORE CALLING IS INJURY
-    public bool isEnd()
-    {
-        if(currentIndex == total_text_and_injury - 2)
-        {
-            return true;
-        }
-        return false;
-    }
 
+    public int getNumInjuries()
+    {
+        return numInjuries;
+    }
     //CHECKS IF NEXT THING TO DO IS AN INJURY TREATMENT
     //TRUE IF INJURY IS NEXT
-    public bool isInjury()
+    public injuryObjects getInjuryType(int n)
     {
-        currentIndex++;
-        return(isInjury_notText[currentIndex-1]);
+        //completed_injuries[n] = true;
+        return injuries[n];
     }
 
-    //CALL THIS FUNCTION IF isInjury returns true
-    //use string to make an injury play
-    /*public string getNextInjuryName()
-    {
-        currentInjury++;
-        return (injuries[currentInjury-1]);
-    }*/
 
-    //CALL THIS FUNCTION IF isInjury returns false
-    //SEND THE RESULT OF THIS TEXT ASSET INTO THE DIALOGUE MANAGER FOR GAMEPLAY playText(TextAsset) - Karen will update it later
-    public TextAsset getText()
+    public injuryObjects startInjury(int n)
     {
-        currentIndex++;
-        return(txtAssets[currentIndex-1]);
+        numComplete--;
+        completed_injuries[n] = true;
+        return injuries[n];
     }
+
+    public bool injuryStatus(int n)
+    {
+        return completed_injuries[n];
+    }
+    
 
     //SEND THE RESULT OF THIS TEXT ASSET INTO THE DIALOGUE MANAGER FOR GAMEPLAY playText(TextAsset) - Karen will update it later
     public TextAsset get_Intro_text()
@@ -85,7 +84,10 @@ public class patientObject : ScriptableObject
         return(txtAssets[numTextAssets-2]);
     }
 
-
+    public int getNumInjuriesLeft()
+    {
+        return numComplete;
+    }
 
     //private void OnEnable() {}
 

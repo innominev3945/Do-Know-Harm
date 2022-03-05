@@ -18,6 +18,8 @@ public class DialogueManagerForGameplay : MonoBehaviour
     [SerializeField] private TextAsset txtAsset;
 
     [SerializeField] private float fadeSpeed;
+
+    [SerializeField] GameObject TextElements;
     private string txt;
 
      public Sprite[] characters;
@@ -29,14 +31,38 @@ public class DialogueManagerForGameplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        txt = txtAsset.ToString();
-        ReadTextFile();
-        
+        //TextElements = gameObject.GetComponent<GameObject>();
+        playText(txtAsset);
     }
     /**********************************************************************************************
                             READS TEXT FILE INTO 3 LISTS
     ***********************************************************************************************/
-    
+    public void playText(TextAsset txtAsset)
+    {
+        //***********************************************************************************************
+        //                                     To do: Enable UI Input
+        //************************************************************************************************
+        TextElements.SetActive(true);
+        script.Clear();
+        //lineType.Clear();
+        speaker.Clear();
+        //isBlack = true;
+        txt = txtAsset.ToString();
+        ReadTextFile();
+        
+        
+        playLine();
+    }
+
+    void OnClick(InputValue value)
+    {
+        //END OF SCRIPT
+        
+        if (value.isPressed)
+        {
+            playLine();
+        } 
+    }
     
     private void ReadTextFile()
     {
@@ -75,6 +101,11 @@ public class DialogueManagerForGameplay : MonoBehaviour
     {
         if (index >= script.Count)
         {
+            //****************************************************************************************************
+            //                                             ToDo: Disable UI input
+            //****************************************************************************************************
+            TextElements.SetActive(false);
+
             return;
         }
         linePlayed = false;
@@ -82,26 +113,29 @@ public class DialogueManagerForGameplay : MonoBehaviour
         {
             finishSpeaking();
         }
-        while(!linePlayed)
-        {
-            if(!string.IsNullOrEmpty(script[index]))
+        else{
+            while(!linePlayed)
             {
-                linePlayed = true;
-                Say(script[index], speaker[index]);
-                if (speaker[index] == "Hannah")
+                if(!string.IsNullOrEmpty(script[index]))
                 {
-                    CharacterRenderer.sprite = characters[0];
+                    linePlayed = true;
+                    Debug.Log(speaker[index]);
+                    Say(script[index], speaker[index]);
+                    if (speaker[index] == "Hannah")
+                    {
+                        CharacterRenderer.sprite = characters[0];
+                    }
+                    else if (speaker[index] == "Eric")
+                    {
+                        CharacterRenderer.sprite = characters[1];
+                    }
+                    else
+                    {
+                        CharacterRenderer.sprite = characters[2];
+                    }
                 }
-                else if (speaker[index] == "Eric")
-                {
-                    CharacterRenderer.sprite = characters[1];
-                }
-                else
-                {
-                    CharacterRenderer.sprite = characters[2];
-                }
+                index++;
             }
-            index++;
         }
         return;
     }
