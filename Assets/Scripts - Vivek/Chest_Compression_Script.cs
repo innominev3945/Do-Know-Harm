@@ -23,8 +23,8 @@ namespace ChestCompressionScript
         {
             maxCompressions = 30;
             numCompressions = 0;
-            maxTimeInterval = 1f;
-            minTimeInterval = 0.5f;
+            maxTimeInterval = 0.6f;
+            minTimeInterval = 0.2f;
             timeElapsed = 0f;
             healed = false;
             contact = false;

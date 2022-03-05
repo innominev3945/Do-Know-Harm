@@ -4,6 +4,7 @@ using ForeignObjectClass;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MouseReactionScript;
 
 namespace ForcepsTreatmentClass
 {
@@ -47,6 +48,12 @@ namespace ForcepsTreatmentClass
             forceps.SetActive(false);
             foreignObject.SetActive(false);
             bleedingWound.SetActive(false);
+        }
+
+        public override void ShowInjury()
+        {
+            foreignObject.SetActive(true);
+            bleedingWound.SetActive(true);
         }
 
         // Update is called once per frame

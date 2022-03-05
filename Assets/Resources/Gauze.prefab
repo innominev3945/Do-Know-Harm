@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8723020226205549637}
   m_Layer: 0
   m_Name: Gauze
-  m_TagString: Untagged
+  m_TagString: Mouse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,6 @@ MonoBehaviour:
   totalClicks: 0
   timeLimit: 0
   shrinkScale: 0
-  healed: 0
 --- !u!58 &8723020226205549639
 CircleCollider2D:
   m_ObjectHideFlags: 0

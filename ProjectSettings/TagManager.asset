@@ -12,6 +12,8 @@ TagManager:
   - Foreign Object
   - Chest
   - WoundDress
+  - Mouse
+  - BaseMouse
   layers:
   - Default
   - TransparentFX

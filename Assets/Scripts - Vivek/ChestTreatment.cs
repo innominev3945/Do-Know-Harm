@@ -36,12 +36,19 @@ namespace ChestTreatmentClass
             chest.SetActive(true);
             compressor.SetActive(true);
         }
+
         public override void StopTreatment()
         {
             treatmentStarted = false;
             chest.SetActive(false);
             compressor.SetActive(false);
         }
+
+        public override void ShowInjury()
+        {
+            chest.SetActive(true);
+        }
+
         // Update is called once per frame
         void Update()
         {

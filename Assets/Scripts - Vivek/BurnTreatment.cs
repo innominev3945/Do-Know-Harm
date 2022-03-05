@@ -53,6 +53,11 @@ namespace BurnTreatmentClass
             trigger2.SetActive(false);
         }
 
+        public override void ShowInjury()
+        {
+            burnWound.SetActive(true);
+        }
+
         // Update is called once per frame
         void Update()
         {

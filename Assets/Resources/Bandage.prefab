@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9096168364550271418}
   m_Layer: 0
   m_Name: Bandage
-  m_TagString: Untagged
+  m_TagString: Mouse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -49,6 +49,12 @@ namespace GauzeTreatmentClass
             bleedingWound.SetActive(false);
         }
 
+        public override void ShowInjury()
+        {
+            bloodPool.SetActive(true);
+            bleedingWound.SetActive(true);
+        }
+
         // Update is called once per frame
         void Update()
         {

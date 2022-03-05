@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6372299250984037993}
   - component: {fileID: 6372299250984037992}
   - component: {fileID: 6372299250984037910}
+  - component: {fileID: -4251939163161553395}
   m_Layer: 0
   m_Name: BloodPool
   m_TagString: Blood Pool
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6372299250984037995}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.96, y: 2.2, z: 0}
+  m_LocalPosition: {x: -3.96, y: 2.2, z: -1}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -99,3 +100,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &-4251939163161553395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6372299250984037995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b2c480707273ce4db44f007451ee832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

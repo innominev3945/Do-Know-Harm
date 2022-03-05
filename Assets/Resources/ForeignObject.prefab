@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6916518142669834184}
   - component: {fileID: 6916518142669834182}
   - component: {fileID: 6916518142669834183}
+  - component: {fileID: -70799360125769384}
   m_Layer: 0
   m_Name: ForeignObject
   m_TagString: Foreign Object
@@ -110,5 +111,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4f2ffe05288344998cd9c51733f95f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-70799360125769384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6916518142669834187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b2c480707273ce4db44f007451ee832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
