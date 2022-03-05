@@ -10,10 +10,10 @@ TagManager:
   - Blood Pool
   - Gauze_Image
   - Foreign Object
-  - Wound
-  - Tourniquet
-  - Limb
-  - Scissors
+  - Chest
+  - WoundDress
+  - Mouse
+  - BaseMouse
   layers:
   - Default
   - TransparentFX
@@ -26,7 +26,7 @@ TagManager:
   - Fade Layer
   - Fade Text Layer
   - Camera
-  - Draggable Objects
+  - 
   - 
   - 
   - 
@@ -48,48 +48,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Neck
-    uniqueID: 2360319731
-    locked: 0
-  - name: Body
-    uniqueID: 1323200207
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Head
-    uniqueID: 2731245263
+  - name: Character Layer
+    uniqueID: 992186971
     locked: 0
-  - name: Over Body
-    uniqueID: 1930378543
+  - name: UI Layer
+    uniqueID: 976181001
     locked: 0
-  - name: Cursor
-    uniqueID: 4038126279
+  - name: MC Layer
+    uniqueID: 2801030167
     locked: 0
-  - name: back
-    uniqueID: 1716867951
-    locked: 0
-  - name: body
-    uniqueID: 1530261687
-    locked: 0
-  - name: wound
-    uniqueID: 1774343361
-    locked: 0
-  - name: fore
-    uniqueID: 848793359
-    locked: 0
-  - name: Characters
-    uniqueID: 3415417791
-    locked: 0
-  - name: Text Box
-    uniqueID: 3223919345
-    locked: 0
-  - name: Main Character
-    uniqueID: 106095041
-    locked: 0
-  - name: Fade Effect
-    uniqueID: 204651555
-    locked: 0
-  - name: Text on Fade
-    uniqueID: 2912731401
+  - name: Fade Layer
+    uniqueID: 2202052007
     locked: 0
