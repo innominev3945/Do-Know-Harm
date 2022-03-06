@@ -837,8 +837,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtAssets:
-  - {fileID: 4900000, guid: 57c9224889e999d44857e3a015fc132b, type: 3}
-  - {fileID: 4900000, guid: 11a38ed730cb1a348b8ac9b779412e60, type: 3}
+  - {fileID: 4900000, guid: c99fa187486628249a94c27b10d0bd61, type: 3}
+  - {fileID: 4900000, guid: 0e7c3806c414c644eac6994fa241d24d, type: 3}
   spriteRenderer: {fileID: 428713065}
   fadeSpeed: 2
 --- !u!114 &829284124
