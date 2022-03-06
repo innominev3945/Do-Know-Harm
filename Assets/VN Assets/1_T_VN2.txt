@@ -1,0 +1,286 @@
+﻿[MUSIC]2
+[BG]4
+[ENTER]2
+[MC]1
+
+
+[FADE]1
+
+
+[THOUGHT]
+At last.
+
+
+I stand back, exhausted and a bit in a daze.
+
+
+I wipe the blood- or rather, the red paint, off my hands. 
+
+
+[Captain]
+That was a good show, son. 
+
+
+[THOUGHT]
+He lets a proud smile escape, and gives me a hefty pat on my shoulder.
+
+
+[Eric]
+Did… I pass?
+
+
+[Captain]
+No.
+
+
+[THOUGHT]
+...
+
+
+What?
+
+
+Oh my God.
+
+
+What happened? Did I miss something? I thought I covered everything. Where did I go-
+
+
+[Captain]
+Relax, sonny, I was messing with you. You passed.
+
+
+[THOUGHT]
+I hate you.
+
+
+[Eric]
+Ah… I see… thank you, sir.
+
+
+[Hannah]
+Eric! You did amazing!
+
+
+[ENTER]0
+
+
+[THOUGHT]
+She hops up from the ground, dusting herself off and loosening the bandages I tied around her.
+
+
+[Eric]
+Ah… thanks.
+
+
+[Hannah]
+Of course!
+
+
+…hey, you’re looking a bit tired. You okay?
+
+
+[Eric]
+Yeah, I am feeling a bit exhausted after that. I think I’ll go lay down for a moment.
+
+[THOUGHT]
+I start to take my leave, planning to catch my breath and sit down at a desk.
+
+
+[Captain]
+Where do you think you’re going, Wai?
+
+
+[Eric]
+Uh, Sir?
+
+
+[Captain]
+I should flunk you for abandoning your partner. This is a cooperative exam.
+
+
+ It’s your turn to be the patient. Get your rear in the backroom and get changed.
+
+
+[Hannah]
+You can get your nap later. Have fun~
+
+
+[THOUGHT]
+Dammit.
+
+
+[FADE]0
+
+
+[EXIT]0
+
+
+[THOUGHT]
+Hannah finished her practical with me in record time. 
+
+
+Despite her saying how worried she was, she passed with flying colors. She might have even blown me out of the water.
+
+
+After our turn, I waited in the back of the room, keeping quiet so as to not disturb the others during their practical. 
+
+
+Hannah stayed at the front, letting me take my much needed nap.
+
+
+After what must have been an hour, it was all finished.
+
+
+[BG]5
+[FADE]1
+
+
+[Captain]
+That wraps up the last of the practicals. 
+
+
+[THOUGHT]
+The Captain positions himself in the front of the room. 
+
+
+He clears his throat, and after a small pause, he begins to speak.
+
+
+[Captain]
+Everyone, may I have your attention.
+
+
+[MUSIC]1
+
+
+We live in times marked by violence. 
+
+
+Across the ocean, there are people dying every second to bullets. Bombs. Flames.
+
+
+Every year this war continues, the more destruction we bring upon ourselves.
+
+
+The duty of a medical technician is not to fan the flames of war. Rather, we serve to resist this brutality, and save those put in danger’s way. 
+
+
+Ladies and gentlemen, we do no harm. But we do know harm.
+
+
+I have seen how hard you have worked these past few months.
+
+
+I am proud to announce that every person in this room is now a medical technician of the Civilian Defense Department. 
+
+
+Congratulations. You’ve earned it.
+
+
+[THOUGHT]
+The class stands up, cheering and clapping in a ferocious celebration.
+
+
+Even I join in. It’s a proud moment.
+
+
+As the others begin to mingle and socialize with one another, I fumble by myself in the back of the room.
+
+
+It looks like there’s not much for me to do at this point. I was never one for socializing.
+
+
+I get up from my seat, quietly trying to leave without making a fuss. Might as well try and get home early, I’m exhausted.
+
+
+As I reach for the exit, a familiar voice interrupts me.
+
+
+[Hannah]
+Hey, Eric?
+
+
+[Eric]
+Hm?
+
+
+[ENTER]0
+
+
+[Hannah]
+I know I said it before back then, but you did great today.
+
+
+[Eric]
+Ah… thanks.
+
+
+…
+
+
+You did great too.
+
+
+What was that about not feeling ready earlier?
+
+
+
+
+[Hannah]
+Thanks, hehe. It must have been the adrenaline that got me moving so fast.
+
+
+Are you heading out now?
+
+
+[Eric]
+Yeah, I’m gonna catch the next streetcar home. I need to pack and get ready.
+
+
+How about you?
+
+
+[Hannah]
+I’m taking the transport with everyone else who’s housed in the garrison, so I need to stay here. 
+
+
+I don’t want to keep you. You know I’m not local, but even I know the streetcars take forever to come around. 
+
+
+Make sure to rest! You need your sleep. I’ll see you later!
+
+
+[Eric]
+Y… yeah.
+
+
+See you later.
+
+
+[EXIT]0
+
+
+[THOUGHT]
+She flashes me a smile before she walks back to mingle with all the others.
+
+
+She’s a real handful, especially for someone like me who can barely handle conversation. 
+
+
+But… I can tell she’s a sweet person. 
+
+
+Anyhow, she’s right. The streetcars are never around when you need them. 
+
+
+[SFX]3
+
+
+I open the door, and step outside to the world.
+
+
+I’m a medical technician now. The reality of it all still hasn’t quite set in.
+
+
+I hope they’d be proud.
