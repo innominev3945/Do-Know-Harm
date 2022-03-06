@@ -31,7 +31,7 @@ namespace ForcepsTreatmentClass
         // Start is called before the first frame update
         void Start()
         {
-            StopTreatment();
+            //StopTreatment();
         }
 
         public override void StartTreatment()

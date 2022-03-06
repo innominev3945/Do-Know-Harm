@@ -38,7 +38,7 @@ public class PatientFunctionality : MonoBehaviour
         compressionInj = new Injury(0.1f, new Vector2(-0.08f, -2.7f), 1f);
         burnInj = new Injury(0.1f, new Vector2(-0.13f, -3.79f), 1f);
 
-
+        
 
         //dress = DressTreatment.MakeDressTreatmentObject(this.gameObject, laceration);
         forceps = ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, laceration);
@@ -60,7 +60,7 @@ public class PatientFunctionality : MonoBehaviour
         bodyparts = new Bodypart[1]; // Create an array of BodyParts (in this case only a single Bodypart) to be added to the Patient 
 
         bodyparts[0] = chest; // Add the Chest BodyPart to the array 
-
+        
         hero = Patient.MakePatientObject(this.gameObject, bodyparts, 1.0f); // Add the array of BodyParts to the Patient when creating them (in a standard situation you'd have more BodyParts)
     }
 

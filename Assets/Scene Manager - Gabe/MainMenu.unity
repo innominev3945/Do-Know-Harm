@@ -538,6 +538,7 @@ GameObject:
   - component: {fileID: 321194365}
   - component: {fileID: 321194364}
   - component: {fileID: 321194367}
+  - component: {fileID: 321194368}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -609,9 +610,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 321194367}
-        m_TargetAssemblyTypeName: ToVN, Assembly-CSharp
-        m_MethodName: LoadVisualNovel
+      - m_Target: {fileID: 321194368}
+        m_TargetAssemblyTypeName: ToScene, Assembly-CSharp
+        m_MethodName: LoadSelectedScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -671,6 +672,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 840d7d7f2ecb4e24994f41ab21824491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &321194368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321194362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3319f270ebd5034d897ba4536fe71db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: Do Know Harm - Vivek
 --- !u!1 &401532876
 GameObject:
   m_ObjectHideFlags: 0

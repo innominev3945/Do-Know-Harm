@@ -41,6 +41,18 @@ public static class Loader
         UnitySceneManager.LoadScene(Scene.LoadingScene.ToString());
     }
 
+    public static void Load(string sceneName)
+    {
+        // Set the loader callback action to lead the target scene
+        onLoaderCallback = () =>
+        {
+            UnitySceneManager.LoadScene(sceneName);
+        };
+
+        // Load the loading scene
+        UnitySceneManager.LoadScene(Scene.LoadingScene.ToString());
+    }
+
     public static void LoaderCallback()
     {
         // Triggered after the first Update which lets the screen refresh
