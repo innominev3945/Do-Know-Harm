@@ -393,6 +393,7 @@ public class DialogueManager : MonoBehaviour
             //END OF SCRIPT and there aren't any lines playing
             //*****************************************************************************
             //                         TO DO:   EXIT OUT OF SCENE
+            GetComponent<ToScene>().LoadSceneByName("Do Know Harm - Vivek");
             //******************************************************************************
             return;
         }
