@@ -210,6 +210,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7a56abc4-7ae0-45b5-ba13-cd933f2996a9
     m_ActionName: Treatment/Zoom[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 63e5dcf7-dff3-4f4d-b6cb-6357f812346f
+    m_ActionName: Treatment/LockAndRotate[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ed2b1ccb-2cc3-465b-a1b4-5738fdbaa590
+    m_ActionName: Treatment/Menu[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Treatment
@@ -223,7 +231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 432608757}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.37794533, y: 0.72900593, z: -1.4038885}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
