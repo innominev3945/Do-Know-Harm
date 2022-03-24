@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalNumTimes: 0
+  hitbox: {fileID: 4714007148673898081, guid: 03ce7281d2a4c4d12a9c0552912469db, type: 3}
 --- !u!114 &7762077886955278408
 MonoBehaviour:
   m_ObjectHideFlags: 0
