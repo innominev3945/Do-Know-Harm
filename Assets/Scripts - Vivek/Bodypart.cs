@@ -12,7 +12,7 @@ namespace BodypartClass
 {
     public class Bodypart : MonoBehaviour
     {
-        private GameObject cursor;
+        //private GameObject cursor;
         private float timeInterval;
         private float nextTime;
         private float health; // Health of the body part, not the entire patient 
@@ -45,11 +45,6 @@ namespace BodypartClass
             injuries.Add(injury);
         }
 
-
-        void Start()
-        {
-            cursor = GameObject.Find("Cursor");
-        }
         // Update functionality that is called every timeInterval
         void Update()
         {
@@ -78,22 +73,6 @@ namespace BodypartClass
                     }
                 }
                 nextTime += timeInterval; 
-            }
-
-            // Start treating an Injury that is clicked and abort the treatment of all other injuries (since you can only treat one injury at a time)
-            if (injuries.Count != 0 && cursor.GetComponent<NewCursor>().getSelected())
-            {
-                bool found = false;
-                foreach (Injury injury in injuries)
-                {
-                    if (injury.IsSelected(cursor.transform.position) && !found)
-                    {
-                        injury.Treat();
-                        found = true;
-                    }
-                    else if (!found)
-                        injury.AbortTreatment();
-                }
             }
         }
     }

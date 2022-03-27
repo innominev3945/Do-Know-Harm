@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes-Simon/Health bar & time.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scene Manager - Gabe/MainMenu.unity
+    guid: 604b471fb54f4df4085cde08f02af596
+  - enabled: 1
+    path: Assets/Scene Manager - Gabe/LoadingScene.unity
+    guid: 5efdb3a995cad484b94a7e41dd7a2adf
+  - enabled: 1
+    path: Assets/Scenes - Vivek/VNScene.unity
+    guid: a8d02bf40b8d8584d819407f49f6316e
+  - enabled: 1
+    path: Assets/Do Know Harm - Vivek.unity
+    guid: 91f44f78bd168aa4bbd806da308ffaed
   m_configObjects: {}

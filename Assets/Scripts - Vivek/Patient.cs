@@ -16,7 +16,7 @@ namespace PatientClass
     public class Patient : MonoBehaviour
     {
         private float timeInterval; // Time interval for how often a Patient's health will update 
-        private float nextTime; 
+        private float nextTime;
 
         private Bodypart[] bodyparts;
         private float health; // Health of ENTIRE Patient, weighted via the various Bodyparts 
@@ -25,7 +25,7 @@ namespace PatientClass
         // Unity, being the helpful engine, doesn't like to have normal Constructors work properly when dealing with
         // Monobehaviour scripts, so instead of creating a Patient object using the Patient() constructor, use 
         // the MakePatientObject() method instead 
-        public static Patient MakePatientObject(GameObject ob /*This is the GameObject that Patient is being attached to, so when using it in a driver program, use the "this" keyword*/, 
+        public static Patient MakePatientObject(GameObject ob /*This is the GameObject that Patient is being attached to, so when using it in a driver program, use the "this" keyword*/,
             Bodypart[] parts, float interval)
         {
             Patient ret = ob.AddComponent<Patient>();
@@ -33,7 +33,7 @@ namespace PatientClass
             ret.nextTime = 0f;
             ret.bodyparts = parts; // Takes an array of Bodyparts as the parameter, so Bodyparts can be split and weighted as seen necessary 
             ret.health = 100;
-            return ret; 
+            return ret;
         }
 
         //Accessors
