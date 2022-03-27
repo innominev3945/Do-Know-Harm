@@ -8,7 +8,14 @@ public class Player : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth = 0f;
     public bool isDead = false;
+    public bool hasWon = false;
     public HealthBar healthBar;
+    public int numOfInjur = 5;
+    // update numOfInjur at the beginning of each game!!
+    public int injuredTime = 0;
+    // players made mistakes --> add injuredTime
+    public int healingTime = 0;
+    // same concept as injuredTime, when player receives a health boost ...
 
     void Start()
     {
@@ -18,10 +25,29 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (numOfInjur == 0)
+        {
+            hasWon = true;
+            healthBar.SetHealth(maxHealth);
+            return;
+        }
         //the following two lines make health decrease with time
         if (currentHealth > 0)
         {
-            currentHealth -= 1 * Time.deltaTime;
+            if (injuredTime > 0)
+            {
+                currentHealth -= 30 * Time.deltaTime;
+                injuredTime--;
+            }
+            else if (healingTime > 0)
+            {
+                currentHealth += 30 * Time.deltaTime;
+                healingTime--;
+            }
+            else
+            {
+                currentHealth -= 0.8f * Time.deltaTime * numOfInjur;
+            }
             healthBar.SetHealth(currentHealth);
         }
         else
@@ -32,12 +58,17 @@ public class Player : MonoBehaviour
         //link this to action!!
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            TakeDamage(20f);
+            injuredTime += 160;
         }
         //link this to action!!
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            GetHeal(10f);
+            healingTime += 160;
+        }
+        //link this to action!!
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            numOfInjur--;
         }
     }
 
@@ -55,4 +86,5 @@ public class Player : MonoBehaviour
     {
         return currentHealth;
     }
+
 }

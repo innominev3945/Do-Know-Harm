@@ -25,6 +25,10 @@ public class CountDownTimer : MonoBehaviour
             countdownText.text = "You've lost!:/";
             //switch to another scene since game over!!
         }
+        else if (player.hasWon)
+        {
+            countdownText.text = "You've won!";
+        }
         else
         {
             currentTime -= 1 * Time.deltaTime;
