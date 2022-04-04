@@ -1,0 +1,41 @@
+﻿title: Start
+
+---
+<<fade Yarn>>
+Hannah: And here we go again...
+
+<<mc Yarn 0>>
+
+<<enter Yarn 1>>
+Karen: Yap... here we go again title
+
+Eric: What's going on here?
+
+<<enter Yarn 2>>
+Captain: Attention!
+Captain: Karen, remind yourself that names cannot have a space.
+
+Karen: Yessir! Of course sir!
+
+Captain: Goodbye.
+
+<<exit Yarn 2>>
+Karen: So, how's the choice mechanism working?
+-> Eh
+    ...
+-> Great!
+    That's good to hear.
+-> Blech
+    TT
+
+
+<<music Yarn 1>>
+Wow!
+My first ever Yarn script in Unity!
+
+-> Gosh!
+-> Incredible!
+-> I'm amazed!
+
+Anyway, time to get writing!
+===
