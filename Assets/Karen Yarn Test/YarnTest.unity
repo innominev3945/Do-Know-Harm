@@ -167,7 +167,7 @@ SortingGroup:
   m_GameObject: {fileID: 19055334}
   m_Enabled: 1
   m_SortingLayerID: 992186971
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!1 &127497695
 GameObject:
@@ -352,7 +352,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 992186971
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -388,7 +388,7 @@ SortingGroup:
   m_GameObject: {fileID: 169621060}
   m_Enabled: 1
   m_SortingLayerID: 992186971
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!1 &181647192
 GameObject:
@@ -580,7 +580,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2092915289
-  m_SortingLayer: 5
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -621,7 +621,7 @@ SortingGroup:
   m_GameObject: {fileID: 312766447}
   m_Enabled: 0
   m_SortingLayerID: -2092915289
-  m_SortingLayer: 5
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!1 &353405068
 GameObject:
@@ -729,7 +729,7 @@ SortingGroup:
   m_GameObject: {fileID: 353405068}
   m_Enabled: 1
   m_SortingLayerID: 976181001
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!1 &501771503
 GameObject:
@@ -869,6 +869,7 @@ GameObject:
   - component: {fileID: 513151816}
   - component: {fileID: 513151815}
   - component: {fileID: 513151814}
+  - component: {fileID: 513151817}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -932,6 +933,88 @@ Transform:
   m_Father: {fileID: 605271955}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &513151817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513151813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 64f27f02e510faf4183131ebd5bb86ad, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8b4c5dbd-5131-4803-9b40-58e265463e55
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: efd90f5b-765d-4416-afd3-0f021b9ea1a8
+    m_ActionName: Player/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2fbb517c-994f-4314-9efa-2cd1401b4b14
+    m_ActionName: Player/Fire[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 52f94215-bfd4-4b15-8351-1296e7a2f36e
+    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ca1d630c-23e8-459a-b96e-413061d55cb9
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 115fc99a-b078-40f8-9220-ef5baad6ede4
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1102e621-2435-4074-8f33-6c6ce21b81e9
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7a848f3f-95aa-49a9-b606-0f6cfa612f92
+    m_ActionName: UI/Click[/Mouse/leftButton,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 21dbd284-3867-48de-bade-a11fe719e363
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2e753d36-ab82-49e8-82e9-d5bbec4af034
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a7d82d2d-9ccf-43b5-9d28-09a2f565c451
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3cd565ca-bbe1-48b8-9be3-4c015dc9b91f
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5ba78b44-be87-4320-9fea-a2b94a17f5bb
+    m_ActionName: UI/TrackedDeviceOrientation
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &526869429
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,7 +1089,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 976181001
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0.9811321, g: 0.8625242, b: 0.63557607, a: 1}
@@ -1543,7 +1626,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 976181001
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0.5058824, g: 1, b: 0.98823535, a: 1}
@@ -1612,7 +1695,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 992186971
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1648,7 +1731,7 @@ SortingGroup:
   m_GameObject: {fileID: 1040519492}
   m_Enabled: 1
   m_SortingLayerID: 992186971
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!1 &1053325300
 GameObject:
@@ -1779,7 +1862,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 992186971
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1815,7 +1898,7 @@ SortingGroup:
   m_GameObject: {fileID: 1182682337}
   m_Enabled: 1
   m_SortingLayerID: 992186971
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!1 &1335685310
 GameObject:
@@ -2056,7 +2139,7 @@ SortingGroup:
   m_GameObject: {fileID: 1366151403}
   m_Enabled: 1
   m_SortingLayerID: 976181001
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!1 &1562431201
 GameObject:
@@ -2114,7 +2197,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1493937129
-  m_SortingLayer: 4
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2150,7 +2233,7 @@ SortingGroup:
   m_GameObject: {fileID: 1562431201}
   m_Enabled: 1
   m_SortingLayerID: -1493937129
-  m_SortingLayer: 4
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!1 &1606534076
 GameObject:
@@ -2634,7 +2717,7 @@ SortingGroup:
   m_GameObject: {fileID: 1797514812}
   m_Enabled: 1
   m_SortingLayerID: -2092915289
-  m_SortingLayer: 5
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!1 &1804116930
 GameObject:
@@ -2748,7 +2831,7 @@ SortingGroup:
   m_GameObject: {fileID: 1804116930}
   m_Enabled: 1
   m_SortingLayerID: 976181001
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!1 &1863005907
 GameObject:
@@ -3064,5 +3147,5 @@ SortingGroup:
   m_GameObject: {fileID: 2032536023}
   m_Enabled: 1
   m_SortingLayerID: 976181001
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 0
