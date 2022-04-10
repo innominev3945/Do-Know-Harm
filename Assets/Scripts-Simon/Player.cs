@@ -72,15 +72,16 @@ public class Player : MonoBehaviour
         }
     }
 
-    void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
+        injuredTime += damage;
+        //healthBar.SetHealth(currentHealth);
     }
-    void GetHeal(float heal)
+    public void GetHeal(int heal)
     {
-        currentHealth += heal;
-        healthBar.SetHealth(currentHealth);
+        //currentHealth += heal;
+        healingTime += heal;
+        //healthBar.SetHealth(currentHealth);
     }
     public float GetCurrentHealth()
     {
