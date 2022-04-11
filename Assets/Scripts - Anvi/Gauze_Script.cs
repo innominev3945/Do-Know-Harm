@@ -90,9 +90,13 @@ namespace Gauze
             {
                 if (gauzeCollider.GetComponent<Gauze_Hit_Box_Collider_Script>().insideHitBox())
                 {
-                    float xCoord = gauzeCollider.GetComponent<Gauze_Hit_Box_Collider_Script>().getCollisionX();
-                    float yCoord = gauzeCollider.GetComponent<Gauze_Hit_Box_Collider_Script>().getCollisionY();
-                    Instantiate(gauzeImage, new Vector3(xCoord, yCoord, 0), Quaternion.identity);
+                    if (rightmouseButtonDown)
+                    {
+                        Debug.Log("Placed down gauze square");
+                        float xCoord = gauzeCollider.GetComponent<Gauze_Hit_Box_Collider_Script>().getCollisionX();
+                        float yCoord = gauzeCollider.GetComponent<Gauze_Hit_Box_Collider_Script>().getCollisionY();
+                        Instantiate(gauzeImage, new Vector3(xCoord, yCoord, 0), Quaternion.identity);
+                    }
                 }
             }
         }
@@ -129,9 +133,10 @@ namespace Gauze
         {
             if (context.started)
             {
+                Debug.Log("Right mouse button pressed (gauze)");
                 rightmouseButtonDown = true;
             }
-            else
+            else if (context.canceled)
             {
                 rightmouseButtonDown = false;
             }

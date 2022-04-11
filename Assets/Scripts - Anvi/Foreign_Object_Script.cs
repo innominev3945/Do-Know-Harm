@@ -8,9 +8,9 @@ namespace ForeignObjectClass
     {
         // NOTE: Foreign Object should always be placed within the collider of the wound
 
-        private bool exitedWound;
-        private Vector3 woundLocation;
-        private const float minimumDistanceAway = 5;
+        // private bool exitedWound;
+        // private Vector3 woundLocation;
+        // private const float minimumDistanceAway = 5;
         private GameObject wound;
         private bool healed;
 
@@ -24,22 +24,35 @@ namespace ForeignObjectClass
         // Start is called before the first frame update
         void Start()
         {
-            exitedWound = false;
-            woundLocation = wound.transform.position;
+            // exitedWound = false;
+            // woundLocation = wound.transform.position;
+            // woundLocation = new Vector3(0, 0, 0);
             healed = false;
         }
 
         // Update is called once per frame
         void Update()
         {
-            Debug.Log("Distance: " + Vector3.Distance(transform.position, woundLocation));
+            // Debug.Log("Distance: " + Vector3.Distance(transform.position, woundLocation));
             //if (exitedWound)
             //{
+            /*
             if (Vector3.Distance(transform.position, woundLocation) > minimumDistanceAway)
             {
                 healed = true;
             }
+            */
             //}
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.tag == "Foreign Object Disposal")
+            {
+                Debug.Log("In disposal");
+                healed = true;
+                Destroy(gameObject);
+            }
         }
 
         /*

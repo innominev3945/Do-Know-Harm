@@ -15,6 +15,7 @@ TagManager:
   - Mouse
   - BaseMouse
   - Hit Box (Gauze)
+  - Foreign Object Disposal
   layers:
   - Default
   - TransparentFX
