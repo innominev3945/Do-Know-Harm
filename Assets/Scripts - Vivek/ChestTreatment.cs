@@ -10,7 +10,6 @@ namespace ChestTreatmentClass
     public class ChestTreatment : Treatment
     {
         public GameObject chest;
-        public GameObject compressor;
 
         public static ChestTreatment MakeChestTreatmentObject(GameObject ob, Injury inj) 
         {
@@ -19,8 +18,7 @@ namespace ChestTreatmentClass
             ret.vitalSpike = false;
             ret.injury = inj;
 
-            ret.chest = Instantiate((UnityEngine.Object)Resources.Load("Chest"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
-            ret.compressor = Instantiate((UnityEngine.Object)Resources.Load("Compressor"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            ret.chest = Instantiate((UnityEngine.Object)Resources.Load("Chest"), new Vector3(ret.injury.GetLocation().x, ret.injury.GetLocation().y, 1f), Quaternion.identity) as GameObject;
 
             return ret;
         }
@@ -34,14 +32,12 @@ namespace ChestTreatmentClass
         {
             treatmentStarted = true;
             chest.SetActive(true);
-            compressor.SetActive(true);
         }
 
         public override void StopTreatment()
         {
             treatmentStarted = false;
             chest.SetActive(false);
-            compressor.SetActive(false);
         }
 
         public override void ShowInjury()
@@ -52,11 +48,9 @@ namespace ChestTreatmentClass
         // Update is called once per frame
         void Update()
         {
-            if (treatmentStarted && compressor.GetComponent<Chest_Compression_Script>().GetHealed())
+            if (treatmentStarted && chest.transform.GetChild(0).tag == "Healed")
             {
                 injury.RemoveTreatment();
-                compressor.SetActive(false);
-                Destroy(compressor);
                 Destroy(chest);
                 Destroy(this);
             }
