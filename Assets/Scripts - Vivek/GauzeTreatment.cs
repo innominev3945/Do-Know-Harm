@@ -9,7 +9,7 @@ namespace GauzeTreatmentClass
 {
     public class GauzeTreatment : Treatment
     {
-        private GameObject gauze;
+        //private GameObject gauze;
         private GameObject bloodPool;
         private GameObject bleedingWound;
 
@@ -20,7 +20,7 @@ namespace GauzeTreatmentClass
             ret.vitalSpike = false;
             ret.injury = inj;
 
-            ret.gauze = Instantiate((UnityEngine.Object)Resources.Load("Gauze"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            //ret.gauze = Instantiate((UnityEngine.Object)Resources.Load("Gauze"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
             ret.bloodPool = Instantiate((UnityEngine.Object)Resources.Load("BloodPool"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
             ret.bleedingWound = Instantiate((UnityEngine.Object)Resources.Load("BleedingWound"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
 
@@ -36,7 +36,7 @@ namespace GauzeTreatmentClass
         public override void StartTreatment()
         {
             treatmentStarted = true;
-            gauze.SetActive(true);
+            //gauze.SetActive(true);
             bloodPool.SetActive(true);
             bleedingWound.SetActive(true);
         }
@@ -44,7 +44,7 @@ namespace GauzeTreatmentClass
         public override void StopTreatment()
         {
             treatmentStarted = false;
-            gauze.SetActive(false);
+            //gauze.SetActive(false);
             bloodPool.SetActive(false);
             bleedingWound.SetActive(false);
         }
@@ -58,11 +58,12 @@ namespace GauzeTreatmentClass
         // Update is called once per frame
         void Update()
         {
-            if (treatmentStarted && gauze.GetComponent<Gauze_Script>().GetHealed())
+            if (treatmentStarted && bleedingWound.transform.GetChild(0).tag == "Healed") //gauze.GetComponent<Gauze_Script>().GetHealed())
             {
                 injury.RemoveTreatment();
-                gauze.SetActive(false);
-                Destroy(gauze);
+                treatmentStarted = false;
+                //gauze.SetActive(false);
+                //Destroy(gauze);
                 if (bloodPool != null)
                     Destroy(bloodPool);
                 Destroy(bleedingWound);

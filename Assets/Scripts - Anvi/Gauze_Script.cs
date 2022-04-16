@@ -103,11 +103,15 @@ namespace Gauze
                 }
                 timePassed = timePassed + Time.deltaTime;
                 // Debug.Log("timePassed: " + timePassed);
+                Debug.Log("Colliding");
                 if (timePassed >= timeLimit)
                 {
                     if (numClicks >= totalClicks)
                     {
                         healed = true;
+                        GameObject obChild = collision.gameObject.transform.GetChild(0).gameObject;
+                        if (obChild != null)
+                            obChild.tag = "Healed";
                         // TODO: change wound sprite to indicate less blood
                         //GameObject wound = GameObject.Find("Bleeding Wound");
                         //wound.GetComponent<SpriteRenderer>().color = Color.grey;
