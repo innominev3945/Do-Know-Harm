@@ -11,7 +11,7 @@ public class GameControl : MonoBehaviour
 
     public static GameControl control;
     public int savedIndex;
-    public int savedChapter;
+    public int savedChapter; // add more variables if necessary
 
     void Awake()
     {
@@ -56,13 +56,8 @@ public class GameControl : MonoBehaviour
         }
     }
 
-    public void Add()
-    {
-        savedIndex += 1;
-    }
-
     [Serializable]
-    class PlayerData
+    class PlayerData // store necessary information here
     {
         public int index;
         public int chapter;

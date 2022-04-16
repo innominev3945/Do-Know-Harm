@@ -12,6 +12,7 @@ public class Tourniquet : MonoBehaviour
     public bool isSet;
     public bool isTight;
     [SerializeField] private GameObject tab;
+    [SerializeField] private LayerMask layerMask;
 
 
     //note: https://forum.unity.com/threads/how-would-you-handle-a-getbuttondown-situaiton-with-the-new-input-system.627184/
@@ -81,7 +82,7 @@ public class Tourniquet : MonoBehaviour
             }
             if (context.canceled) //formerly !isHeld
             {
-                int layerMask = ~(LayerMask.GetMask("Draggable Objects"));
+                //int layerMask = ~(LayerMask.GetMask("Draggable Objects"));
                 RaycastHit2D hit2 = Physics2D.Raycast(this.transform.position, Vector2.zero, Mathf.Infinity, layerMask); // detect if/which limb tourniquet is placed on
                 if (hit2.collider != null && hit2.collider.gameObject.tag == "Limb")
                 {
