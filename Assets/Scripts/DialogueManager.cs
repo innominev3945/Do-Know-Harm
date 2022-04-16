@@ -1,4 +1,3 @@
-
 /*
 using System.Collections;
 using System.Collections.Generic;
@@ -46,9 +45,9 @@ public class DialogueManager : MonoBehaviour
         ReadTextFile();
         
     }
-    /**********************************************************************************************
-                            READS TEXT FILE INTO 3 LISTS
-    ***********************************************************************************************
+    //**********************************************************************************************
+    //                        READS TEXT FILE INTO 3 LISTS
+    //***********************************************************************************************
     
     
     private void ReadTextFile()
@@ -406,5 +405,4 @@ public class DialogueManager : MonoBehaviour
     }
     
 }
-
 */
