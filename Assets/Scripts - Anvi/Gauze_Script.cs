@@ -3,140 +3,145 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Gauze_Script : MonoBehaviour
+namespace Gauze
 {
-
-    private Vector3 mousePosition;
-
-    private int numClicks;
-    private float timePassed;
-    [SerializeField] int totalClicks;
-    [SerializeField] float timeLimit;
-    private bool mouseButtonDown;
-    private bool mouseHeldDown;
-    private int mouseHeldInBloodPoolCounter;
-    private bool mouseHeldBloodPool;
-    private bool mouseHeldInBloodPoolCollider;
-    [SerializeField] float shrinkScale;
-
-    public bool healed;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Gauze_Script : MonoBehaviour
     {
-        numClicks = 0;
-        timePassed = 0;
 
-        totalClicks = 12;
-        timeLimit = 3;
+        private Vector3 mousePosition;
 
-        mouseButtonDown = false;
-        mouseHeldDown = false;
+        private int numClicks;
+        private float timePassed;
+        [SerializeField] int totalClicks;
+        [SerializeField] float timeLimit;
+        private bool mouseButtonDown;
+        private bool mouseHeldDown;
+        private int mouseHeldInBloodPoolCounter;
+        private bool mouseHeldBloodPool;
+        private bool mouseHeldInBloodPoolCollider;
+        [SerializeField] float shrinkScale;
 
-        mouseHeldInBloodPoolCounter = 0;
-        mouseHeldBloodPool = false;
-        mouseHeldInBloodPoolCollider = false;
+        private bool healed;
 
-        shrinkScale = -0.3f;
+        public bool GetHealed() { return healed; }
 
-        healed = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        mousePosition = Mouse.current.position.ReadValue();
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        transform.position = Vector2.Lerp(transform.position, mousePosition, 1);
-
-        if (mouseHeldBloodPool)
+        // Start is called before the first frame update
+        void Start()
         {
-            if (mouseHeldInBloodPoolCounter < 5)
-            {
-                mouseHeldInBloodPoolCounter++;
-            }
-        }
-    }
+            numClicks = 0;
+            timePassed = 0;
 
-    public void StopBleeding(InputAction.CallbackContext context)
-    {
-        if (context.started /*&& !mouseHeldDown*/)
-        {
-            mouseButtonDown = true;
-            mouseHeldDown = true;
-        }
-        else
-        {
+            totalClicks = 12;
+            timeLimit = 3;
+
             mouseButtonDown = false;
             mouseHeldDown = false;
-        }
-    }
 
-    public void AbsorbBlood(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            mouseHeldBloodPool = true;
-        }
-        else if (/*context.performed || */context.canceled)
-        {
-            mouseHeldBloodPool = false;
             mouseHeldInBloodPoolCounter = 0;
+            mouseHeldBloodPool = false;
             mouseHeldInBloodPoolCollider = false;
-        }
-    }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        // Debug.Log("Collision happened");
-        if (collision.gameObject.tag == "Bleeding Wound")
+            shrinkScale = -0.3f;
+
+            healed = false;
+        }
+
+        // Update is called once per frame
+        void Update()
         {
-            // Debug.Log("Gauze is on the wound");
-            if (mouseButtonDown)
+            mousePosition = Mouse.current.position.ReadValue();
+            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            transform.position = Vector2.Lerp(transform.position, mousePosition, 1);
+
+            if (mouseHeldBloodPool)
             {
-                numClicks++;
-                Debug.Log("numClicks: " + numClicks);
-            }
-            timePassed = timePassed + Time.deltaTime;
-            // Debug.Log("timePassed: " + timePassed);
-            if (timePassed >= timeLimit)
-            {
-                if (numClicks >= totalClicks)
+                if (mouseHeldInBloodPoolCounter < 5)
                 {
-                    healed = true;
-                    // TODO: change wound sprite to indicate less blood
-                    GameObject wound = GameObject.Find("Bleeding Wound");
-                    wound.GetComponent<SpriteRenderer>().color = Color.grey;
-                    Debug.Log("Successfully stopped bleeding by applying pressure on wound");
-                }
-                else
-                {
-                    numClicks = 0;
-                    timePassed = 0;
+                    mouseHeldInBloodPoolCounter++;
                 }
             }
         }
 
-        if (collision.gameObject.tag == "Blood Pool")
+        public void StopBleeding(InputAction.CallbackContext context)
         {
-            Debug.Log("Inside Blood Pool Collider");
-            if (mouseHeldBloodPool && (mouseHeldInBloodPoolCounter >= 1 && mouseHeldInBloodPoolCounter <= 4))
+            if (context.started /*&& !mouseHeldDown*/)
             {
-                mouseHeldInBloodPoolCollider = true;
-                Debug.Log("Mouse held down inside blood pool collider");
+                mouseButtonDown = true;
+                mouseHeldDown = true;
             }
-            if (mouseHeldInBloodPoolCollider)
+            else
             {
-                // shrink blood pool sprite
-                Debug.Log("Blood pool shrinking");
-                // just need to check length of one dimension (object as whole decreases in size)
-                if (collision.gameObject.transform.localScale.x >= 0.2f)
+                mouseButtonDown = false;
+                mouseHeldDown = false;
+            }
+        }
+
+        public void AbsorbBlood(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                mouseHeldBloodPool = true;
+            }
+            else if (/*context.performed || */context.canceled)
+            {
+                mouseHeldBloodPool = false;
+                mouseHeldInBloodPoolCounter = 0;
+                mouseHeldInBloodPoolCollider = false;
+            }
+        }
+
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            // Debug.Log("Collision happened");
+            if (collision.gameObject.tag == "Bleeding Wound")
+            {
+                // Debug.Log("Gauze is on the wound");
+                if (mouseButtonDown)
                 {
-                    collision.gameObject.transform.localScale += new Vector3(shrinkScale, shrinkScale, shrinkScale) * Time.deltaTime;
+                    numClicks++;
+                    Debug.Log("numClicks: " + numClicks);
                 }
-                else
+                timePassed = timePassed + Time.deltaTime;
+                // Debug.Log("timePassed: " + timePassed);
+                if (timePassed >= timeLimit)
                 {
-                    Destroy(collision.gameObject);
+                    if (numClicks >= totalClicks)
+                    {
+                        healed = true;
+                        // TODO: change wound sprite to indicate less blood
+                        //GameObject wound = GameObject.Find("Bleeding Wound");
+                        //wound.GetComponent<SpriteRenderer>().color = Color.grey;
+                        Debug.Log("Successfully stopped bleeding by applying pressure on wound");
+                    }
+                    else
+                    {
+                        numClicks = 0;
+                        timePassed = 0;
+                    }
+                }
+            }
+
+            if (collision.gameObject.tag == "Blood Pool")
+            {
+                Debug.Log("Inside Blood Pool Collider");
+                if (mouseHeldBloodPool && (mouseHeldInBloodPoolCounter >= 1 && mouseHeldInBloodPoolCounter <= 4))
+                {
+                    mouseHeldInBloodPoolCollider = true;
+                    Debug.Log("Mouse held down inside blood pool collider");
+                }
+                if (mouseHeldInBloodPoolCollider)
+                {
+                    // shrink blood pool sprite
+                    Debug.Log("Blood pool shrinking");
+                    // just need to check length of one dimension (object as whole decreases in size)
+                    if (collision.gameObject.transform.localScale.x >= 0.2f)
+                    {
+                        collision.gameObject.transform.localScale += new Vector3(shrinkScale, shrinkScale, shrinkScale) * Time.deltaTime;
+                    }
+                    else
+                    {
+                        Destroy(collision.gameObject);
+                    }
                 }
             }
         }
