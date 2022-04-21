@@ -14,8 +14,13 @@ public class Flashlight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         Vector2 pos2D = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        Vector3 pos3D = new Vector3(pos2D.x, pos2D.y, 0);
+        float xVal = Mathf.Lerp(transform.position.x, pos2D.x, Time.deltaTime * 5);
+        float yVal = Mathf.Lerp(transform.position.y, pos2D.y, Time.deltaTime * 5);
+        float zVal = this.transform.position.z;
+        
+        Vector3 pos3D = new Vector3(xVal, yVal, zVal);
         transform.position = pos3D;
     }
 }
