@@ -61,6 +61,7 @@ namespace GauzeTreatmentClass
             if (treatmentStarted && bleedingWound.transform.GetChild(0).tag == "Healed") //gauze.GetComponent<Gauze_Script>().GetHealed())
             {
                 injury.RemoveTreatment();
+                Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
                 treatmentStarted = false;
                 //gauze.SetActive(false);
                 //Destroy(gauze);

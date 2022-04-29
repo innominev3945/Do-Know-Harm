@@ -41,48 +41,16 @@ namespace TourniquetTreatmentClass
             tourniquet.SetActive(false);
             bleedingWound.SetActive(false);
         }
-    }
 
-    public class Tourniquet_Script : MonoBehaviour // make this in another script? probably
-    {
-        private bool isSet;
-        private bool isTightening;
-        private bool finished;
-        private bool mousePressed;
-        // may need gameobject variable for tab
-
-        public void setTourniquet(Vector2 position)
+        private void Update()
         {
-
-        }
-
-        public void ClickTourniquet(InputAction.CallbackContext context)
-        {
-            if (context.started)
+            if (tourniquet.GetComponent<Tourniquet_Script>().GetHealed())
             {
-                mousePressed = true;
-            }
-            else if (context.canceled)
-            {
-                mousePressed = false;
+                injury.RemoveTreatment(); // more stuff needed here?
+                Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
+                Debug.Log("playsfx");
             }
         }
-
-        private void OnTriggerStay2D(Collider2D collision)
-        {
-            GameObject arm = collision.gameObject;
-            if(arm.tag == "limb")
-            {
-                transform.position = new Vector2(arm.transform.position.x, this.transform.position.y);
-                transform.rotation = arm.transform.rotation;
-
-                float heightDiff = transform.position.y - arm.transform.position.y;
-                Vector3 eulerAngles = arm.transform.rotation.eulerAngles;
-                float xDiff = Mathf.Tan(Mathf.Deg2Rad * eulerAngles.z) * heightDiff;
-                transform.position = new Vector2(arm.transform.position.x - xDiff, transform.position.y);
-            }
-        }
-
     }
 }
 

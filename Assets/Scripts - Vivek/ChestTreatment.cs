@@ -51,6 +51,7 @@ namespace ChestTreatmentClass
             if (treatmentStarted && chest.transform.GetChild(0).tag == "Healed")
             {
                 injury.RemoveTreatment();
+                Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
                 Destroy(chest);
                 Destroy(this);
             }
