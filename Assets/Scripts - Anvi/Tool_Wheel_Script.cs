@@ -28,11 +28,25 @@ public class Tool_Wheel_Script : MonoBehaviour
     private GameObject[] arrayOfTools;
     private int numTools;
 
+    private Transform highlightTransform;
+
+    private bool northSelected;
+    private bool northEastSelected;
+    private bool eastSelected;
+    private bool southEastSelected;
+    private bool southSelected;
+    private bool southWestSelected;
+    private bool westSelected;
+    private bool northWestSelected;
+
     // Start is called before the first frame update
     void Start()
     {
+        // store the transform of the tool wheel highlight
+        highlightTransform = wheel.transform.GetChild(0);
+
         currentRotation = Quaternion.identity;
-        rotationalConstant = 15f;   // TODO: change back to 15f after testing
+        rotationalConstant = 15f;
         rotation = 0;
         current = null;
 
@@ -52,6 +66,15 @@ public class Tool_Wheel_Script : MonoBehaviour
         northWestTriggerTimer = 0;
         southEastTriggerTimer = 0;
         southWestTriggerTimer = 0;
+
+        northSelected = false;
+        northEastSelected = false;
+        eastSelected = false;
+        southEastSelected = false;
+        southSelected = false;
+        southWestSelected = false;
+        westSelected = false;
+        northWestSelected = false;
     }
 
     // Update is called once per frame
@@ -75,6 +98,8 @@ public class Tool_Wheel_Script : MonoBehaviour
         }
     }
 
+    // The following commented out code is no longer wheel (intended to rotate the wheel)
+    /*
     public void RotateLeft(InputAction.CallbackContext context)
     {
         rotation += rotationalConstant;
@@ -108,6 +133,7 @@ public class Tool_Wheel_Script : MonoBehaviour
             arrayOfTools[0] = temp;
         }
     }
+    */
 
     public void SelectNorthEastTool()
     {
@@ -135,98 +161,228 @@ public class Tool_Wheel_Script : MonoBehaviour
 
     public void SelectNorthTool()
     {
-        if (current != null)
-        {
-            Destroy(current);
-        }
-
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        if (northEastTriggerTimer > 0)
+        if (northEastTriggerTimer > 0 && !northEastSelected)
         {
+            if (current != null)
+            {
+                Destroy(current);
+            }
+
             current = Instantiate(arrayOfTools[1], mousePosition, Quaternion.identity);
+
+            highlightTransform.localRotation = Quaternion.Euler(0, 0, -45f);
+
+            changeToolFlags(ref northEastSelected);
         }
-        else if (northWestTriggerTimer > 0)
+        else if (northWestTriggerTimer > 0 && !northWestSelected)
         {
+            if (current != null)
+            {
+                Destroy(current);
+            }
+
             current = Instantiate(arrayOfTools[7], mousePosition, Quaternion.identity);
+
+            highlightTransform.localRotation = Quaternion.Euler(0, 0, 45f);
+
+            changeToolFlags(ref northWestSelected);
         }
         else
         {
+            Invoke("SelectNorthToolHelper", 0.1f);
+        }
+    }
+
+    public void SelectNorthToolHelper()
+    {
+        if (northEastTriggerTimer <= 0 && northWestTriggerTimer <= 0 && !northSelected)
+        {
+            if (current != null)
+            {
+                Destroy(current);
+            }
+
             current = Instantiate(arrayOfTools[0], mousePosition, Quaternion.identity);
+            highlightTransform.localRotation = Quaternion.Euler(0, 0, 0f);
+
+            changeToolFlags(ref northSelected);
         }
     }
 
     public void SelectSouthTool()
     {
-        if (current != null)
-        {
-            Destroy(current);
-        }
-
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        if (southEastTriggerTimer > 0)
+        if (southEastTriggerTimer > 0 && !southEastSelected)
         {
+            if (current != null)
+            {
+                Destroy(current);
+            }
+
             current = Instantiate(arrayOfTools[3], mousePosition, Quaternion.identity);
+
+            highlightTransform.localRotation = Quaternion.Euler(0, 0, -135f);
+
+            changeToolFlags(ref southEastSelected);
         }
-        else if (southWestTriggerTimer > 0)
+        else if (southWestTriggerTimer > 0 && !southWestSelected)
         {
+            if (current != null)
+            {
+                Destroy(current);
+            }
+
             current = Instantiate(arrayOfTools[5], mousePosition, Quaternion.identity);
+
+            highlightTransform.localRotation = Quaternion.Euler(0, 0, 135f);
+
+            changeToolFlags(ref southWestSelected);
         }
         else
         {
+            Invoke("SelectSouthToolHelper", 0.1f);
+        }
+    }
+
+    public void SelectSouthToolHelper()
+    {
+        if (southEastTriggerTimer <= 0 && southWestTriggerTimer <= 0 && !southSelected)
+        {
+            if (current != null)
+            {
+                Destroy(current);
+            }
+
             current = Instantiate(arrayOfTools[4], mousePosition, Quaternion.identity);
+            highlightTransform.localRotation = Quaternion.Euler(0, 0, 180f);
+
+            changeToolFlags(ref southSelected);
         }
     }
 
     public void SelectEastTool()
     {
-        if (current != null)
-        {
-            Destroy(current);
-        }
-
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        if (northEastTriggerTimer > 0)
+        if (northEastTriggerTimer > 0 && !northEastSelected)
         {
+            if (current != null)
+            {
+                Destroy(current);
+            }
+
             current = Instantiate(arrayOfTools[1], mousePosition, Quaternion.identity);
+
+            highlightTransform.localRotation = Quaternion.Euler(0, 0, -45f);
+
+            changeToolFlags(ref northEastSelected);
         }
-        else if (southEastTriggerTimer > 0)
+        else if (southEastTriggerTimer > 0 && !southEastSelected)
         {
+            if (current != null)
+            {
+                Destroy(current);
+            }
+
             current = Instantiate(arrayOfTools[3], mousePosition, Quaternion.identity);
+
+            highlightTransform.localRotation = Quaternion.Euler(0, 0, -135f);
+
+            changeToolFlags(ref southEastSelected);
         }
         else
         {
+            Invoke("SelectEastToolHelper", 0.1f);
+        }
+    }
+
+    public void SelectEastToolHelper()
+    {
+        if (northEastTriggerTimer <= 0 && southEastTriggerTimer <= 0 && !eastSelected)
+        {
+            if (current != null)
+            {
+                Destroy(current);
+            }
+
             current = Instantiate(arrayOfTools[2], mousePosition, Quaternion.identity);
+            highlightTransform.localRotation = Quaternion.Euler(0, 0, -90f);
+
+            changeToolFlags(ref eastSelected);
         }
     }
 
     public void SelectWestTool()
     {
-        if (current != null)
-        {
-            Destroy(current);
-        }
-
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        if (northWestTriggerTimer > 0)
+        if (northWestTriggerTimer > 0 && !northWestSelected)
         {
+            if (current != null)
+            {
+                Destroy(current);
+            }
+
             current = Instantiate(arrayOfTools[7], mousePosition, Quaternion.identity);
+
+            highlightTransform.localRotation = Quaternion.Euler(0, 0, 45f);
+
+            changeToolFlags(ref northWestSelected);
         }
-        else if (southWestTriggerTimer > 0)
+        else if (southWestTriggerTimer > 0 && !southWestSelected)
         {
+            if (current != null)
+            {
+                Destroy(current);
+            }
+
             current = Instantiate(arrayOfTools[5], mousePosition, Quaternion.identity);
+
+            highlightTransform.localRotation = Quaternion.Euler(0, 0, 135f);
+
+            changeToolFlags(ref southWestSelected);
         }
         else
         {
-            current = Instantiate(arrayOfTools[6], mousePosition, Quaternion.identity);
+            Invoke("SelectWestToolHelper", 0.1f);
         }
+    }
+
+    public void SelectWestToolHelper()
+    {
+        if (northWestTriggerTimer <= 0 && southWestTriggerTimer <= 0 && !westSelected)
+        {
+            if (current != null)
+            {
+                Destroy(current);
+            }
+
+            current = Instantiate(arrayOfTools[6], mousePosition, Quaternion.identity);
+            highlightTransform.localRotation = Quaternion.Euler(0, 0, 90f);
+
+            changeToolFlags(ref westSelected);
+        }
+    }
+
+    public void changeToolFlags(ref bool currentFlag)
+    {
+        northSelected = false;
+        northEastSelected = false;
+        eastSelected = false;
+        southEastSelected = false;
+        southSelected = false;
+        southWestSelected = false;
+        westSelected = false;
+        northWestSelected = false;
+
+        currentFlag = true;
     }
 
 }
