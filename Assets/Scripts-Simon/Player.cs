@@ -10,12 +10,13 @@ public class Player : MonoBehaviour
     public bool isDead = false;
     public bool hasWon = false;
     public HealthBar healthBar;
-    public int numOfInjur = 5;
+    public int numOfInjur = 2;
     // update numOfInjur at the beginning of each game!!
     public int injuredTime = 0;
     // players made mistakes --> add injuredTime
     public int healingTime = 0;
     // same concept as injuredTime, when player receives a health boost ...
+    public WhitePhosphorus WP;
 
     void Start()
     {
@@ -46,7 +47,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                currentHealth -= 0.8f * Time.deltaTime * numOfInjur;
+                currentHealth -= 0.8f * Time.deltaTime * numOfInjur * WP.degree / 0.5f;
             }
             healthBar.SetHealth(currentHealth);
         }
