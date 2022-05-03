@@ -190,7 +190,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -180, y: -21}
+  m_AnchoredPosition: {x: -147, y: -34}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &329085637
@@ -207,6 +207,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1902926660}
   Forceps: {fileID: 1771003123}
+  degree1: {fileID: 21300000, guid: f2e617e44b644754b947c532278ac4ac, type: 3}
+  degree2: {fileID: 21300000, guid: 0b6e4e9bf9796ac428555f9af9b9a46b, type: 3}
+  degree3: {fileID: 21300000, guid: 351770e8f462aab4184d89298c11a1d7, type: 3}
+  degree: 0
   canvas: {fileID: 1345618272}
 --- !u!114 &329085638
 MonoBehaviour:
@@ -524,6 +528,7 @@ GameObject:
   - component: {fileID: 777125411}
   - component: {fileID: 777125410}
   - component: {fileID: 777125412}
+  - component: {fileID: 777125413}
   m_Layer: 5
   m_Name: Wound
   m_TagString: Untagged
@@ -547,7 +552,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -49, y: -113}
+  m_AnchoredPosition: {x: -24, y: -39}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &777125410
@@ -602,6 +607,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1902926660}
   Item1: {fileID: 2127719746}
+  canvas: {fileID: 1345618272}
+--- !u!225 &777125413
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777125408}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1197859793
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,9 +1272,10 @@ MonoBehaviour:
   isDead: 0
   hasWon: 0
   healthBar: {fileID: 1505467335}
-  numOfInjur: 5
+  numOfInjur: 2
   injuredTime: 0
   healingTime: 0
+  WP: {fileID: 329085637}
 --- !u!4 &1902926661
 Transform:
   m_ObjectHideFlags: 0
