@@ -101,6 +101,7 @@ using DressTreatmentClass;
 using ChestTreatmentClass;
 using DressTreatmentClass;
 using BodypartSwitchClass;
+using TourniquetTreatmentClass;
 
 public class PatientFunctionality : MonoBehaviour
 {
@@ -133,6 +134,10 @@ public class PatientFunctionality : MonoBehaviour
         laceration.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject.transform.GetChild(2).gameObject, laceration));
         laceration.AddTreatment(DressTreatment.MakeDressTreatmentObject(this.gameObject.transform.GetChild(2).gameObject, laceration));
         legs.AddInjury(laceration);
+
+        Injury laceration2 = new Injury(2f, arms.GetLocation());
+        laceration2.AddTreatment(TourniquetTreatment.MakeTourniquetTreatment(this.gameObject.transform.GetChild(3).gameObject, laceration2));
+        arms.AddInjury(laceration2);
 
         Injury chestCompression = new Injury(2f, chest.GetLocation());
         chestCompression.AddTreatment(ChestTreatment.MakeChestTreatmentObject(this.gameObject.transform.GetChild(0).gameObject, chestCompression));

@@ -8,7 +8,7 @@ public class Tourniquet_Script : MonoBehaviour
     public bool isSet;
     private bool isTightening;
     private bool finished;
-    private bool mousePressed;
+    public bool mousePressed;
     private bool onLimb;
 
     private int currentQuad;
@@ -16,7 +16,6 @@ public class Tourniquet_Script : MonoBehaviour
     private int startQuad;
     private int maxRotations;
     [SerializeField] private GameObject tab;
-    // may need gameobject variable for tab
 
     private void Start()
     {
@@ -32,47 +31,60 @@ public class Tourniquet_Script : MonoBehaviour
 
     private void Update()
     {
-        if (!finished && mousePressed && !isSet)
+        //Debug.Log(mousePressed);
+        if (!finished)
         {
-            Vector2 pos2D = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            transform.position = pos2D;
-        }
-        if (isTightening)
-        {
-            Mouse.current.position.ReadValue();
-            Vector2 pos2D = Mouse.current.position.ReadValue();
-            pos2D = Camera.main.ScreenToWorldPoint(pos2D);
-            RaycastHit2D hit = Physics2D.Raycast(pos2D, Vector2.zero, Mathf.Infinity);
-            if (hit.collider != null && hit.collider.gameObject == this) // checks if mouse hits tourniquet, resets if true
+            if (mousePressed && !isSet)
             {
-                rotations = 0;
-                isTightening = false;
+                Vector2 pos2D = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+                transform.position = pos2D;
             }
-            else
+            else if (!mousePressed && !onLimb)
             {
-                int mouseLocation = FindPos(pos2D);
-                if (mouseLocation != currentQuad)
+                Vector3 temp = new Vector3(150, 700, 0);
+
+                transform.position = new Vector3(Camera.main.ScreenToWorldPoint(temp).x, Camera.main.ScreenToWorldPoint(temp).y, 0);
+            }
+            if (isTightening)
+            {
+                Mouse.current.position.ReadValue();
+                Vector2 pos2D = Mouse.current.position.ReadValue();
+                pos2D = Camera.main.ScreenToWorldPoint(pos2D);
+                RaycastHit2D hit = Physics2D.Raycast(pos2D, Vector2.zero, Mathf.Infinity);
+                if (hit.collider != null && hit.collider.gameObject == this) // checks if mouse hits tourniquet, resets if true
                 {
-                    if (InOrderAdjacent(currentQuad, mouseLocation))
+                    rotations = 0;
+                    isTightening = false;
+                }
+                else
+                {
+                    int mouseLocation = FindPos(pos2D);
+                    if (mouseLocation != currentQuad)
                     {
-                        currentQuad = mouseLocation;
-                        if (mouseLocation == startQuad)
+                        if (InOrderAdjacent(currentQuad, mouseLocation))
                         {
-                            rotations++;
+                            currentQuad = mouseLocation;
+                            if (mouseLocation == startQuad)
+                            {
+                                rotations++;
+                            }
                         }
                     }
                 }
+                if (rotations >= maxRotations) // finish treatment here
+                {
+                    finished = true;
+                    isTightening = false;
+                    //Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
+                }
             }
-            if (rotations >= maxRotations) // finish treatment here
+            else
             {
-                finished = true;
-                isTightening = false;
+                rotations = 0;
             }
         }
-        else
-        {
-            rotations = 0;
-        }
+        
+        
         if (finished)
         {
         }
@@ -82,11 +94,21 @@ public class Tourniquet_Script : MonoBehaviour
         return finished;
     }
 
-
-
-    public void ClickTourniquet(InputAction.CallbackContext context)
+    public void mouseClickedTrue()
     {
-        if (context.started)
+        mousePressed = true;
+    }
+
+    public void mouseClickedFalse()
+    {
+        mousePressed = false;
+    }
+
+    public void ClickTourniquet() // rework so input action is on hand tool instead, have reaction to it here
+    {
+
+
+        /*if (context.started)
         {
             mousePressed = true;
             if (onLimb && isSet)
@@ -124,12 +146,24 @@ public class Tourniquet_Script : MonoBehaviour
             mousePressed = false;
             isTightening = false;
         }
+        Debug.Log(mousePressed);*/
+    }
+
+    public void StartTightening()
+    {
+        isTightening = true; // starts tightening input check
+        Vector2 pos2D = Mouse.current.position.ReadValue();
+        Vector2 posCheck = Mouse.current.position.ReadValue();
+        pos2D = Camera.main.ScreenToWorldPoint(posCheck);
+        startQuad = FindPos(posCheck);
+        currentQuad = startQuad;
     }
 
     void OnTriggerStay2D(Collider2D collision)
     {
         //if (!mousePressed)
-       // {
+        // {
+        Debug.Log(collision.gameObject.name);
             GameObject arm = collision.gameObject;
             if (arm.name == "UpperArm") // change this to tag when tag system is decided
             {
@@ -152,14 +186,16 @@ public class Tourniquet_Script : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("entered");
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        onLimb = false;
-        isSet = false;
-        transform.rotation = Quaternion.Euler(Vector3.zero);
+        if (collision.gameObject.name == "UpperArm")
+        {
+            onLimb = false;
+            isSet = false;
+            transform.rotation = Quaternion.Euler(Vector3.zero);
+        }
     }
 
     private int FindPos(Vector2 pos2D)

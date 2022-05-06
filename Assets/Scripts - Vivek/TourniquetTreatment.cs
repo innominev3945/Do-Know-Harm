@@ -48,7 +48,8 @@ namespace TourniquetTreatmentClass
             {
                 injury.RemoveTreatment(); // more stuff needed here?
                 Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
-                Debug.Log("playsfx");
+                Destroy(bleedingWound);
+                Destroy(this);
             }
         }
     }
