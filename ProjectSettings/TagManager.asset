@@ -15,6 +15,12 @@ TagManager:
   - Mouse
   - BaseMouse
   - Healed
+  - Limb
+  - Wound
+  - Button1
+  - Button2
+  - Button3
+  - Button4
   layers:
   - Default
   - TransparentFX

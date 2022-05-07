@@ -52,14 +52,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "Switch Arms",
-                    "type": "Button",
-                    "id": "e3b3411e-caec-4dac-a545-da589f04ec02",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -313,17 +305,6 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Switch Legs",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "25304d4e-e8ff-4e34-8f10-315bbf3b451b",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Switch Arms",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

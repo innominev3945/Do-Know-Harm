@@ -34,6 +34,8 @@ namespace InjuryClass
         public Vector2 GetLocation() { return location; }
         public bool GetBeingTreated() { return beingTreated; }
 
+        public bool GetHealed() { return (treatments.Count == 0); }
+
         // Starts treating an Injury by activating the Treatment of the topmost item in the Queue 
         public void Treat()
         {
@@ -68,5 +70,6 @@ namespace InjuryClass
                     beingTreated = false;
             }
         }
+
     }
 }

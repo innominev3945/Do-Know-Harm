@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 1485549995263656021}
   - component: {fileID: 1485549995263656020}
   - component: {fileID: 1485549995263656026}
-  - component: {fileID: -5671093851728767885}
+  - component: {fileID: -8914136819474662336}
   m_Layer: 0
   m_Name: BleedingWound
   m_TagString: Bleeding Wound
@@ -141,7 +141,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-5671093851728767885
+--- !u!114 &-8914136819474662336
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,6 +150,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1485549995263656023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b2c480707273ce4db44f007451ee832, type: 3}
+  m_Script: {fileID: 11500000, guid: 0799694b139c6da43b937e8cd99aa7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

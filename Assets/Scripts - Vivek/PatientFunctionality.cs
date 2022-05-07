@@ -87,6 +87,7 @@ public class PatientFunctionality : MonoBehaviour
 //Debug.Log(thermalOintment.GetComponent<Thermal_Ointment_Script>().GetHealed());
 //  }
 //}
+/*
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -100,48 +101,55 @@ using GauzeTreatmentClass;
 using DressTreatmentClass;
 using ChestTreatmentClass;
 using DressTreatmentClass;
-using BodypartSwitchClass;
 
 public class PatientFunctionality : MonoBehaviour
 {
     Patient patient;
     public Bodypart head;
     public Bodypart chest;
-    public Bodypart legs;
-    public Bodypart arms;
+    public Bodypart leftLeg;
+    public Bodypart rightLeg;
+    public Bodypart leftArm;
+    public Bodypart rightArm;
     [SerializeField] float patientHealth;
     [SerializeField] float headHealth;
     [SerializeField] float chestHealth;
-    [SerializeField] float legsHealth;
-    [SerializeField] float armsHealth;
+    [SerializeField] float leftLegHealth;
+    [SerializeField] float rightLegHealth;
+    [SerializeField] float leftArmHealth;
+    [SerializeField] float rightArmHealth;
 
     // Initializes patient and bodyparts with their respective locations; in the future, generate levels via information from a file (the sprites, injuries, etc)
     private void Start()
     {
         /* Initialize Bodyparts and Patient Here */
-        head = Bodypart.MakeBodypartObject(this.gameObject.transform.GetChild(0).gameObject, 0.7f, 1f, new Vector2(-0.5f, 1f));
+/*
+        head = Bodypart.MakeBodypartObject(this.gameObject.transform.GetChild(0).gameObject, 0.7f, 1f, new Vector2(-0.5f, 2f));
         chest = Bodypart.MakeBodypartObject(this.gameObject.transform.GetChild(1).gameObject, 0.5f, 1f, new Vector2(-0.7f, -6.6f));
-        legs = Bodypart.MakeBodypartObject(this.gameObject.transform.GetChild(2).gameObject, 0.2f, 1f, new Vector2(1f, -17.1f));
-        arms = Bodypart.MakeBodypartObject(this.gameObject.transform.GetChild(3).gameObject, 0.2f, 1f, new Vector2(-6.1f, -6.9f));
+        leftLeg = Bodypart.MakeBodypartObject(this.gameObject.transform.GetChild(2).gameObject, 0.1f, 1f, new Vector2(-4.7f, -17.1f));
+        rightLeg = Bodypart.MakeBodypartObject(this.gameObject.transform.GetChild(3).gameObject, 0.1f, 1f, new Vector2(3.7f, -17.1f));
+        leftArm = Bodypart.MakeBodypartObject(this.gameObject.transform.GetChild(4).gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f));
+        rightArm = Bodypart.MakeBodypartObject(this.gameObject.transform.GetChild(5).gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f));
 
-        Bodypart[] bodyparts = { head, chest, legs, arms };
+        Bodypart[] bodyparts = { head, chest, leftLeg, rightLeg, leftArm, rightArm };
         patient = Patient.MakePatientObject(this.gameObject, bodyparts, 1f);
 
         /* Create injuries with their respective treatments here*/
-        Injury laceration = new Injury(2f, legs.GetLocation());
+/*
+        Injury laceration = new Injury(2f, new Vector2(leftLeg.GetLocation().x + 1.3f, leftLeg.GetLocation().y));
         laceration.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject.transform.GetChild(2).gameObject, laceration));
         laceration.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject.transform.GetChild(2).gameObject, laceration));
         laceration.AddTreatment(DressTreatment.MakeDressTreatmentObject(this.gameObject.transform.GetChild(2).gameObject, laceration));
-        legs.AddInjury(laceration);
+        leftLeg.AddInjury(laceration);
 
         Injury chestCompression = new Injury(2f, chest.GetLocation());
         chestCompression.AddTreatment(ChestTreatment.MakeChestTreatmentObject(this.gameObject.transform.GetChild(0).gameObject, chestCompression));
         chest.AddInjury(chestCompression);
 
-        this.gameObject.GetComponent<BodypartSwitch>().SwitchHead();
+        //this.gameObject.GetComponent<BodypartSwitch>().SwitchHead();
     }
 
 
 
 
-}
+}*/

@@ -40,6 +40,32 @@ namespace PatientClass
         public float GetHealth() { return health; }
         public Bodypart[] GetBodyparts() { return bodyparts; }
 
+        public void AbortTreatments()
+        {
+            foreach (Bodypart bodypart in bodyparts)
+            {
+                bodypart.StopInjuries();
+            }
+        }
+
+        public void StartTreatments()
+        {
+            foreach (Bodypart bodypart in bodyparts)
+            {
+                bodypart.TreatInjuries();
+            }
+        }
+
+        public bool GetHealed()
+        {
+            foreach (Bodypart bodypart in bodyparts)
+            {
+                if (!bodypart.GetHealed())
+                    return false;
+            }
+            return true;
+        }
+
         // Update functionality that is called every timeInterval 
         public void Update()
         {

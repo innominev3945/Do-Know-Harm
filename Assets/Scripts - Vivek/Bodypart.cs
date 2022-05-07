@@ -42,6 +42,16 @@ namespace BodypartClass
 
         public Vector2 GetLocation() { return location; }
 
+        public bool GetHealed() 
+        {
+            foreach (Injury injury in injuries)
+            {
+                if (!injury.GetHealed())
+                    return false;
+            }
+            return true;
+        }
+
         // Add an injury that the BodyPart is dealing with
         public void AddInjury(Injury injury) 
         { 
@@ -91,5 +101,6 @@ namespace BodypartClass
                 nextTime += timeInterval; 
             }
         }
+
     }
 }
