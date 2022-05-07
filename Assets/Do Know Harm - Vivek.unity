@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 703134971}
   - component: {fileID: 703134974}
   - component: {fileID: 703134975}
+  - component: {fileID: 703134976}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -488,6 +489,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   click: {fileID: 1762770125}
   injury_clear: {fileID: 1390231989}
+--- !u!114 &703134976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703134970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a8b48a1929bd42fc8a74e9281c1f25e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CamTransform: {fileID: 703134973}
+  CameraSpeedMultiplier: 1
+  Color: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
+  Size: 5
+  HorizontalSpeed: 2
+  VerticalSpeed: 0
+  Density: 0.89
+  Shader: {fileID: 4800000, guid: 00e888b8dfe2842c1a10e04b2d083b64, type: 3}
 --- !u!1 &706154844
 GameObject:
   m_ObjectHideFlags: 0
