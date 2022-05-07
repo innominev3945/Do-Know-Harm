@@ -21,6 +21,7 @@ namespace ForcepsTreatmentClass
             ret.vitalSpike = false;
             ret.injury = inj;
 
+
             //ret.forceps = Instantiate((UnityEngine.Object)Resources.Load("Forceps"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
             ret.bleedingWound = Instantiate((UnityEngine.Object)Resources.Load("BleedingWound"), new Vector3(ret.injury.GetLocation().x, ret.injury.GetLocation().y, 0), Quaternion.identity) as GameObject;
             ret.foreignObject = Instantiate((UnityEngine.Object)Resources.Load("ForeignObject"), new Vector3(ret.injury.GetLocation().x, ret.injury.GetLocation().y, -1), Quaternion.identity) as GameObject;
@@ -62,6 +63,7 @@ namespace ForcepsTreatmentClass
             if (treatmentStarted && foreignObject.GetComponent<Foreign_Object_Script>().GetHealed())
             {
                 injury.RemoveTreatment();
+                Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
                 //forceps.SetActive(false);
                 //Destroy(forceps);
                 foreignObject.SetActive(false);

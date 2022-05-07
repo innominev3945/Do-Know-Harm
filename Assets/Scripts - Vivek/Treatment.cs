@@ -12,6 +12,7 @@ namespace TreatmentClass
         protected bool treatmentStarted;
         protected bool vitalSpike;
         protected Injury injury;
+        protected GameObject bodypart;
 
         public bool GetTreatmentStarted() { return treatmentStarted; }
         public bool GetVitalSpike() { return vitalSpike; } // If making a mistake in a treatment causes the patient to take more health, this boolean should be set to true

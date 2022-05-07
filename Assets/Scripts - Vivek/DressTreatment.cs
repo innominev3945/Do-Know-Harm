@@ -52,6 +52,7 @@ namespace DressTreatmentClass
             if (treatmentStarted && (woundDress.transform.GetChild(0).tag == "Healed"))
             {
                 injury.RemoveTreatment();
+                Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
                 Destroy(woundDress);
                 Destroy(this);
             }
