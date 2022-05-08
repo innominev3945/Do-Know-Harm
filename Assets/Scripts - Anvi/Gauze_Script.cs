@@ -31,6 +31,8 @@ namespace Gauze
         [SerializeField] GameObject gauzeImage;
         public List<GameObject> allHitBoxes;
 
+        GameObject gauzeHitBoxManager;
+
         private bool healed;
 
         // TODO: there are two cases for healed
@@ -42,9 +44,9 @@ namespace Gauze
         void Start()
         {
             // obtain hit box positions and create hit boxes
-            GameObject positionsObject = GameObject.Find("Gauze Hit Box Manager");
-            List<float> positionsX = positionsObject.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxLocationsX();
-            List<float> positionsY = positionsObject.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxLocationsY();
+            gauzeHitBoxManager = GameObject.Find("Gauze Hit Box Manager");
+            List<float> positionsX = gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxLocationsX();
+            List<float> positionsY = gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxLocationsY();
             for (int i = 0; i < positionsX.Count; i++)
             {
                 allHitBoxes.Add(Instantiate(hitbox, new Vector3(positionsX[i], positionsY[i], 0), Quaternion.identity));
@@ -96,6 +98,10 @@ namespace Gauze
                         float xCoord = gauzeCollider.GetComponent<Gauze_Hit_Box_Collider_Script>().getCollisionX();
                         float yCoord = gauzeCollider.GetComponent<Gauze_Hit_Box_Collider_Script>().getCollisionY();
                         Instantiate(gauzeImage, new Vector3(xCoord, yCoord, 0), Quaternion.identity);
+                        gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().notifyHitBoxCovered(xCoord, yCoord);
+
+                        // to make sure this body of code is executed only once and not multiple times for a single right mouse click
+                        rightmouseButtonDown = false;
                     }
                 }
             }
