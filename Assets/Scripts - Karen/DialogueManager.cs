@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -88,9 +89,9 @@ public class DialogueManager : MonoBehaviour
         
         playLine();
     }
-    /**********************************************************************************************
-                            READS TEXT FILE INTO 3 LISTS
-    ***********************************************************************************************/
+    //**********************************************************************************************
+    //                        READS TEXT FILE INTO 3 LISTS
+    //***********************************************************************************************
     
     public void loadVNScene(int savedIndex, int chapterNum)
     {

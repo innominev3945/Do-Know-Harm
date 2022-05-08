@@ -9,7 +9,7 @@ namespace BurnTreatmentClass
 {
     public class BurnTreatment : Treatment
     {
-        private GameObject thermalOintment;
+        //private GameObject thermalOintment;
         private GameObject burnWound;
         private GameObject trigger1;
         private GameObject trigger2;
@@ -21,7 +21,7 @@ namespace BurnTreatmentClass
             ret.vitalSpike = false;
             ret.injury = inj;
 
-            ret.thermalOintment = Instantiate((UnityEngine.Object)Resources.Load("ThermalOintment"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            //ret.thermalOintment = Instantiate((UnityEngine.Object)Resources.Load("ThermalOintment"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
             ret.burnWound = Instantiate((UnityEngine.Object)Resources.Load("Burn"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
             ret.trigger1 = Instantiate((UnityEngine.Object)Resources.Load("Trigger1"), new Vector2(ret.injury.GetLocation().x - 2f, ret.injury.GetLocation().y), Quaternion.identity) as GameObject;
             ret.trigger2 = Instantiate((UnityEngine.Object)Resources.Load("Trigger2"), new Vector2(ret.injury.GetLocation().x + 2f, ret.injury.GetLocation().y), Quaternion.identity) as GameObject;
@@ -38,7 +38,7 @@ namespace BurnTreatmentClass
         public override void StartTreatment()
         {
             treatmentStarted = true;
-            thermalOintment.SetActive(true);
+            //thermalOintment.SetActive(true);
             burnWound.SetActive(true);
             trigger1.SetActive(true);
             trigger2.SetActive(true);
@@ -47,7 +47,7 @@ namespace BurnTreatmentClass
         public override void StopTreatment()
         {
             treatmentStarted = false;
-            thermalOintment.SetActive(false);
+            //thermalOintment.SetActive(false);
             burnWound.SetActive(false);
             trigger1.SetActive(false);
             trigger2.SetActive(false);
@@ -61,11 +61,12 @@ namespace BurnTreatmentClass
         // Update is called once per frame
         void Update()
         {
-            if (treatmentStarted && thermalOintment.GetComponent<Thermal_Ointment_Script>().GetHealed())
+            if (treatmentStarted && (trigger1.transform.GetChild(0).tag == "Healed" || trigger2.transform.GetChild(0).tag == "Healed"))//thermalOintment.GetComponent<Thermal_Ointment_Script>().GetHealed())
             {
                 injury.RemoveTreatment();
-                thermalOintment.SetActive(false);
-                Destroy(thermalOintment);
+                treatmentStarted = false;
+                //thermalOintment.SetActive(false);
+                //Destroy(thermalOintment);
                 Destroy(burnWound);
                 Destroy(trigger1);
                 Destroy(trigger2);

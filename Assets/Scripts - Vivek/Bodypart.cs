@@ -12,7 +12,7 @@ namespace BodypartClass
 {
     public class Bodypart : MonoBehaviour
     {
-        //private GameObject cursor;
+        private Vector2 location;
         private float timeInterval;
         private float nextTime;
         private float health; // Health of the body part, not the entire patient 
@@ -23,9 +23,10 @@ namespace BodypartClass
         // Unity, being the helpful engine, doesn't like to have normal Constructors work properly when dealing with
         // Monobehaviour scripts, so instead of creating a Patient object using the Patient() constructor, use 
         // the MakePatientObject() method instead 
-        public static Bodypart MakeBodypartObject(GameObject ob /*Make sure this parameter is this.gameObject when calling the constructor*/, float severity, float interval)
+        public static Bodypart MakeBodypartObject(GameObject ob /*Make sure this parameter is this.gameObject when calling the constructor*/, float severity, float interval, Vector2 loc)
         {
             Bodypart ret = ob.AddComponent<Bodypart>();
+            ret.location = loc;
             ret.timeInterval = interval;
             ret.nextTime = 0f;
 
@@ -39,11 +40,36 @@ namespace BodypartClass
         public float GetHealth() { return health; }
         public float GetSeverityMultiplier() { return severityMultiplier; }
 
+        public Vector2 GetLocation() { return location; }
+
+        public bool GetHealed() 
+        {
+            foreach (Injury injury in injuries)
+            {
+                if (!injury.GetHealed())
+                    return false;
+            }
+            return true;
+        }
+
         // Add an injury that the BodyPart is dealing with
         public void AddInjury(Injury injury) 
         { 
             injuries.Add(injury);
         }
+
+        public void TreatInjuries()
+        {
+            foreach (Injury injury in injuries)
+                injury.Treat();
+        }
+
+        public void StopInjuries()
+        {
+            foreach (Injury injury in injuries)
+                injury.AbortTreatment();
+        }
+
 
         // Update functionality that is called every timeInterval
         void Update()
@@ -75,5 +101,6 @@ namespace BodypartClass
                 nextTime += timeInterval; 
             }
         }
+
     }
 }

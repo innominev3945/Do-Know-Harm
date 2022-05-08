@@ -1,0 +1,33 @@
+{
+    "name": "HandTool",
+    "maps": [
+        {
+            "name": "Treatment",
+            "id": "c02ab194-7a07-4142-9ccb-c55e5deb617b",
+            "actions": [
+                {
+                    "name": "HandTool",
+                    "type": "Button",
+                    "id": "f96e98f5-c613-46c6-afa5-725ff63e6c31",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "97234232-b002-4beb-b16b-d5eeb3e61321",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HandTool",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

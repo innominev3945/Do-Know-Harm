@@ -12,15 +12,13 @@ namespace InjuryClass
     {
         private float injurySeverity;
         private Vector2 location; // Represents the location of the Injury (for treatment and animation purposes)
-        private float radius; // An injury is represented as a circle of the given radius centered at location
         private bool beingTreated; // Determines if an injury is currently being treated by the Player 
         private Queue<Treatment> treatments; // Queue of treatments - as soon as one treatment is finished, the next one in priority is to be started 
 
-        public Injury(float severity, Vector2 loc, float rad)
+        public Injury(float severity, Vector2 loc)
         {
             injurySeverity = severity;
             location = loc;
-            radius = rad;
             beingTreated = false;
             treatments = new Queue<Treatment>();
         }
@@ -35,7 +33,8 @@ namespace InjuryClass
 
         public Vector2 GetLocation() { return location; }
         public bool GetBeingTreated() { return beingTreated; }
-        public float GetRadius() { return radius; }
+
+        public bool GetHealed() { return (treatments.Count == 0); }
 
         // Starts treating an Injury by activating the Treatment of the topmost item in the Queue 
         public void Treat()
@@ -56,6 +55,7 @@ namespace InjuryClass
 
         public void AddTreatment(Treatment treatment) 
         {
+            treatment.StopTreatment();
             treatments.Enqueue(treatment);
         }
 
@@ -70,5 +70,6 @@ namespace InjuryClass
                     beingTreated = false;
             }
         }
+
     }
 }

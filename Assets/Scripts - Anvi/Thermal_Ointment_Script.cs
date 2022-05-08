@@ -14,7 +14,7 @@ namespace ThermalOintmentClass
         private bool enteredOtherTrigger;
         private bool getTriggerTag;
         private bool exit;
-        private int numTimes;
+        [SerializeField] private int numTimes;
         [SerializeField] int totalNumTimes;
         private string triggerTag;
         private int mouseHeldInTriggerCounter;
@@ -100,7 +100,7 @@ namespace ThermalOintmentClass
             {
                 getTriggerTag = true;
 
-                Debug.Log("Started");
+                //Debug.Log("Started");
             }
             else if (context.canceled)
             {
@@ -130,7 +130,7 @@ namespace ThermalOintmentClass
 
         void OnTriggerStay2D(Collider2D collision)
         {
-            // Debug.Log("Inside Trigger");
+             Debug.Log("Inside Trigger");
             if (collision.gameObject.tag == "Trigger 1 (TO)" || collision.gameObject.tag == "Trigger 2 (TO)")
             {
                 // first time mouse is pressed down inside a trigger
@@ -165,6 +165,9 @@ namespace ThermalOintmentClass
                         if (numTimes >= totalNumTimes)
                         {
                             healed = true;
+                            GameObject obChild = collision.gameObject.transform.GetChild(0).gameObject;
+                            if (obChild != null)
+                                obChild.tag = "Healed";
                             // TODO: change after getting correct sprites
                             //GameObject burn = GameObject.Find("Burn");
                             //burn.GetComponent<SpriteRenderer>().color = Color.white;

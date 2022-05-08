@@ -19,6 +19,13 @@ TagManager:
   - Hit Box (Tape) 1
   - Hit Box (Tape) 2
   - Tape Pivot
+  - Healed
+  - Limb
+  - Wound
+  - Button1
+  - Button2
+  - Button3
+  - Button4
   layers:
   - Default
   - TransparentFX
