@@ -19,6 +19,7 @@ namespace ChestTreatmentClass
             ret.injury = inj;
 
             ret.chest = Instantiate((UnityEngine.Object)Resources.Load("Chest"), new Vector3(ret.injury.GetLocation().x, ret.injury.GetLocation().y, 1f), Quaternion.identity) as GameObject;
+            ret.chest.transform.parent = ob.transform;
 
             return ret;
         }

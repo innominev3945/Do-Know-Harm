@@ -167,6 +167,7 @@ public class Tourniquet_Script : MonoBehaviour
             GameObject arm = collision.gameObject;
             if (arm.name == "UpperArm") // change this to tag when tag system is decided
             {
+                //transform.parent = arm.transform;
                 Vector3 center = arm.GetComponent<Collider2D>().bounds.center;
                 transform.position = new Vector2(center.x, this.transform.position.y); // add rotation effect later maybe? see below
                 /*transform.rotation = arm.transform.rotation;
@@ -195,6 +196,7 @@ public class Tourniquet_Script : MonoBehaviour
             onLimb = false;
             isSet = false;
             transform.rotation = Quaternion.Euler(Vector3.zero);
+            //transform.parent = null;
         }
     }
 

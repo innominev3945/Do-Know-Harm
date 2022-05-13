@@ -66,6 +66,7 @@ namespace InjuryClass
                     treatments.Peek().StartTreatment();
                 else
                     beingTreated = false;
+                Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
             }
         }
     }
