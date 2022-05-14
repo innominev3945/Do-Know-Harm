@@ -9,12 +9,15 @@ using Yarn.Unity;
 
 public class YarnCommands : MonoBehaviour
 {
+    public static bool[] JournalEntries;
     [SerializeField] SpriteRenderer fadeScreen;
     [SerializeField] private float fadeSpeed;
 
     [SerializeField] AudioManager audioManager;
 
     [SerializeField] CharacterManager character;
+
+    [SerializeField] VNManager vnManager;
 
     static bool isFaded = true;
 
@@ -154,6 +157,18 @@ public class YarnCommands : MonoBehaviour
             fadeScreen.color = objectColor;
             yield return null;
         }
+    }
+
+    [YarnCommand("unlock")]
+    public void unlockEntry(int entry_id)
+    {
+        JournalEntries[entry_id] = true;
+    }
+
+    [YarnCommand("bg")]
+    public void changeBackground(int bg_id)
+    {
+        vnManager.changeBG(bg_id);
     }
 
     //Fades sprite renderer to opaque
