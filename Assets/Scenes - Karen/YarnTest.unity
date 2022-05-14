@@ -1292,18 +1292,24 @@ MonoBehaviour:
   runSelectedOptionAsLine: 0
   lineProvider: {fileID: 0}
   verboseLogging: 1
+  <IsDialogueRunning>k__BackingField: 0
   onNodeStart:
     m_PersistentCalls:
       m_Calls: []
+    m_CallsDirty: 1
   onNodeComplete:
     m_PersistentCalls:
       m_Calls: []
+    m_CallsDirty: 1
   onDialogueComplete:
     m_PersistentCalls:
       m_Calls: []
+    m_CallsDirty: 1
   onCommand:
     m_PersistentCalls:
       m_Calls: []
+    m_CallsDirty: 1
+  IsOptionSelectionAllowed: 0
 --- !u!1 &605594450
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,12 +1359,7 @@ MonoBehaviour:
   CharacterRenderer_1: {fileID: 1040519493}
   CharacterRenderer_2: {fileID: 1182682338}
   CharacterRenderer_3: {fileID: 169621061}
-  CharacterExpression_1: {fileID: 0}
-  CharacterExpression_2: {fileID: 0}
-  CharacterExpression_3: {fileID: 0}
   MC: {fileID: 1562431202}
-  MCExpr: {fileID: 0}
-  CharacterBases: []
   HannahExpressions:
   - {fileID: 21300000, guid: 764bd624afa7fe643ae02d5a488b90f0, type: 3}
   - {fileID: 21300000, guid: 764bd624afa7fe643ae02d5a488b90f0, type: 3}
@@ -2055,6 +2056,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6d51f267209b042a194f510c766c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FrontPagePrefab: {fileID: 0}
+  BackPagePrefab: {fileID: 0}
+  book: {fileID: 0}
+  JournalEntries: {fileID: 0}
+  pageCount: 0
+  tempImage: {fileID: 0}
+  num_People_Pages: 0
+  num_Place_Pages: 0
+  num_Org_Pages: 0
+  num_Inj_Treat_Pages: 0
+  num_People_Paper: 0
+  num_Place_Paper: 0
+  num_Org_Paper: 0
+  num_Inj_Treat_Paper: 0
 --- !u!1 &1335685310
 GameObject:
   m_ObjectHideFlags: 0
@@ -2511,6 +2526,7 @@ MonoBehaviour:
   lastLineText: {fileID: 782101111}
   fadeTime: 0.1
   showUnavailableOptions: 0
+  optionViews: []
 --- !u!225 &1606534082
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2628,7 +2644,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 960, y: 540, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1721309341}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2724,8 +2741,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 653338551}
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 1634371694}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3377,6 +3394,7 @@ MonoBehaviour:
   onCharacterTyped:
     m_PersistentCalls:
       m_Calls: []
+    m_CallsDirty: 1
   typewriterEffectSpeed: 250
   continueButton: {fileID: 0}
   holdTime: 1
