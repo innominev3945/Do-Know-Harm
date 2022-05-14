@@ -9,46 +9,67 @@ using ForcepsTreatmentClass;
 using GauzeTreatmentClass;
 using DressTreatmentClass;
 using ChestTreatmentClass;
+using ButtonManagerClass;
 using System;
+using UnityEngine.UI;
+using TMPro;
 
 namespace PatientManagerClass
 {
     public class PatientManager : MonoBehaviour
     {
+        private string[] bodypartEnums = { "Head", "Chest", "Left Leg", "Right Leg", "Left Arm", "Right Arm" };
+
         private float damptime = 0.3f;
         private Vector3 velocity = Vector3.zero;
 
 
-        [SerializeField] Tuple<Patient, Sprite> currentPatient; // Patient on main screen
+        [SerializeField] Tuple<Patient, Sprite> currentPatient; // Patient on current screen
         [SerializeField] Bodypart[] bodyparts;
 
         private Tuple<Patient, Sprite>[] patients; // Patient, sprite string pair
-        private int[] buttonMappings; // Maps a given patient to one of the four buttons 
+        private ButtonManager[] buttons; // Collection of the buttons used to switch between patients 
 
-        private Queue<Tuple<Patient, Sprite>> nextPatients;
+        private Queue<Tuple<Patient, Sprite>> nextPatients; // Patients that will enter after current patients are either healed or die
+        private TextMeshProUGUI patientInjuryText;
+        private TextMeshProUGUI healthText;
+
 
         // Start is called before the first frame update
         void Start()
         {
             nextPatients = new Queue<Tuple<Patient, Sprite>>();
-
+            buttons = new ButtonManager[4];
             currentPatient = null;
             bodyparts = null;
+            patients = new Tuple<Patient, Sprite>[5];
+            patientInjuryText = GameObject.Find("Injury Information").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            healthText = GameObject.Find("Health").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
-
-            patients = new Tuple<Patient, Sprite>[4];
             for (int i = 0; i < patients.Length; i++)
                 patients[i] = null;
 
-            buttonMappings = new int[4];
-            for (int i = 0; i < buttonMappings.Length; i++)
-                buttonMappings[i] = -1;
+            for (int i = 0; i < 4; i++)
+            {
+                buttons[i] = GameObject.Find("Patient" + i).GetComponent<ButtonManager>();
+                buttons[i].patient = null;
+            }
+
 
             Init();
+
+            foreach (Tuple<Patient, Sprite> patient in nextPatients)
+            {
+                patient.Item1.AbortTreatments();
+                patient.Item1.PauseDamage();
+            }
 
             for (int i = 0; i < 5 && nextPatients.Count != 0; i++)
             {
                 patients[i] = nextPatients.Peek();
+                patients[i].Item1.UnpauseDamage();
+                if (i != 0)
+                    buttons[i - 1].patient = patients[i];
                 nextPatients.Dequeue();
             }
 
@@ -56,20 +77,11 @@ namespace PatientManagerClass
             {
                 currentPatient = patients[0];
                 bodyparts = currentPatient.Item1.GetBodyparts();
+                UpdateText();
                 gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
                 gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
             }
 
-            for (int i = 1; i < 5 && patients[i] != null; i++)
-            {
-                buttonMappings[i - 1] = i;
-            }
-
-            foreach (Tuple<Patient, Sprite> patient in patients)
-            {
-                if (patient != null && patient != currentPatient)
-                    patient.Item1.AbortTreatments();
-            }
 
             currentPatient.Item1.StartTreatments();
 
@@ -79,40 +91,65 @@ namespace PatientManagerClass
         // Update is called once per frame
         void Update()
         {
-
+            if (currentPatient.Item1 != null)
+                healthText.text = currentPatient.Item1.GetHealth().ToString();
+            if ((currentPatient.Item1.GetHealed() || currentPatient.Item1.GetHealth() == 0) && nextPatients.Count != 0)
+            {
+                Debug.Log("Switching Patient");
+                for (int i = 0; i < patients.Length; i++)
+                {
+                    if (patients[i] == currentPatient)
+                    {
+                        patients[i] = nextPatients.Peek();
+                        break;
+                    }
+                }
+                Destroy(currentPatient.Item1);
+                currentPatient = nextPatients.Peek();
+                gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
+                gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
+                bodyparts = currentPatient.Item1.GetBodyparts();
+                UpdateText();
+                currentPatient.Item1.UnpauseDamage();
+                currentPatient.Item1.StartTreatments();
+                ViewHead();
+                nextPatients.Dequeue();
+            }
+            for (int i = 0; i < patients.Length; i++)
+            {
+                if (patients[i] != currentPatient && ((patients[i].Item1.GetHealed() || patients[i].Item1.GetHealth() == 0) && nextPatients.Count != 0))
+                {
+                    Debug.Log("Switching Patient");
+                    foreach (ButtonManager button in buttons)
+                    {
+                        if (button.patient == patients[i])
+                        {
+                            button.patient = nextPatients.Peek();
+                            break;
+                        }
+                    }
+                    Destroy(patients[i].Item1);
+                    patients[i] = nextPatients.Peek();
+                    patients[i].Item1.UnpauseDamage();
+                    nextPatients.Dequeue();
+                }
+            }
         }
 
-        public void SwitchPatient(string buttonNum)
+        public void SwitchPatient(ButtonManager btn)
         {
-            int mapping = int.Parse(buttonNum.Substring(7));
-            Debug.Log(mapping);
-
-
-            int i;
-            for (i = 0; i < patients.Length; i++)
-            {
-                if (currentPatient.Item1 == patients[i].Item1)
-                    break;
-            }
-
-            int pos = buttonMappings[mapping];
-            if (pos == -1)
+            Tuple<Patient, Sprite> tmp = btn.patient;
+            if (tmp == null)
                 return;
-
-            Tuple<Patient, Sprite> pair = patients[pos];
-            if (pair == null)
-                return;
-
-
             currentPatient.Item1.AbortTreatments();
-            currentPatient = pair;
-            bodyparts = currentPatient.Item1.GetBodyparts();
+            btn.patient = currentPatient;
+            currentPatient = tmp;
             gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
             gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
             currentPatient.Item1.StartTreatments();
+            bodyparts = currentPatient.Item1.GetBodyparts();
+            UpdateText();
             ViewHead();
-
-            buttonMappings[mapping] = i;
         }
 
         public void ViewHead()
@@ -159,7 +196,7 @@ namespace PatientManagerClass
             parts1[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
 
-            Injury laceration = new Injury(2f, new Vector2(parts1[2].GetLocation().x + 1.6f, parts1[2].GetLocation().y));
+            Injury laceration = new Injury(2f, new Vector2(parts1[2].GetLocation().x + 1.6f, parts1[2].GetLocation().y), "Forceps");
             laceration.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, laceration));
             parts1[2].AddInjury(laceration);
 
@@ -175,69 +212,93 @@ namespace PatientManagerClass
             parts2[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
             parts2[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
-            Injury chestCompression = new Injury(2f, new Vector2(parts2[1].GetLocation().x, parts2[1].GetLocation().y + 3f));
+            Injury chestCompression = new Injury(2f, new Vector2(parts2[1].GetLocation().x, parts2[1].GetLocation().y + 3f), "Chest Compression");
             chestCompression.AddTreatment(ChestTreatment.MakeChestTreatmentObject(this.gameObject, chestCompression));
             parts2[1].AddInjury(chestCompression);
+            Injury gze = new Injury(3f, new Vector2(parts2[0].GetLocation().x, parts2[0].GetLocation().y + 1f), "Gauze");
+            gze.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, gze));
+            parts2[0].AddInjury(gze);
 
             nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts2, 1f), Resources.Load<Sprite>("MaleBody")));
 
+            /* Creating Third Patient */
+            Bodypart[] parts3 = new Bodypart[6];
+            parts3[0] = Bodypart.MakeBodypartObject(this.gameObject, 0.7f, 1f, new Vector2(0f, 4.5f)); // Head
+            parts3[1] = Bodypart.MakeBodypartObject(this.gameObject, 0.5f, 1f, new Vector2(0f, -2f)); // Chest
+            parts3[2] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-0.5f, -12)); // Left leg 
+            parts3[3] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(0.5f, -12)); // Right leg 
+            parts3[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
+            parts3[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
+            Injury woundDress = new Injury(2f, new Vector2(parts3[0].GetLocation().x, parts3[0].GetLocation().y + 1f), "Wound Dress");
+            woundDress.AddTreatment(DressTreatment.MakeDressTreatmentObject(this.gameObject, woundDress));
+            parts3[0].AddInjury(woundDress);
+
+            nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts3, 1f), Resources.Load<Sprite>("MaleBody")));
+
+            /* Creating Fourth Patient */
+            Bodypart[] parts4 = new Bodypart[6];
+            parts4[0] = Bodypart.MakeBodypartObject(this.gameObject, 0.7f, 1f, new Vector2(0f, 4.5f)); // Head
+            parts4[1] = Bodypart.MakeBodypartObject(this.gameObject, 0.5f, 1f, new Vector2(0f, -2f)); // Chest
+            parts4[2] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-0.5f, -12)); // Left leg 
+            parts4[3] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(0.5f, -12)); // Right leg 
+            parts4[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
+            parts4[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
+
+            Injury frcps = new Injury(2f, new Vector2(parts4[4].GetLocation().x + 2.5f, parts4[4].GetLocation().y + 6f), "Forceps");
+            frcps.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, frcps));
+            parts4[4].AddInjury(frcps);
+
+            nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts4, 1f), Resources.Load<Sprite>("MaleBody")));
+
+            /* Creating Fifth Patient */
+            Bodypart[] parts5 = new Bodypart[6];
+            parts5[0] = Bodypart.MakeBodypartObject(this.gameObject, 0.7f, 1f, new Vector2(0f, 4.5f)); // Head
+            parts5[1] = Bodypart.MakeBodypartObject(this.gameObject, 0.5f, 1f, new Vector2(0f, -2f)); // Chest
+            parts5[2] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-0.5f, -12)); // Left leg 
+            parts5[3] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(0.5f, -12)); // Right leg 
+            parts5[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
+            parts5[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
+
+            Injury bndg = new Injury(2f, new Vector2(parts5[3].GetLocation().x + 0.5f, parts5[3].GetLocation().y), "Wound Dress");
+            bndg.AddTreatment(DressTreatment.MakeDressTreatmentObject(this.gameObject, bndg));
+            parts5[3].AddInjury(bndg);
+
+            nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts5, 1f), Resources.Load<Sprite>("MaleBody")));
+
+            /* Creating Sixth Patient */
+            Bodypart[] parts6 = new Bodypart[6];
+            parts6[0] = Bodypart.MakeBodypartObject(this.gameObject, 0.7f, 1f, new Vector2(0f, 4.5f)); // Head
+            parts6[1] = Bodypart.MakeBodypartObject(this.gameObject, 0.5f, 1f, new Vector2(0f, -2f)); // Chest
+            parts6[2] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-0.5f, -12)); // Left leg 
+            parts6[3] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(0.5f, -12)); // Right leg 
+            parts6[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
+            parts6[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
+
+            Injury gauze = new Injury(2f, new Vector2(parts6[3].GetLocation().x + 0.5f, parts6[3].GetLocation().y), "Gauze");
+            gauze.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, gauze));
+            parts6[3].AddInjury(gauze);
+
+            nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts6, 1f), Resources.Load<Sprite>("MaleBody")));
         }
 
-        /*
-        public void SwitchHead()
+        private void UpdateText()
         {
-            float z = Camera.main.transform.position.z;
-            Bodypart head = bodyparts[0];
-            Camera.main.transform.position = new Vector3(head.GetLocation().x, head.GetLocation().y, z);
-            currentPatient.AbortTreatments();
-            head.TreatInjuries();
+            if (currentPatient != null)
+            {
+                string information = "";
+                for (int i = 0; i < bodyparts.Length; i++)
+                {
+                    if (!bodyparts[i].GetHealed())
+                    {
+                        information += bodypartEnums[i] + ":\n";
+                        List<string> names = bodyparts[i].GetInjuryNames();
+                        foreach (string name in names)
+                            information += name + "\n";
+                    }
+                }
+                patientInjuryText.text = information;
+            }
         }
-
-        public void SwitchChest()
-        {
-            float z = Camera.main.transform.position.z;
-            Bodypart chest = bodyparts[1];
-            Camera.main.transform.position = new Vector3(chest.GetLocation().x, chest.GetLocation().y, z);
-            currentPatient.AbortTreatments();
-            chest.TreatInjuries();
-        }
-
-        public void SwitchLeftLeg()
-        {
-            float z = Camera.main.transform.position.z;
-            Bodypart leftLeg = bodyparts[2];
-            Camera.main.transform.position = new Vector3(leftLeg.GetLocation().x, leftLeg.GetLocation().y, z);
-            currentPatient.AbortTreatments();
-            leftLeg.TreatInjuries();
-        }
-
-        public void SwitchRightLeg()
-        {
-            float z = Camera.main.transform.position.z;
-            Bodypart rightLeg = bodyparts[3];
-            Camera.main.transform.position = new Vector3(rightLeg.GetLocation().x, rightLeg.GetLocation().y, z);
-            currentPatient.AbortTreatments();
-            rightLeg.TreatInjuries();
-        }
-
-        public void SwitchLeftArm()
-        {
-            float z = Camera.main.transform.position.z;
-            Bodypart leftArm = bodyparts[4];
-            Camera.main.transform.position = new Vector3(leftArm.GetLocation().x, leftArm.GetLocation().y, z);
-            currentPatient.AbortTreatments();
-            leftArm.TreatInjuries();
-        }
-
-        public void SwitchRightArm()
-        {
-            float z = Camera.main.transform.position.z;
-            Bodypart rightArm = bodyparts[5];
-            Camera.main.transform.position = new Vector3(rightArm.GetLocation().x, rightArm.GetLocation().y, z);
-            currentPatient.AbortTreatments();
-            rightArm.TreatInjuries();
-        }
-        */
     }
 }

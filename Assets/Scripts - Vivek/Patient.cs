@@ -17,7 +17,6 @@ namespace PatientClass
     {
         private float timeInterval; // Time interval for how often a Patient's health will update 
         private float nextTime;
-
         private Bodypart[] bodyparts;
         private float health; // Health of ENTIRE Patient, weighted via the various Bodyparts 
 
@@ -64,6 +63,22 @@ namespace PatientClass
                     return false;
             }
             return true;
+        }
+
+        public void PauseDamage()
+        {
+            foreach (Bodypart part in bodyparts)
+            {
+                part.PauseDamage();
+            }
+        }
+
+        public void UnpauseDamage()
+        {
+            foreach (Bodypart part in bodyparts)
+            {
+                part.UnpauseDamage();
+            }
         }
 
         // Update functionality that is called every timeInterval 
