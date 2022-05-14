@@ -9,25 +9,6 @@ public class VNSaveFile : MonoBehaviour
     // Start is called before the first frame update
     public static VNSaveFile Instance;
 
-    public GameObject FrontPagePrefab;
-    public GameObject BackPagePrefab;
-
-    [SerializeField] private BookPro book;
-
-    FastForwardFlipper People_chapter;
-
-    FastForwardFlipper Places_chapter;
-
-    FastForwardFlipper Organizations_chapter;
-
-    FastForwardFlipper Injuries_and_Treatments_chapter;
-    
-    VNSaveFile JournalEntries;
-
-    private int pageCount = 0;
-
-    private Image tempImage;
-
     private int num_People_Pages = 0;
     private int num_Place_Pages = 0;
     private int num_Org_Pages = 0;
@@ -113,123 +94,24 @@ public class VNSaveFile : MonoBehaviour
 
         //TODO: edit this!
         page temp = pages[n];
-        int cur_page = 3;
-        int paperCount = 1;
 
-        if (temp.type == ChapterType.People)
+        if (temp.type == ChapterType.InjuriesAndTreatment)
         {
-            if ((num_People_Pages*2) > num_People_Paper)
-            {
-                AddPaper(temp.type);
-            }
-            
-            cur_page += num_People_Pages;
-            cur_page++;
-
-            paperCount += num_People_Paper;
-
-
-            if (cur_page % 2 == 1)
-            {
-                tempImage = book.papers[paperCount].Back.GetComponent<Image>();
-            }
-            else
-            {
-                tempImage = book.papers[paperCount].Front.GetComponent<Image>();
-            }
-
-            tempImage.sprite = temp.pageImage;
-            
-            //Injuries_and_Treatment_Pages.Add(temp.pageImage);
+            Injuries_and_Treatment_Pages.Add(temp.pageImage);
             return;
         }
-        else if (temp.type == ChapterType.Places)
+        else if (temp.type == ChapterType.People)
         {
-            if ((num_Places_Pages*2) > num_Places_Paper)
-            {
-                AddPaper(temp.type);
-            }
-            
-            cur_page += (num_People_Paper * 2);
-            cur_page += num_Place_Pages;
-
-            paperCount += num_People_Paper;
-            paperCount += num_Place_Paper;
-
-            if (cur_page % 2 == 1)
-            {
-                tempImage = book.papers[paperCount].Back.GetComponent<Image>();
-            }
-            else
-            {
-                tempImage = book.papers[paperCount].Front.GetComponent<Image>();
-            }
-
-            tempImage.sprite = temp.pageImage;
-            
-            //Injuries_and_Treatment_Pages.Add(temp.pageImage);
+            People_Pages.Add(temp.pageImage);
             return;
         }
-        else if(temp.type == ChapterType.Organizations)
+        else if(temp.type == ChapterType.Places)
         {
-            if ((num_Org_Pages*2) > num_Org_Paper)
-            {
-                AddPaper(temp.type);
-            }
-            
-            cur_page += (num_People_Paper * 2);
-            cur_page += (num_Places_Paper * 2);
-            cur_page += num_Org_Pages;
-
-            paperCount += num_People_Paper;
-            paperCount += num_Place_Paper;
-            paperCount += num_Org_Paper;
-
-
-            if (cur_page % 2 == 1)
-            {
-                tempImage = book.papers[paperCount].Back.GetComponent<Image>();
-            }
-            else
-            {
-                tempImage = book.papers[paperCount].Front.GetComponent<Image>();
-            }
-
-            tempImage.sprite = temp.pageImage;
-            
-            //Injuries_and_Treatment_Pages.Add(temp.pageImage);
-            return;
+            Place_Pages.Add(temp.pageImage);
         }
-        else if (temp.type == ChapterType.InjuriesAndTreatment)
+        else if (temp.type == ChapterType.Organizations)
         {
-            if ((num_Inj_Treat_Pages*2) > num_Inj_Treat_Paper)
-            {
-                AddPaper(temp.type);
-            }
-            
-            cur_page += (num_People_Paper * 2);
-            cur_page += (num_Places_Paper * 2);
-            cur_page += (num_Org_Paper * 2);
-            cur_page += num_Inj_Treat_Pages;
-
-            paperCount += num_People_Paper;
-            paperCount += num_Place_Paper;
-            paperCount += num_Org_Paper;
-            paperCount += num_Inj_Treat_Paper;
-
-
-            if (cur_page % 2 == 1)
-            {
-                tempImage = book.papers[paperCount].Back.GetComponent<Image>();
-            }
-            else
-            {
-                tempImage = book.papers[paperCount].Front.GetComponent<Image>();
-            }
-
-            tempImage.sprite = temp.pageImage;
-            
-            //Injuries_and_Treatment_Pages.Add(temp.pageImage);
+            Organization_Pages.Add(temp.pageImage);
             return;
         }
 
@@ -243,7 +125,16 @@ public class VNSaveFile : MonoBehaviour
 
 
     
+    public GameObject FrontPagePrefab;
+    public GameObject BackPagePrefab;
 
+    [SerializeField] private BookPro book;
+
+    VNSaveFile JournalEntries;
+
+    private int pageCount = 0;
+
+    private Image tempImage;
 
     
     private void AddPaper(ChapterType section)
@@ -262,40 +153,13 @@ public class VNSaveFile : MonoBehaviour
         if(section == ChapterType.People)
         {
             n += num_People_Paper;
-            num_People_Paper++;
-            Places_chapter.pageNum++;
-            Organizations_chapter.pageNum++;
-            Injuries_and_Treatments_chapter.pageNum++;
-        }else if (section == ChapterType.Places)
-        {
-            n += num_People_Paper;
-            n += num_Place_Paper;
-            num_Place_Paper++;
-            Organizations_chapter.pageNum++;
-            Injuries_and_Treatments_chapter.pageNum++;
-        }else if (section == ChapterType.Organizations)
-        {
-            n += num_People_Paper;
-            n += num_Place_Paper;
-            n += num_Org_Paper;
-            num_Org_Paper++;
-            Injuries_and_Treatments_chapter.pageNum++;
         }
-        else if (section == ChapterType.InjuriesAndTreatment)
-        {
-            n += num_People_Paper;
-            n += num_Place_Paper;
-            n += num_Org_Paper;
-            n += num_Inj_Treat_Paper;
-            num_Inj_Treat_Paper++;
-        }
-
         for (int i = 0; i < n; i++)
         {
             papers[i] = book.papers[i];
         }
 
-        papers[n] = newPaper;
+
 
         for (int i = n + 1; i < book.papers.Length; i++)
         {
@@ -307,6 +171,9 @@ public class VNSaveFile : MonoBehaviour
         book.EndFlippingPaper = book.papers.Length - 1;
         book.UpdatePages();
     }
+    
+    
+
 
 }
 
