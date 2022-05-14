@@ -31,7 +31,7 @@ public class rightLegFractureRealign : MonoBehaviour
 
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
-                Debug.Log(transform.rotation.eulerAngles.z);
+                //Debug.Log(transform.rotation.eulerAngles.z);
                 if (col == Physics2D.OverlapPoint(mousePos))
                 {
 
@@ -45,7 +45,7 @@ public class rightLegFractureRealign : MonoBehaviour
 
             if (Mouse.current.leftButton.isPressed)
             {
-                Debug.Log(transform.rotation.eulerAngles.z);
+                //Debug.Log(transform.rotation.eulerAngles.z);
                 if (col == Physics2D.OverlapPoint(mousePos))
                 {
                     Vector3 vec3 = Mouse.current.position.ReadValue() - screenPos;
@@ -54,16 +54,16 @@ public class rightLegFractureRealign : MonoBehaviour
 
                     if (transform.rotation.eulerAngles.z > boneStartingRotation)    //if bone is rotated the wrong way
                     {
-                        Debug.Log("BRO WRONG WAY YOURE MAKING IT WORSE");
+                        //Debug.Log("BRO WRONG WAY YOURE MAKING IT WORSE");
                         //subtract health or something idk
                     }
                 }
             }
         }
-        else
-        {
-            Debug.Log("Bone realigned!");
-        }
+        //else
+        //{
+            //Debug.Log("Bone realigned!");
+        //}
         
 
     }

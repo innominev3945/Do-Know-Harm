@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7671409060025135074, guid: a33b671517aebc84993beda8e5eff9ee, type: 3}
       propertyPath: m_Name
-      value: PSBMaleBody1D
+      value: MaleBody1D - leg fracture
       objectReference: {fileID: 0}
     - target: {fileID: -6656787085776074639, guid: a33b671517aebc84993beda8e5eff9ee, type: 3}
       propertyPath: m_LocalRotation.w
