@@ -123,6 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!1 &75613000
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +203,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75613000}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &105399821
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +284,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 105399821}
   m_CullTransparentMesh: 1
+<<<<<<< Updated upstream
 --- !u!1 &183057176
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a85bb65596263d342b889d60d2f305dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+>>>>>>> Stashed changes
 --- !u!1 &212247478
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +537,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1334726100}
+<<<<<<< Updated upstream
   - {fileID: 183057177}
+=======
+>>>>>>> Stashed changes
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -552,7 +561,11 @@ GameObject:
   - component: {fileID: 577895706}
   - component: {fileID: 577895705}
   m_Layer: 5
+<<<<<<< Updated upstream
   m_Name: Patients Dead
+=======
+  m_Name: Text (1)
+>>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -712,10 +725,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 921317930}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: 706f9984b5b808c4da40a237f0dd86b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   GameOverScreen: {fileID: 1334726103}
+=======
+  m_Script: {fileID: 11500000, guid: a5b6000648a78e24384c62f445776544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+>>>>>>> Stashed changes
 --- !u!1 &1181668392
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,7 +748,11 @@ GameObject:
   - component: {fileID: 1181668395}
   - component: {fileID: 1181668394}
   m_Layer: 5
+<<<<<<< Updated upstream
   m_Name: Main Menu Button
+=======
+  m_Name: Button (1)
+>>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -798,6 +821,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1181668395}
   m_OnClick:
     m_PersistentCalls:
+<<<<<<< Updated upstream
       m_Calls:
       - m_Target: {fileID: 1334726103}
         m_TargetAssemblyTypeName: GameOverScreen, Assembly-CSharp
@@ -811,6 +835,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+=======
+      m_Calls: []
+>>>>>>> Stashed changes
 --- !u!114 &1181668395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -941,7 +968,11 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
+<<<<<<< Updated upstream
   m_IsActive: 0
+=======
+  m_IsActive: 1
+>>>>>>> Stashed changes
 --- !u!224 &1334726100
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1012,10 +1043,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1334726099}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: 92865189252fcf44eb80e9ce3461214a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pointsText: {fileID: 577895705}
+=======
+  m_Script: {fileID: 11500000, guid: 7e32b3cd9658f0d41861b5dcba81c410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+>>>>>>> Stashed changes
 --- !u!1 &1750477459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,7 +1145,11 @@ GameObject:
   - component: {fileID: 2137407723}
   - component: {fileID: 2137407722}
   m_Layer: 5
+<<<<<<< Updated upstream
   m_Name: Restart Button
+=======
+  m_Name: Button
+>>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1177,6 +1218,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2137407723}
   m_OnClick:
     m_PersistentCalls:
+<<<<<<< Updated upstream
       m_Calls:
       - m_Target: {fileID: 1334726103}
         m_TargetAssemblyTypeName: GameOverScreen, Assembly-CSharp
@@ -1190,6 +1232,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+=======
+      m_Calls: []
+>>>>>>> Stashed changes
 --- !u!114 &2137407723
 MonoBehaviour:
   m_ObjectHideFlags: 0
