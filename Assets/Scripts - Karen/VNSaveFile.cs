@@ -9,6 +9,7 @@ public class VNSaveFile : MonoBehaviour
     // Start is called before the first frame update
     public static VNSaveFile Instance;
 
+
     private int num_People_Pages = 0;
     private int num_Place_Pages = 0;
     private int num_Org_Pages = 0;

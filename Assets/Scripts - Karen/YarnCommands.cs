@@ -17,6 +17,8 @@ public class YarnCommands : MonoBehaviour
 
     [SerializeField] CharacterManager character;
 
+    [SerializeField] VNSaveFile saver;
+
     [SerializeField] VNManager vnManager;
 
     static bool isFaded = true;
@@ -169,6 +171,12 @@ public class YarnCommands : MonoBehaviour
     public void changeBackground(int bg_id)
     {
         vnManager.changeBG(bg_id);
+    }
+
+    [YarnCommand("addPage")]
+    public void addPage(int n)
+    {
+        saver.unlockPage(n);
     }
 
     //Fades sprite renderer to opaque
