@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8723020226205549639}
   - component: {fileID: 8723020226205549636}
   - component: {fileID: 8723020226205549637}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Gauze
   m_TagString: Mouse
   m_Icon: {fileID: 0}
@@ -72,9 +72,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: 305414621
+  m_SortingLayer: 9
+  m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
   m_FlipX: 0

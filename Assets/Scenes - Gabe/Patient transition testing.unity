@@ -214,9 +214,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 290745777}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Legs
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 375578547}
   - component: {fileID: 375578546}
   - component: {fileID: 375578549}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MaleBody1D_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,8 +308,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2074325077
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: -7918272126136477768, guid: 61ae7deecc695c445b2c4c1527fe04f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -370,7 +370,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 385322467}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -645, y: 166.5}
+  m_AnchoredPosition: {x: -645, y: 248}
   m_SizeDelta: {x: 355.5989, y: 66.6748}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &515853259
@@ -839,7 +839,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -645, y: 271}
+  m_AnchoredPosition: {x: -645, y: 342.01}
   m_SizeDelta: {x: 355.5989, y: 66.6748}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1022531364
@@ -1884,9 +1884,9 @@ GameObject:
   - component: {fileID: 1926735193}
   - component: {fileID: 1926735195}
   - component: {fileID: 1926735194}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: UpperArm
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1988,9 +1988,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: -2074325077
+  m_SortingLayer: 5
+  m_SortingOrder: 0
   m_Sprite: {fileID: 3420559645593879332, guid: 61ae7deecc695c445b2c4c1527fe04f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2086,9 +2086,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2145123799}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

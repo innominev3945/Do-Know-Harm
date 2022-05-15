@@ -18,9 +18,10 @@ public class HandToolScript : MonoBehaviour
         transform.position = new Vector3(pos.x, pos.y, 0);
     }
 
-    public void ClickOnTarget(InputAction.CallbackContext context)
+    public void ClickOnTarget(InputAction.CallbackContext context) // change so that variable if mousepressed true is contained in handtool object (Here) and set action for mousePressed to collider funcs in tourniquet
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.zero, Mathf.Infinity);
+        //int layerMask = ~(LayerMask.GetMask("Draggable Object"));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.zero, Mathf.Infinity, 1 << LayerMask.NameToLayer("Draggable Object"));
         if (context.started)
         {
             //Vector2 pos2D = Mouse.current.position.ReadValue(); // is there a way to rid this of mouse dependency? last line left that uses it

@@ -5,21 +5,19 @@ using UnityEngine.InputSystem;
 
 public class Tourniquet_Script : MonoBehaviour
 {
-    public bool isSet;
     private bool isTightening;
     private bool finished;
-    public bool mousePressed;
+    [SerializeField] public bool mousePressed;
     private bool onLimb;
 
     private int currentQuad;
-    private int rotations;
+    [SerializeField] private int rotations;
     private int startQuad;
     private int maxRotations;
     [SerializeField] private GameObject tab;
 
     private void Start()
     {
-        isSet = false;
         isTightening = false;
         finished = false;
         mousePressed = false;
@@ -34,7 +32,7 @@ public class Tourniquet_Script : MonoBehaviour
         //Debug.Log(mousePressed);
         if (!finished)
         {
-            if (mousePressed && !isSet)
+            if (mousePressed)
             {
                 Vector2 pos2D = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
                 transform.position = pos2D;
@@ -194,7 +192,6 @@ public class Tourniquet_Script : MonoBehaviour
         if (collision.gameObject.name == "UpperArm")
         {
             onLimb = false;
-            isSet = false;
             transform.rotation = Quaternion.Euler(Vector3.zero);
             //transform.parent = null;
         }

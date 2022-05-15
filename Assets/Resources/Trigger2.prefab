@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4681245555301388859}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: HealTag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 6190180752691004947}
   - component: {fileID: 6190180752691004944}
   - component: {fileID: 6190180752691004945}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Trigger2
   m_TagString: Trigger 2 (TO)
   m_Icon: {fileID: 0}
@@ -100,8 +100,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2040607149
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0.49411768, g: 0.49411768, b: 0.49411768, a: 1}
