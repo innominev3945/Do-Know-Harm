@@ -32,7 +32,7 @@ namespace ForeignObjectClass
         // Update is called once per frame
         void Update()
         {
-            Debug.Log("Distance: " + Vector3.Distance(transform.position, woundLocation));
+            //Debug.Log("Distance: " + Vector3.Distance(transform.position, woundLocation));
             //if (exitedWound)
             //{
             if (Vector3.Distance(transform.position, woundLocation) > minimumDistanceAway)

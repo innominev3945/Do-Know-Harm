@@ -14,13 +14,15 @@ namespace InjuryClass
         private Vector2 location; // Represents the location of the Injury (for treatment and animation purposes)
         private bool beingTreated; // Determines if an injury is currently being treated by the Player 
         private Queue<Treatment> treatments; // Queue of treatments - as soon as one treatment is finished, the next one in priority is to be started 
+        private string injuryName;
 
-        public Injury(float severity, Vector2 loc)
+        public Injury(float severity, Vector2 loc, string name)
         {
             injurySeverity = severity;
             location = loc;
             beingTreated = false;
             treatments = new Queue<Treatment>();
+            injuryName = name;
         }
 
         // Acessors 
@@ -33,6 +35,10 @@ namespace InjuryClass
 
         public Vector2 GetLocation() { return location; }
         public bool GetBeingTreated() { return beingTreated; }
+
+        public bool GetHealed() { return (treatments.Count == 0); }
+
+        public string GetName() { return injuryName; }
 
         // Starts treating an Injury by activating the Treatment of the topmost item in the Queue 
         public void Treat()
@@ -69,5 +75,6 @@ namespace InjuryClass
                 Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
             }
         }
+
     }
 }
