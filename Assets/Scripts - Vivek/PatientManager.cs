@@ -34,10 +34,11 @@ namespace PatientManagerClass
         private TextMeshProUGUI patientInjuryText;
         private TextMeshProUGUI healthText;
 
-
+        private bool levelComplete;
         // Start is called before the first frame update
         void Start()
         {
+            // Initialize all variables
             nextPatients = new Queue<Tuple<Patient, Sprite>>();
             buttons = new ButtonManager[4];
             currentPatient = null;
@@ -91,8 +92,12 @@ namespace PatientManagerClass
         // Update is called once per frame
         void Update()
         {
+            Debug.Log(GetLevelComplete().ToString());
             if (currentPatient.Item1 != null)
                 healthText.text = currentPatient.Item1.GetHealth().ToString();
+
+            // Handles switching out patients if they are either fully healed of their injuries or are dead
+            // Switching out current patient 
             if ((currentPatient.Item1.GetHealed() || currentPatient.Item1.GetHealth() == 0) && nextPatients.Count != 0)
             {
                 Debug.Log("Switching Patient");
@@ -115,6 +120,7 @@ namespace PatientManagerClass
                 ViewHead();
                 nextPatients.Dequeue();
             }
+            // Switching out non-current patients
             for (int i = 0; i < patients.Length; i++)
             {
                 if (patients[i] != currentPatient && ((patients[i].Item1.GetHealed() || patients[i].Item1.GetHealth() == 0) && nextPatients.Count != 0))
@@ -134,6 +140,20 @@ namespace PatientManagerClass
                     nextPatients.Dequeue();
                 }
             }
+        }
+
+        public bool GetLevelComplete()
+        {
+            if (nextPatients.Count == 0)
+            {
+                foreach (Tuple<Patient, Sprite> patient in patients)
+                {
+                    if (!(patient.Item1.GetHealed() || patient.Item1.GetHealth() == 0))
+                        return false;
+                }
+                return true;
+            }
+            return false;
         }
 
         public void SwitchPatient(ButtonManager btn)

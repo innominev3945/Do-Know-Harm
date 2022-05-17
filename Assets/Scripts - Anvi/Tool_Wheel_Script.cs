@@ -28,6 +28,7 @@ public class Tool_Wheel_Script : MonoBehaviour
     private GameObject[] arrayOfTools;
     private int numTools;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -143,15 +144,15 @@ public class Tool_Wheel_Script : MonoBehaviour
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        if (northEastTriggerTimer > 0)
+        if (northEastTriggerTimer > 0 && arrayOfTools[1] != null)
         {
             current = Instantiate(arrayOfTools[1], mousePosition, Quaternion.identity);
         }
-        else if (northWestTriggerTimer > 0)
+        else if (northWestTriggerTimer > 0 && arrayOfTools[7] != null)
         {
             current = Instantiate(arrayOfTools[7], mousePosition, Quaternion.identity);
         }
-        else
+        else if (arrayOfTools[0] != null)
         {
             current = Instantiate(arrayOfTools[0], mousePosition, Quaternion.identity);
         }
@@ -167,15 +168,15 @@ public class Tool_Wheel_Script : MonoBehaviour
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        if (southEastTriggerTimer > 0)
+        if (southEastTriggerTimer > 0 && arrayOfTools[3] != null)
         {
             current = Instantiate(arrayOfTools[3], mousePosition, Quaternion.identity);
         }
-        else if (southWestTriggerTimer > 0)
+        else if (southWestTriggerTimer > 0 && arrayOfTools[5] != null)
         {
             current = Instantiate(arrayOfTools[5], mousePosition, Quaternion.identity);
         }
-        else
+        else if (arrayOfTools[4] != null)
         {
             current = Instantiate(arrayOfTools[4], mousePosition, Quaternion.identity);
         }
@@ -191,15 +192,15 @@ public class Tool_Wheel_Script : MonoBehaviour
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        if (northEastTriggerTimer > 0)
+        if (northEastTriggerTimer > 0 && arrayOfTools[1] != null)
         {
             current = Instantiate(arrayOfTools[1], mousePosition, Quaternion.identity);
         }
-        else if (southEastTriggerTimer > 0)
+        else if (southEastTriggerTimer > 0 && arrayOfTools[3] != null)
         {
             current = Instantiate(arrayOfTools[3], mousePosition, Quaternion.identity);
         }
-        else
+        else if (arrayOfTools[2] != null)
         {
             current = Instantiate(arrayOfTools[2], mousePosition, Quaternion.identity);
         }
@@ -215,15 +216,15 @@ public class Tool_Wheel_Script : MonoBehaviour
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        if (northWestTriggerTimer > 0)
+        if (northWestTriggerTimer > 0 && arrayOfTools[7] != null)
         {
             current = Instantiate(arrayOfTools[7], mousePosition, Quaternion.identity);
         }
-        else if (southWestTriggerTimer > 0)
+        else if (southWestTriggerTimer > 0 && arrayOfTools[5] != null)
         {
             current = Instantiate(arrayOfTools[5], mousePosition, Quaternion.identity);
         }
-        else
+        else if (arrayOfTools[6] != null)
         {
             current = Instantiate(arrayOfTools[6], mousePosition, Quaternion.identity);
         }

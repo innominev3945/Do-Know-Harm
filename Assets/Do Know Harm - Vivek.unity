@@ -1329,7 +1329,6 @@ GameObject:
   - component: {fileID: 1178329769}
   - component: {fileID: 1178329768}
   - component: {fileID: 1178329767}
-  - component: {fileID: 1178329766}
   m_Layer: 5
   m_Name: Injury Information
   m_TagString: Button3
@@ -1357,18 +1356,6 @@ RectTransform:
   m_AnchoredPosition: {x: -320, y: -30}
   m_SizeDelta: {x: 100, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1178329766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1178329764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cece19a60d21bcc4eb479ad97710a05f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1178329767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2165,7 +2152,6 @@ GameObject:
   - component: {fileID: 1941831281}
   - component: {fileID: 1941831280}
   - component: {fileID: 1941831279}
-  - component: {fileID: 1941831278}
   m_Layer: 5
   m_Name: Health
   m_TagString: Button3
@@ -2193,18 +2179,6 @@ RectTransform:
   m_AnchoredPosition: {x: -318, y: -160}
   m_SizeDelta: {x: 100, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1941831278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1941831276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cece19a60d21bcc4eb479ad97710a05f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1941831279
 MonoBehaviour:
   m_ObjectHideFlags: 0
