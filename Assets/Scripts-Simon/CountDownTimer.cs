@@ -14,7 +14,7 @@ public class CountDownTimer : MonoBehaviour
     {
         startingTime = 60f;
         currentTime = startingTime;
-        countdownText.text = "Time Left: " + startingTime.ToString("0");
+        countdownText.text = "VITALS: " + startingTime.ToString("0");
     }
 
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class CountDownTimer : MonoBehaviour
         else
         {
             currentTime -= 1 * Time.deltaTime;
-            countdownText.text = "Time Left: " + currentTime.ToString("0");
+            countdownText.text = "VITALS: " + currentTime.ToString("0");
         }
     }
 }
