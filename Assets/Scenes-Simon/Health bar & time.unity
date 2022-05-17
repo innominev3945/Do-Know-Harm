@@ -507,7 +507,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Time Left:'
+  m_Text: 'VITALS:'
 --- !u!222 &699197544
 CanvasRenderer:
   m_ObjectHideFlags: 0
