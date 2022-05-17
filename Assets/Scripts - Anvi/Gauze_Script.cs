@@ -90,8 +90,10 @@ namespace Gauze
 
             if (gauzeCollider != null)
             {
+                //Debug.Log("Have gauze collider");
                 if (gauzeCollider.GetComponent<Gauze_Hit_Box_Collider_Script>().insideHitBox())
                 {
+                    Debug.Log("Inside hit box function");
                     if (rightmouseButtonDown)
                     {
                         Debug.Log("Placed down gauze square");

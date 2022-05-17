@@ -18,6 +18,9 @@ public class Tape_Script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Rigidbody2D rigidbody = gameObject.GetComponent<Rigidbody2D>();
+        rigidbody.gravityScale = 0;
+
         stretchTape = false;
         startTape = new Vector2(0, 0);
         tapePivot = GameObject.FindWithTag("Tape Pivot");

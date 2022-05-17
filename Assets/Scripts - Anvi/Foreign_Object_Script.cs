@@ -24,6 +24,9 @@ namespace ForeignObjectClass
         // Start is called before the first frame update
         void Start()
         {
+            Rigidbody2D rigidbody = gameObject.GetComponent<Rigidbody2D>();
+            rigidbody.gravityScale = 0;
+
             // exitedWound = false;
             // woundLocation = wound.transform.position;
             // woundLocation = new Vector3(0, 0, 0);
