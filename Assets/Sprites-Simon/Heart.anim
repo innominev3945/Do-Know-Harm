@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Border
+  m_Name: Heart
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -54,140 +54,140 @@ AnimationClip:
   - time: 0
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: d3a90907cc0f8ce4d9cdfad4ac20528a, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: aab405e8c1c70f84382fe4b5e899bb80, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.05
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: b787981ab4c6e5a49b4fd80c0548da5e, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 48e281bc4d2e6e14bb4266e4c315a6ad, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.1
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: cbc8f438ea08ecd42b3a083a83efab0d, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: e7ab838b012e50949a12deb83b21d3d2, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.15
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: 43d8fa921ad54574fadacbb89e0f0896, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 0f837149fd1fc194e8755ae15b14d2d2, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.2
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: 99a5c306b28d6eb4294b5542873a36f0, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 4cd1750e75b578f40ad2f58adb9ebe84, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.25
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: e641507b7223dde409f7b6dde15a1ecb, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 41dfaa035c0d67942b8ebadba79107c6, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.3
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: 5a1ed9099707e2340aad7f68e06c09e0, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 21d72c233f29d30458d3a77d82289c07, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.35
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: 198c7eff299a4964a987838be28d86b4, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 3f66929e36a6a104c8f5c8ab040199ff, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.4
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: 306c93155903ac340b414b21178396cc, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: bc4e7ba2a3b9c094cbdc85f1f00466c5, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.45
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: ff0a3e3f42dee64458c43756d024d44e, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 980c247bded861241aa417bdd29f56ea, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.5
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: 793e7e630dda7614d99ea4becb238b91, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 9c7015d020d6bf640a03eba8f8684b00, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.55
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: ad601394661135c49ada50df63f87c98, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 4bc324e526fc6e749aa89e13019094d1, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.6
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: e2bf0d11a692b074692234b626ca5492, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 9f03bd9278b4afd46a59da06e5e4f4cf, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.65
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: 9bfb917c7256346499c6197fecf7fb94, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 5f5d25103d55ea74885f8276dc88968d, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.7
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: b267b487b52461e48b9012d3fddef330, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 6b3bf60cd87234c418d94becdf5d3bdf, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.75
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: 34d03e4ee75cc29478b094fb53935436, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 15472c38b0b2df44c9c57f53d63e164d, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.8
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: 6c72c03bb97127b449c2eebc1653b94c, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 59332a710368847419112923655386da, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.85
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: a3cb7084a38b67b4dac443f306283960, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 7e8c998cc7d2c194cbe0c1ba5db0f18f, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.9
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 21300000, guid: 319eeadd503a93849a9ef38927d3f6aa, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: c1338a263841d6644b8e26c32df58a9b, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.95
     functionName: set_sprite
     data: 
-    objectReferenceParameter: {fileID: 2613348730587745498, guid: fdbdeeea144d6cf4ebbe65e58345bc2e, type: 3}
+    objectReferenceParameter: {fileID: 21300000, guid: 0ba83dcad0a9b7941a996c7cc010e551, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
