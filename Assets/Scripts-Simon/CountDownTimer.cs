@@ -14,7 +14,8 @@ public class CountDownTimer : MonoBehaviour
     {
         startingTime = 60f;
         currentTime = startingTime;
-        countdownText.text = "VITALS: " + startingTime.ToString("0");
+        float health = player.GetCurrentHealth();
+        countdownText.text = "VITALS: " + health.ToString("0");
     }
 
     // Update is called once per frame
@@ -31,8 +32,9 @@ public class CountDownTimer : MonoBehaviour
         }
         else
         {
-            currentTime -= 1 * Time.deltaTime;
-            countdownText.text = "VITALS: " + currentTime.ToString("0");
+            float health = player.GetCurrentHealth();
+            //currentTime -= 1 * Time.deltaTime;
+            countdownText.text = "VITALS: " + health.ToString("0");
         }
     }
 }
