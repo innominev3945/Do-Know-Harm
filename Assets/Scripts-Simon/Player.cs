@@ -17,21 +17,33 @@ public class Player : MonoBehaviour
     public int healingTime = 0;
     // same concept as injuredTime, when player receives a health boost ...
     public WhitePhosphorus WP;
+    private bool soundchange1, soundchange2, soundchange3, soundchangedeath, soundchangewon;
 
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        soundchange1 = true;
+        soundchange2 = false;
+        soundchange3 = false;
+        soundchangedeath = false;
+        soundchangewon = false;
     }
 
     void Update()
     {
         if (numOfInjur == 0)
         {
+            if (!soundchangewon)
+            {
+                SoundManagerScript.PlaySound("win");
+                soundchangewon = true;
+            }
             hasWon = true;
             healthBar.SetHealth(maxHealth);
             return;
         }
+
         //the following two lines make health decrease with time
         if (currentHealth > 0)
         {
@@ -50,9 +62,36 @@ public class Player : MonoBehaviour
                 currentHealth -= 0.8f * Time.deltaTime * numOfInjur * WP.degree / 0.5f;
             }
             healthBar.SetHealth(currentHealth);
+
+            if (currentHealth > 70f && soundchange1)
+            {
+                SoundManagerScript.PlaySound("heartbeat1");
+                soundchange1 = false;
+                soundchange2 = true;
+                soundchange3 = true;
+            }
+            else if (currentHealth <= 70f && currentHealth > 30f && soundchange2)
+            {
+                SoundManagerScript.PlaySound("heartbeat2");
+                soundchange1 = true;
+                soundchange2 = false;
+                soundchange3 = true;
+            }
+            else if (currentHealth <= 30f && currentHealth > 0f && soundchange3)
+            {
+                SoundManagerScript.PlaySound("heartbeat3");
+                soundchange1 = true;
+                soundchange2 = true;
+                soundchange3 = false;
+            }
         }
         else
         {
+            if (!soundchangedeath)
+            {
+                SoundManagerScript.PlaySound("death");
+                soundchangedeath = true;
+            }
             isDead = true;
             return;
         }
