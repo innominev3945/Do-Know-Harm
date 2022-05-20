@@ -9,10 +9,13 @@ namespace ForcepsClass
     {
         private Vector3 mousePosition;
 
-        private bool mousePressed;
+        [SerializeField] private bool mousePressed;
         private bool onForeignObject;
         private bool dragForeignObject;
         GameObject currentForeignObject;
+        [SerializeField] private Sprite forcepsOpen;
+        [SerializeField] private Sprite forcepsClosed;
+        private SpriteRenderer sprender;
 
         // Start is called before the first frame update
         void Start()
@@ -21,6 +24,8 @@ namespace ForcepsClass
             onForeignObject = false;
             dragForeignObject = false;
             currentForeignObject = null;
+            sprender = this.GetComponent<SpriteRenderer>();
+            sprender.sprite = forcepsOpen;
         }
 
         // Update is called once per frame
@@ -30,6 +35,7 @@ namespace ForcepsClass
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
             transform.position = Vector2.Lerp(transform.position, mousePosition, 1);
 
+
             if (currentForeignObject != null && dragForeignObject)
             {
                 currentForeignObject.transform.position = Vector2.Lerp(transform.position, mousePosition, 1);
@@ -38,15 +44,17 @@ namespace ForcepsClass
 
         public void RemoveObject(InputAction.CallbackContext context)
         {
-            if (context.started && onForeignObject)
+            if (context.started) // && onForeignObject
             {
                 mousePressed = true;
+                sprender.sprite = forcepsClosed;
             }
             else if (context.canceled)
             {
                 mousePressed = false;
                 dragForeignObject = false;
                 currentForeignObject = null;
+                sprender.sprite = forcepsOpen;
             }
         }
 

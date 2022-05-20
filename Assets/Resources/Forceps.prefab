@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5974668805313062710}
   - component: {fileID: 5974668805313062704}
   - component: {fileID: 5974668805313062707}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Forceps
   m_TagString: Mouse
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5974668805313062709}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2182103, y: -0.956003, z: -2}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 1.04178, y: 1.04178, z: 1.7363}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,10 +72,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 305414621
-  m_SortingLayer: 9
+  m_SortingLayerID: -253013955
+  m_SortingLayer: 10
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: -6589300739962659974, guid: 352d586e774fc1f46ab0ea91b16bd5ef, type: 3}
   m_Color: {r: 0.61681205, g: 0.759178, b: 0.7830189, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,18 +99,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.04037285, y: 0.005046636}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.2114285, y: 1.8114285}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5155277, y: 0.60636574}
   m_EdgeRadius: 0
 --- !u!50 &5974668805313062710
 Rigidbody2D:
@@ -145,6 +145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f20fa58fee3420492710a20b1414c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mousePressed: 0
+  forcepsOpen: {fileID: -6589300739962659974, guid: 352d586e774fc1f46ab0ea91b16bd5ef, type: 3}
+  forcepsClosed: {fileID: -987111613401760254, guid: a6cf20d0f8c65164aa94e802b96fd9e9, type: 3}
 --- !u!114 &5974668805313062707
 MonoBehaviour:
   m_ObjectHideFlags: 0

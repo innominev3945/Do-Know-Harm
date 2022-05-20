@@ -466,6 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   click: {fileID: 693990036}
   injury_clear: {fileID: 0}
+  step_clear: {fileID: 0}
 --- !u!1 &278754653
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,14 +629,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 321194368}
         m_TargetAssemblyTypeName: ToScene, Assembly-CSharp
-        m_MethodName: LoadSelectedScene
-        m_Mode: 1
+        m_MethodName: LoadSceneByName
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Do Know Harm - Vivek
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 260872548}
@@ -712,7 +713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3319f270ebd5034d897ba4536fe71db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: VNScene
+  scene: Do Know Harm - Vivek
 --- !u!1 &401532876
 GameObject:
   m_ObjectHideFlags: 0

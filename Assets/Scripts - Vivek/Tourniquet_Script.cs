@@ -162,6 +162,10 @@ public class Tourniquet_Script : MonoBehaviour
     public void mouseClickedFalse()
     {
         mousePressed = false;
+        if (onLimb && !finished)
+        {
+            Camera.main.GetComponent<SFXPlaying>().SFXstepClear();
+        }
     }
 
     public void ClickTourniquet() // rework so input action is on hand tool instead, have reaction to it here

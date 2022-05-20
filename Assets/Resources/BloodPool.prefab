@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6058668669035857510}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: HealTag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 6372299250984037992}
   - component: {fileID: 6372299250984037910}
   - component: {fileID: 4652710415097237887}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BloodPool
   m_TagString: Blood Pool
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 6372299250984037995}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.96, y: 2.2, z: -1}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1.2968506, y: 1.2968506, z: 0.6484253}
   m_Children:
   - {fileID: 6058668669035857510}
   m_Father: {fileID: 0}
@@ -101,10 +101,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_SortingLayerID: -108117885
+  m_SortingLayer: 7
+  m_SortingOrder: 1
+  m_Sprite: {fileID: -6378772332506279423, guid: cd939808dd8c2384e83e5568375ba420, type: 3}
   m_Color: {r: 0.4528302, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -130,7 +130,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.68
 --- !u!114 &4652710415097237887
 MonoBehaviour:
   m_ObjectHideFlags: 0
