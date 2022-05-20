@@ -34,7 +34,7 @@ public class CountDownTimer : MonoBehaviour
         {
             float health = player.GetCurrentHealth();
             //currentTime -= 1 * Time.deltaTime;
-            countdownText.text = "VITALS: " + health.ToString("0");
+            countdownText.text = "VITALS: " + health.ToString("0") + "%";
         }
     }
 }
