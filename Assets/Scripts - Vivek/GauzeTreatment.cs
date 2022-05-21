@@ -22,7 +22,9 @@ namespace GauzeTreatmentClass
 
             //ret.gauze = Instantiate((UnityEngine.Object)Resources.Load("Gauze"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
             ret.bloodPool = Instantiate((UnityEngine.Object)Resources.Load("BloodPool"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            ret.bloodPool.transform.parent = ob.transform;
             ret.bleedingWound = Instantiate((UnityEngine.Object)Resources.Load("BleedingWound"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            ret.bleedingWound.transform.parent = ob.transform;
 
             return ret;
         }

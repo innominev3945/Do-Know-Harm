@@ -5,28 +5,34 @@ using UnityEngine.InputSystem;
 
 public class Tourniquet_Script : MonoBehaviour
 {
-    public bool isSet;
     private bool isTightening;
     private bool finished;
-    public bool mousePressed;
+    [SerializeField] public bool mousePressed;
     private bool onLimb;
 
     private int currentQuad;
-    private int rotations;
+    [SerializeField] private int rotations;
     private int startQuad;
     private int maxRotations;
-    [SerializeField] private GameObject tab;
+    [SerializeField] private GameObject leftEnd;
+    [SerializeField] private GameObject rightEnd;
+    [SerializeField] private GameObject strap;
+    private Vector3 originalScale;
+    [SerializeField] private Vector3 armScale;
+    [SerializeField] private Vector3 legScale;
+
 
     private void Start()
     {
-        isSet = false;
         isTightening = false;
         finished = false;
         mousePressed = false;
         onLimb = false;
+        strap.SetActive(false);
 
         rotations = 0;
         maxRotations = 3;
+        originalScale = this.transform.localScale;
     }
 
     private void Update()
@@ -34,7 +40,7 @@ public class Tourniquet_Script : MonoBehaviour
         //Debug.Log(mousePressed);
         if (!finished)
         {
-            if (mousePressed && !isSet)
+            if (mousePressed && !isTightening)
             {
                 Vector2 pos2D = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
                 transform.position = pos2D;
@@ -47,51 +53,105 @@ public class Tourniquet_Script : MonoBehaviour
             }
             if (isTightening)
             {
-                Mouse.current.position.ReadValue();
-                Vector2 pos2D = Mouse.current.position.ReadValue();
-                pos2D = Camera.main.ScreenToWorldPoint(pos2D);
-                RaycastHit2D hit = Physics2D.Raycast(pos2D, Vector2.zero, Mathf.Infinity);
-                if (hit.collider != null && hit.collider.gameObject == this) // checks if mouse hits tourniquet, resets if true
+                if (mousePressed)
                 {
-                    rotations = 0;
-                    isTightening = false;
+                    //Mouse.current.position.ReadValue();
+                    Vector2 pos2D = Mouse.current.position.ReadValue();
+                    pos2D = Camera.main.ScreenToWorldPoint(pos2D);
+                    strap.SetActive(true);
+
+                    RaycastHit2D hit = Physics2D.Raycast(pos2D, Vector2.zero, Mathf.Infinity);
+                    if (hit.collider != null && hit.collider.gameObject == this) // checks if mouse hits tourniquet, resets if true
+                    {
+                        rotations = 0;
+                        isTightening = false;
+                    }
+                    else
+                    {
+                        int mouseLocation = FindPos(pos2D);
+                        if (mouseLocation != currentQuad)
+                        {
+                            if (InOrderAdjacent(currentQuad, mouseLocation))
+                            {
+                                currentQuad = mouseLocation;
+                                if (mouseLocation == startQuad)
+                                {
+                                    rotations++;
+                                }
+                            }
+                            else
+                            {
+                                currentQuad = mouseLocation;
+                            }
+                        }
+                        Vector3 strapStartPos;
+                        if (currentQuad == startQuad || currentQuad == NextQuad(startQuad))
+                        {
+                            strap.GetComponent<SpriteRenderer>().sortingLayerName = "Draggable Object";
+                            strap.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                            strapStartPos = rightEnd.transform.position;
+                        }
+                        else
+                        {
+                            strap.GetComponent<SpriteRenderer>().sortingLayerName = "Patient";
+                            strap.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                            strapStartPos = leftEnd.transform.position;
+                        }
+                        if (Vector3.Distance(strapStartPos, pos2D) > 4)
+                        {
+                            rotations = 0;
+                            isTightening = false;
+                        }
+                        else
+                        {
+                            Stretch(strap, strapStartPos, pos2D, true);
+                        }
+                    }
+                    if (rotations >= maxRotations) // finish treatment here
+                    {
+                        finished = true;
+                        isTightening = false;
+                        strap.SetActive(false);
+                    }
                 }
                 else
                 {
-                    int mouseLocation = FindPos(pos2D);
-                    if (mouseLocation != currentQuad)
-                    {
-                        if (InOrderAdjacent(currentQuad, mouseLocation))
-                        {
-                            currentQuad = mouseLocation;
-                            if (mouseLocation == startQuad)
-                            {
-                                rotations++;
-                            }
-                        }
-                    }
-                }
-                if (rotations >= maxRotations) // finish treatment here
-                {
-                    finished = true;
                     isTightening = false;
-                    //Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
+                    rotations = 0;
+                    strap.SetActive(false);
                 }
+                
             }
             else
             {
+                strap.SetActive(false);
                 rotations = 0;
             }
         }
         
-        
-        if (finished)
-        {
-        }
     }
+
+    public void Stretch(GameObject _sprite, Vector3 _initialPosition, Vector3 _finalPosition, bool _mirrorZ)
+    {
+        Vector3 centerPos = (_initialPosition + _finalPosition) / 2f;
+        _sprite.transform.position = centerPos;
+        Vector3 direction = _finalPosition - _initialPosition;
+        direction = Vector3.Normalize(direction);
+        _sprite.transform.right = direction;
+        if (_mirrorZ) _sprite.transform.right *= -1f;
+        Vector3 scale = _sprite.transform.localScale;
+        scale.x = Vector3.Distance(_initialPosition, _finalPosition) / _sprite.transform.parent.transform.localScale.x / 5.5f;
+        _sprite.transform.localScale = scale;
+    }
+
     public bool GetHealed()
     {
         return finished;
+    }
+    
+    public bool GetOnLimb()
+    {
+        return onLimb;
     }
 
     public void mouseClickedTrue()
@@ -102,6 +162,10 @@ public class Tourniquet_Script : MonoBehaviour
     public void mouseClickedFalse()
     {
         mousePressed = false;
+        if (onLimb && !finished)
+        {
+            Camera.main.GetComponent<SFXPlaying>().SFXstepClear();
+        }
     }
 
     public void ClickTourniquet() // rework so input action is on hand tool instead, have reaction to it here
@@ -165,8 +229,9 @@ public class Tourniquet_Script : MonoBehaviour
         // {
         Debug.Log(collision.gameObject.name);
             GameObject arm = collision.gameObject;
-            if (arm.name == "UpperArm") // change this to tag when tag system is decided
+            if (arm.name.Contains("arm") || arm.name.Contains("Arm")) // change this to tag when tag system is decided
             {
+                //transform.parent = arm.transform;
                 Vector3 center = arm.GetComponent<Collider2D>().bounds.center;
                 transform.position = new Vector2(center.x, this.transform.position.y); // add rotation effect later maybe? see below
                 /*transform.rotation = arm.transform.rotation;
@@ -175,8 +240,10 @@ public class Tourniquet_Script : MonoBehaviour
                 Vector3 eulerAngles = arm.transform.rotation.eulerAngles;
                 float xDiff = Mathf.Tan(Mathf.Deg2Rad * eulerAngles.z) * heightDiff;
                 transform.position = new Vector2(arm.transform.position.x - xDiff, transform.position.y);*/
-
-                Debug.Log(center);
+                if (!mousePressed)
+                {
+                    this.transform.localScale = armScale;
+                }
             }
             onLimb = true;
         //Debug.Log("placed");
@@ -193,9 +260,10 @@ public class Tourniquet_Script : MonoBehaviour
         if (collision.gameObject.name == "UpperArm")
         {
             onLimb = false;
-            isSet = false;
             transform.rotation = Quaternion.Euler(Vector3.zero);
+            //transform.parent = null;
         }
+        this.transform.localScale = originalScale;
     }
 
     private int FindPos(Vector2 pos2D)
@@ -221,6 +289,18 @@ public class Tourniquet_Script : MonoBehaviour
             {
                 return 3;
             }
+        }
+    }
+
+    private int NextQuad(int a)
+    {
+        if (a >= 3)
+        {
+            return 0;
+        }
+        else
+        {
+            return a + 1;
         }
     }
 

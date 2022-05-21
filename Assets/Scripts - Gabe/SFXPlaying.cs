@@ -6,6 +6,7 @@ public class SFXPlaying : MonoBehaviour
 {
     public AudioSource click;
     public AudioSource injury_clear;
+    public AudioSource step_clear;
 
     public void SFXplayClick()
     {
@@ -14,5 +15,10 @@ public class SFXPlaying : MonoBehaviour
     public void SFXinjuryClear()
     {
         injury_clear.Play();   
+    }
+
+    public void SFXstepClear()
+    {
+        step_clear.Play();
     }
 }

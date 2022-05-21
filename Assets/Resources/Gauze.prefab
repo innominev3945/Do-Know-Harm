@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 8723020226205549633}
   - component: {fileID: 8723020226205549632}
   - component: {fileID: 8723020226205549638}
+  - component: {fileID: 8723020226205549639}
   - component: {fileID: 8723020226205549636}
   - component: {fileID: 8723020226205549637}
-  - component: {fileID: 4356754155004327382}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Gauze
   m_TagString: Mouse
   m_Icon: {fileID: 0}
@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8723020226205549635}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.157, y: -0.0728, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.157, y: -0.0728, z: -2}
+  m_LocalScale: {x: 0.9921365, y: 0.9921365, z: 2.3306}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,11 +72,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 0a8c58c60105b17409c41c26f1a118d7, type: 3}
-  m_Color: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
+  m_SortingLayerID: -253013955
+  m_SortingLayer: 10
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -4984923765706312686, guid: 2118a30e158ce854e83b63ff474cf24b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6156863}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,13 +98,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188bbe968bcad47d1918f15535ff83bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numClicks: 0
   totalClicks: 0
   timeLimit: 0
   shrinkScale: 0
-  hitbox: {fileID: 4254575839729413508, guid: 5d588dfecc456425ab7c98478f20a982, type: 3}
-  gauzeHitBoxCollider: {fileID: 6937333998593828931, guid: 74c48d53f1b0d4befb6fbe920408a85f, type: 3}
-  gauzeImage: {fileID: 6786973600921594002, guid: a4ccbdc36a82244b1857da8ed11f97f1, type: 3}
-  allHitBoxes: []
+--- !u!58 &8723020226205549639
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8723020226205549635}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.49999997
 --- !u!50 &8723020226205549636
 Rigidbody2D:
   serializedVersion: 4
@@ -236,19 +249,7 @@ MonoBehaviour:
     m_ActionId: 9bcfc533-5563-45a9-8a23-7d2a57163596
     m_ActionName: Player/AbsorbBlood[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8723020226205549638}
-        m_TargetAssemblyTypeName: Gauze.Gauze_Script, Assembly-CSharp
-        m_MethodName: AddGauzeSquare
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 45c96069-67d4-429f-a910-fef23b340849
     m_ActionName: Player/AddGauzeSquare[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
@@ -256,29 +257,3 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!61 &4356754155004327382
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8723020226205549635}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0

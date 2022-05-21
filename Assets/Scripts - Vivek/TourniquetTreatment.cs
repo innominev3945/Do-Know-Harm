@@ -24,6 +24,8 @@ namespace TourniquetTreatmentClass
 
             ret.tourniquet = Instantiate((UnityEngine.Object)Resources.Load("Tourniquet2"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
             ret.bleedingWound = Instantiate((UnityEngine.Object)Resources.Load("BleedingWound"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            ret.tourniquet.transform.parent = obj.transform;
+            ret.bleedingWound.transform.parent = obj.transform;
             
             return ret;
         }

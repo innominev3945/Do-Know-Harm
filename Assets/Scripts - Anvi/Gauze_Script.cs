@@ -13,7 +13,7 @@ namespace Gauze
 
         private Vector3 mousePosition;
 
-        private int numClicks;
+        [SerializeField] private int numClicks;
         private float timePassed;
         [SerializeField] int totalClicks;
         [SerializeField] float timeLimit;
@@ -204,6 +204,7 @@ namespace Gauze
                     }
                     else
                     {
+                        Camera.main.GetComponent<SFXPlaying>().SFXstepClear();
                         Destroy(collision.gameObject);
                     }
                 }

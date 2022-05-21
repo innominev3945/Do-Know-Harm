@@ -25,6 +25,9 @@ namespace BurnTreatmentClass
             ret.burnWound = Instantiate((UnityEngine.Object)Resources.Load("Burn"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
             ret.trigger1 = Instantiate((UnityEngine.Object)Resources.Load("Trigger1"), new Vector2(ret.injury.GetLocation().x - 2f, ret.injury.GetLocation().y), Quaternion.identity) as GameObject;
             ret.trigger2 = Instantiate((UnityEngine.Object)Resources.Load("Trigger2"), new Vector2(ret.injury.GetLocation().x + 2f, ret.injury.GetLocation().y), Quaternion.identity) as GameObject;
+            ret.burnWound.transform.parent = ob.transform;
+            ret.trigger1.transform.parent = ob.transform;
+            ret.trigger2.transform.parent = ob.transform;
 
             return ret;
         }

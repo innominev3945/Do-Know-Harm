@@ -24,7 +24,9 @@ namespace ForcepsTreatmentClass
 
             //ret.forceps = Instantiate((UnityEngine.Object)Resources.Load("Forceps"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
             ret.bleedingWound = Instantiate((UnityEngine.Object)Resources.Load("BleedingWound"), new Vector3(ret.injury.GetLocation().x, ret.injury.GetLocation().y, 0), Quaternion.identity) as GameObject;
+            ret.bleedingWound.transform.parent = ob.transform;
             ret.foreignObject = Instantiate((UnityEngine.Object)Resources.Load("ForeignObject"), new Vector3(ret.injury.GetLocation().x, ret.injury.GetLocation().y, -1), Quaternion.identity) as GameObject;
+            ret.foreignObject.transform.parent = ob.transform;
             ret.foreignObject.GetComponent<Foreign_Object_Script>().SetWound(ret.bleedingWound);
             return ret;
         }

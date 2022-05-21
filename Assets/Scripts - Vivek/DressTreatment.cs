@@ -19,6 +19,7 @@ namespace DressTreatmentClass
             ret.injury = inj;
 
             ret.woundDress = Instantiate((UnityEngine.Object)Resources.Load("WoundDress"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            ret.woundDress.transform.parent = ob.transform;
 
             return ret;
         }

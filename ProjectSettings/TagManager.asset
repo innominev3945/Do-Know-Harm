@@ -14,11 +14,6 @@ TagManager:
   - WoundDress
   - Mouse
   - BaseMouse
-  - Hit Box (Gauze)
-  - Foreign Object Disposal
-  - Hit Box (Tape) 1
-  - Hit Box (Tape) 2
-  - Tape Pivot
   - Healed
   - Limb
   - Wound
@@ -26,6 +21,7 @@ TagManager:
   - Button2
   - Button3
   - Button4
+  - Tourniquet
   layers:
   - Default
   - TransparentFX
@@ -38,12 +34,12 @@ TagManager:
   - Fade Layer
   - Fade Text Layer
   - Camera
-  - Tape
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Patient
+  - Clothing
+  - Wound
+  - Treatment Object
+  - Draggable Object
+  - Tool
   - 
   - 
   - 
@@ -74,4 +70,22 @@ TagManager:
     locked: 0
   - name: Fade Layer
     uniqueID: 2202052007
+    locked: 0
+  - name: Patient
+    uniqueID: 2288987193
+    locked: 0
+  - name: Clothing
+    uniqueID: 685507723
+    locked: 0
+  - name: Wound
+    uniqueID: 4186849411
+    locked: 0
+  - name: Treatment Object
+    uniqueID: 667069347
+    locked: 0
+  - name: Draggable Object
+    uniqueID: 1679353511
+    locked: 0
+  - name: Tool
+    uniqueID: 4041953341
     locked: 0

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7756403004471253220}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: HealTag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 8134364409158931938}
   - component: {fileID: 8134364409158931939}
   - component: {fileID: -7920971383237945348}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Burn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,9 +100,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: 2040607149
+  m_SortingLayer: 7
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 0.31739217, b: 0, a: 1}
   m_FlipX: 0
