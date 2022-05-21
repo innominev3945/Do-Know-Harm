@@ -34,11 +34,11 @@ namespace PatientManagerClass
         private TextMeshProUGUI patientInjuryText;
         private TextMeshProUGUI healthText;
 
-        private bool transitioning = false;
-
+        private bool levelComplete;
         // Start is called before the first frame update
         void Start()
         {
+            // Initialize all variables
             nextPatients = new Queue<Tuple<Patient, Sprite>>();
             buttons = new ButtonManager[4];
             currentPatient = null;
@@ -92,30 +92,16 @@ namespace PatientManagerClass
         // Update is called once per frame
         void Update()
         {
+            Debug.Log(GetLevelComplete().ToString());
             if (currentPatient.Item1 != null)
                 healthText.text = currentPatient.Item1.GetHealth().ToString();
-            if ((currentPatient.Item1.GetHealed() || currentPatient.Item1.GetHealth() == 0) && nextPatients.Count != 0 && !transitioning)
+
+            // Handles switching out patients if they are either fully healed of their injuries or are dead
+            // Switching out current patient 
+            if ((currentPatient.Item1.GetHealed() || currentPatient.Item1.GetHealth() == 0) && nextPatients.Count != 0)
             {
-                transitioning = true;
-                //gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(gameObject.transform.GetChild(0).gameObject);
-                Debug.Log("current patient dead or healed");
                 Debug.Log("Switching Patient");
-                if (currentPatient.Item1.GetHealed())
-                {
-                    gameObject.GetComponent<SaveDeathTransition>().currentPatientSaved(gameObject.transform.GetChild(0).gameObject);
-                    Debug.Log("current patient dead or healed");
-                    Debug.Log("Switching Patient");
-                    currentPatient.Item1.PauseDamage();
-                }
-                else
-                {
-                    gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(gameObject.transform.GetChild(0).gameObject);
-                    Debug.Log("current patient dead or healed");
-                    Debug.Log("Switching Patient");
-                    currentPatient.Item1.PauseDamage();
-                }
-                 // add in check for healed or dead
-                /*for (int i = 0; i < patients.Length; i++)
+                for (int i = 0; i < patients.Length; i++)
                 {
                     if (patients[i] == currentPatient)
                     {
@@ -132,8 +118,9 @@ namespace PatientManagerClass
                 currentPatient.Item1.UnpauseDamage();
                 currentPatient.Item1.StartTreatments();
                 ViewHead();
-                nextPatients.Dequeue();*/
+                nextPatients.Dequeue();
             }
+            // Switching out non-current patients
             for (int i = 0; i < patients.Length; i++)
             {
                 if (patients[i] != currentPatient && ((patients[i].Item1.GetHealed() || patients[i].Item1.GetHealth() == 0) && nextPatients.Count != 0))
@@ -155,82 +142,25 @@ namespace PatientManagerClass
             }
         }
 
-        IEnumerator PatientSaveTransitionHelper()
+        public bool GetLevelComplete()
         {
-            gameObject.GetComponent<SaveDeathTransition>().currentPatientSaved(gameObject.transform.GetChild(0).gameObject);
-            Debug.Log("current patient dead or healed");
-            Debug.Log("Switching Patient");
-            currentPatient.Item1.PauseDamage();
-            yield return null;
-            /*gameObject.GetComponent<SaveDeathTransition>().PatientSwitchTransition(0.6f);
-            yield return new WaitForSeconds(0.6f);
-            PatientSaveTransitionHelper2();*/
-            /*for (int i = 0; i < patients.Length; i++)
+            if (nextPatients.Count == 0)
             {
-                if (patients[i] == currentPatient)
+                foreach (Tuple<Patient, Sprite> patient in patients)
                 {
-                    patients[i] = nextPatients.Peek();
-                    break;
+                    if (!(patient.Item1.GetHealed() || patient.Item1.GetHealth() == 0))
+                        return false;
                 }
+                return true;
             }
-            Destroy(currentPatient.Item1);
-            currentPatient = nextPatients.Peek();
-            gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
-            gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
-            bodyparts = currentPatient.Item1.GetBodyparts();
-            UpdateText();
-            currentPatient.Item1.UnpauseDamage();
-            currentPatient.Item1.StartTreatments();
-            ViewHead();
-            nextPatients.Dequeue();
-            transitioning = false;*/
+            return false;
         }
 
-        IEnumerator PatientDeathTransitionHelper()
+        public void SwitchPatient(ButtonManager btn)
         {
-            gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(gameObject.transform.GetChild(0).gameObject);
-            Debug.Log("current patient dead or healed");
-            Debug.Log("Switching Patient");
-            currentPatient.Item1.PauseDamage();
-            yield return null;
-        }
-
-        public void PatientSaveDeathTransitionHelper2() // called by MoveSavedPatient of SaveDeathTransition script when saved patient is moved offscreen
-        {
-            StartCoroutine(PatientSaveDeathTransitionHelper3());
-        }
-
-        IEnumerator PatientSaveDeathTransitionHelper3() 
-        {
-            gameObject.GetComponent<SaveDeathTransition>().PatientSwitchTransition(0.6f);
-            yield return new WaitForSeconds(0.6f);
-            for (int i = 0; i < patients.Length; i++)
-            {
-                if (patients[i] == currentPatient)
-                {
-                    patients[i] = nextPatients.Peek();
-                    break;
-                }
-            }
-            Destroy(currentPatient.Item1);
-            currentPatient = nextPatients.Peek();
-            gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
-            gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
-            bodyparts = currentPatient.Item1.GetBodyparts();
-            UpdateText();
-            currentPatient.Item1.UnpauseDamage();
-            currentPatient.Item1.StartTreatments();
-            ViewHead();
-            nextPatients.Dequeue();
-            yield return new WaitForSeconds(0.6f);
-            transitioning = false;
-        }
-
-        IEnumerator SwitchPatientHelper(ButtonManager btn)
-        {
-            gameObject.GetComponent<SaveDeathTransition>().PatientSwitchTransition(0.6f);
-            yield return new WaitForSeconds(0.6f);
             Tuple<Patient, Sprite> tmp = btn.patient;
+            if (tmp == null)
+                return;
             currentPatient.Item1.AbortTreatments();
             btn.patient = currentPatient;
             currentPatient = tmp;
@@ -240,32 +170,6 @@ namespace PatientManagerClass
             bodyparts = currentPatient.Item1.GetBodyparts();
             UpdateText();
             ViewHead();
-            yield return new WaitForSeconds(0.6f);
-            transitioning = false;
-        }
-
-        public void SwitchPatient(ButtonManager btn)
-        {
-            if (!transitioning)
-            {
-                transitioning = true;
-                Tuple<Patient, Sprite> tmp = btn.patient;
-                if (tmp == null)
-                    return;
-                StartCoroutine(SwitchPatientHelper(btn));
-                /*Tuple<Patient, Sprite> tmp = btn.patient;
-                if (tmp == null)
-                    return;
-                currentPatient.Item1.AbortTreatments();
-                btn.patient = currentPatient;
-                currentPatient = tmp;
-                gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
-                gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
-                currentPatient.Item1.StartTreatments();
-                bodyparts = currentPatient.Item1.GetBodyparts();
-                UpdateText();
-                ViewHead();*/
-            }
         }
 
         public void ViewHead()
