@@ -100,7 +100,21 @@ namespace PatientManagerClass
                 //gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(gameObject.transform.GetChild(0).gameObject);
                 Debug.Log("current patient dead or healed");
                 Debug.Log("Switching Patient");
-                StartCoroutine(PatientSaveTransitionHelper()); // add in check for healed or dead
+                if (currentPatient.Item1.GetHealed())
+                {
+                    gameObject.GetComponent<SaveDeathTransition>().currentPatientSaved(gameObject.transform.GetChild(0).gameObject);
+                    Debug.Log("current patient dead or healed");
+                    Debug.Log("Switching Patient");
+                    currentPatient.Item1.PauseDamage();
+                }
+                else
+                {
+                    gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(gameObject.transform.GetChild(0).gameObject);
+                    Debug.Log("current patient dead or healed");
+                    Debug.Log("Switching Patient");
+                    currentPatient.Item1.PauseDamage();
+                }
+                 // add in check for healed or dead
                 /*for (int i = 0; i < patients.Length; i++)
                 {
                     if (patients[i] == currentPatient)
@@ -143,7 +157,7 @@ namespace PatientManagerClass
 
         IEnumerator PatientSaveTransitionHelper()
         {
-            gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(gameObject.transform.GetChild(0).gameObject);
+            gameObject.GetComponent<SaveDeathTransition>().currentPatientSaved(gameObject.transform.GetChild(0).gameObject);
             Debug.Log("current patient dead or healed");
             Debug.Log("Switching Patient");
             currentPatient.Item1.PauseDamage();
@@ -172,12 +186,21 @@ namespace PatientManagerClass
             transitioning = false;*/
         }
 
-        public void PatientSaveTransitionHelper2() // called by MoveSavedPatient of SaveDeathTransition script when saved patient is moved offscreen
+        IEnumerator PatientDeathTransitionHelper()
         {
-            StartCoroutine(PatientSaveTransitionHelper3());
+            gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(gameObject.transform.GetChild(0).gameObject);
+            Debug.Log("current patient dead or healed");
+            Debug.Log("Switching Patient");
+            currentPatient.Item1.PauseDamage();
+            yield return null;
         }
 
-        IEnumerator PatientSaveTransitionHelper3() 
+        public void PatientSaveDeathTransitionHelper2() // called by MoveSavedPatient of SaveDeathTransition script when saved patient is moved offscreen
+        {
+            StartCoroutine(PatientSaveDeathTransitionHelper3());
+        }
+
+        IEnumerator PatientSaveDeathTransitionHelper3() 
         {
             gameObject.GetComponent<SaveDeathTransition>().PatientSwitchTransition(0.6f);
             yield return new WaitForSeconds(0.6f);
