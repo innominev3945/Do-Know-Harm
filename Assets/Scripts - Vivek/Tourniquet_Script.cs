@@ -21,6 +21,8 @@ public class Tourniquet_Script : MonoBehaviour
     [SerializeField] private Vector3 armScale;
     [SerializeField] private Vector3 legScale;
 
+    public GameObject wound;
+
 
     private void Start()
     {
@@ -223,6 +225,11 @@ public class Tourniquet_Script : MonoBehaviour
         currentQuad = startQuad;
     }
 
+    public void setWoundObject(GameObject thing)
+    {
+        wound = thing;
+    }
+
     void OnTriggerStay2D(Collider2D collision)
     {
         //if (!mousePressed)
@@ -244,8 +251,19 @@ public class Tourniquet_Script : MonoBehaviour
                 {
                     this.transform.localScale = armScale;
                 }
+                if (wound != null)
+                {
+                    if (wound.transform.position.y < this.transform.position.y)
+                    {
+                        Debug.Log("above");
+                        onLimb = true;
+                    }
+                    else
+                    {
+                        onLimb = false;
+                    }
+                }
             }
-            onLimb = true;
         //Debug.Log("placed");
         
        // }

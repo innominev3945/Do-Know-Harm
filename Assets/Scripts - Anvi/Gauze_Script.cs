@@ -92,6 +92,7 @@ namespace Gauze
 
         private void OnTriggerStay2D(Collider2D collision)
         {
+            Debug.Log(collision.gameObject.name);
             // Debug.Log("Collision happened");
             if (collision.gameObject.tag == "Bleeding Wound")
             {
@@ -103,7 +104,7 @@ namespace Gauze
                 }
                 timePassed = timePassed + Time.deltaTime;
                 // Debug.Log("timePassed: " + timePassed);
-                Debug.Log("Colliding");
+                //Debug.Log("Colliding");
                 if (timePassed >= timeLimit)
                 {
                     if (numClicks >= totalClicks)
