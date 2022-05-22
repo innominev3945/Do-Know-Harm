@@ -102,6 +102,10 @@ MonoBehaviour:
   totalClicks: 0
   timeLimit: 0
   shrinkScale: 0
+  hitbox: {fileID: 4254575839729413508, guid: 5d588dfecc456425ab7c98478f20a982, type: 3}
+  gauzeHitBoxCollider: {fileID: 6937333998593828931, guid: 74c48d53f1b0d4befb6fbe920408a85f, type: 3}
+  gauzeImage: {fileID: 6786973600921594002, guid: a4ccbdc36a82244b1857da8ed11f97f1, type: 3}
+  allHitBoxes: []
 --- !u!58 &8723020226205549639
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -249,7 +253,19 @@ MonoBehaviour:
     m_ActionId: 9bcfc533-5563-45a9-8a23-7d2a57163596
     m_ActionName: Player/AbsorbBlood[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8723020226205549638}
+        m_TargetAssemblyTypeName: Gauze.Gauze_Script, Assembly-CSharp
+        m_MethodName: AddGauzeSquare
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 45c96069-67d4-429f-a910-fef23b340849
     m_ActionName: Player/AddGauzeSquare[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
