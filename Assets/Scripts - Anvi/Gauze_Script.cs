@@ -7,6 +7,9 @@ namespace Gauze
 {
     public class Gauze_Script : MonoBehaviour
     {
+        // ***** IMPORTANT: PLEASE READ *****
+        // WHENEVER GUAZE IS USED IN A SCENE, ALSO INCLUDE THE GAUZE HIT BOX MANAGER GAME OBJECT IN THE SCENE
+        // PLEASE LOOK AT THE TODO COMMENTS IN THE GAUZE_HIT_BOX_MANAGER_SCRIPT EVERY TIME GAUZE IS USED FOR A LEVEL
 
         private Vector3 mousePosition;
 
@@ -15,19 +18,42 @@ namespace Gauze
         [SerializeField] int totalClicks;
         [SerializeField] float timeLimit;
         private bool mouseButtonDown;
+        private bool rightmouseButtonDown;
         private bool mouseHeldDown;
         private int mouseHeldInBloodPoolCounter;
         private bool mouseHeldBloodPool;
         private bool mouseHeldInBloodPoolCollider;
         [SerializeField] float shrinkScale;
 
+        [SerializeField] GameObject hitbox;
+        [SerializeField] GameObject gauzeHitBoxCollider;
+        GameObject gauzeCollider;
+        [SerializeField] GameObject gauzeImage;
+        public List<GameObject> allHitBoxes;
+
+        GameObject gauzeHitBoxManager;
+
         private bool healed;
 
+        // TODO: there are two cases for healed
+        // 1. when bleeding is stopped by applying pressure
+        // 2. when applying gauze squares to cover the wound
         public bool GetHealed() { return healed; }
 
         // Start is called before the first frame update
         void Start()
         {
+            // obtain hit box positions and create hit boxes
+            gauzeHitBoxManager = GameObject.Find("Gauze Hit Box Manager");
+            List<float> positionsX = gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxLocationsX();
+            List<float> positionsY = gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxLocationsY();
+            for (int i = 0; i < positionsX.Count; i++)
+            {
+                allHitBoxes.Add(Instantiate(hitbox, new Vector3(positionsX[i], positionsY[i], 0), Quaternion.identity));
+            }
+
+            gauzeCollider = Instantiate(gauzeHitBoxCollider, new Vector3(0, 0, 0), Quaternion.identity);
+
             numClicks = 0;
             timePassed = 0;
 
@@ -35,6 +61,7 @@ namespace Gauze
             timeLimit = 3;
 
             mouseButtonDown = false;
+            rightmouseButtonDown = false;
             mouseHeldDown = false;
 
             mouseHeldInBloodPoolCounter = 0;
@@ -58,6 +85,26 @@ namespace Gauze
                 if (mouseHeldInBloodPoolCounter < 5)
                 {
                     mouseHeldInBloodPoolCounter++;
+                }
+            }
+
+            if (gauzeCollider != null)
+            {
+                //Debug.Log("Have gauze collider");
+                if (gauzeCollider.GetComponent<Gauze_Hit_Box_Collider_Script>().insideHitBox())
+                {
+                    Debug.Log("Inside hit box function");
+                    if (rightmouseButtonDown)
+                    {
+                        Debug.Log("Placed down gauze square");
+                        float xCoord = gauzeCollider.GetComponent<Gauze_Hit_Box_Collider_Script>().getCollisionX();
+                        float yCoord = gauzeCollider.GetComponent<Gauze_Hit_Box_Collider_Script>().getCollisionY();
+                        Instantiate(gauzeImage, new Vector3(xCoord, yCoord, 0), Quaternion.identity);
+                        gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().notifyHitBoxCovered(xCoord, yCoord);
+
+                        // to make sure this body of code is executed only once and not multiple times for a single right mouse click
+                        rightmouseButtonDown = false;
+                    }
                 }
             }
         }
@@ -87,6 +134,19 @@ namespace Gauze
                 mouseHeldBloodPool = false;
                 mouseHeldInBloodPoolCounter = 0;
                 mouseHeldInBloodPoolCollider = false;
+            }
+        }
+
+        public void AddGauzeSquare(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                Debug.Log("Right mouse button pressed (gauze)");
+                rightmouseButtonDown = true;
+            }
+            else if (context.canceled)
+            {
+                rightmouseButtonDown = false;
             }
         }
 
@@ -149,6 +209,19 @@ namespace Gauze
                         Destroy(collision.gameObject);
                     }
                 }
+            }
+        }
+
+        void OnDestroy()
+        {
+            foreach(GameObject hitbox in allHitBoxes)
+            {
+                Destroy(hitbox);
+            }
+
+            if (gauzeCollider != null)
+            {
+                Destroy(gauzeCollider);
             }
         }
     }

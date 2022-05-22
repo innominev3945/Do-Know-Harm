@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Gauze_Hit_Box_Collider_Script : MonoBehaviour
 {
-    bool collideWithHitBox;
+    private bool collideWithHitBox;
     float collisionSourceX;
     float collisionSourceY;
 
@@ -14,6 +14,10 @@ public class Gauze_Hit_Box_Collider_Script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject gauze = GameObject.Find("Gauze(Clone)");
+
+        Physics2D.IgnoreCollision(gauze.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+
         collideWithHitBox = false;
         collisionSourceX = 0;
         collisionSourceY = 0;
@@ -37,6 +41,25 @@ public class Gauze_Hit_Box_Collider_Script : MonoBehaviour
             collideWithHitBox = true;
             collisionSourceX = collision.gameObject.transform.position.x;
             collisionSourceY = collision.gameObject.transform.position.y;
+        }
+        else
+        {
+            string other = collision.gameObject.name;
+            Debug.Log("Colliding with something else: " + other);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Hit Box (Gauze)")
+        {
+            Debug.Log("Leaving collision with hit box (gauze)");
+            collideWithHitBox = false;
+        }
+        else
+        {
+            string other = collision.gameObject.name;
+            Debug.Log("Leaving collision with something else: " + other);
         }
     }
 

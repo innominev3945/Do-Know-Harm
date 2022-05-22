@@ -1,0 +1,33 @@
+{
+    "name": "Tape_Input_Actions",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "7b422c30-ee38-4888-9c10-8b0eab903dda",
+            "actions": [
+                {
+                    "name": "Extend Tape",
+                    "type": "Button",
+                    "id": "e0501292-6aed-473b-9730-c681ec6c3d82",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "75c97c7b-f791-4197-9d9b-ab848666a430",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Extend Tape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

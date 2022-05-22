@@ -20,6 +20,13 @@ namespace ThermalOintmentClass
         private int mouseHeldInTriggerCounter;
         private bool healed;
 
+        [SerializeField] GameObject hitbox;
+        private GameObject initialHitbox;
+        private GameObject otherHitbox;
+        private float hitbox1X;
+        private float hitbox1Y;
+        private float hitbox2X;
+        private float hitbox2Y;
 
         public bool GetHealed() { return healed; }
 
@@ -34,6 +41,27 @@ namespace ThermalOintmentClass
             totalNumTimes = 3;
             triggerTag = "";
             mouseHeldInTriggerCounter = 0;
+
+            initialHitbox = null;
+            otherHitbox = null;
+            GameObject trigger1 = GameObject.FindWithTag("Trigger 1 (TO)");
+            GameObject trigger2 = GameObject.FindWithTag("Trigger 2 (TO)");
+            if (trigger1 == null || trigger2 == null)
+            {
+                Debug.Log("Need triggers for thermal ointment!");
+                // TODO: have insurance that script will do nothing else
+            }
+            else
+            {
+                hitbox1X = trigger1.transform.position.x;
+                hitbox1Y = trigger1.transform.position.y;
+                hitbox2X = trigger2.transform.position.x;
+                hitbox2Y = trigger2.transform.position.y;
+                // assume that player will start with trigger 1
+                initialHitbox = Instantiate(hitbox, new Vector3(hitbox1X, hitbox1Y, 0), Quaternion.identity);
+                otherHitbox = Instantiate(hitbox, new Vector3(hitbox2X, hitbox2Y, 0), Quaternion.identity);
+                Debug.Log("Create hit boxes");
+            }
 
             healed = false;
         }
@@ -84,6 +112,18 @@ namespace ThermalOintmentClass
                 triggerTag = "";
                 getTriggerTag = false;
                 mouseHeldInTriggerCounter = 0;
+
+                if (initialHitbox.transform.position.x != hitbox1X && initialHitbox.transform.position.y != hitbox1Y)
+                {
+                    // assume that player will start with trigger 1 (for initial hit box)
+                    GameObject temp = initialHitbox;
+                    initialHitbox = otherHitbox;
+                    otherHitbox = temp;
+                }
+
+                initialHitbox.GetComponent<SpriteRenderer>().enabled = true;
+                otherHitbox.GetComponent<SpriteRenderer>().enabled = true;
+
                 Debug.Log("mouseHeldDown = false");
             }
         }
@@ -97,6 +137,18 @@ namespace ThermalOintmentClass
                 if (getTriggerTag && (mouseHeldInTriggerCounter >= 1 && mouseHeldInTriggerCounter <= 4)/*!mouseHeldDown &&*/ /*Input.GetMouseButtonDown(0)*/)
                 {
                     triggerTag = collision.gameObject.tag;
+                    if (triggerTag == "Trigger 2 (TO)")
+                    {
+                        // if player starts with trigger 2 instead, swap the current initial hit box and other hit box
+                        GameObject temp = initialHitbox;
+                        initialHitbox = otherHitbox;
+                        otherHitbox = temp;
+                    }
+
+                    // make initial hit box invisible
+                    initialHitbox.GetComponent<SpriteRenderer>().enabled = false;
+                    otherHitbox.GetComponent<SpriteRenderer>().enabled = true;
+
                     mouseHeldDown = true;
                     Debug.Log("mouseHeldDown = true");
                     getTriggerTag = false;
@@ -121,11 +173,19 @@ namespace ThermalOintmentClass
                             //burn.GetComponent<SpriteRenderer>().color = Color.white;
                             Debug.Log("Healed!");
                         }
+                        else
+                        {
+                            initialHitbox.GetComponent<SpriteRenderer>().enabled = false;
+                            otherHitbox.GetComponent<SpriteRenderer>().enabled = true;
+                        }
                     }
                     else if (triggerTag != collision.gameObject.tag)
                     {
                         enteredOtherTrigger = true;
                         Debug.Log("enteredOtherTrigger = true");
+
+                        initialHitbox.GetComponent<SpriteRenderer>().enabled = true;
+                        otherHitbox.GetComponent<SpriteRenderer>().enabled = false;
                     }
                 }
             }
@@ -137,6 +197,18 @@ namespace ThermalOintmentClass
             {
                 Debug.Log("Exited Trigger (TO)");
                 exit = true;
+            }
+        }
+
+        void OnDestroy()
+        {
+            if (initialHitbox != null)
+            {
+                Destroy(initialHitbox);
+            }
+            if (otherHitbox != null)
+            {
+                Destroy(otherHitbox);
             }
         }
     }
