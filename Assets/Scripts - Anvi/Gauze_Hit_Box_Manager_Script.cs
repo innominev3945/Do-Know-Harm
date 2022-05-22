@@ -59,7 +59,7 @@ public class Gauze_Hit_Box_Manager_Script : MonoBehaviour
         return hitBoxesY;
     }
 
-    class wound
+    public class wound
     {
         int totalHitBoxes;
         int hitBoxesCovered;
@@ -90,6 +90,11 @@ public class Gauze_Hit_Box_Manager_Script : MonoBehaviour
     }
 
     private List<wound> allWounds;
+
+    public List<wound> getAllWounds()
+    {
+        return allWounds;
+    }
 
     public void notifyHitBoxCovered(float xCoord, float yCoord)
     {
@@ -133,6 +138,7 @@ public class Gauze_Hit_Box_Manager_Script : MonoBehaviour
         allHitBoxes = new List<hitBox>();
         allWounds = new List<wound>();
 
+        /*
         // TODO: Every time the gauze is used, specify the locations of the hitboxes below (for the current patient)
         // Use the format:
         // hitBoxesX.Add(X COORDINATE);
@@ -172,6 +178,16 @@ public class Gauze_Hit_Box_Manager_Script : MonoBehaviour
         allHitBoxes.Add(new hitBox(7.24f, 2.96f, 1));
 
         allWounds.Add(new wound(3));
+        */
+    }
+
+    public void addHitBox(float xCoord, float yCoord)
+    {
+        hitBoxesX.Add(xCoord);
+        hitBoxesY.Add(yCoord);
+        allHitBoxes.Add(new hitBox(xCoord, yCoord, allWounds.Count));
+
+        allWounds.Add(new wound(1));
     }
 
     // Update is called once per frame
