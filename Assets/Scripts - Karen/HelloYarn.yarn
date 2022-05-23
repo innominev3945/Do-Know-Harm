@@ -1,23 +1,35 @@
 ﻿title: Start
 
 ---
-<<fade Yarn>>
+<<fade Yarn 0>>
 Hannah: And here we go again...
 
 <<mc Yarn 0>>
 
 <<enter Yarn 1>>
-Karen: Yap... here we go again title
+Karen: Yap... here we go again
 
 Eric: What's going on here?
 
+
+<<fade Yarn 1>>
+
+???: Attention!
+
 <<enter Yarn 2>>
-Captain: Attention!
-Captain: Karen, remind yourself that names cannot have a space.
+Captain Stone: Karen, remind yourself that names can have a space.
+
+<<outfit Yarn 1 1>>
+
+<<outfit Yarn 0 1>>
+
+<<expr Yarn 2 1>>
 
 Karen: Yessir! Of course sir!
 
-Captain: Goodbye.
+<<expr Yarn 0 1>>
+
+Captain Stone: Goodbye.
 
 <<exit Yarn 2>>
 Karen: So, how's the choice mechanism working?

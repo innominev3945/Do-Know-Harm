@@ -11,6 +11,7 @@ public class YarnCommands : MonoBehaviour
 {
     public static bool[] JournalEntries;
     [SerializeField] SpriteRenderer fadeScreen;
+
     [SerializeField] private float fadeSpeed;
 
     [SerializeField] AudioManager audioManager;
@@ -21,6 +22,13 @@ public class YarnCommands : MonoBehaviour
 
     [SerializeField] VNManager vnManager;
 
+    [SerializeField] LineView2 lineViewer;
+
+    [SerializeField] TextMeshProUGUI fadedText;
+
+    [SerializeField] TextMeshProUGUI unfadedText;
+
+    //private SerializedProperty dialogueDisplay;
     static bool isFaded = true;
 
     //[SerializeField] private DialogueRunner dialogueRunner;
@@ -32,14 +40,27 @@ public class YarnCommands : MonoBehaviour
     //<<fade ObjectName>>
     //*************************************
     [YarnCommand("fade")]
-    public void Fade()
+    public void Fade(int fadeNumber)
     {
-        if (isFaded)
+        //LineView.Update();
+
+        //dialogueDisplay = serializedObject.FindProperty("lineText");
+
+        //EditorGUI.PropertyField(TextMeshProUGUI, dialogueDisplay);
+
+        lineViewer.setLineText(fadeNumber);
+        //lineViewer.toggleFade(fadeNumber);
+        if (isFaded && fadeNumber == 1)
         {   
+            //lineViewer.GetComponent<LineView>().LineText = unfadedText;
+            //lineViewer.GetComponent<LineText>() = unfadedText;
+            //lineViewer.lineText = unfadedText;
             StartCoroutine(FadeFromBlack()); 
         }
-        else
+        else if (!isFaded && fadeNumber == 0)
         {
+            //lineViewer.GetComponent<LineText>() = fadedText;
+            lineViewer.lineText = fadedText;
             StartCoroutine(FadeToBlack());
             
         }
@@ -134,6 +155,7 @@ public class YarnCommands : MonoBehaviour
     public void changeAmbience(int ambience_number)
     {
         audioManager.PlayAmbience(ambience_number);
+        return;
     }
 
     //*************************************
@@ -145,6 +167,7 @@ public class YarnCommands : MonoBehaviour
     public void loadMC(int MC)
     {
         character.loadMC(MC);
+        return;
     }
 
     //Fades sprite renderer to transparent
@@ -165,13 +188,33 @@ public class YarnCommands : MonoBehaviour
     public void unlockEntry(int entry_id)
     {
         JournalEntries[entry_id] = true;
+        return;
     }
 
     [YarnCommand("bg")]
     public void changeBackground(int bg_id)
     {
         vnManager.changeBG(bg_id);
+        return;
     }
+
+
+    [YarnCommand("outfit")]
+    public void changeOutfit(int character_number, int outfit_number)
+    {
+        character.changeOutfit(character_number, outfit_number);
+        return;
+    }
+
+    [YarnCommand("change_outfit")]
+    public void changeOutfits(int character_number, int outfit_number)
+    {
+        character.changeOutfit(character_number, outfit_number);
+        return;
+    }
+
+    //[YarnCommand("")]
+
 
     [YarnCommand("addPage")]
     public void addPage(int n)

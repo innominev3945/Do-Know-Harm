@@ -30,7 +30,7 @@ public class CharacterManager : MonoBehaviour
     
     
 
-    public Sprite[] CharacterBases;
+    //public Sprite[] CharacterBases;
     public Sprite[] HannahExpressions;
     public Sprite[] EricExpressions;
     public Sprite[] CaptainExpressions;
@@ -38,13 +38,13 @@ public class CharacterManager : MonoBehaviour
     public Sprite[] AmphiteranMan1Expressions;
 
 //Add in when outfit sprites added
-    /*
+    
     public Sprite[] HannahOutfits;
     public Sprite[] EricOutfits;
     public Sprite[] CaptainOutfits;
     public Sprite[] ElderlyLady1Outfits;
     public Sprite[] AmphiteranMan1Outfits;
-    */
+    
 
     //temporary storage to change sprites of a character
     private Sprite[] temp;
@@ -150,7 +150,7 @@ public class CharacterManager : MonoBehaviour
             return AmphiteranMan1Expressions;
     }
 
-    /*
+    
     private Sprite[] getCharacterOutfitArray(int characterNumber)
     {
         if (characterNumber == 0)
@@ -163,7 +163,7 @@ public class CharacterManager : MonoBehaviour
             return ElderlyLady1Outfits;
         else
             return AmphiteranMan1Outfits;
-    }*/
+    }
 
     void Awake()
     {
@@ -171,12 +171,13 @@ public class CharacterManager : MonoBehaviour
         {
             characterLoads[i] = -1;
         }
-        MC.size += new Vector2(1.0f, 1.0f);
+        //MC.size += new Vector2(1.0f, 1.0f);
     }
 
 
     public void loadCharacter(int n)
     {
+        Debug.Log("Tryna load a character: " + n);
         currCharacterNum++;
         //If there aren't any characters, load in character to center
         if (currCharacterNum == 1)
@@ -188,14 +189,14 @@ public class CharacterManager : MonoBehaviour
             FadeOut(CharacterExpression_1);
             
             //get the character's default base visual (remove later)
-            CharacterRenderer_1.sprite = CharacterBases[n];
+            //CharacterRenderer_1.sprite = CharacterBases[n];
 
             //To add once we get different costumes
-            /*
+            
             temp = getCharacterOutfitArray(n);
             characterLoads[n] = 0;
             CharacterRenderer_1.sprite = temp[0];
-            */
+            
 
 
             //Loads the expression array of the character
@@ -225,14 +226,14 @@ public class CharacterManager : MonoBehaviour
             FadeOut(CharacterExpression_2);
             
             //load the base default sprite (TO REMOVE)
-            CharacterRenderer_2.sprite = CharacterBases[n];
+            //CharacterRenderer_2.sprite = CharacterBases[n];
 
             //TO ADD
-            /*
+            
             temp = getCharacterOutfitArray(n);
             characterLoads[n] = 1;
             CharacterRenderer_2.sprite = temp[0];
-            */
+           
 
             temp = getCharacterExpressionArray(n);
             characterLoads[n] = 1;
@@ -259,14 +260,14 @@ public class CharacterManager : MonoBehaviour
             FadeOut(CharacterExpression_3);
 
             //TO REMOVE
-            CharacterRenderer_3.sprite = CharacterBases[n];
+            //CharacterRenderer_3.sprite = CharacterBases[n];
 
             //TO ADD
-            /*
+            
             temp = getCharacterOutfitArray(n);
             characterLoads[n] = 0;
             CharacterRenderer_1.sprite = temp[0];
-            */
+            
 
 
             temp = getCharacterExpressionArray(n);
@@ -403,13 +404,13 @@ public class CharacterManager : MonoBehaviour
 
 
     //Changes the outfit of the character in question (add in when multiple costumes added)
-    /*
+    
     public void changeOutfit(int characterNumber, int outfitNumber)
     {
         
         if (characterNumber == whichMC)
         {
-            MC.sprite = MCOutfits[outfitNumber];
+            MC.sprite = MCOutfit[outfitNumber];
             return;
         }
         temp = getCharacterOutfitArray(characterNumber);
@@ -428,7 +429,7 @@ public class CharacterManager : MonoBehaviour
         {
             CharacterRenderer_3.sprite = temp[outfitNumber];
         }
-    }*/
+    }
 
     public void loadMC(int n)
     {
@@ -437,16 +438,21 @@ public class CharacterManager : MonoBehaviour
         {
             //MCOutfit = HannahOutfit;
             MCExpressions = HannahExpressions;
+            MCOutfit = HannahOutfits;
         }else
         {
             //MCOutfit = EricOutfit;
             MCExpressions = EricExpressions;
+            MCOutfit = EricOutfits;
         }
 
         FadeOut(MC);
-        MC.sprite = MCExpressions[0];
+        FadeOut(MCExpr);
+        MC.sprite = MCOutfit[0];
+        MCExpr.sprite = MCExpressions[0];
         
         FadeIn(MC);
+        FadeIn(MCExpr);
         return;
     }
     

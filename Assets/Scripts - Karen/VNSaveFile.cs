@@ -7,7 +7,7 @@ using BookCurlPro;
 public class VNSaveFile : MonoBehaviour
 {
     // Start is called before the first frame update
-    public static VNSaveFile Instance;
+    //public static VNSaveFile Instance;
 
 
     private int num_People_Pages = 0;
@@ -67,7 +67,7 @@ public class VNSaveFile : MonoBehaviour
     static List<Sprite> Injuries_and_Treatment_Pages = new List<Sprite>();
 
 
-    private void Awake()
+    /*private void Awake()
     {
         if (Instance != null)
         {
@@ -75,9 +75,9 @@ public class VNSaveFile : MonoBehaviour
             return;
         }
 
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+        //Instance = this;
+        //DontDestroyOnLoad(gameObject);
+    }*/
 
     public void unlockPage(int n){
         if(n >= pages.Length || n < 0)
