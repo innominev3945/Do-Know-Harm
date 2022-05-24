@@ -94,7 +94,7 @@ namespace PatientManagerClass
         // Update is called once per frame
         void Update()
         {
-            Debug.Log(GetLevelComplete().ToString());
+            //Debug.Log(GetLevelComplete().ToString());
             if (currentPatient.Item1 != null)
                 healthText.text = currentPatient.Item1.GetHealth().ToString();
 
