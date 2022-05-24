@@ -1,6 +1,7 @@
 ﻿title: Start
 
 ---
+<<bg Yarn 0>>
 <<fade Yarn 0>>
 Hannah: And here we go again...
 
@@ -9,10 +10,12 @@ Hannah: And here we go again...
 <<enter Yarn 1>>
 Karen: Yap... here we go again
 
+<<fade Yarn 1>>
+
 Eric: What's going on here?
 
 
-<<fade Yarn 1>>
+<<bg Yarn 1>>
 
 ???: Attention!
 
@@ -25,11 +28,19 @@ Captain Stone: Karen, remind yourself that names can have a space.
 
 <<expr Yarn 2 1>>
 
+
+<<set $tester to 1>>
+
 Karen: Yessir! Of course sir!
 
 <<expr Yarn 0 1>>
 
 Captain Stone: Goodbye.
+
+<<if $KarenWantsC6Xiao is 7>>
+    <<bg Yarn 0>>
+    Karen: That was odd...
+<<endif>>
 
 <<exit Yarn 2>>
 Karen: So, how's the choice mechanism working?
