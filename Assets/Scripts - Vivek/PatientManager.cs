@@ -119,6 +119,8 @@ namespace PatientManagerClass
                 else
                 {
                     numDeadPatients++;
+                    numDeaths.setNumberValue("$patientDeaths", (float) numDeadPatients);
+                    numDeaths.Save();
                     gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(gameObject.transform.GetChild(0).gameObject);
                     Debug.Log("current patient dead or healed");
                     Debug.Log("Switching Patient");
@@ -130,8 +132,12 @@ namespace PatientManagerClass
             {
                 if (patients[i] != currentPatient && ((patients[i].Item1.GetHealed() || patients[i].Item1.GetHealth() == 0) && nextPatients.Count != 0))
                 {
-                    numDeaths.setNumberValue("$patientDeaths", numDeadPatients);
-                    numDeaths.Save();
+                    if (patients[i].Item1.GetHealth() == 0)
+                    {
+                        numDeadPatients++;
+                        numDeaths.setNumberValue("$patientDeaths", (float)numDeadPatients);
+                        numDeaths.Save();
+                    }
                     foreach (ButtonManager button in buttons)
                     {
                         if (button.patient == patients[i])
@@ -285,10 +291,10 @@ namespace PatientManagerClass
             parts2[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
             parts2[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
-            Injury chestCompression = new Injury(2f, new Vector2(parts2[1].GetLocation().x, parts2[1].GetLocation().y + 3f), "Chest Compression");
+            Injury chestCompression = new Injury(5f, new Vector2(parts2[1].GetLocation().x, parts2[1].GetLocation().y + 3f), "Chest Compression");
             chestCompression.AddTreatment(ChestTreatment.MakeChestTreatmentObject(this.gameObject, chestCompression));
             parts2[1].AddInjury(chestCompression);
-            Injury gze = new Injury(3f, new Vector2(parts2[0].GetLocation().x, parts2[0].GetLocation().y + 1f), "Gauze");
+            Injury gze = new Injury(5f, new Vector2(parts2[0].GetLocation().x, parts2[0].GetLocation().y + 1f), "Gauze");
             gze.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, gze));
             parts2[0].AddInjury(gze);
 
