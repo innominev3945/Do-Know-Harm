@@ -15,16 +15,17 @@ namespace ForcepsTreatmentClass
         private GameObject bleedingWound;
         private GameObject disposal;
 
-        public static ForcepsTreatment MakeForcepsTreatmentObject(GameObject ob, Injury inj)
+        public static ForcepsTreatment MakeForcepsTreatmentObject(GameObject ob, Injury inj, float rotation)
         {
             ForcepsTreatment ret = ob.AddComponent<ForcepsTreatment>();
+            Quaternion q = Quaternion.Euler(0, 0, rotation);
             ret.treatmentStarted = false;
             ret.vitalSpike = false;
             ret.injury = inj;
 
 
             //ret.forceps = Instantiate((UnityEngine.Object)Resources.Load("Forceps"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
-            ret.bleedingWound = Instantiate((UnityEngine.Object)Resources.Load("BleedingWound"), new Vector3(ret.injury.GetLocation().x, ret.injury.GetLocation().y, 0), Quaternion.identity) as GameObject;
+            ret.bleedingWound = Instantiate((UnityEngine.Object)Resources.Load("BleedingWoundFO"), new Vector3(ret.injury.GetLocation().x, ret.injury.GetLocation().y, 0), q) as GameObject;
             ret.bleedingWound.transform.parent = ob.transform;
             ret.foreignObject = Instantiate((UnityEngine.Object)Resources.Load("ForeignObject"), new Vector3(ret.injury.GetLocation().x, ret.injury.GetLocation().y, -1), Quaternion.identity) as GameObject;
             ret.foreignObject.transform.parent = ob.transform;

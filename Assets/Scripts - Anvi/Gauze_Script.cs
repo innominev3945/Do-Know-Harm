@@ -43,7 +43,6 @@ namespace Gauze
         // Start is called before the first frame update
         void Start()
         {
-            Debug.Log("bruhhuhuh");
             // obtain hit box positions and create hit boxes
             gauzeHitBoxManager = GameObject.Find("Gauze Hit Box Manager");
             List<float> positionsX = gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxLocationsX();

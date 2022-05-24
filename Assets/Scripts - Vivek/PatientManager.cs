@@ -10,6 +10,7 @@ using GauzeTreatmentClass;
 using DressTreatmentClass;
 using ChestTreatmentClass;
 using ButtonManagerClass;
+using BurnTreatmentClass;
 using System;
 using UnityEngine.UI;
 using TMPro;
@@ -294,7 +295,7 @@ namespace PatientManagerClass
 
 
             Injury laceration = new Injury(2f, new Vector2(parts1[2].GetLocation().x + 1.6f, parts1[2].GetLocation().y), "Forceps");
-            laceration.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, laceration));
+            laceration.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, laceration, 180));
             parts1[2].AddInjury(laceration);
 
             nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts1, 1f), Resources.Load<Sprite>("MaleBody")));
@@ -310,6 +311,7 @@ namespace PatientManagerClass
             parts2[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
             Injury chestCompression = new Injury(2f, new Vector2(parts2[1].GetLocation().x, parts2[1].GetLocation().y + 3f), "Chest Compression");
+            chestCompression.AddTreatment(BurnTreatment.MakeBurnTreatmentObject(this.gameObject, chestCompression));
             chestCompression.AddTreatment(ChestTreatment.MakeChestTreatmentObject(this.gameObject, chestCompression));
             parts2[1].AddInjury(chestCompression);
             Injury gze = new Injury(3f, new Vector2(parts2[0].GetLocation().x, parts2[0].GetLocation().y + 1f), "Gauze");
@@ -343,7 +345,7 @@ namespace PatientManagerClass
             parts4[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
             Injury frcps = new Injury(2f, new Vector2(parts4[4].GetLocation().x + 2.5f, parts4[4].GetLocation().y + 6f), "Forceps");
-            frcps.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, frcps));
+            frcps.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, frcps, 0));
             parts4[4].AddInjury(frcps);
 
             nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts4, 1f), Resources.Load<Sprite>("MaleBody")));
