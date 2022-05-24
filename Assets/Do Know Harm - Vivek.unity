@@ -1320,6 +1320,8 @@ GameObject:
   - component: {fileID: 1166823355}
   - component: {fileID: 1166823356}
   - component: {fileID: 1166823357}
+  - component: {fileID: 1166823359}
+  - component: {fileID: 1166823358}
   m_Layer: 0
   m_Name: PatientManager
   m_TagString: Untagged
@@ -1354,6 +1356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cac5145e5747d147a34907f41ebdb4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numDeaths: {fileID: 0}
   bodyparts: []
 --- !u!114 &1166823356
 MonoBehaviour:
@@ -1501,6 +1504,33 @@ MonoBehaviour:
   saveBanner: {fileID: 1072858034}
   deathBanner: {fileID: 616160432}
   fadePanel: {fileID: 489911550}
+--- !u!114 &1166823358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166823353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0045337d88c4d5c4c92914c49f53f95e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saver: {fileID: 1166823359}
+--- !u!114 &1166823359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166823353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bf30d9465ba0146b33a5a9f9e73873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showDebug: 0
+  debugTextView: {fileID: 0}
 --- !u!1 &1168147714
 GameObject:
   m_ObjectHideFlags: 0
