@@ -9,19 +9,19 @@ public class VNVariableStorage : MonoBehaviour
     string filepath { get { return Application.persistentDataPath + Path.DirectorySeparatorChar + "playerSave.json" ;} }
 
 
-    [UnityEngine.Serialization.FormerlySerializedAs("variableStorage")]
-    [SerializeField] internal VariableStorageBehaviour _variableStorage;
+    // [UnityEngine.Serialization.FormerlySerializedAs("variableStorage")]
+    // [SerializeField] internal VariableStorageBehaviour _variableStorage;
     [SerializeField] internal jsonSaver saver;
 
         /// <inheritdoc cref="_variableStorage"/>
-    public VariableStorageBehaviour VariableStorage
-    {
-        get => _variableStorage; 
-        set
-        {
-            _variableStorage = value;
-        }
-    }
+    // public VariableStorageBehaviour VariableStorage
+    // {
+    //     get => _variableStorage; 
+    //     set
+    //     {
+    //         _variableStorage = value;
+    //     }
+    // }
 
     // Start is called before the first frame update
     void Awake()
