@@ -226,6 +226,7 @@ namespace Yarn.Unity
         /// <seealso cref="useFadeEffect"/>
         [SerializeField]
         internal CanvasGroup canvasGroup;
+        [SerializeField] AudioManager audios;
 
         /// <summary>
         /// Controls whether the line view should fade in when lines appear, and
@@ -648,7 +649,7 @@ namespace Yarn.Unity
             // We received a request to advance the view. If we're in the middle of
             // an animation, skip to the end of it. If we're not current in an
             // animation, interrupt the line so we can skip to the next one.
-
+            audios.PlayClick();
             // we have no line, so the user just mashed randomly
             if (currentLine == null)
             {
@@ -672,6 +673,7 @@ namespace Yarn.Unity
         /// </summary>
         public void OnContinueClicked()
         {
+            //audios.PlayClick();
             // When the Continue button is clicked, we'll do the same thing as
             // if we'd received a signal from any other part of the game (for
             // example, if a DialogueAdvanceInput had signalled us.)

@@ -1,0 +1,53 @@
+﻿title: Start
+---
+<<Music Yarn 0>>
+<<MC Yarn 1>>
+Hannah: Testing Testing
+
+Hannah: Am I here?
+
+Karen: I sure hope you are existing.
+
+Hannah: It's me! Hannah desu!
+
+Karen: It's back to haunt me...
+
+Karen: Moving on, we're testing sound effects
+
+<<soundEffect Yarn 0>>
+
+<<Music Yarn -1>>
+
+<<Ambience Yarn 0>>
+
+Karen: Uhh.... What did you break Hannah?
+
+Hannah: Ehe~
+
+Paimon: EHE TTE NANDAYO!
+
+Karen: Woah... chill... time to play with Hannah's expressions...
+
+<<expression Yarn 1>>
+
+Hannah: What. Did. You. Do?
+
+Paimon: You deserved it!
+
+Karen: And outfit change~
+
+<<Outfit Yarn 1>>
+
+Hannah: Uh.....
+
+Paimon: It's magic!
+
+Karen: Yup! And.....
+
+Hannah: !!
+
+<<soundEffect Yarn 0>>
+<<MC Yarn 0>>
+
+Karen: Ah! It worked!
+===
