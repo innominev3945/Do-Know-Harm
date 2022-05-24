@@ -291,11 +291,11 @@
                 },
                 {
                     "name": "Click",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "297bcdf3-2afa-40f4-a9dd-7b139691f08e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(pressPoint=0.5,behavior=1)"
                 },
                 {
                     "name": "ScrollWheel",
