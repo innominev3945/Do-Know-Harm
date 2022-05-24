@@ -2711,6 +2711,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1249475741}
   - component: {fileID: 1249475742}
+  - component: {fileID: 1249475743}
   m_Layer: 0
   m_Name: VNSaver
   m_TagString: Untagged
@@ -2747,6 +2748,19 @@ MonoBehaviour:
   FrontPagePrefab: {fileID: 1482755983806906, guid: 95765253d762ca342999a664958d2852, type: 3}
   BackPagePrefab: {fileID: 1592660846251548, guid: a1e856007fd57024b8ce66dd38bb201d, type: 3}
   book: {fileID: 653338552}
+--- !u!114 &1249475743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249475740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0045337d88c4d5c4c92914c49f53f95e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saver: {fileID: 605271957}
 --- !u!1 &1294020522
 GameObject:
   m_ObjectHideFlags: 0
