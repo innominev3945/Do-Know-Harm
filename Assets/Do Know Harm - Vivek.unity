@@ -1107,7 +1107,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1661991067}
         m_TargetAssemblyTypeName: Tool_Wheel_Script, Assembly-CSharp
-        m_MethodName: SelectSouthEastTool
+        m_MethodName: SelectNorthEastTool
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1636,7 +1636,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numDeaths: {fileID: 1166823358}
   bodyparts: []
-  transitioning: 0
 --- !u!114 &1166823356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2362,6 +2361,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4518165457762597996}
     m_Modifications:
+    - target: {fileID: 5049375688069141900, guid: c2d7f78411c5dc7478656d633efff263, type: 3}
+      propertyPath: NorthEastTool
+      value: 
+      objectReference: {fileID: 9096168364550271408, guid: c49e5782f40ef364f80bd2a7ce2cc8ac, type: 3}
     - target: {fileID: 5049375688069141903, guid: c2d7f78411c5dc7478656d633efff263, type: 3}
       propertyPath: m_Enabled
       value: 0

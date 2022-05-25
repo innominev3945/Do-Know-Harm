@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8668418650210736194}
   - component: {fileID: 8668418650210736195}
-  - component: {fileID: 8668418650210736197}
   - component: {fileID: 4527614993880221848}
+  - component: {fileID: 1500065232}
   m_Layer: 16
   m_Name: Foreign Object Disposal
   m_TagString: Foreign Object Disposal
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: -253013955
   m_SortingLayer: 10
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  m_Sprite: {fileID: -8938819534478884857, guid: f5a38a78bedc2d54580c47825a26469c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,8 +84,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8668418650210736197
-BoxCollider2D:
+--- !u!114 &4527614993880221848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8668418650210736192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f155ec6b354e95541beb11825c3e6403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!60 &1500065232
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -101,24 +113,48 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.944, y: 1.024}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &4527614993880221848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8668418650210736192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f155ec6b354e95541beb11825c3e6403, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Points:
+    m_Paths:
+    - - {x: 0.67600006, y: -0.36}
+      - {x: 0.81200004, y: -0.272}
+      - {x: 0.91600007, y: -0.17600001}
+      - {x: 0.94000006, y: -0.120000005}
+      - {x: 0.96400005, y: -0.048}
+      - {x: 0.97200006, y: -0.016}
+      - {x: 0.97200006, y: 0.056}
+      - {x: 0.95600003, y: 0.14400001}
+      - {x: 0.91600007, y: 0.2}
+      - {x: 0.81200004, y: 0.30400002}
+      - {x: 0.69200003, y: 0.384}
+      - {x: 0.5, y: 0.45600003}
+      - {x: 0.372, y: 0.48800004}
+      - {x: 0.23600002, y: 0.512}
+      - {x: -0.124000005, y: 0.512}
+      - {x: -0.156, y: 0.504}
+      - {x: -0.30800003, y: 0.48800004}
+      - {x: -0.5, y: 0.44000003}
+      - {x: -0.572, y: 0.416}
+      - {x: -0.66, y: 0.37600002}
+      - {x: -0.82800007, y: 0.264}
+      - {x: -0.91600007, y: 0.16800001}
+      - {x: -0.97200006, y: 0.072000004}
+      - {x: -0.97200006, y: -0.080000006}
+      - {x: -0.9480001, y: -0.14400001}
+      - {x: -0.90000004, y: -0.216}
+      - {x: -0.82000005, y: -0.28800002}
+      - {x: -0.69200003, y: -0.37600002}
+      - {x: -0.62, y: -0.416}
+      - {x: -0.51600003, y: -0.448}
+      - {x: -0.38000003, y: -0.48000002}
+      - {x: -0.33200002, y: -0.48800004}
+      - {x: -0.132, y: -0.512}
+      - {x: 0.052, y: -0.512}
+      - {x: 0.19600001, y: -0.49600002}
+      - {x: 0.44400004, y: -0.45600003}
+      - {x: 0.596, y: -0.39200002}

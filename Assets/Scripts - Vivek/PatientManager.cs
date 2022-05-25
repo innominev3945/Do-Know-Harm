@@ -279,7 +279,7 @@ namespace PatientManagerClass
 
 
             Injury laceration = new Injury(2f, new Vector2(parts1[2].GetLocation().x + 1.6f, parts1[2].GetLocation().y), "Forceps");
-            laceration.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, laceration, 0f));
+            laceration.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, laceration, 20f));
             parts1[2].AddInjury(laceration);
 
             nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts1, 1f), Resources.Load<Sprite>("MaleBody")));
@@ -298,7 +298,7 @@ namespace PatientManagerClass
             chestCompression.AddTreatment(ChestTreatment.MakeChestTreatmentObject(this.gameObject, chestCompression));
             parts2[1].AddInjury(chestCompression);
             Injury gze = new Injury(5f, new Vector2(parts2[0].GetLocation().x, parts2[0].GetLocation().y + 1f), "Gauze");
-            gze.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, gze));
+            gze.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, gze, 0f));
             parts2[0].AddInjury(gze);
 
             nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts2, 1f), Resources.Load<Sprite>("MaleBody")));
@@ -362,7 +362,7 @@ namespace PatientManagerClass
             parts6[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
             Injury gauze = new Injury(2f, new Vector2(parts6[3].GetLocation().x + 0.5f, parts6[3].GetLocation().y), "Gauze");
-            gauze.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, gauze));
+            gauze.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, gauze, 90f));
             parts6[3].AddInjury(gauze);
 
             nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts6, 1f), Resources.Load<Sprite>("MaleBody")));

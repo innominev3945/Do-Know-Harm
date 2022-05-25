@@ -13,17 +13,18 @@ namespace GauzeTreatmentClass
         private GameObject bloodPool;
         private GameObject bleedingWound;
 
-        public static GauzeTreatment MakeGauzeTreatmentObject(GameObject ob, Injury inj)
+        public static GauzeTreatment MakeGauzeTreatmentObject(GameObject ob, Injury inj, float rotation)
         {
             GauzeTreatment ret = ob.AddComponent<GauzeTreatment>();
+            Quaternion q = Quaternion.Euler(0, 0, rotation);
             ret.treatmentStarted = false;
             ret.vitalSpike = false;
             ret.injury = inj;
 
             //ret.gauze = Instantiate((UnityEngine.Object)Resources.Load("Gauze"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
-            ret.bloodPool = Instantiate((UnityEngine.Object)Resources.Load("BloodPool"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            ret.bloodPool = Instantiate((UnityEngine.Object)Resources.Load("BloodPool"), ret.injury.GetLocation(), q) as GameObject;
             ret.bloodPool.transform.parent = ob.transform;
-            ret.bleedingWound = Instantiate((UnityEngine.Object)Resources.Load("BleedingWound"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            ret.bleedingWound = Instantiate((UnityEngine.Object)Resources.Load("BleedingWound"), ret.injury.GetLocation(), q) as GameObject;
             ret.bleedingWound.transform.parent = ob.transform;
 
             return ret;

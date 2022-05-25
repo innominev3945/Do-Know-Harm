@@ -12,7 +12,9 @@ namespace WoundDressingScript
         private bool contact;
         private bool selected;
         private bool performed;
-        GameObject WoundDress; 
+        GameObject WoundDress;
+        [SerializeField] private Sprite circle;
+        [SerializeField] private Sprite wound;
 
         private Vector2 prev; 
         private LineRenderer renderer; 
@@ -25,7 +27,8 @@ namespace WoundDressingScript
             selected = false;
             WoundDress = null;
             renderer = gameObject.AddComponent<LineRenderer>();
-            renderer.material.color = Color.gray;
+            renderer.material = new Material(Shader.Find("Sprites/Default"));
+            renderer.material.color = Color.white;
             renderer.sortingLayerName = "Tool";
             prev = new Vector2(0f, 0f);
             performed = false;
@@ -40,6 +43,7 @@ namespace WoundDressingScript
                 Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()); 
                 renderer.SetPosition(0, WoundDress.transform.position);
                 renderer.SetPosition(1, mousePosition);
+                WoundDress.GetComponent<SpriteRenderer>().sprite = circle;
 
 
                 mousePosition = (new Vector2(WoundDress.transform.position.x, WoundDress.transform.position.y)) - mousePosition;
@@ -67,7 +71,10 @@ namespace WoundDressingScript
                 {
                     selected = false;
                     if (WoundDress != null)
+                    {
                         WoundDress.GetComponent<DressReaction>().Unwrap();
+                        WoundDress.GetComponent<SpriteRenderer>().sprite = wound;
+                    }
                     WoundDress = null;
                     Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
                     renderer.SetPosition(0, mousePosition);
@@ -82,6 +89,7 @@ namespace WoundDressingScript
             {
                 contact = true;
                 WoundDress = collision.gameObject;
+                wound = collision.gameObject.GetComponent<SpriteRenderer>().sprite;
             }
         }
 
