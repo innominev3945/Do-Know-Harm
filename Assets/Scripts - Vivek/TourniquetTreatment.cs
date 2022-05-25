@@ -15,16 +15,19 @@ namespace TourniquetTreatmentClass
         private GameObject tourniquet;
         private GameObject bleedingWound;
 
-        public static TourniquetTreatment MakeTourniquetTreatment(GameObject obj, Injury inj)
+        public static TourniquetTreatment MakeTourniquetTreatmentObject(GameObject obj, Injury inj)
         {
             TourniquetTreatment ret = obj.AddComponent<TourniquetTreatment>();
             ret.treatmentStarted = false;
             ret.vitalSpike = false;
             ret.injury = inj;
 
-            ret.tourniquet = Instantiate((UnityEngine.Object)Resources.Load("Tourniquet2"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            ret.tourniquet = Instantiate((UnityEngine.Object)Resources.Load("Tourniquet"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+
             ret.bleedingWound = Instantiate((UnityEngine.Object)Resources.Load("BleedingWound"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
             ret.tourniquet.transform.parent = obj.transform;
+            ret.tourniquet.GetComponent<Tourniquet_Script>().setWoundObject(ret.bleedingWound);
+
             ret.bleedingWound.transform.parent = obj.transform;
             
             return ret;

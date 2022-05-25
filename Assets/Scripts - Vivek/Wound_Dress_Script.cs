@@ -26,6 +26,7 @@ namespace WoundDressingScript
             WoundDress = null;
             renderer = gameObject.AddComponent<LineRenderer>();
             renderer.material.color = Color.gray;
+            renderer.sortingLayerName = "Tool";
             prev = new Vector2(0f, 0f);
             performed = false;
         }

@@ -54,7 +54,7 @@ namespace ForeignObjectClass
             {
                 Debug.Log("In disposal");
                 healed = true;
-                Destroy(gameObject);
+                //Destroy(gameObject);
             }
         }
 

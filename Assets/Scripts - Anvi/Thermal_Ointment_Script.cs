@@ -38,7 +38,7 @@ namespace ThermalOintmentClass
             getTriggerTag = false;
             exit = false;
             numTimes = 0;
-            totalNumTimes = 3;
+            totalNumTimes = 6;
             triggerTag = "";
             mouseHeldInTriggerCounter = 0;
 

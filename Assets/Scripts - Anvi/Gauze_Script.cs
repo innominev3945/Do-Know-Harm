@@ -27,7 +27,7 @@ namespace Gauze
 
         [SerializeField] GameObject hitbox;
         [SerializeField] GameObject gauzeHitBoxCollider;
-        GameObject gauzeCollider;
+        [SerializeField] private GameObject gauzeCollider;
         [SerializeField] GameObject gauzeImage;
         public List<GameObject> allHitBoxes;
 
@@ -44,7 +44,8 @@ namespace Gauze
         void Start()
         {
             // obtain hit box positions and create hit boxes
-            gauzeHitBoxManager = GameObject.Find("Gauze Hit Box Manager");
+            // temporarily disabled for showcase
+            /*gauzeHitBoxManager = GameObject.Find("Gauze Hit Box Manager");
             List<float> positionsX = gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxLocationsX();
             List<float> positionsY = gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxLocationsY();
             for (int i = 0; i < positionsX.Count; i++)
@@ -52,7 +53,7 @@ namespace Gauze
                 allHitBoxes.Add(Instantiate(hitbox, new Vector3(positionsX[i], positionsY[i], 0), Quaternion.identity));
             }
 
-            gauzeCollider = Instantiate(gauzeHitBoxCollider, new Vector3(0, 0, 0), Quaternion.identity);
+            gauzeCollider = Instantiate(gauzeHitBoxCollider, new Vector3(0, 0, 0), Quaternion.identity);*/
 
             numClicks = 0;
             timePassed = 0;
@@ -152,6 +153,7 @@ namespace Gauze
 
         private void OnTriggerStay2D(Collider2D collision)
         {
+            Debug.Log(collision.gameObject.name);
             // Debug.Log("Collision happened");
             if (collision.gameObject.tag == "Bleeding Wound")
             {
@@ -163,7 +165,7 @@ namespace Gauze
                 }
                 timePassed = timePassed + Time.deltaTime;
                 // Debug.Log("timePassed: " + timePassed);
-                Debug.Log("Colliding");
+                //Debug.Log("Colliding");
                 if (timePassed >= timeLimit)
                 {
                     if (numClicks >= totalClicks)
