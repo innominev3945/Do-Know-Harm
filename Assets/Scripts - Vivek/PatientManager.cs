@@ -9,6 +9,7 @@ using ForcepsTreatmentClass;
 using GauzeTreatmentClass;
 using DressTreatmentClass;
 using ChestTreatmentClass;
+using BurnTreatmentClass;
 using ButtonManagerClass;
 using System;
 using UnityEngine.UI;
@@ -111,7 +112,7 @@ namespace PatientManagerClass
                 Debug.Log("Switching Patient");
                 if (currentPatient.Item1.GetHealed())
                 {
-                    gameObject.GetComponent<SaveDeathTransition>().currentPatientSaved(gameObject.transform.GetChild(0).gameObject);
+                    gameObject.GetComponent<SaveDeathTransition>().currentPatientSaved(this.gameObject);
                     Debug.Log("current patient dead or healed");
                     Debug.Log("Switching Patient");
                     currentPatient.Item1.PauseDamage();
@@ -121,7 +122,7 @@ namespace PatientManagerClass
                     numDeadPatients++;
                     numDeaths.setNumberValue("$patientDeaths", (float)numDeadPatients);
                     numDeaths.Save();
-                    gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(gameObject.transform.GetChild(0).gameObject);
+                    gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(this.gameObject);
                     Debug.Log("current patient dead or healed");
                     Debug.Log("Switching Patient");
                     currentPatient.Item1.PauseDamage();
@@ -166,13 +167,7 @@ namespace PatientManagerClass
 
         public void PatientSaveDeathTransitionHelper2() // called by MoveSavedPatient of SaveDeathTransition script when saved patient is moved offscreen
         {
-            StartCoroutine(PatientSaveDeathTransitionHelper3());
-        }
-
-        IEnumerator PatientSaveDeathTransitionHelper3()
-        {
-            gameObject.GetComponent<SaveDeathTransition>().PatientSwitchTransition(0.6f);
-            yield return new WaitForSeconds(0.6f);
+            //StartCoroutine(PatientSaveDeathTransitionHelper3());
             for (int i = 0; i < patients.Length; i++)
             {
                 if (patients[i] == currentPatient)
@@ -191,7 +186,7 @@ namespace PatientManagerClass
             currentPatient.Item1.StartTreatments();
             ViewHead();
             nextPatients.Dequeue();
-            yield return new WaitForSeconds(0.6f);
+            //yield return new WaitForSeconds(0.6f);
             transitioning = false;
         }
 
@@ -284,7 +279,7 @@ namespace PatientManagerClass
 
 
             Injury laceration = new Injury(2f, new Vector2(parts1[2].GetLocation().x + 1.6f, parts1[2].GetLocation().y), "Forceps");
-            laceration.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, laceration));
+            laceration.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, laceration, 0f));
             parts1[2].AddInjury(laceration);
 
             nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts1, 1f), Resources.Load<Sprite>("MaleBody")));
@@ -321,6 +316,10 @@ namespace PatientManagerClass
             woundDress.AddTreatment(DressTreatment.MakeDressTreatmentObject(this.gameObject, woundDress));
             parts3[0].AddInjury(woundDress);
 
+            Injury burn = new Injury(1f, new Vector2(parts2[1].GetLocation().x, parts3[1].GetLocation().y + 1f), "Burn Treatment");
+            burn.AddTreatment(BurnTreatment.MakeBurnTreatmentObject(this.gameObject, burn));
+            parts3[1].AddInjury(burn);
+
             nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts3, 1f), Resources.Load<Sprite>("MaleBody")));
 
             /* Creating Fourth Patient */
@@ -333,7 +332,7 @@ namespace PatientManagerClass
             parts4[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
             Injury frcps = new Injury(2f, new Vector2(parts4[4].GetLocation().x + 2.5f, parts4[4].GetLocation().y + 6f), "Forceps");
-            frcps.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, frcps));
+            frcps.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, frcps, 180f));
             parts4[4].AddInjury(frcps);
 
             nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts4, 1f), Resources.Load<Sprite>("MaleBody")));
