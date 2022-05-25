@@ -10,7 +10,6 @@ using GauzeTreatmentClass;
 using DressTreatmentClass;
 using ChestTreatmentClass;
 using ButtonManagerClass;
-using BurnTreatmentClass;
 using System;
 using UnityEngine.UI;
 using TMPro;
@@ -19,6 +18,8 @@ namespace PatientManagerClass
 {
     public class PatientManager : MonoBehaviour
     {
+        [SerializeField] VNVariableStorage numDeaths;
+        private int numDeadPatients;
         private string[] bodypartEnums = { "Head", "Chest", "Left Leg", "Right Leg", "Left Arm", "Right Arm" };
 
         private float damptime = 0.3f;
@@ -42,6 +43,7 @@ namespace PatientManagerClass
         void Start()
         {
             // Initialize all variables
+            numDeadPatients = 0;
             nextPatients = new Queue<Tuple<Patient, Sprite>>();
             buttons = new ButtonManager[4];
             currentPatient = null;
@@ -95,7 +97,7 @@ namespace PatientManagerClass
         // Update is called once per frame
         void Update()
         {
-            //Debug.Log(GetLevelComplete().ToString());
+            Debug.Log(GetLevelComplete().ToString());
             if (currentPatient.Item1 != null)
                 healthText.text = currentPatient.Item1.GetHealth().ToString();
 
@@ -116,37 +118,26 @@ namespace PatientManagerClass
                 }
                 else
                 {
+                    numDeadPatients++;
+                    numDeaths.setNumberValue("$patientDeaths", (float) numDeadPatients);
+                    numDeaths.Save();
                     gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(gameObject.transform.GetChild(0).gameObject);
                     Debug.Log("current patient dead or healed");
                     Debug.Log("Switching Patient");
                     currentPatient.Item1.PauseDamage();
                 }
-                /*Debug.Log("Switching Patient");
-                for (int i = 0; i < patients.Length; i++)
-                {
-                    if (patients[i] == currentPatient)
-                    {
-                        patients[i] = nextPatients.Peek();
-                        break;
-                    }
-                }
-                Destroy(currentPatient.Item1);
-                currentPatient = nextPatients.Peek();
-                gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
-                gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
-                bodyparts = currentPatient.Item1.GetBodyparts();
-                UpdateText();
-                currentPatient.Item1.UnpauseDamage();
-                currentPatient.Item1.StartTreatments();
-                ViewHead();
-                nextPatients.Dequeue();*/
             }
             // Switching out non-current patients
             for (int i = 0; i < patients.Length; i++)
             {
                 if (patients[i] != currentPatient && ((patients[i].Item1.GetHealed() || patients[i].Item1.GetHealth() == 0) && nextPatients.Count != 0))
                 {
-                    Debug.Log("Switching Patient");
+                    if (patients[i].Item1.GetHealth() == 0)
+                    {
+                        numDeadPatients++;
+                        numDeaths.setNumberValue("$patientDeaths", (float)numDeadPatients);
+                        numDeaths.Save();
+                    }
                     foreach (ButtonManager button in buttons)
                     {
                         if (button.patient == patients[i])
@@ -161,6 +152,8 @@ namespace PatientManagerClass
                     nextPatients.Dequeue();
                 }
             }
+
+            Debug.Log("DEAD PATIENTS LOL: " + numDeadPatients);
         }
 
         public void PatientSaveDeathTransitionHelper2() // called by MoveSavedPatient of SaveDeathTransition script when saved patient is moved offscreen
@@ -236,18 +229,6 @@ namespace PatientManagerClass
                     return;
                 StartCoroutine(SwitchPatientHelper(btn));
             }
-            /*Tuple<Patient, Sprite> tmp = btn.patient;
-            if (tmp == null)
-                return;
-            currentPatient.Item1.AbortTreatments();
-            btn.patient = currentPatient;
-            currentPatient = tmp;
-            gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
-            gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
-            currentPatient.Item1.StartTreatments();
-            bodyparts = currentPatient.Item1.GetBodyparts();
-            UpdateText();
-            ViewHead();*/
         }
 
         public void ViewHead()
@@ -295,7 +276,7 @@ namespace PatientManagerClass
 
 
             Injury laceration = new Injury(2f, new Vector2(parts1[2].GetLocation().x + 1.6f, parts1[2].GetLocation().y), "Forceps");
-            laceration.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, laceration, 180));
+            laceration.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, laceration));
             parts1[2].AddInjury(laceration);
 
             nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts1, 1f), Resources.Load<Sprite>("MaleBody")));
@@ -310,11 +291,10 @@ namespace PatientManagerClass
             parts2[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
             parts2[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
-            Injury chestCompression = new Injury(2f, new Vector2(parts2[1].GetLocation().x, parts2[1].GetLocation().y + 3f), "Chest Compression");
-            chestCompression.AddTreatment(BurnTreatment.MakeBurnTreatmentObject(this.gameObject, chestCompression));
+            Injury chestCompression = new Injury(5f, new Vector2(parts2[1].GetLocation().x, parts2[1].GetLocation().y + 3f), "Chest Compression");
             chestCompression.AddTreatment(ChestTreatment.MakeChestTreatmentObject(this.gameObject, chestCompression));
             parts2[1].AddInjury(chestCompression);
-            Injury gze = new Injury(3f, new Vector2(parts2[0].GetLocation().x, parts2[0].GetLocation().y + 1f), "Gauze");
+            Injury gze = new Injury(5f, new Vector2(parts2[0].GetLocation().x, parts2[0].GetLocation().y + 1f), "Gauze");
             gze.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, gze));
             parts2[0].AddInjury(gze);
 
@@ -345,7 +325,7 @@ namespace PatientManagerClass
             parts4[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
             Injury frcps = new Injury(2f, new Vector2(parts4[4].GetLocation().x + 2.5f, parts4[4].GetLocation().y + 6f), "Forceps");
-            frcps.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, frcps, 0));
+            frcps.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, frcps));
             parts4[4].AddInjury(frcps);
 
             nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts4, 1f), Resources.Load<Sprite>("MaleBody")));
