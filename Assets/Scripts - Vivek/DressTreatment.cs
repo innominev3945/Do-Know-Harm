@@ -11,6 +11,11 @@ namespace DressTreatmentClass
     {
         private GameObject woundDress;
 
+        private void OnDestroy()
+        {
+            if (woundDress != null)
+                Destroy(woundDress);
+        }
         public static DressTreatment MakeDressTreatmentObject(GameObject ob, Injury inj)
         {
             DressTreatment ret = ob.AddComponent<DressTreatment>();

@@ -10,7 +10,6 @@ using GauzeTreatmentClass;
 using DressTreatmentClass;
 using ChestTreatmentClass;
 using ButtonManagerClass;
-using BurnTreatmentClass;
 using System;
 using UnityEngine.UI;
 using TMPro;
@@ -37,7 +36,7 @@ namespace PatientManagerClass
         private TextMeshProUGUI patientInjuryText;
         private TextMeshProUGUI healthText;
 
-        [SerializeField] private bool transitioning = false;
+        private bool transitioning = false;
 
         private bool levelComplete;
         // Start is called before the first frame update
@@ -98,7 +97,7 @@ namespace PatientManagerClass
         // Update is called once per frame
         void Update()
         {
-            //Debug.Log(GetLevelComplete().ToString());
+            Debug.Log(GetLevelComplete().ToString());
             if (currentPatient.Item1 != null)
                 healthText.text = currentPatient.Item1.GetHealth().ToString();
 
@@ -112,7 +111,7 @@ namespace PatientManagerClass
                 Debug.Log("Switching Patient");
                 if (currentPatient.Item1.GetHealed())
                 {
-                    gameObject.GetComponent<SaveDeathTransition>().currentPatientSaved(this.gameObject);
+                    gameObject.GetComponent<SaveDeathTransition>().currentPatientSaved(gameObject.transform.GetChild(0).gameObject);
                     Debug.Log("current patient dead or healed");
                     Debug.Log("Switching Patient");
                     currentPatient.Item1.PauseDamage();
@@ -120,13 +119,23 @@ namespace PatientManagerClass
                 else
                 {
                     numDeadPatients++;
-                    numDeaths.setNumberValue("$patientDeaths", (float) numDeadPatients);
+                    numDeaths.setNumberValue("$patientDeaths", (float)numDeadPatients);
                     numDeaths.Save();
-                    gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(this.gameObject);
+                    gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(gameObject.transform.GetChild(0).gameObject);
                     Debug.Log("current patient dead or healed");
                     Debug.Log("Switching Patient");
                     currentPatient.Item1.PauseDamage();
                 }
+            } // If the current patient is healed, but there are no next patients to bring in, update the current patient's text to indicate that they're fully healed  
+            else if (currentPatient.Item1.GetHealed() && nextPatients.Count == 0)
+            { 
+                // Todo, add more stuff - maybe make it so the player can no longer return to this player since theres no need 
+                UpdateText();
+            } // If the current patient is dead, but there are no next patients to bring in, update the current patient's text to indicate that they're dead 
+            else if (currentPatient.Item1.GetHealth() == 0 && nextPatients.Count == 0)
+            {
+                // Todo, add more stuff - maybe an animation indicating that they're dead 
+                UpdateText();
             }
             // Switching out non-current patients
             for (int i = 0; i < patients.Length; i++)
@@ -153,13 +162,17 @@ namespace PatientManagerClass
                     nextPatients.Dequeue();
                 }
             }
-
-            //Debug.Log("DEAD PATIENTS LOL: " + numDeadPatients);
         }
 
         public void PatientSaveDeathTransitionHelper2() // called by MoveSavedPatient of SaveDeathTransition script when saved patient is moved offscreen
         {
-            //StartCoroutine(PatientSaveDeathTransitionHelper3());
+            StartCoroutine(PatientSaveDeathTransitionHelper3());
+        }
+
+        IEnumerator PatientSaveDeathTransitionHelper3()
+        {
+            gameObject.GetComponent<SaveDeathTransition>().PatientSwitchTransition(0.6f);
+            yield return new WaitForSeconds(0.6f);
             for (int i = 0; i < patients.Length; i++)
             {
                 if (patients[i] == currentPatient)
@@ -172,16 +185,14 @@ namespace PatientManagerClass
             currentPatient = nextPatients.Peek();
             gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
             gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
-            Debug.Log(gameObject.transform.GetChild(0).transform.position);
             bodyparts = currentPatient.Item1.GetBodyparts();
             UpdateText();
             currentPatient.Item1.UnpauseDamage();
             currentPatient.Item1.StartTreatments();
             ViewHead();
             nextPatients.Dequeue();
-            //yield return new WaitForSeconds(0.6f);
+            yield return new WaitForSeconds(0.6f);
             transitioning = false;
-            Debug.Log(gameObject.transform.GetChild(0).transform.position);
         }
 
         IEnumerator SwitchPatientHelper(ButtonManager btn)
@@ -273,7 +284,7 @@ namespace PatientManagerClass
 
 
             Injury laceration = new Injury(2f, new Vector2(parts1[2].GetLocation().x + 1.6f, parts1[2].GetLocation().y), "Forceps");
-            laceration.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, laceration, 0));
+            laceration.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, laceration));
             parts1[2].AddInjury(laceration);
 
             nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts1, 1f), Resources.Load<Sprite>("MaleBody")));
@@ -310,10 +321,6 @@ namespace PatientManagerClass
             woundDress.AddTreatment(DressTreatment.MakeDressTreatmentObject(this.gameObject, woundDress));
             parts3[0].AddInjury(woundDress);
 
-            Injury burn = new Injury(1f, new Vector2(parts2[1].GetLocation().x, parts3[1].GetLocation().y + 1f), "Burn Treatment");
-            burn.AddTreatment(BurnTreatment.MakeBurnTreatmentObject(this.gameObject, burn));
-            parts3[1].AddInjury(burn);
-
             nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts3, 1f), Resources.Load<Sprite>("MaleBody")));
 
             /* Creating Fourth Patient */
@@ -326,7 +333,7 @@ namespace PatientManagerClass
             parts4[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
             Injury frcps = new Injury(2f, new Vector2(parts4[4].GetLocation().x + 2.5f, parts4[4].GetLocation().y + 6f), "Forceps");
-            frcps.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, frcps, 180));
+            frcps.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, frcps));
             parts4[4].AddInjury(frcps);
 
             nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts4, 1f), Resources.Load<Sprite>("MaleBody")));
@@ -364,21 +371,28 @@ namespace PatientManagerClass
 
         private void UpdateText()
         {
-            if (currentPatient != null)
+            if (currentPatient != null && !currentPatient.Item1.GetHealed())
             {
-                string information = "";
-                for (int i = 0; i < bodyparts.Length; i++)
+                if (currentPatient.Item1.GetHealth() != 0)
                 {
-                    if (!bodyparts[i].GetHealed())
+                    string information = "";
+                    for (int i = 0; i < bodyparts.Length; i++)
                     {
-                        information += bodypartEnums[i] + ":\n";
-                        List<string> names = bodyparts[i].GetInjuryNames();
-                        foreach (string name in names)
-                            information += name + "\n";
+                        if (!bodyparts[i].GetHealed())
+                        {
+                            information += bodypartEnums[i] + ":\n";
+                            List<string> names = bodyparts[i].GetInjuryNames();
+                            foreach (string name in names)
+                                information += name + "\n";
+                        }
                     }
+                    patientInjuryText.text = information;
                 }
-                patientInjuryText.text = information;
+                else
+                    patientInjuryText.text = "Dead";
             }
+            else if (currentPatient != null && currentPatient.Item1.GetHealed())
+                patientInjuryText.text = "Healed";
         }
     }
 }

@@ -16,6 +16,13 @@ namespace InjuryClass
         private Queue<Treatment> treatments; // Queue of treatments - as soon as one treatment is finished, the next one in priority is to be started 
         private string injuryName;
 
+        ~Injury()
+        {
+            foreach (Treatment treatment in treatments)
+                if (treatment != null)
+                    GameObject.Destroy(treatment);
+        }
+
         public Injury(float severity, Vector2 loc, string name)
         {
             injurySeverity = severity;
