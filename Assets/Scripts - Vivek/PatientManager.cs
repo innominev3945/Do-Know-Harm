@@ -119,13 +119,23 @@ namespace PatientManagerClass
                 else
                 {
                     numDeadPatients++;
-                    numDeaths.setNumberValue("$patientDeaths", (float) numDeadPatients);
+                    numDeaths.setNumberValue("$patientDeaths", (float)numDeadPatients);
                     numDeaths.Save();
                     gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(gameObject.transform.GetChild(0).gameObject);
                     Debug.Log("current patient dead or healed");
                     Debug.Log("Switching Patient");
                     currentPatient.Item1.PauseDamage();
                 }
+            } // If the current patient is healed, but there are no next patients to bring in, update the current patient's text to indicate that they're fully healed  
+            else if (currentPatient.Item1.GetHealed() && nextPatients.Count == 0)
+            { 
+                // Todo, add more stuff - maybe make it so the player can no longer return to this player since theres no need 
+                UpdateText();
+            } // If the current patient is dead, but there are no next patients to bring in, update the current patient's text to indicate that they're dead 
+            else if (currentPatient.Item1.GetHealth() == 0 && nextPatients.Count == 0)
+            {
+                // Todo, add more stuff - maybe an animation indicating that they're dead 
+                UpdateText();
             }
             // Switching out non-current patients
             for (int i = 0; i < patients.Length; i++)
@@ -152,8 +162,6 @@ namespace PatientManagerClass
                     nextPatients.Dequeue();
                 }
             }
-
-            Debug.Log("DEAD PATIENTS LOL: " + numDeadPatients);
         }
 
         public void PatientSaveDeathTransitionHelper2() // called by MoveSavedPatient of SaveDeathTransition script when saved patient is moved offscreen
@@ -363,21 +371,28 @@ namespace PatientManagerClass
 
         private void UpdateText()
         {
-            if (currentPatient != null)
+            if (currentPatient != null && !currentPatient.Item1.GetHealed())
             {
-                string information = "";
-                for (int i = 0; i < bodyparts.Length; i++)
+                if (currentPatient.Item1.GetHealth() != 0)
                 {
-                    if (!bodyparts[i].GetHealed())
+                    string information = "";
+                    for (int i = 0; i < bodyparts.Length; i++)
                     {
-                        information += bodypartEnums[i] + ":\n";
-                        List<string> names = bodyparts[i].GetInjuryNames();
-                        foreach (string name in names)
-                            information += name + "\n";
+                        if (!bodyparts[i].GetHealed())
+                        {
+                            information += bodypartEnums[i] + ":\n";
+                            List<string> names = bodyparts[i].GetInjuryNames();
+                            foreach (string name in names)
+                                information += name + "\n";
+                        }
                     }
+                    patientInjuryText.text = information;
                 }
-                patientInjuryText.text = information;
+                else
+                    patientInjuryText.text = "Dead";
             }
+            else if (currentPatient != null && currentPatient.Item1.GetHealed())
+                patientInjuryText.text = "Healed";
         }
     }
 }

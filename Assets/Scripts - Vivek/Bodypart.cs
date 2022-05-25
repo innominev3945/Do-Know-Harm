@@ -20,6 +20,7 @@ namespace BodypartClass
         private List<Injury> injuries; // Injuries that impact the health of the body part 
         private bool damagePause;
 
+
         // Constructor 
         // Unity, being the helpful engine, doesn't like to have normal Constructors work properly when dealing with
         // Monobehaviour scripts, so instead of creating a Patient object using the Patient() constructor, use 

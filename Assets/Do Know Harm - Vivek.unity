@@ -1356,7 +1356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cac5145e5747d147a34907f41ebdb4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numDeaths: {fileID: 0}
+  numDeaths: {fileID: 1166823358}
   bodyparts: []
 --- !u!114 &1166823356
 MonoBehaviour:

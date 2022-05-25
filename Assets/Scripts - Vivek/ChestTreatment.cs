@@ -11,6 +11,12 @@ namespace ChestTreatmentClass
     {
         public GameObject chest;
 
+        private void OnDestroy()
+        {
+            if (chest != null)
+                Destroy(chest);
+        }
+
         public static ChestTreatment MakeChestTreatmentObject(GameObject ob, Injury inj) 
         {
             ChestTreatment ret = ob.AddComponent<ChestTreatment>();

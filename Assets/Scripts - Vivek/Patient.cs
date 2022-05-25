@@ -20,6 +20,13 @@ namespace PatientClass
         private Bodypart[] bodyparts;
         private float health; // Health of ENTIRE Patient, weighted via the various Bodyparts 
 
+        private void OnDestroy()
+        {
+            foreach (Bodypart bodypart in bodyparts)
+                if (bodypart != null)
+                    Destroy(bodypart);
+        }
+
         // Constructor
         // Unity, being the helpful engine, doesn't like to have normal Constructors work properly when dealing with
         // Monobehaviour scripts, so instead of creating a Patient object using the Patient() constructor, use 
