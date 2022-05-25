@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GPMenuScript : MonoBehaviour
 {
@@ -62,23 +63,26 @@ public class GPMenuScript : MonoBehaviour
         }
     }
 
-    public void Escape()
+    public void Escape(InputAction.CallbackContext context)
     {
-        if (menuOpen)
+        if (context.started)
         {
-            if (optionsOpen)
+            if (menuOpen)
             {
-                ToggleOptionsMenu();
+                if (optionsOpen)
+                {
+                    ToggleOptionsMenu();
+                }
+                else
+                {
+                    Debug.Log("closing escape menu");
+                    ToggleEscapeMenu();
+                }
             }
             else
             {
-                Debug.Log("closing escape menu");
                 ToggleEscapeMenu();
             }
-        }
-        else
-        {
-            ToggleEscapeMenu();
         }
     }
 }
