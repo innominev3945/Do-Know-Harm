@@ -14,6 +14,16 @@ namespace BurnTreatmentClass
         private GameObject trigger1;
         private GameObject trigger2;
 
+        private void OnDestroy()
+        {
+            if (burnWound != null)
+                Destroy(burnWound);
+            if (trigger1 != null)
+                Destroy(trigger1);
+            if (trigger2 != null)
+                Destroy(trigger2);
+        }
+
         public static BurnTreatment MakeBurnTreatmentObject(GameObject ob, Injury inj)
         {
             BurnTreatment ret = ob.AddComponent<BurnTreatment>();

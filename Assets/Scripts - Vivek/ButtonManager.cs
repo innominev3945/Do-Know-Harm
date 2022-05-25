@@ -12,7 +12,7 @@ namespace ButtonManagerClass
     public class ButtonManager : MonoBehaviour
     {
         private Button button;
-        public Tuple<Patient, Sprite> patient;
+        public Tuple<Patient, Sprite, int> patient;
 
         // Start is called before the first frame update
         void Start()

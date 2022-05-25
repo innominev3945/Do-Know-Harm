@@ -19,21 +19,23 @@ namespace PatientManagerClass
 {
     public class PatientManager : MonoBehaviour
     {
-        [SerializeField] VNVariableStorage numDeaths;
-        private int numDeadPatients;
         private string[] bodypartEnums = { "Head", "Chest", "Left Leg", "Right Leg", "Left Arm", "Right Arm" };
+
+        [SerializeField] VNVariableStorage numDeaths; // Storage for VN
+        private bool[] patientStatus; // Mapping of the status (true = alive, false = dead) for all patients 
 
         private float damptime = 0.3f;
         private Vector3 velocity = Vector3.zero;
 
+        // Tuple: (1) Patient Object, (2) Patient Sprite, (3) Unique Patient ID
+        [SerializeField] Tuple<Patient, Sprite, int> currentPatient; // Patient on current screen
+        [SerializeField] Bodypart[] bodyparts; // Bodypart of the current patient on screen
 
-        [SerializeField] Tuple<Patient, Sprite> currentPatient; // Patient on current screen
-        [SerializeField] Bodypart[] bodyparts;
+        private Tuple<Patient, Sprite, int>[] patients; // Collection of "current" patients in rotation
+        private ButtonManager[] buttons; // Collection of the buttons used to switch between current patients in rotation
 
-        private Tuple<Patient, Sprite>[] patients; // Patient, sprite string pair
-        private ButtonManager[] buttons; // Collection of the buttons used to switch between patients 
-
-        private Queue<Tuple<Patient, Sprite>> nextPatients; // Patients that will enter after current patients are either healed or die
+        private Queue<Tuple<Patient, Sprite, int>> nextPatients; // Patients that will enter after current patients are either healed or die
+        
         private TextMeshProUGUI patientInjuryText;
         private TextMeshProUGUI healthText;
 
@@ -44,12 +46,11 @@ namespace PatientManagerClass
         void Start()
         {
             // Initialize all variables
-            numDeadPatients = 0;
-            nextPatients = new Queue<Tuple<Patient, Sprite>>();
+            nextPatients = new Queue<Tuple<Patient, Sprite, int>>();
             buttons = new ButtonManager[4];
             currentPatient = null;
             bodyparts = null;
-            patients = new Tuple<Patient, Sprite>[5];
+            patients = new Tuple<Patient, Sprite, int>[5];
             patientInjuryText = GameObject.Find("Injury Information").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             healthText = GameObject.Find("Health").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
@@ -62,10 +63,13 @@ namespace PatientManagerClass
                 buttons[i].patient = null;
             }
 
-
+            // Adds the current level's patients to the nextPatient queue
             Init();
+            patientStatus = new bool[nextPatients.Count];
+            for (int i = 0; i < patientStatus.Length; i++)
+                patientStatus[i] = true;
 
-            foreach (Tuple<Patient, Sprite> patient in nextPatients)
+            foreach (Tuple<Patient, Sprite, int> patient in nextPatients)
             {
                 patient.Item1.AbortTreatments();
                 patient.Item1.PauseDamage();
@@ -98,20 +102,21 @@ namespace PatientManagerClass
         // Update is called once per frame
         void Update()
         {
-            Debug.Log(GetLevelComplete().ToString());
             if (currentPatient.Item1 != null)
                 healthText.text = currentPatient.Item1.GetHealth().ToString();
-
+            
             // Handles switching out patients if they are either fully healed of their injuries or are dead
             // Switching out current patient 
             if ((currentPatient.Item1.GetHealed() || currentPatient.Item1.GetHealth() == 0) && nextPatients.Count != 0 && !transitioning)
             {
                 transitioning = true;
+                currentPatient.Item1.AbortTreatments();
                 //gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(gameObject.transform.GetChild(0).gameObject);
                 Debug.Log("current patient dead or healed");
                 Debug.Log("Switching Patient");
                 if (currentPatient.Item1.GetHealed())
                 {
+                    currentPatient.Item1.DestroyTreatmentObjects();
                     gameObject.GetComponent<SaveDeathTransition>().currentPatientSaved(this.gameObject);
                     Debug.Log("current patient dead or healed");
                     Debug.Log("Switching Patient");
@@ -119,9 +124,8 @@ namespace PatientManagerClass
                 }
                 else
                 {
-                    numDeadPatients++;
-                    numDeaths.setNumberValue("$patientDeaths", (float)numDeadPatients);
-                    numDeaths.Save();
+                    currentPatient.Item1.DestroyTreatmentObjects();
+                    patientStatus[currentPatient.Item3] = false;
                     gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(this.gameObject);
                     Debug.Log("current patient dead or healed");
                     Debug.Log("Switching Patient");
@@ -130,12 +134,12 @@ namespace PatientManagerClass
             } // If the current patient is healed, but there are no next patients to bring in, update the current patient's text to indicate that they're fully healed  
             else if (currentPatient.Item1.GetHealed() && nextPatients.Count == 0)
             { 
-                // Todo, add more stuff - maybe make it so the player can no longer return to this player since theres no need 
                 UpdateText();
             } // If the current patient is dead, but there are no next patients to bring in, update the current patient's text to indicate that they're dead 
             else if (currentPatient.Item1.GetHealth() == 0 && nextPatients.Count == 0)
             {
-                // Todo, add more stuff - maybe an animation indicating that they're dead 
+                currentPatient.Item1.DestroyTreatmentObjects();
+                patientStatus[currentPatient.Item3] = false;
                 UpdateText();
             }
             // Switching out non-current patients
@@ -143,12 +147,6 @@ namespace PatientManagerClass
             {
                 if (patients[i] != currentPatient && ((patients[i].Item1.GetHealed() || patients[i].Item1.GetHealth() == 0) && nextPatients.Count != 0))
                 {
-                    if (patients[i].Item1.GetHealth() == 0)
-                    {
-                        numDeadPatients++;
-                        numDeaths.setNumberValue("$patientDeaths", (float)numDeadPatients);
-                        numDeaths.Save();
-                    }
                     foreach (ButtonManager button in buttons)
                     {
                         if (button.patient == patients[i])
@@ -157,10 +155,20 @@ namespace PatientManagerClass
                             break;
                         }
                     }
+                    if (patients[i].Item1.GetHealth() == 0)
+                        patientStatus[patients[i].Item3] = false;
+                    patients[i].Item1.DestroyTreatmentObjects();
                     Destroy(patients[i].Item1);
                     patients[i] = nextPatients.Peek();
                     patients[i].Item1.UnpauseDamage();
                     nextPatients.Dequeue();
+                }
+                else if (patients[i] != currentPatient && patients[i].Item1.GetHealed())
+                    patients[i].Item1.DestroyTreatmentObjects();
+                else if (patients[i] != currentPatient && patients[i].Item1.GetHealth() == 0)
+                {
+                    patients[i].Item1.DestroyTreatmentObjects();
+                    patientStatus[patients[i].Item3] = false;
                 }
             }
         }
@@ -194,7 +202,7 @@ namespace PatientManagerClass
         {
             gameObject.GetComponent<SaveDeathTransition>().PatientSwitchTransition(0.6f);
             yield return new WaitForSeconds(0.6f);
-            Tuple<Patient, Sprite> tmp = btn.patient;
+            Tuple<Patient, Sprite, int> tmp = btn.patient;
             currentPatient.Item1.AbortTreatments();
             btn.patient = currentPatient;
             currentPatient = tmp;
@@ -208,11 +216,21 @@ namespace PatientManagerClass
             transitioning = false;
         }
 
+        public void SetNumDeaths()
+        {
+            int numDeadPatients = 0;
+            foreach (bool status in patientStatus)
+                if (!status)
+                    numDeadPatients++;
+            numDeaths.setNumberValue("$patientDeaths", (float)numDeadPatients);
+            numDeaths.Save();
+        }
+
         public bool GetLevelComplete()
         {
             if (nextPatients.Count == 0)
             {
-                foreach (Tuple<Patient, Sprite> patient in patients)
+                foreach (Tuple<Patient, Sprite, int> patient in patients)
                 {
                     if (!(patient.Item1.GetHealed() || patient.Item1.GetHealth() == 0))
                         return false;
@@ -227,7 +245,7 @@ namespace PatientManagerClass
             if (!transitioning)
             {
                 transitioning = true;
-                Tuple<Patient, Sprite> tmp = btn.patient;
+                Tuple<Patient, Sprite, int> tmp = btn.patient;
                 if (tmp == null)
                     return;
                 StartCoroutine(SwitchPatientHelper(btn));
@@ -282,7 +300,7 @@ namespace PatientManagerClass
             laceration.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, laceration, 0f));
             parts1[2].AddInjury(laceration);
 
-            nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts1, 1f), Resources.Load<Sprite>("MaleBody")));
+            nextPatients.Enqueue(new Tuple<Patient, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts1, 1f), Resources.Load<Sprite>("MaleBody"), 0));
             
 
             /* Creating Second Patient */
@@ -301,7 +319,7 @@ namespace PatientManagerClass
             gze.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, gze));
             parts2[0].AddInjury(gze);
 
-            nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts2, 1f), Resources.Load<Sprite>("MaleBody")));
+            nextPatients.Enqueue(new Tuple<Patient, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts2, 1f), Resources.Load<Sprite>("MaleBody"), 1));
 
             /* Creating Third Patient */
             Bodypart[] parts3 = new Bodypart[6];
@@ -320,7 +338,7 @@ namespace PatientManagerClass
             burn.AddTreatment(BurnTreatment.MakeBurnTreatmentObject(this.gameObject, burn));
             parts3[1].AddInjury(burn);
 
-            nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts3, 1f), Resources.Load<Sprite>("MaleBody")));
+            nextPatients.Enqueue(new Tuple<Patient, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts3, 1f), Resources.Load<Sprite>("MaleBody"), 2));
 
             /* Creating Fourth Patient */
             Bodypart[] parts4 = new Bodypart[6];
@@ -335,7 +353,7 @@ namespace PatientManagerClass
             frcps.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, frcps, 180f));
             parts4[4].AddInjury(frcps);
 
-            nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts4, 1f), Resources.Load<Sprite>("MaleBody")));
+            nextPatients.Enqueue(new Tuple<Patient, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts4, 1f), Resources.Load<Sprite>("MaleBody"), 3));
 
             /* Creating Fifth Patient */
             Bodypart[] parts5 = new Bodypart[6];
@@ -350,7 +368,7 @@ namespace PatientManagerClass
             bndg.AddTreatment(DressTreatment.MakeDressTreatmentObject(this.gameObject, bndg));
             parts5[3].AddInjury(bndg);
 
-            nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts5, 1f), Resources.Load<Sprite>("MaleBody")));
+            nextPatients.Enqueue(new Tuple<Patient, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts5, 1f), Resources.Load<Sprite>("MaleBody"), 4));
 
             /* Creating Sixth Patient */
             Bodypart[] parts6 = new Bodypart[6];
@@ -365,7 +383,7 @@ namespace PatientManagerClass
             gauze.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, gauze));
             parts6[3].AddInjury(gauze);
 
-            nextPatients.Enqueue(new Tuple<Patient, Sprite>(Patient.MakePatientObject(this.gameObject, parts6, 1f), Resources.Load<Sprite>("MaleBody")));
+            nextPatients.Enqueue(new Tuple<Patient, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts6, 1f), Resources.Load<Sprite>("MaleBody"), 5));
         }
 
         private void UpdateText()

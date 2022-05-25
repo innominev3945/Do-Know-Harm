@@ -45,6 +45,12 @@ namespace BodypartClass
 
         public Vector2 GetLocation() { return location; }
 
+        public void DestroyTreatmentObjects()
+        {
+            foreach (Injury injury in injuries)
+                if (injury != null)
+                    injury.DestroyTreatmentObjects();
+        }
         public bool GetHealed() 
         {
             foreach (Injury injury in injuries)

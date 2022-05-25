@@ -15,6 +15,13 @@ namespace TourniquetTreatmentClass
         private GameObject tourniquet;
         private GameObject bleedingWound;
 
+        public void OnDestroy()
+        {
+            if (tourniquet != null)
+                Destroy(tourniquet);
+            if (bleedingWound != null)
+                Destroy(bleedingWound);
+        }
         public static TourniquetTreatment MakeTourniquetTreatmentObject(GameObject obj, Injury inj)
         {
             TourniquetTreatment ret = obj.AddComponent<TourniquetTreatment>();

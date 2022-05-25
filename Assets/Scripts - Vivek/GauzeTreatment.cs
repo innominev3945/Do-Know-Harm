@@ -13,6 +13,13 @@ namespace GauzeTreatmentClass
         private GameObject bloodPool;
         private GameObject bleedingWound;
 
+        private void OnDestroy()
+        {
+            if (bloodPool != null)
+                Destroy(bloodPool);
+            if (bleedingWound != null)
+                Destroy(bleedingWound);
+        }
         public static GauzeTreatment MakeGauzeTreatmentObject(GameObject ob, Injury inj)
         {
             GauzeTreatment ret = ob.AddComponent<GauzeTreatment>();
