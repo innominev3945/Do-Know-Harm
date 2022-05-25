@@ -106,6 +106,8 @@ namespace PatientClass
                     health = 0;
                 nextTime += timeInterval;
             }
+            if (health == 0)
+                AbortTreatments();
         }
     }
 }

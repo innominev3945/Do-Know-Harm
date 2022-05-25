@@ -2197,6 +2197,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5665525222876327343, guid: 1ae8c1a6d33547d40a971ddfe69a78c5, type: 3}
     - target: {fileID: 4518165458702064153, guid: 05ed5f77ea6a78d4eb4e5d9a5c99089b, type: 3}
+      propertyPath: NorthTool
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518165458702064153, guid: 05ed5f77ea6a78d4eb4e5d9a5c99089b, type: 3}
       propertyPath: NorthEastTool
       value: 
       objectReference: {fileID: 9096168364550271408, guid: c49e5782f40ef364f80bd2a7ce2cc8ac, type: 3}
