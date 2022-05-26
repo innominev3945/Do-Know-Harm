@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     // players made mistakes --> add injuredTime
     public int healingTime = 0;
     // same concept as injuredTime, when player receives a health boost ...
-    public WhitePhosphorus WP;
+    //public WhitePhosphorus WP;
     private bool soundchange1, soundchange2, soundchange3, soundchangedeath, soundchangewon;
 
     void Start()
@@ -59,7 +59,8 @@ public class Player : MonoBehaviour
             }
             else
             {
-                currentHealth -= 0.8f * Time.deltaTime * numOfInjur * WP.degree / 0.5f;
+                //currentHealth -= 0.8f * Time.deltaTime * numOfInjur * WP.degree / 0.5f;
+                currentHealth -= 2.0f * Time.deltaTime * numOfInjur;
             }
             healthBar.SetHealth(currentHealth);
 
