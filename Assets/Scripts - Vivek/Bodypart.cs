@@ -90,6 +90,11 @@ namespace BodypartClass
             damagePause = false;
         }
 
+        public int GetNumInjuries()
+        {
+            return injuries.Count;
+        }
+
         public List<string> GetInjuryNames()
         {
             List<string> ret = new List<string>();
