@@ -561,22 +561,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GPMenus
       objectReference: {fileID: 0}
-    - target: {fileID: 7001017018778107696, guid: cfe0fd28cd3dc0441965d8068b8e9612, type: 3}
-      propertyPath: m_Color.a
-      value: 0.7882353
-      objectReference: {fileID: 0}
-    - target: {fileID: 7001017018778107696, guid: cfe0fd28cd3dc0441965d8068b8e9612, type: 3}
-      propertyPath: m_Color.b
-      value: 0.18729973
-      objectReference: {fileID: 0}
-    - target: {fileID: 7001017018778107696, guid: cfe0fd28cd3dc0441965d8068b8e9612, type: 3}
-      propertyPath: m_Color.g
-      value: 0.4603343
-      objectReference: {fileID: 0}
-    - target: {fileID: 7001017018778107696, guid: cfe0fd28cd3dc0441965d8068b8e9612, type: 3}
-      propertyPath: m_Color.r
-      value: 0.6509434
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfe0fd28cd3dc0441965d8068b8e9612, type: 3}
 --- !u!1 &489911550
@@ -940,271 +924,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 703134973}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &924094757
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 924094759}
-  - component: {fileID: 924094758}
-  m_Layer: 0
-  m_Name: InputManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &924094758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 924094757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 569c5c81799b99b4092034344e5c031c, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1166823355}
-        m_TargetAssemblyTypeName: PatientManagerClass.PatientManager, Assembly-CSharp
-        m_MethodName: ViewHead
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: d640e934-b632-4578-9508-4cdd528e51b5
-    m_ActionName: Player/Switch Head[/Keyboard/1]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1166823355}
-        m_TargetAssemblyTypeName: PatientManagerClass.PatientManager, Assembly-CSharp
-        m_MethodName: ViewChest
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 88f95713-ea41-45c3-a7e7-35016fb2c44b
-    m_ActionName: Player/Switch Chest[/Keyboard/2]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1166823355}
-        m_TargetAssemblyTypeName: PatientManagerClass.PatientManager, Assembly-CSharp
-        m_MethodName: ViewLegs
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 94bea811-4f42-4b23-9c23-680cd3880dcd
-    m_ActionName: Player/Switch Legs[/Keyboard/3]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4452ea4d-7285-4130-ac78-a0da06a01855
-    m_ActionName: Player/RotateLeft[/Keyboard/q]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 52151b75-a908-45b8-bdb8-b2d5bcc45f90
-    m_ActionName: Player/RotateRight[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1661991067}
-        m_TargetAssemblyTypeName: Tool_Wheel_Script, Assembly-CSharp
-        m_MethodName: SelectNorthTool
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: dffb0856-cbca-4fbf-8309-68ed3001affc
-    m_ActionName: Player/SelectNorthTool[/Keyboard/w]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1661991067}
-        m_TargetAssemblyTypeName: Tool_Wheel_Script, Assembly-CSharp
-        m_MethodName: SelectSouthTool
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 0b9f1a1e-5fec-4cdd-a426-4bf9ef169abb
-    m_ActionName: Player/SelectSouthTool[/Keyboard/s]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1661991067}
-        m_TargetAssemblyTypeName: Tool_Wheel_Script, Assembly-CSharp
-        m_MethodName: SelectEastTool
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: ba1d8919-dbdf-4505-af6a-52afd0655168
-    m_ActionName: Player/SelectEastTool[/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1661991067}
-        m_TargetAssemblyTypeName: Tool_Wheel_Script, Assembly-CSharp
-        m_MethodName: SelectWestTool
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: f0300356-6fc4-4067-8617-99a8f33ad4a6
-    m_ActionName: Player/SelectWestTool[/Keyboard/a]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1661991067}
-        m_TargetAssemblyTypeName: Tool_Wheel_Script, Assembly-CSharp
-        m_MethodName: SelectNorthEastTool
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 1ef2397d-a96b-4770-938e-bbe0b50c56ef
-    m_ActionName: Player/SelectNorthEastTool[/Keyboard/d,/Keyboard/w]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1661991067}
-        m_TargetAssemblyTypeName: Tool_Wheel_Script, Assembly-CSharp
-        m_MethodName: SelectNorthWestTool
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 912ec9d9-18c7-4a03-b355-8bbe9c105450
-    m_ActionName: Player/SelectNorthWestTool[/Keyboard/a,/Keyboard/w]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1661991067}
-        m_TargetAssemblyTypeName: Tool_Wheel_Script, Assembly-CSharp
-        m_MethodName: SelectSouthEastTool
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 434268a5-81bd-4472-87df-277aae320a10
-    m_ActionName: Player/SelectSouthEastTool[/Keyboard/d,/Keyboard/s]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1661991067}
-        m_TargetAssemblyTypeName: Tool_Wheel_Script, Assembly-CSharp
-        m_MethodName: SelectSouthWestTool
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: dcb66579-c105-4ec8-b91a-c4a57a45ba45
-    m_ActionName: Player/SelectSouthWestTool[/Keyboard/a,/Keyboard/s]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 48799a0f-0826-4d99-a46a-b53216af6c31
-    m_ActionName: New action map/New action
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1952509628}
-        m_TargetAssemblyTypeName: GPMenuScript, Assembly-CSharp
-        m_MethodName: Escape
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-    m_ActionId: cbe4a91e-f15b-4fdb-95c5-c478dae6c68a
-    m_ActionName: Player/New action
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!4 &924094759
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 924094757}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.68510175, y: 0.16864353, z: -0.13536167}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1016612053
 GameObject:
@@ -2361,14 +2080,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4518165457762597996}
     m_Modifications:
-    - target: {fileID: 5049375688069141900, guid: c2d7f78411c5dc7478656d633efff263, type: 3}
-      propertyPath: NorthEastTool
-      value: 
-      objectReference: {fileID: 9096168364550271408, guid: c49e5782f40ef364f80bd2a7ce2cc8ac, type: 3}
-    - target: {fileID: 5049375688069141903, guid: c2d7f78411c5dc7478656d633efff263, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5049375688069141904, guid: c2d7f78411c5dc7478656d633efff263, type: 3}
       propertyPath: m_Pivot.x
       value: 0.4988188
@@ -3812,3 +3523,108 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1001 &6799076103429887924
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6799076103246677649, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_Name
+      value: InputManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799076103246677650, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1166823355}
+    - target: {fileID: 6799076103246677650, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1166823355}
+    - target: {fileID: 6799076103246677650, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1166823355}
+    - target: {fileID: 6799076103246677650, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1661991067}
+    - target: {fileID: 6799076103246677650, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1661991067}
+    - target: {fileID: 6799076103246677650, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1661991067}
+    - target: {fileID: 6799076103246677650, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1661991067}
+    - target: {fileID: 6799076103246677650, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1661991067}
+    - target: {fileID: 6799076103246677650, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1661991067}
+    - target: {fileID: 6799076103246677650, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1661991067}
+    - target: {fileID: 6799076103246677650, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1661991067}
+    - target: {fileID: 6799076103246677650, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1952509628}
+    - target: {fileID: 6799076103246677651, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799076103246677651, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.68510175
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799076103246677651, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.16864353
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799076103246677651, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.13536167
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799076103246677651, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799076103246677651, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799076103246677651, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799076103246677651, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799076103246677651, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799076103246677651, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799076103246677651, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 02e6bf0f572f30745b3e755f2513bbc3, type: 3}

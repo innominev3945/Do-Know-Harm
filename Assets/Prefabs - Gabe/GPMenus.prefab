@@ -261,7 +261,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee64775a2bea3840a17c94799848aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: Volume
+  key1: musicVol
+  key2: sfxVol
+  key3: clickVol
 --- !u!1 &7001017018114564545
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,7 +969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.509434, g: 0.36337873, b: 0.15619439, a: 0.54509807}
+  m_Color: {r: 0.6509434, g: 0.4603343, b: 0.18729973, a: 0.7882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
