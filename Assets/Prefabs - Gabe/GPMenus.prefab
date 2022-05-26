@@ -277,8 +277,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: set_volume
+        m_TargetAssemblyTypeName: PlayerPrefsFloatSaver, GameplayScripts
+        m_MethodName: SetFloatSFX
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -289,8 +289,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerPrefsFloatSaver, GameplayScripts
-        m_MethodName: SetFloatSFX
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: set_volume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1488,8 +1488,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 6.711914, y: -10.067627}
-  m_SizeDelta: {x: 162.1807, y: 147.7339}
+  m_AnchoredPosition: {x: -8.345, y: -10.0676}
+  m_SizeDelta: {x: 2003.4167, y: 1094.1636}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7001017018778107699
 CanvasRenderer:
