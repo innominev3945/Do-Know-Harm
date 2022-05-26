@@ -46,6 +46,7 @@ namespace PatientClass
         public float GetHealth() { return health; }
         public Bodypart[] GetBodyparts() { return bodyparts; }
 
+
         public void AbortTreatments()
         {
             foreach (Bodypart bodypart in bodyparts)
@@ -64,6 +65,8 @@ namespace PatientClass
 
         public bool GetHealed()
         {
+            if (health == 0)
+                return false;
             foreach (Bodypart bodypart in bodyparts)
             {
                 if (!bodypart.GetHealed())
@@ -106,6 +109,21 @@ namespace PatientClass
                     health = 0;
                 nextTime += timeInterval;
             }
+        }
+
+        public void DestroyTreatmentObjects()
+        {
+            foreach (Bodypart bodypart in bodyparts)
+                if (bodypart != null)
+                    bodypart.DestroyTreatmentObjects();
+        }
+
+        public int GetNumInjuries()
+        {
+            int amt = 0;
+            foreach (Bodypart part in bodyparts)
+                amt += part.GetNumInjuries();
+            return amt;
         }
     }
 }

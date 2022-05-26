@@ -15,6 +15,15 @@ namespace ForcepsTreatmentClass
         private GameObject bleedingWound;
         private GameObject disposal;
 
+        private void OnDestroy()
+        {
+            if (foreignObject != null)
+                Destroy(foreignObject);
+            if (bleedingWound != null)
+                Destroy(bleedingWound);
+            if (disposal != null)
+                Destroy(disposal);
+        }
         public static ForcepsTreatment MakeForcepsTreatmentObject(GameObject ob, Injury inj, float rotation)
         {
             ForcepsTreatment ret = ob.AddComponent<ForcepsTreatment>();
@@ -31,7 +40,7 @@ namespace ForcepsTreatmentClass
             ret.foreignObject.transform.parent = ob.transform;
             ret.foreignObject.GetComponent<Foreign_Object_Script>().SetWound(ret.bleedingWound);
 
-            ret.disposal = Instantiate((UnityEngine.Object)Resources.Load("Foreign Object Disposal"), new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+            ret.disposal = Instantiate((UnityEngine.Object)Resources.Load("Foreign Object Disposal"), new Vector3(ret.injury.GetLocation().x, ret.injury.GetLocation().y, -1), Quaternion.identity) as GameObject;
             return ret;
         }
 
