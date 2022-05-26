@@ -117,5 +117,13 @@ namespace PatientClass
                 if (bodypart != null)
                     bodypart.DestroyTreatmentObjects();
         }
+
+        public int GetNumInjuries()
+        {
+            int amt = 0;
+            foreach (Bodypart part in bodyparts)
+                amt += part.GetNumInjuries();
+            return amt;
+        }
     }
 }
