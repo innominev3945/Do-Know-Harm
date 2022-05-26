@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public bool isDead = false;
     public bool hasWon = false;
     public HealthBar healthBar;
-    public int numOfInjur = 2;
+    public int numOfInjur;
     // update numOfInjur at the beginning of each game!!
     public int injuredTime = 0;
     // players made mistakes --> add injuredTime
@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        numOfInjur = 0;
         //pat = GameObject.Find("PatientManager").GetComponent<PatientManager>().currentPatient.Item1;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         pat = GameObject.Find("PatientManager").GetComponent<PatientManager>().currentPatient.Item1;
+        numOfInjur = pat.GetNumInjuries();
         if (numOfInjur == 0)
         {
             if (!soundchangewon)
@@ -101,6 +103,7 @@ public class Player : MonoBehaviour
             isDead = true;
             return;
         }
+        /*
         //link this to action!!
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -116,6 +119,7 @@ public class Player : MonoBehaviour
         {
             numOfInjur--;
         }
+        */
     }
 
     public void TakeDamage(int damage)
@@ -132,7 +136,9 @@ public class Player : MonoBehaviour
     public float GetCurrentHealth()
     {
         //return currentHealth;
-        return pat.GetHealth();
+        if (pat != null)
+            return pat.GetHealth();
+        return 0f;
     }
 
 }
