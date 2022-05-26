@@ -22,12 +22,24 @@ namespace ButtonManagerClass
             this.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/Icon1");
         }
 
+        public void UpdateNumberIcon()
+        {
+            if (patient != null)
+            {
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("PatientNumbers/Patient" + (patient.Item3 + 1));
+                transform.GetChild(0).transform.localScale.Set(3f, 3f , 3f);
+                transform.GetChild(0).transform.position = new Vector3(transform.GetChild(0).transform.position.x, transform.GetChild(0).transform.position.y, -5);
+            }
+        }
+
         private void Update()
         {
             if (patient != null)
             {
                 float health = patient.Item1.GetHealth();
-                if (health <= 0)
+                if (patient.Item1.GetHealed())
+                    this.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/Icon0");
+                else if (health <= 0)
                     this.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/Icon10");
                 else if (health > 0 && health <= 11.1f)
                     this.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/Icon9");

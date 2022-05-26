@@ -38,6 +38,7 @@ namespace PatientManagerClass
         
         private TextMeshProUGUI patientInjuryText;
         private TextMeshProUGUI healthText;
+        private TextMeshProUGUI queueText; 
 
         private bool transitioning = false;
 
@@ -53,6 +54,7 @@ namespace PatientManagerClass
             patients = new Tuple<Patient, Sprite, int>[5];
             patientInjuryText = GameObject.Find("Injury Information").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             healthText = GameObject.Find("Health").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            queueText = GameObject.Find("Queue").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
             for (int i = 0; i < patients.Length; i++)
                 patients[i] = null;
@@ -80,7 +82,10 @@ namespace PatientManagerClass
                 patients[i] = nextPatients.Peek();
                 patients[i].Item1.UnpauseDamage();
                 if (i != 0)
+                {
                     buttons[i - 1].patient = patients[i];
+                    buttons[i - 1].UpdateNumberIcon();
+                }
                 nextPatients.Dequeue();
             }
 
@@ -104,7 +109,9 @@ namespace PatientManagerClass
         {
             if (currentPatient.Item1 != null)
                 healthText.text = currentPatient.Item1.GetHealth().ToString();
-            
+
+            queueText.text = "Upcoming Patients: " + nextPatients.Count;
+
             // Handles switching out patients if they are either fully healed of their injuries or are dead
             // Switching out current patient 
             if ((currentPatient.Item1.GetHealed() || currentPatient.Item1.GetHealth() == 0) && nextPatients.Count != 0 && !transitioning)
@@ -152,6 +159,7 @@ namespace PatientManagerClass
                         if (button.patient == patients[i])
                         {
                             button.patient = nextPatients.Peek();
+                            button.UpdateNumberIcon();
                             break;
                         }
                     }
@@ -205,6 +213,7 @@ namespace PatientManagerClass
             Tuple<Patient, Sprite, int> tmp = btn.patient;
             currentPatient.Item1.AbortTreatments();
             btn.patient = currentPatient;
+            btn.UpdateNumberIcon();
             currentPatient = tmp;
             gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
             gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
@@ -242,6 +251,16 @@ namespace PatientManagerClass
 
         public void SwitchPatient(ButtonManager btn)
         {
+            if (btn.patient.Item1.GetHealed())
+            {
+                Debug.Log("Can't Switch, Patient Already Healed");
+                return;
+            }
+            if (btn.patient.Item1.GetHealth() == 0)
+            {
+                Debug.Log("Can't Switch, Patient is Dead");
+                return;
+            }
             if (!transitioning)
             {
                 transitioning = true;
