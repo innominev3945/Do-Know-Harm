@@ -14,27 +14,27 @@ public class CountDownTimer : MonoBehaviour
     {
         startingTime = 60f;
         currentTime = startingTime;
-        float health = player.GetCurrentHealth();
-        countdownText.text = "VITALS: " + health.ToString("0");
+        //float health = player.GetCurrentHealth();
+        countdownText.text = "VITALS: ";
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentTime <= 0 || player.GetCurrentHealth() <= 0 || player.isDead)
-        {
-            countdownText.text = "You've lost!:/";
-            //switch to another scene since game over!!
-        }
-        else if (player.hasWon)
-        {
-            countdownText.text = "You've won!";
-        }
-        else
-        {
+        //if (currentTime <= 0 || player.GetCurrentHealth() <= 0 || player.isDead)
+        //{
+        //    countdownText.text = "You've lost!:/";
+        //    //switch to another scene since game over!!
+        //}
+        //else if (player.hasWon)
+        //{
+        //    countdownText.text = "You've won!";
+        //}
+        //else
+        //{
             float health = player.GetCurrentHealth();
             //currentTime -= 1 * Time.deltaTime;
             countdownText.text = "VITALS: " + health.ToString("0") + "%";
-        }
+        //}
     }
 }

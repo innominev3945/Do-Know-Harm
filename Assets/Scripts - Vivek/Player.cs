@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using PatientClass;
+using PatientManagerClass;
 
 public class Player : MonoBehaviour
 {
+    Patient pat;
     public float maxHealth = 100f;
     public float currentHealth = 0f;
     public bool isDead = false;
@@ -21,6 +24,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        //pat = GameObject.Find("PatientManager").GetComponent<PatientManager>().currentPatient.Item1;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         soundchange1 = true;
@@ -32,6 +36,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        pat = GameObject.Find("PatientManager").GetComponent<PatientManager>().currentPatient.Item1;
         if (numOfInjur == 0)
         {
             if (!soundchangewon)
@@ -43,25 +48,25 @@ public class Player : MonoBehaviour
             healthBar.SetHealth(maxHealth);
             return;
         }
-
+        currentHealth = pat.GetHealth();
         //the following two lines make health decrease with time
         if (currentHealth > 0)
         {
-            if (injuredTime > 0)
-            {
-                currentHealth -= 30 * Time.deltaTime;
-                injuredTime--;
-            }
-            else if (healingTime > 0)
-            {
-                currentHealth += 30 * Time.deltaTime;
-                healingTime--;
-            }
-            else
-            {
-                //currentHealth -= 0.8f * Time.deltaTime * numOfInjur * WP.degree / 0.5f;
-                currentHealth -= 2.0f * Time.deltaTime * numOfInjur;
-            }
+            //if (injuredTime > 0)
+            //{
+            //    currentHealth -= 30 * Time.deltaTime;
+            //    injuredTime--;
+            //}
+            //else if (healingTime > 0)
+            //{
+            //    currentHealth += 30 * Time.deltaTime;
+            //    healingTime--;
+            //}
+            //else
+            //{
+            //    //currentHealth -= 0.8f * Time.deltaTime * numOfInjur * WP.degree / 0.5f;
+            //    currentHealth -= 2.0f * Time.deltaTime * numOfInjur;
+            //}
             healthBar.SetHealth(currentHealth);
 
             if (currentHealth > 70f && soundchange1)
@@ -126,7 +131,8 @@ public class Player : MonoBehaviour
     }
     public float GetCurrentHealth()
     {
-        return currentHealth;
+        //return currentHealth;
+        return pat.GetHealth();
     }
 
 }

@@ -28,7 +28,8 @@ namespace PatientManagerClass
         private Vector3 velocity = Vector3.zero;
 
         // Tuple: (1) Patient Object, (2) Patient Sprite, (3) Unique Patient ID
-        [SerializeField] Tuple<Patient, Sprite, int> currentPatient; // Patient on current screen
+        public Tuple<Patient, Sprite, int> currentPatient; // Patient on current screen
+        //[SerializeField] Tuple<Patient, Sprite, int> currentPatient; // Patient on current screen
         [SerializeField] Bodypart[] bodyparts; // Bodypart of the current patient on screen
 
         private Tuple<Patient, Sprite, int>[] patients; // Collection of "current" patients in rotation
@@ -109,7 +110,7 @@ namespace PatientManagerClass
         {
             Debug.Log("Number of Injuries: " + currentPatient.Item1.GetNumInjuries());
             if (currentPatient.Item1 != null)
-                healthText.text = currentPatient.Item1.GetHealth().ToString();
+                //healthText.text = currentPatient.Item1.GetHealth().ToString();
 
             queueText.text = "Upcoming Patients: " + nextPatients.Count;
 
