@@ -14,6 +14,16 @@ namespace BurnTreatmentClass
         private GameObject trigger1;
         private GameObject trigger2;
 
+        private void OnDestroy()
+        {
+            if (burnWound != null)
+                Destroy(burnWound);
+            if (trigger1 != null)
+                Destroy(trigger1);
+            if (trigger2 != null)
+                Destroy(trigger2);
+        }
+
         public static BurnTreatment MakeBurnTreatmentObject(GameObject ob, Injury inj)
         {
             BurnTreatment ret = ob.AddComponent<BurnTreatment>();
@@ -22,9 +32,13 @@ namespace BurnTreatmentClass
             ret.injury = inj;
 
             //ret.thermalOintment = Instantiate((UnityEngine.Object)Resources.Load("ThermalOintment"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
-            ret.burnWound = Instantiate((UnityEngine.Object)Resources.Load("Burn"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
-            ret.trigger1 = Instantiate((UnityEngine.Object)Resources.Load("Trigger1"), new Vector2(ret.injury.GetLocation().x - 2f, ret.injury.GetLocation().y), Quaternion.identity) as GameObject;
-            ret.trigger2 = Instantiate((UnityEngine.Object)Resources.Load("Trigger2"), new Vector2(ret.injury.GetLocation().x + 2f, ret.injury.GetLocation().y), Quaternion.identity) as GameObject;
+            ret.burnWound = Instantiate((UnityEngine.Object)Resources.Load("BurnUpdated"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            ret.trigger1 = ret.burnWound.transform.GetChild(1).gameObject;
+            ret.trigger2 = ret.burnWound.transform.GetChild(2).gameObject;
+            //ret.trigger1 = Instantiate((UnityEngine.Object)Resources.Load("Trigger1"), new Vector2(ret.injury.GetLocation().x - 2f, ret.injury.GetLocation().y), Quaternion.identity) as GameObject;
+            //ret.trigger2 = Instantiate((UnityEngine.Object)Resources.Load("Trigger2"), new Vector2(ret.injury.GetLocation().x + 2f, ret.injury.GetLocation().y), Quaternion.identity) as GameObject;
+            ret.burnWound.transform.parent = ob.transform;
+            
 
             return ret;
         }

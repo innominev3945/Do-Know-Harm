@@ -13,18 +13,34 @@ namespace ForcepsTreatmentClass
         //private GameObject forceps;
         private GameObject foreignObject;
         private GameObject bleedingWound;
+        private GameObject disposal;
 
-        public static ForcepsTreatment MakeForcepsTreatmentObject(GameObject ob, Injury inj)
+        private void OnDestroy()
+        {
+            if (foreignObject != null)
+                Destroy(foreignObject);
+            if (bleedingWound != null)
+                Destroy(bleedingWound);
+            if (disposal != null)
+                Destroy(disposal);
+        }
+        public static ForcepsTreatment MakeForcepsTreatmentObject(GameObject ob, Injury inj, float rotation)
         {
             ForcepsTreatment ret = ob.AddComponent<ForcepsTreatment>();
+            Quaternion q = Quaternion.Euler(0, 0, rotation);
             ret.treatmentStarted = false;
             ret.vitalSpike = false;
             ret.injury = inj;
 
+
             //ret.forceps = Instantiate((UnityEngine.Object)Resources.Load("Forceps"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
-            ret.bleedingWound = Instantiate((UnityEngine.Object)Resources.Load("BleedingWound"), new Vector3(ret.injury.GetLocation().x, ret.injury.GetLocation().y, 0), Quaternion.identity) as GameObject;
+            ret.bleedingWound = Instantiate((UnityEngine.Object)Resources.Load("BleedingWoundFO"), new Vector3(ret.injury.GetLocation().x, ret.injury.GetLocation().y, 0), q) as GameObject;
+            ret.bleedingWound.transform.parent = ob.transform;
             ret.foreignObject = Instantiate((UnityEngine.Object)Resources.Load("ForeignObject"), new Vector3(ret.injury.GetLocation().x, ret.injury.GetLocation().y, -1), Quaternion.identity) as GameObject;
+            ret.foreignObject.transform.parent = ob.transform;
             ret.foreignObject.GetComponent<Foreign_Object_Script>().SetWound(ret.bleedingWound);
+
+            ret.disposal = Instantiate((UnityEngine.Object)Resources.Load("Foreign Object Disposal"), new Vector3(ret.injury.GetLocation().x, ret.injury.GetLocation().y, -1), Quaternion.identity) as GameObject;
             return ret;
         }
 
@@ -40,6 +56,7 @@ namespace ForcepsTreatmentClass
             //forceps.SetActive(true);
             foreignObject.SetActive(true);
             bleedingWound.SetActive(true);
+            disposal.SetActive(true);
         }
 
         public override void StopTreatment()
@@ -48,12 +65,14 @@ namespace ForcepsTreatmentClass
             //forceps.SetActive(false);
             foreignObject.SetActive(false);
             bleedingWound.SetActive(false);
+            disposal.SetActive(false);
         }
 
         public override void ShowInjury()
         {
             foreignObject.SetActive(true);
             bleedingWound.SetActive(true);
+            disposal.SetActive(true);
         }
 
         // Update is called once per frame
@@ -62,11 +81,13 @@ namespace ForcepsTreatmentClass
             if (treatmentStarted && foreignObject.GetComponent<Foreign_Object_Script>().GetHealed())
             {
                 injury.RemoveTreatment();
+                Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
                 //forceps.SetActive(false);
                 //Destroy(forceps);
                 foreignObject.SetActive(false);
                 Destroy(foreignObject);
                 Destroy(bleedingWound);
+                Destroy(disposal);
                 Destroy(this);
             }
         }

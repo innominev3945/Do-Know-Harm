@@ -17,9 +17,15 @@ namespace PatientClass
     {
         private float timeInterval; // Time interval for how often a Patient's health will update 
         private float nextTime;
-
         private Bodypart[] bodyparts;
         private float health; // Health of ENTIRE Patient, weighted via the various Bodyparts 
+
+        private void OnDestroy()
+        {
+            foreach (Bodypart bodypart in bodyparts)
+                if (bodypart != null)
+                    Destroy(bodypart);
+        }
 
         // Constructor
         // Unity, being the helpful engine, doesn't like to have normal Constructors work properly when dealing with
@@ -40,6 +46,51 @@ namespace PatientClass
         public float GetHealth() { return health; }
         public Bodypart[] GetBodyparts() { return bodyparts; }
 
+
+        public void AbortTreatments()
+        {
+            foreach (Bodypart bodypart in bodyparts)
+            {
+                bodypart.StopInjuries();
+            }
+        }
+
+        public void StartTreatments()
+        {
+            foreach (Bodypart bodypart in bodyparts)
+            {
+                bodypart.TreatInjuries();
+            }
+        }
+
+        public bool GetHealed()
+        {
+            if (health == 0)
+                return false;
+            foreach (Bodypart bodypart in bodyparts)
+            {
+                if (!bodypart.GetHealed())
+                    return false;
+            }
+            return true;
+        }
+
+        public void PauseDamage()
+        {
+            foreach (Bodypart part in bodyparts)
+            {
+                part.PauseDamage();
+            }
+        }
+
+        public void UnpauseDamage()
+        {
+            foreach (Bodypart part in bodyparts)
+            {
+                part.UnpauseDamage();
+            }
+        }
+
         // Update functionality that is called every timeInterval 
         public void Update()
         {
@@ -58,6 +109,13 @@ namespace PatientClass
                     health = 0;
                 nextTime += timeInterval;
             }
+        }
+
+        public void DestroyTreatmentObjects()
+        {
+            foreach (Bodypart bodypart in bodyparts)
+                if (bodypart != null)
+                    bodypart.DestroyTreatmentObjects();
         }
     }
 }

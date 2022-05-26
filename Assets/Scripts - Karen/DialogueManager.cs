@@ -394,7 +394,7 @@ public class DialogueManager : MonoBehaviour
             //END OF SCRIPT and there aren't any lines playing
             //*****************************************************************************
             //                         TO DO:   EXIT OUT OF SCENE
-            GetComponent<ToScene>().LoadSceneByName("Do Know Harm - Vivek");
+            //GetComponent<ToScene>().LoadSceneByName("Do Know Harm - Vivek");
             //******************************************************************************
             return;
         }
@@ -538,6 +538,7 @@ public class DialogueManager : MonoBehaviour
                     temp = Int32.Parse(script[index]);
                     audioManager.PlayAmbience(temp);
                 }
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
                 //load background
                 else if (lineType[index] == 'B')
                 {

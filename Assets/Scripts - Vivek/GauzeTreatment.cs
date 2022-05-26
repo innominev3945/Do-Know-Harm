@@ -13,6 +13,13 @@ namespace GauzeTreatmentClass
         private GameObject bloodPool;
         private GameObject bleedingWound;
 
+        private void OnDestroy()
+        {
+            if (bloodPool != null)
+                Destroy(bloodPool);
+            if (bleedingWound != null)
+                Destroy(bleedingWound);
+        }
         public static GauzeTreatment MakeGauzeTreatmentObject(GameObject ob, Injury inj)
         {
             GauzeTreatment ret = ob.AddComponent<GauzeTreatment>();
@@ -22,7 +29,9 @@ namespace GauzeTreatmentClass
 
             //ret.gauze = Instantiate((UnityEngine.Object)Resources.Load("Gauze"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
             ret.bloodPool = Instantiate((UnityEngine.Object)Resources.Load("BloodPool"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            ret.bloodPool.transform.parent = ob.transform;
             ret.bleedingWound = Instantiate((UnityEngine.Object)Resources.Load("BleedingWound"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            ret.bleedingWound.transform.parent = ob.transform;
 
             return ret;
         }
@@ -61,6 +70,7 @@ namespace GauzeTreatmentClass
             if (treatmentStarted && bleedingWound.transform.GetChild(0).tag == "Healed") //gauze.GetComponent<Gauze_Script>().GetHealed())
             {
                 injury.RemoveTreatment();
+                Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
                 treatmentStarted = false;
                 //gauze.SetActive(false);
                 //Destroy(gauze);

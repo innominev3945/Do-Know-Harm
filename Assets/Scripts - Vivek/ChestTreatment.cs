@@ -11,6 +11,12 @@ namespace ChestTreatmentClass
     {
         public GameObject chest;
 
+        private void OnDestroy()
+        {
+            if (chest != null)
+                Destroy(chest);
+        }
+
         public static ChestTreatment MakeChestTreatmentObject(GameObject ob, Injury inj) 
         {
             ChestTreatment ret = ob.AddComponent<ChestTreatment>();
@@ -19,6 +25,7 @@ namespace ChestTreatmentClass
             ret.injury = inj;
 
             ret.chest = Instantiate((UnityEngine.Object)Resources.Load("Chest"), new Vector3(ret.injury.GetLocation().x, ret.injury.GetLocation().y, 1f), Quaternion.identity) as GameObject;
+            ret.chest.transform.parent = ob.transform;
 
             return ret;
         }
@@ -51,6 +58,7 @@ namespace ChestTreatmentClass
             if (treatmentStarted && chest.transform.GetChild(0).tag == "Healed")
             {
                 injury.RemoveTreatment();
+                Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
                 Destroy(chest);
                 Destroy(this);
             }

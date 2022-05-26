@@ -18,6 +18,8 @@ namespace BodypartClass
         private float health; // Health of the body part, not the entire patient 
         private float severityMultiplier; // Weighted importance of body part relative to health of entire patient (i.e. head is higher than legs)
         private List<Injury> injuries; // Injuries that impact the health of the body part 
+        private bool damagePause;
+
 
         // Constructor 
         // Unity, being the helpful engine, doesn't like to have normal Constructors work properly when dealing with
@@ -33,6 +35,7 @@ namespace BodypartClass
             ret.health = 100;
             ret.severityMultiplier = severity;
             ret.injuries = new List<Injury>();
+            ret.damagePause = false;
             return ret;
         }
 
@@ -41,6 +44,22 @@ namespace BodypartClass
         public float GetSeverityMultiplier() { return severityMultiplier; }
 
         public Vector2 GetLocation() { return location; }
+
+        public void DestroyTreatmentObjects()
+        {
+            foreach (Injury injury in injuries)
+                if (injury != null)
+                    injury.DestroyTreatmentObjects();
+        }
+        public bool GetHealed() 
+        {
+            foreach (Injury injury in injuries)
+            {
+                if (!injury.GetHealed())
+                    return false;
+            }
+            return true;
+        }
 
         // Add an injury that the BodyPart is dealing with
         public void AddInjury(Injury injury) 
@@ -60,6 +79,26 @@ namespace BodypartClass
                 injury.AbortTreatment();
         }
 
+        // Stops the body part for taking damage until "unpause"
+        public void PauseDamage()
+        {
+            damagePause = true;
+        }
+
+        public void UnpauseDamage()
+        {
+            damagePause = false;
+        }
+
+        public List<string> GetInjuryNames()
+        {
+            List<string> ret = new List<string>();
+            foreach (Injury inj in injuries)
+            {
+                ret.Add(inj.GetName());
+            }
+            return ret;
+        }
 
         // Update functionality that is called every timeInterval
         void Update()
@@ -74,7 +113,8 @@ namespace BodypartClass
                     {
                         loss += (injury.GetInjurySeverity());
                     }
-                    health -= loss;
+                    if (!damagePause)
+                        health -= loss;
                     if (health < 0)
                         health = 0;
 
@@ -91,5 +131,6 @@ namespace BodypartClass
                 nextTime += timeInterval; 
             }
         }
+
     }
 }

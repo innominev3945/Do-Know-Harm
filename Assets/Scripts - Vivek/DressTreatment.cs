@@ -11,6 +11,11 @@ namespace DressTreatmentClass
     {
         private GameObject woundDress;
 
+        private void OnDestroy()
+        {
+            if (woundDress != null)
+                Destroy(woundDress);
+        }
         public static DressTreatment MakeDressTreatmentObject(GameObject ob, Injury inj)
         {
             DressTreatment ret = ob.AddComponent<DressTreatment>();
@@ -19,6 +24,7 @@ namespace DressTreatmentClass
             ret.injury = inj;
 
             ret.woundDress = Instantiate((UnityEngine.Object)Resources.Load("WoundDress"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            ret.woundDress.transform.parent = ob.transform;
 
             return ret;
         }
@@ -52,6 +58,7 @@ namespace DressTreatmentClass
             if (treatmentStarted && (woundDress.transform.GetChild(0).tag == "Healed"))
             {
                 injury.RemoveTreatment();
+                Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
                 Destroy(woundDress);
                 Destroy(this);
             }
