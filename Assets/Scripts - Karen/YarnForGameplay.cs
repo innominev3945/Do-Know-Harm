@@ -17,6 +17,18 @@ public class YarnForGameplay : MonoBehaviour
 
     [SerializeField] CharacterManagerForGameplay character;
 
+    [SerializeField] LineView lineViewer;
+
+     void OnClick(InputValue value)
+    {
+        
+        if(value.isPressed)
+        {
+            //Debug.Log("meow");
+            lineViewer.OnContinueClicked();
+        }
+    }
+
 
 
     //private SerializedProperty dialogueDisplay;
@@ -48,7 +60,7 @@ public class YarnForGameplay : MonoBehaviour
     //or
     //<<EXPR ObjectName>>
     //*************************************
-    [YarnCommand("expression")]
+    [YarnCommand("Expression")]
     public void setExpr(int expression_number)
     {
         character.changeExpression(expression_number);

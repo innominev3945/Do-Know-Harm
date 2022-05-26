@@ -226,7 +226,6 @@ namespace Yarn.Unity
         /// <seealso cref="useFadeEffect"/>
         [SerializeField]
         internal CanvasGroup canvasGroup;
-        [SerializeField] AudioManager audios;
 
         /// <summary>
         /// Controls whether the line view should fade in when lines appear, and
@@ -274,23 +273,28 @@ namespace Yarn.Unity
         internal TextMeshProUGUI lineText = null;
 
         [SerializeField]
-        public TextMeshProUGUI fadedText;
+        internal TextMeshProUGUI fadedText = null;
 
         [SerializeField]
-        public TextMeshProUGUI unfadedText;
+        internal TextMeshProUGUI unfadedText = null;
 
-        public void setLineText(int n)
+        [SerializeField] SpriteRenderer fadeScreen;
+
+
+        public void setLineText(int num)
         {
-            if (n == 0)
+            if (num == 1)
             {
-                lineText = fadedText;
+                fadedText.text = " ";
+                lineText = unfadedText;
             }
             else
             {
-                lineText = unfadedText;
-                fadedText.text = " ";
+                lineText = fadedText;
             }
         }
+
+
 
         /// <summary>
         /// Controls whether the <see cref="lineText"/> object will show the
@@ -425,7 +429,6 @@ namespace Yarn.Unity
 
         private void Start()
         {
-            lineText = fadedText;
             canvasGroup.alpha = 0;
         }
 
@@ -469,7 +472,6 @@ namespace Yarn.Unity
             
             // for now we are going to just immediately show everything
             // later we will make it fade in
-
             lineText.gameObject.SetActive(true);
             canvasGroup.gameObject.SetActive(true);
 
@@ -638,6 +640,23 @@ namespace Yarn.Unity
                 // coroutine.
                 yield break;
             }
+            
+                
+                if (lineText == fadedText && fadeScreen.color.a < 0.99)
+                {
+                    Debug.Log("autoAdvance not dark screen detected");
+                    Color objectColor = fadeScreen.color;
+                    objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
+                    fadeScreen.color = objectColor;
+                }
+                else if (lineText == unfadedText && fadeScreen.color.a > 0.01)
+                {
+                    Debug.Log("autoAdvance not clear screen detected");
+                    Color objectColor = fadeScreen.color;
+                    objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
+                    fadeScreen.color = objectColor;
+                }
+            
 
             // Our presentation is complete; call the completion handler.
             onDialogueLineFinished();
@@ -649,7 +668,7 @@ namespace Yarn.Unity
             // We received a request to advance the view. If we're in the middle of
             // an animation, skip to the end of it. If we're not current in an
             // animation, interrupt the line so we can skip to the next one.
-            audios.PlayClick();
+
             // we have no line, so the user just mashed randomly
             if (currentLine == null)
             {
@@ -673,7 +692,6 @@ namespace Yarn.Unity
         /// </summary>
         public void OnContinueClicked()
         {
-            //audios.PlayClick();
             // When the Continue button is clicked, we'll do the same thing as
             // if we'd received a signal from any other part of the game (for
             // example, if a DialogueAdvanceInput had signalled us.)
@@ -681,4 +699,3 @@ namespace Yarn.Unity
         }
     }
 }
-

@@ -10,9 +10,6 @@ using Yarn.Unity;
 public class YarnCommands : MonoBehaviour
 {
     public static bool[] JournalEntries;
-    [SerializeField] SpriteRenderer fadeScreen;
-
-    [SerializeField] private float fadeSpeed;
 
     [SerializeField] AudioManager audioManager;
 
@@ -22,11 +19,11 @@ public class YarnCommands : MonoBehaviour
 
     [SerializeField] VNManager vnManager;
 
-    [SerializeField] LineView2 lineViewer;
+    // [SerializeField] LineView2 lineViewer;
 
-    [SerializeField] TextMeshProUGUI fadedText;
+    // [SerializeField] TextMeshProUGUI fadedText;
 
-    [SerializeField] TextMeshProUGUI unfadedText;
+    // [SerializeField] TextMeshProUGUI unfadedText;
 
     //private SerializedProperty dialogueDisplay;
     static bool isFaded = true;
@@ -37,34 +34,67 @@ public class YarnCommands : MonoBehaviour
     //*************************************
     //used to fade a screen
     //Format in yarn:
-    //<<fade ObjectName>>
+    //<<fade ObjectName #>>
     //*************************************
-    [YarnCommand("fade")]
-    public void Fade(int fadeNumber)
-    {
-        //LineView.Update();
+    // [YarnCommand("fade")]
+    // public void Fade(int fadeNumber)
+    // {
+    //     //LineView.Update();
 
-        //dialogueDisplay = serializedObject.FindProperty("lineText");
+    //     //dialogueDisplay = serializedObject.FindProperty("lineText");
 
-        //EditorGUI.PropertyField(TextMeshProUGUI, dialogueDisplay);
+    //     //EditorGUI.PropertyField(TextMeshProUGUI, dialogueDisplay);
+    //     //Debug.Log("Attempted to set fade to: " + fadeNumber);
+        
+    //     //lineViewer.toggleFade(fadeNumber);
+    //     if (fadeNumber == 1)
+    //     {   
+    //         //Debug.Log("unfade started");
+    //         //isFaded = false;
+    //         //lineViewer.GetComponent<LineView>().LineText = unfadedText;
+    //         //lineViewer.GetComponent<LineText>() = unfadedText;
+    //         //lineViewer.lineText = unfadedText;
+    //         StartCoroutine(FadeFromBlack()); 
+    //         // while (fadeScreen.color.a > 0)
+    //         // {
+    //         //     Debug.Log("fadeScreen.color.a " +  fadeScreen.color.a);
+    //         //     Color objectColor = fadeScreen.color;
+    //         //     float fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
+    //         //     Debug.Log("Fade amount 1: " + fadeAmount);
+                
 
-        lineViewer.setLineText(fadeNumber);
-        //lineViewer.toggleFade(fadeNumber);
-        if (isFaded && fadeNumber == 1)
-        {   
-            //lineViewer.GetComponent<LineView>().LineText = unfadedText;
-            //lineViewer.GetComponent<LineText>() = unfadedText;
-            //lineViewer.lineText = unfadedText;
-            StartCoroutine(FadeFromBlack()); 
-        }
-        else if (!isFaded && fadeNumber == 0)
-        {
-            //lineViewer.GetComponent<LineText>() = fadedText;
-            lineViewer.lineText = fadedText;
-            StartCoroutine(FadeToBlack());
+    //         //     objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+                
+    //         //     fadeScreen.color = objectColor;
+                
+    //         //     yield return null;
+    //         // }
+    //         //Debug.Log("unfade ended");
+    //         //yield return null;
+    //     }
+    //     else
+    //     {
+    //         //Debug.Log("fade started");
+    //         //isFaded = true;
+    //         //lineViewer.GetComponent<LineText>() = fadedText;
+    //         //lineViewer.lineText = fadedText;
+    //         StartCoroutine(FadeToBlack());
+    //         // while (fadeScreen.color.a < 1)
+    //         // {
+    //         //     Color objectColor = fadeScreen.color;
+    //         //     float fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
+    //         //     Debug.Log("Fade amount 2: " + fadeAmount);
+
+    //         //     objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+    //         //     fadeScreen.color = objectColor;
+    //         //     yield return null;
+    //         // }
+    //         // Debug.Log("fade ended");
+    //         //yield return null;
             
-        }
-    }
+    //     }
+    //     lineViewer.setLineText(fadeNumber);
+    // }
 
     //*************************************
     //used to play a sound effect
@@ -98,6 +128,11 @@ public class YarnCommands : MonoBehaviour
     }
     [YarnCommand("EXPR")]
     public void setexpression(int character_number, int expression_number)
+    {
+        character.changeExpression(character_number, expression_number);
+    }
+    [YarnCommand("expression")]
+    public void setExpressions(int character_number, int expression_number)
     {
         character.changeExpression(character_number, expression_number);
     }
@@ -171,18 +206,7 @@ public class YarnCommands : MonoBehaviour
     }
 
     //Fades sprite renderer to transparent
-    IEnumerator FadeFromBlack(){
 
-        while (fadeScreen.color.a > 0)
-        {
-            Color objectColor = fadeScreen.color;
-            float fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
-
-            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-            fadeScreen.color = objectColor;
-            yield return null;
-        }
-    }
 
     [YarnCommand("unlock")]
     public void unlockEntry(int entry_id)
@@ -222,18 +246,8 @@ public class YarnCommands : MonoBehaviour
         saver.unlockPage(n);
     }
 
-    //Fades sprite renderer to opaque
-    IEnumerator FadeToBlack(){
-        while (fadeScreen.color.a < 1)
-        {
-            Color objectColor = fadeScreen.color;
-            float fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
 
-            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-            fadeScreen.color = objectColor;
-            yield return null;
-        }
-    }
+
 }
 
 
