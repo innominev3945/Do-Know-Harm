@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
     {
         pat = GameObject.Find("PatientManager").GetComponent<PatientManager>().currentPatient.Item1;
         numOfInjur = pat.GetNumInjuries();
+        if (numOfInjur != 0)
+            soundchangewon = false;
         if (numOfInjur == 0)
         {
             if (!soundchangewon)

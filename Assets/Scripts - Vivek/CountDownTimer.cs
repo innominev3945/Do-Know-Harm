@@ -33,7 +33,10 @@ public class CountDownTimer : MonoBehaviour
         //else
         //{
             float health = player.GetCurrentHealth();
-            //currentTime -= 1 * Time.deltaTime;
+        //currentTime -= 1 * Time.deltaTime;
+        if (player.numOfInjur == 0 && player.currentHealth != 0)
+            countdownText.text = "VITALS: HEALED";
+        else
             countdownText.text = "VITALS: " + health.ToString("0") + "%";
         //}
     }
