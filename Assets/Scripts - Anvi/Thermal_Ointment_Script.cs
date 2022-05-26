@@ -161,6 +161,7 @@ namespace ThermalOintmentClass
                     {
                         enteredOtherTrigger = false;
                         numTimes++;
+                        Camera.main.GetComponent<SFXPlaying>().SFXstepClear();
                         Debug.Log("numTimes: " + numTimes);
                         if (numTimes >= totalNumTimes)
                         {
