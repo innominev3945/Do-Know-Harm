@@ -442,6 +442,11 @@ namespace Yarn.Unity
             typewriterEffectSpeed = text_speed.value;
         }
 
+        public void toggleAuto()
+        {
+            autoAdvance = !autoAdvance;
+        }
+
         private void Reset()
         {
             canvasGroup = GetComponentInParent<CanvasGroup>();
