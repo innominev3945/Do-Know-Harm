@@ -16,6 +16,7 @@ public class VNManager : MonoBehaviour
     [SerializeField] DialogueRunner dialogue_runner;
     [SerializeField] CharacterManager characters;
     [SerializeField] jsonSaver storage;
+    [SerializeField] internal GameObject LoadScreen = null;
 
     //fading speed
     [SerializeField] private float fadeSpeed;
@@ -52,6 +53,7 @@ public class VNManager : MonoBehaviour
     //starts based on current scene
     void Start()
     {
+        LoadScreen.gameObject.SetActive(false);
         //Sets the beginning fade screen on or off
         fadeColor = fadeScreen.color;
         //Loads up the scene signified by current_scene
@@ -85,9 +87,7 @@ public class VNManager : MonoBehaviour
     //*************************************
     [YarnCommand("fade")]
     public void Fade(int fadeNumber)
-    {
-
-        
+    {    
         lineViewer.setLineText(fadeNumber);
         //lineViewer.toggleFade(fadeNumber);
         if (fadeNumber == 1)
@@ -128,6 +128,8 @@ public class VNManager : MonoBehaviour
     //Loads the save file saved by the user
     public void loadSave()
     {
+        LoadScreen.gameObject.SetActive(true);
+        audio.muteAll();
         characters.clearCharacters();
         storage.LoadFromFile(filepath);
         int saved_scene = 0;
@@ -162,6 +164,9 @@ public class VNManager : MonoBehaviour
             fadeScreen.color = objectColor;
         }
         lineViewer.toggleTypewriter();
+        audio.unmuteAll();
+
+        LoadScreen.gameObject.SetActive(false);
         //currLine = savedLine;
     }
 
@@ -232,19 +237,9 @@ public class VNManager : MonoBehaviour
         }
     }
 
-    
-    IEnumerator FadeToBlack(){
-        //Debug.Log("Faded to black");
-        // while (fadeScreen.color.a < 1)
-        // {
-        //     Color objectColor = fadeScreen.color;
-        //     float fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
 
-        //     objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-        //     fadeScreen.color = objectColor;
-        //     yield return null;
-        // }
-        //Color c = fadeScreen.color;
+    //Fades fadeScreen to opaque
+    IEnumerator FadeToBlack(){
         for (float alpha = 0; alpha <= 1; alpha += Time.deltaTime* fadeSpeed)
         {
             fadeColor.a = alpha;
@@ -254,18 +249,9 @@ public class VNManager : MonoBehaviour
         StopFading();
     }
 
+    //Fades fadeScreen to transparent
     IEnumerator FadeFromBlack(){
 
-        //Debug.Log("Faded from black");
-        // while (fadeScreen.color.a > 0)
-        // {
-        //     Color objectColor = fadeScreen.color;
-        //     float fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
-
-        //     objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-        //     fadeScreen.color = objectColor;
-        //     yield return null;
-        // }
         for (float alpha = 1; alpha >= 0; alpha -= Time.deltaTime* fadeSpeed)
         {
             fadeColor.a = alpha;
@@ -273,10 +259,12 @@ public class VNManager : MonoBehaviour
             yield return null;
         }
         
-        //Debug.Log("Completed fade with fadeScreen.color.a: " + fadeScreen.color.a);
         StopFading();
     }
 
+
+
+    //Traverses through to load a scene
     IEnumerator traverseLines()
     {
         Debug.Log("Traverse Line's savedLine: " + savedLine);
@@ -288,7 +276,9 @@ public class VNManager : MonoBehaviour
         }
     }
 
+    
 
+    //Loads scene specified by sceneNumber
     public void LoadScene(int sceneNumber)
     {
         //DialogueRunner dialogue_runner = FindObjectOfType<Yarn.Unity.DialogueRunner>();
@@ -299,7 +289,7 @@ public class VNManager : MonoBehaviour
     }
 
 
-
+    //ExitSce
     [YarnCommand("endScene")]
     public void endScene()
     {
@@ -312,7 +302,5 @@ public class VNManager : MonoBehaviour
             //******************************************************************************
         //Or something
     }
-
-    
-    
+ 
 }
