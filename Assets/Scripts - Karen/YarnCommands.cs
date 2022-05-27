@@ -15,7 +15,7 @@ public class YarnCommands : MonoBehaviour
 
     [SerializeField] CharacterManager character;
 
-    [SerializeField] VNSaveFile saver;
+    //[SerializeField] VNSaveFile saver;
 
     [SerializeField] VNManager vnManager;
 
@@ -252,11 +252,11 @@ public class YarnCommands : MonoBehaviour
     //[YarnCommand("")]
 
 
-    [YarnCommand("addPage")]
-    public void addPage(int n)
-    {
-        saver.unlockPage(n);
-    }
+    // [YarnCommand("addPage")]
+    // public void addPage(int n)
+    // {
+    //     saver.unlockPage(n);
+    // }
 
 
 

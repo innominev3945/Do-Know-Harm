@@ -16,7 +16,8 @@ public class VNManager : MonoBehaviour
     [SerializeField] DialogueRunner dialogue_runner;
     [SerializeField] CharacterManager characters;
     [SerializeField] jsonSaver storage;
-    [SerializeField] public GameObject LoadScreen;
+    [SerializeField] VNSceneNumbers numbers;
+    public GameObject LoadScreen;
 
     //fading speed
     [SerializeField] private float fadeSpeed;
@@ -39,7 +40,7 @@ public class VNManager : MonoBehaviour
     string filepath { get { return Application.persistentDataPath + Path.DirectorySeparatorChar + "playerSave.json" ;} }
 
     //current scene number (set before starting scene)
-    public static int current_scene = 1;
+    private static int current_scene = 0;
 
     //starting fade number
     private int currentFade = 0;
@@ -53,9 +54,10 @@ public class VNManager : MonoBehaviour
     //starts based on current scene
     void Start()
     {
-        LoadScreen.gameObject.SetActive(false);
+        LoadScreen.SetActive(false);
         //Sets the beginning fade screen on or off
         fadeColor = fadeScreen.color;
+        current_scene = numbers.getCurrentScene();
         //Loads up the scene signified by current_scene
         LoadScene(current_scene);
         //loadSave();
@@ -128,7 +130,7 @@ public class VNManager : MonoBehaviour
     //Loads the save file saved by the user
     public void loadSave()
     {
-        LoadScreen.gameObject.SetActive(true);
+        LoadScreen.SetActive(true);
         audio.muteAll();
         characters.clearCharacters();
         storage.LoadFromFile(filepath);
@@ -166,7 +168,7 @@ public class VNManager : MonoBehaviour
         lineViewer.toggleTypewriter();
         audio.unmuteAll();
 
-        LoadScreen.gameObject.SetActive(false);
+        LoadScreen.SetActive(false);
         //currLine = savedLine;
     }
 
