@@ -426,6 +426,10 @@ public class VNManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
     }
 
+    public void setAuto()
+    {
+        lineViewer.toggleAuto();
+    }
     
 
     //Loads scene specified by sceneNumber
