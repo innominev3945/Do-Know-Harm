@@ -58,7 +58,7 @@ namespace Gauze
             numClicks = 0;
             timePassed = 0;
 
-            totalClicks = 12;
+            totalClicks = 6;
             timeLimit = 3;
 
             mouseButtonDown = false;
@@ -211,6 +211,11 @@ namespace Gauze
                     }
                 }
             }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            numClicks = 0;
         }
 
         void OnDestroy()
