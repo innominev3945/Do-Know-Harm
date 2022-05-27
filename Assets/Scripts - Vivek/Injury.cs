@@ -96,7 +96,9 @@ namespace InjuryClass
 
         public string GetTreatableTool()
         {
-            return treatments.Peek().GetToolName();
+            if (treatments.Count != 0)
+                return treatments.Peek().GetToolName();
+            return "";
         }
 
     }
