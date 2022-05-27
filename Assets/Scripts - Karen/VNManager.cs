@@ -17,7 +17,7 @@ public class VNManager : MonoBehaviour
     [SerializeField] CharacterManager characters;
     [SerializeField] jsonSaver storage;
     [SerializeField] VNSceneNumbers numbers;
-    public GameObject LoadScreen;
+    
 
     //fading speed
     [SerializeField] private float fadeSpeed;
@@ -29,8 +29,12 @@ public class VNManager : MonoBehaviour
 
 
     [SerializeField] SpriteRenderer Background_Renderer;
+    [SerializeField] SpriteRenderer loadingScreen;
+
+
     //VN backgrounds
     public Sprite[] Backgrounds;
+    public Sprite[] LoadSprites;
 
     //saved scenes
     private static int savedScene = 0;
@@ -48,22 +52,32 @@ public class VNManager : MonoBehaviour
     //keep track of fade screen's color
     static Color fadeColor;
 
+    static Color loadColor;
+
     //checks for a bad fade (user is a click maniac)
     private bool badFade = false;
 
     //starts based on current scene
     void Start()
     {
-        LoadScreen.SetActive(false);
+        //loadingScreen.activateLoading();
+        loadingScreen.sprite = LoadSprites[1];
+        
         //Sets the beginning fade screen on or off
         fadeColor = fadeScreen.color;
         current_scene = numbers.getCurrentScene();
         //Loads up the scene signified by current_scene
+        //LoadScreen.SetActive(true);
+        
         LoadScene(current_scene);
+        loadingScreen.sprite = LoadSprites[0];
+        
+        //loadingScreen.deactivateLoading();
+        //LoadScreen.gameObject.SetActive(false);
         //loadSave();
         //resets line tracker to be used for loading and saving stuffs
         lineViewer.resetLineNumber();
-
+        
     }
 
     
@@ -72,6 +86,11 @@ public class VNManager : MonoBehaviour
 
     //checks wether in process of fading
     private bool isFading {get{return fading != null;}}
+
+    private Coroutine skipping;
+
+    //checks wether in process of fading
+    private bool isSkipping {get{return fading != null;}}
 
 
    
@@ -130,45 +149,46 @@ public class VNManager : MonoBehaviour
     //Loads the save file saved by the user
     public void loadSave()
     {
-        LoadScreen.SetActive(true);
-        audio.muteAll();
-        characters.clearCharacters();
-        storage.LoadFromFile(filepath);
-        int saved_scene = 0;
-        if (storage.TryGetValue<float>("$saved_scene", out var output))
-        {
-            //Debug.Log("output: {output}");
-            savedScene = Convert.ToInt32(output);
-        }
-        int saved_line = 0;
-        if (storage.TryGetValue<float>("$saved_line", out var output2))
-        {
-            //Debug.Log("output2: {output2}");
-            savedLine = Convert.ToInt32(output2);
-        }
-        lineViewer.toggleTypewriter();
-        lineViewer.resetLineNumber();
-        dialogue_runner.Stop();
-        LoadScene(savedScene);
+        // loadingScreen.sprite = LoadSprites[1];
+        // audio.muteAll();
+        // characters.clearCharacters();
+        // storage.LoadFromFile(filepath);
+        // int saved_scene = 0;
+        // if (storage.TryGetValue<float>("$saved_scene", out var output))
+        // {
+        //     //Debug.Log("output: {output}");
+        //     savedScene = Convert.ToInt32(output);
+        // }
+        // int saved_line = 0;
+        // if (storage.TryGetValue<float>("$saved_line", out var output2))
+        // {
+        //     //Debug.Log("output2: {output2}");
+        //     savedLine = Convert.ToInt32(output2);
+        // }
+        // lineViewer.toggleTypewriter();
+        // lineViewer.resetLineNumber();
+        // dialogue_runner.Stop();
+        // LoadScene(savedScene);
         //int temp_line = 0;
         StartCoroutine(traverseLines());
         Debug.Log("Saved Lines:" + savedLine);
-        if (currentFade == 1)
-        {
-            Color objectColor = fadeScreen.color;
-            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
-            fadeScreen.color = objectColor;
-        }
-        else
-        {
-            Color objectColor = fadeScreen.color;
-            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
-            fadeScreen.color = objectColor;
-        }
-        lineViewer.toggleTypewriter();
-        audio.unmuteAll();
+        // if (currentFade == 1)
+        // {
+        //     Color objectColor = fadeScreen.color;
+        //     objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
+        //     fadeScreen.color = objectColor;
+        // }
+        // else
+        // {
+        //     Color objectColor = fadeScreen.color;
+        //     objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
+        //     fadeScreen.color = objectColor;
+        // }
+        // lineViewer.toggleTypewriter();
+        // audio.unmuteAll();
 
-        LoadScreen.SetActive(false);
+        // loadingScreen.sprite = LoadSprites[0];
+        //loadingScreen.deactivateLoading();
         //currLine = savedLine;
     }
 
@@ -187,6 +207,15 @@ public class VNManager : MonoBehaviour
         {
             StopCoroutine(fading);
             fading = null;
+        }
+    }
+
+    private void stopSkipping()
+    {
+        if(isSkipping)
+        {
+            StopCoroutine(skipping);
+            skipping = null;
         }
     }
 
@@ -264,11 +293,47 @@ public class VNManager : MonoBehaviour
         StopFading();
     }
 
+    IEnumerator FadeFromLoad(){
+        Debug.Log("Fade from load called");
+        for (float alpha = 1; alpha >= 0; alpha -= 0.2f)
+        {
+            loadColor.a = alpha;
+            loadingScreen.color = loadColor;
+            yield return null;
+        }
+        
+        StopFading();
+    }
+
 
 
     //Traverses through to load a scene
     IEnumerator traverseLines()
     {
+        loadingScreen.sprite = LoadSprites[1];
+        audio.muteAll();
+        characters.clearCharacters();
+        storage.LoadFromFile(filepath);
+        int saved_scene = 0;
+        if (storage.TryGetValue<float>("$saved_scene", out var output))
+        {
+            //Debug.Log("output: {output}");
+            savedScene = Convert.ToInt32(output);
+        }
+        int saved_line = 0;
+        if (storage.TryGetValue<float>("$saved_line", out var output2))
+        {
+            //Debug.Log("output2: {output2}");
+            savedLine = Convert.ToInt32(output2);
+        }
+        lineViewer.toggleTypewriter();
+        lineViewer.resetLineNumber();
+        dialogue_runner.Stop();
+        LoadScene(savedScene);
+        int temp_line = 0;
+        yield return new WaitForSeconds(0.5f);
+        //yield return prepareSkip();
+        Debug.Log("B");
         Debug.Log("Traverse Line's savedLine: " + savedLine);
         for (int i = 0; i < savedLine; i++)
         {
@@ -276,6 +341,89 @@ public class VNManager : MonoBehaviour
             lineViewer.OnContinueClicked();
             yield return new WaitForSeconds(0.06f);
         }
+        Debug.Log("C");
+
+         if (currentFade == 1)
+        {
+            Color objectColor = fadeScreen.color;
+            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
+            fadeScreen.color = objectColor;
+        }
+        else
+        {
+            Color objectColor = fadeScreen.color;
+            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
+            fadeScreen.color = objectColor;
+        }
+        lineViewer.toggleTypewriter();
+        audio.unmuteAll();
+
+        loadingScreen.sprite = LoadSprites[0];
+        //loadingScreen.deactivateLoading();
+        //currLine = savedLine;
+        yield return new WaitForSeconds(0.5f);
+    }
+
+    // IEnumerator skipLines()
+    // {
+        
+    //     yield return traverseLines();
+    //     Debug.Log("C");
+    //     if (currentFade == 1)
+    //     {
+    //         Color objectColor = fadeScreen.color;
+    //         objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
+    //         fadeScreen.color = objectColor;
+    //     }
+    //     else
+    //     {
+    //         Color objectColor = fadeScreen.color;
+    //         objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
+    //         fadeScreen.color = objectColor;
+    //     }
+    //     lineViewer.toggleTypewriter();
+    //     audio.unmuteAll();
+
+    //     loadingScreen.sprite = LoadSprites[0];
+    //     yield return new WaitForSeconds(0.1f);
+    // }
+
+    // IEnumerator prepareSkip()
+    // {
+    //     Debug.Log("A");
+    //     loadingScreen.sprite = LoadSprites[1];
+    //     audio.muteAll();
+    //     characters.clearCharacters();
+    //     storage.LoadFromFile(filepath);
+    //     int saved_scene = 0;
+    //     Debug.Log("Ded");
+    //     if (storage.TryGetValue<float>("$saved_scene", out var output))
+    //     {
+    //         //Debug.Log("output: {output}");
+    //         savedScene = Convert.ToInt32(output);
+    //     }
+    //     int saved_line = 0;
+    //     if (storage.TryGetValue<float>("$saved_line", out var output2))
+    //     {
+    //         //Debug.Log("output2: {output2}");
+    //         savedLine = Convert.ToInt32(output2);
+    //     }
+    //     Debug.Log("Alive");
+    //     lineViewer.toggleTypewriter();
+    //     lineViewer.resetLineNumber();
+    //     dialogue_runner.Stop();
+    //     Debug.Log("Deeeeed");
+    //     LoadScene(savedScene);
+    //     Debug.Log ("hahahaha");
+    //     yield return null;
+    // }
+
+    IEnumerator setLoadScreen(float alpha)
+    {
+        Debug.Log("Attempted to turn on load screen");
+        loadColor.a = alpha;
+        loadingScreen.color = loadColor;
+        yield return new WaitForSeconds(0.2f);
     }
 
     
@@ -288,6 +436,7 @@ public class VNManager : MonoBehaviour
         //dialogue_runner.startNode = chapterTitles[sceneNumber];
         dialogue_runner.SetProject(chapters[sceneNumber]);
         dialogue_runner.StartDialogue(chapterTitles[sceneNumber]);
+        //LoadScreen.gameObject.SetActive(false);
     }
 
 

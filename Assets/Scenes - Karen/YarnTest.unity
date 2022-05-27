@@ -1609,8 +1609,12 @@ MonoBehaviour:
   CharacterExpression_1: {fileID: 1394784416}
   CharacterExpression_2: {fileID: 252236556}
   CharacterExpression_3: {fileID: 1294020523}
+  CharacterAccessory_1: {fileID: 0}
+  CharacterAccessory_2: {fileID: 0}
+  CharacterAccessory_3: {fileID: 0}
   MC: {fileID: 1562431202}
   MCExpr: {fileID: 644059182}
+  MCAccessory: {fileID: 0}
   HannahExpressions:
   - {fileID: 21300000, guid: 61dc0a38adb69f247b3eeeb9ae3bf34a, type: 3}
   - {fileID: 21300000, guid: 0f6cca2b4f6a2f04d9adede90f153077, type: 3}
@@ -1782,6 +1786,11 @@ MonoBehaviour:
   AmphiteranMan1Outfits:
   - {fileID: 21300000, guid: ebe4b9baf087cdb42beb8b9d5607c5ce, type: 3}
   - {fileID: 21300000, guid: 66a2f8e86c1209d4b8caa57d4e75f3eb, type: 3}
+  HannahAccessories: []
+  EricAccessories: []
+  CaptainAccessories: []
+  ElderlyLady1Accessories: []
+  AmphiteranMan1Accessories: []
 --- !u!114 &605594453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1796,7 +1805,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioManager: {fileID: 605594454}
   character: {fileID: 605594452}
-  saver: {fileID: 1249475742}
   vnManager: {fileID: 605594455}
 --- !u!114 &605594454
 MonoBehaviour:
@@ -1843,9 +1851,6 @@ MonoBehaviour:
   Ambience_Source: {fileID: 1335685312}
   SFX_Source: {fileID: 501771505}
   Click_Sound: {fileID: 585038027}
-  BGM_Volume: 0.5
-  SFX_Volume: 0.5
-  Click_Volume: 0.5
 --- !u!114 &605594455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1861,7 +1866,15 @@ MonoBehaviour:
   lineViewer: {fileID: 2032536025}
   audio: {fileID: 605594454}
   fadeScreen: {fileID: 312766448}
+  dialogue_runner: {fileID: 0}
+  characters: {fileID: 0}
+  storage: {fileID: 0}
+  numbers: {fileID: 0}
   fadeSpeed: 1
+  chapters: []
+  chapterTitles: []
+  Background_Renderer: {fileID: 1392416341}
+  loadingScreen: {fileID: 0}
   Backgrounds:
   - {fileID: 21300000, guid: d9023fa2ebe6a6a47924c0d40d4c9ad7, type: 3}
   - {fileID: 21300000, guid: 1bdeccb49f624cf41b944950571739ad, type: 3}
@@ -1869,7 +1882,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: bc8b6c4632ed8fe44be82bed278ef48c, type: 3}
   - {fileID: 21300000, guid: bc8b6c4632ed8fe44be82bed278ef48c, type: 3}
   - {fileID: 21300000, guid: bc8b6c4632ed8fe44be82bed278ef48c, type: 3}
-  Background_Renderer: {fileID: 1392416341}
 --- !u!114 &605594456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3865,7 +3877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1707721835
 RectTransform:
   m_ObjectHideFlags: 0

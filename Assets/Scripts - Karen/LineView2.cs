@@ -280,6 +280,8 @@ namespace Yarn.Unity
 
         [SerializeField] SpriteRenderer fadeScreen;
 
+        public Slider text_speed;
+
         private int line_advancements = 0;
 
 
@@ -431,7 +433,13 @@ namespace Yarn.Unity
 
         private void Start()
         {
+            text_speed.onValueChanged.AddListener (delegate {ValueChangeCheck ();});
             canvasGroup.alpha = 0;
+        }
+
+        public void ValueChangeCheck()
+        {
+            typewriterEffectSpeed = text_speed.value;
         }
 
         private void Reset()

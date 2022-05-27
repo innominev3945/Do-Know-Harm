@@ -1,6 +1,7 @@
 using UnityEngine.Audio;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -16,6 +17,48 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource SFX_Source;
 
     [SerializeField] AudioSource Click_Sound;
+
+
+    public Slider BGM_volume;
+
+    public Slider Ambience_volume;
+
+    public Slider SFX_volume;
+
+    public Slider Click_volume;
+
+
+    public void Start()
+    {
+        BGM_volume.onValueChanged.AddListener (delegate {ValueChangeCheckBGM ();});
+        Ambience_volume.onValueChanged.AddListener (delegate {ValueChangeCheckAmbience ();});
+        SFX_volume.onValueChanged.AddListener (delegate {ValueChangeCheckSFX ();});
+        Click_volume.onValueChanged.AddListener (delegate {ValueChangeCheckClick ();});
+    }
+
+    public void ValueChangeCheckBGM()
+    {
+        BGM_Volume = BGM_volume.value;
+        BGM_Source.volume = BGM_Volume;
+        
+    }
+    public void ValueChangeCheckAmbience()
+    {
+        Ambience_Volume = Ambience_volume.value;
+        Ambience_Source.volume = BGM_Volume;
+    }
+    public void ValueChangeCheckSFX()
+    {
+        SFX_Volume = SFX_volume.value;
+        SFX_Source.volume = SFX_Volume;
+        
+    }
+    public void ValueChangeCheckClick()
+    {
+        Click_Volume = Click_volume.value;
+        Click_Sound.volume = Click_Volume;
+        
+    }
 
     //********************************************************************************************************
     //              FAAAAAUUUUSSSSSTIIIIIIIINEEEEEEEEEEEEEEEEEEEEEEEEE HEEEEEEEERRRRRRREEEEEEEEEEEEEEEEEE
