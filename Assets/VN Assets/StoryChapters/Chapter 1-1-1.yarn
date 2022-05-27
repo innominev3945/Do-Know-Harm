@@ -1,0 +1,464 @@
+title: Chapter-1-1-1
+tags: 
+position: 225,315
+---
+
+
+Almost done…
+
+And…
+
+There we go!
+
+<<bg Yarn 3>>
+<<startFade Yarn>>
+<<mc Yarn 1>>
+<<music Yarn 3>>
+
+<<expression Yarn 1 3>>
+HANNAH: You’re all patched up!
+
+<<enter Yarn 2>>
+<<expression Yarn 2 40>>
+
+<<expression Yarn 1 0>>
+The captain kneels and examines my handiwork on the patient.
+
+CAPTAIN: You’ve got some speedy hands, Grayman. You finished in record time.
+
+CAPTAIN: Get up, son. You’re all done now. Go take your nap.
+
+<<enter Yarn 0>>
+<<accessory Yarn 0 1>>
+<<expression Yarn 0 40>>
+
+Eric picks himself off from the ground, loosening the bandages that I’d wrapped around his arms and legs, looking a bit winded.
+
+<<expression Yarn 1 8>>
+HANNAH: Sorry, too tight?
+
+ERIC: Nah, it’s fine. They’re supposed to be tight anyways. 
+
+<<expression Yarn 1 0>>
+CAPTAIN: Bandages in place, splints applied, adequate chest compressions… seems like everything’s all in order. 
+
+<<expression Yarn 2 16>>
+CAPTAIN: Excellent work. Now clear the area, we’re not finished yet.
+
+<<expression Yarn 2 40>>
+CAPTAIN: Jackson, Wyatt, you’re up!
+
+I hastily brush away the scrap bandages and head to the crowding audience. Everyone immediately starts swarming me-
+
+<<exit Yarn 0>>
+<<exit Yarn 2>>
+
+<<expression Yarn 1 8>>
+BRIAN?: You did great!
+
+JENNY?: Hey Hannah, how did you tie that knot again?
+
+MILES?: How fast were you supposed to give compressions?
+
+<<expression Yarn 1 9>>
+HANNAH: Thanks everyone! Uhm…
+
+<<expression Yarn 1 32>>
+I spot Eric hobbling over to the back of the room.
+
+I’ll let him be. I can see he’s tired. He needs a nap.
+
+<<expression Yarn 1 34>>
+…time to deal with the horde.
+
+<<fade Yarn 1>>
+For the next hour or so, I watch the others take their practicals, tying bandages and tightening tourniquets on each other.
+
+I don’t see anybody struggle too badly. They’re all moving with muscle memory, focused on their task without a hitch. It takes a while, but eventually, everyone finishes. 
+
+Sitting back down, we listen as the Captain gives a speech. 
+
+“Do Know Harm…” That’s pretty clever.
+
+Miraculously, we all passed our practicals. 
+
+Either the Captain was feeling generous, or he just didn’t want to train us again for another couple months. Apparently, that happened before. 
+
+Fine by me, either way!
+
+<<fade Yarn 0>>
+
+
+After the Captain’s closing speech, the room collapses in on itself and explodes in conversation.
+
+I’m a certified medical technician.
+
+Certified!
+Fully certified!
+
+The smile on my face grows as the reality of it all sets in. I can barely stop myself from bouncing up and down in nervous excitement.
+
+I can’t wait to tell Tiff back home! This is going to be…
+
+I turn, and I see the crowd standing before me. A mass of people, almost as a single entity.
+
+In a practiced motion, I stick a smile on my face to start talking with them.
+
+Where’s Julia? I think we were getting to know each other pretty well…
+
+…
+
+Hold on, where’s Eric?
+
+I scan across the classroom, looking for him. I should check in on him.
+
+I turn around to see him slowly walking towards the door. 
+
+Without saying goodbye.
+
+…
+
+Ah. Alright. That’s… fine.
+
+It’s fine. It’s fine. I’m sure he’s just tired and wants to go home. I walk after him to intercept before he can make it out of the room.
+
+<<enter Yarn 0>>
+
+HANNAH: Hey, Eric?
+
+ERIC: Hm?
+
+He turns to me, looking like a deer caught in headlights. It’s now that I realize that I have no idea what to even say.
+
+Uh…
+
+HANNAH: …I know I said it before, but you did great today.
+
+Alright, better than nothing?
+
+ERIC: Ah… thanks.
+
+ERIC: …
+
+ERIC: You did great too.
+
+ERIC: What was that about feeling ready earlier?
+
+HANNAH: Thanks, hehe. It must have been the adrenaline that got me moving so fast.
+
+HANNAH: …
+
+HANNAH: Are you heading out now?
+
+ERIC: Yeah, I’m gonna catch the next streetcar home. I need to pack and get ready.
+
+ERIC: How about you?
+
+HANNAH: I’m taking the transport with everyone else who’s housed in the garrison, so I need to stay here. 
+
+HANNAH: I don’t want to keep you. You know I’m not local, but even I know the streetcars take forever to come around. 
+
+HANNAH: Make sure to rest! You need your sleep. I’ll see you later!
+
+ERIC: Y… yeah.
+
+ERIC: See you later.
+
+<<exit Yarn 0>>
+
+He flashes me an awkward smile, followed by a small wave goodbye, before removing himself from our conversation entirely. He opens the door, and gently closes it behind him.
+
+I find myself staring at the door for a moment.
+
+He seems like a nice person. Quiet, but that’s honestly a good change of pace for what I’m used to with a lot of other people. 
+
+I’m… scared I’m annoying him though. I can tell he isn’t one to talk a lot.
+
+Maybe he’s just politely putting up with me. Maybe he just wishes I would shut up. Maybe…
+
+…
+
+Breathe, Hannah. You’re overthinking again.
+
+I glance back at the crowd of newly-graduates.
+
+…
+
+I put on another smile, squint my eyes a bit, and wave towards someone vaguely familiar. 
+
+The streetcars sure do take their sweet time to come around.
+
+<<music Yarn -1>>
+<<fade Yarn 1>>
+<<exit Yarn 1>>
+
+After an hour, the mingling came and went. Then we waited. Nothing.
+
+Yeah, I should have known. Timely transportation is non-existent these days. The buses should have come two hours ago.
+
+Sitting at the very front of the room, the Captain glares at his watch in a cold, silent fury. The whole of the class is nervously still, afraid of setting off a ticking time bomb.
+
+I can see him losing his nerve as the seconds tick by. He taps his foot on the floor tiles, faster and more reckless as time went on. 
+
+I lost track of how long it had been when he bangs his fist on his desk. With footsteps as loud as gunshots, he marches straight into his office. 
+
+The door slams behind him so hard, dust dislodges from the ceiling. And then the shouting comes.
+
+CAPTAIN: Where the god damn hell are my trucks? My people have been waiting here for the past two hours!
+
+OPERATOR: I apologize, Captain. It seems that there’s been a… logistical error with the transportation request.
+
+CAPTAIN: An error? We had this request cleared two weeks ago, what the hell do you mean there’s an error?
+
+CAPTAIN: Are your mechanics sniffing all the diesel over there? Are they playing hooky with the maintenance checks?
+
+OPERATOR: I’m… I don’t know, sir.
+
+CAPTAIN: Put me on the line with the transportation director, or I will personally walk over to his office and tear him a new one!
+
+OPERATOR: Y-yes, sir! I’m sorry, sir!
+
+<<mc Yarn 1>>
+<<bg Yarn 5>>
+<<fade Yarn 0>>
+
+For the next few minutes, the Captain screams his lungs out at the person on the other end of the line, with the occasional bang of his first- or the telephone in his fist.
+
+Then… silence. 
+
+With a gentle creak of the door, the Captain reemerges from the office. He’s still gripping the telephone with a deathly white grip. 
+
+Ah… wait.
+
+No, that’s the entire telephone. He’s dragging a broken telephone along the ground by its cord.
+
+As if nothing were out of the ordinary, the Captain waltzes to the front of the room and turns to us.
+
+CAPTAIN: Ladies and gentlemen, I apologize for the wait. I have some updates from DCD Transportation.
+
+We all stand at attention with a mixture of obedience and fear, as if we hadn’t just heard everything through the door.
+
+CAPTAIN: Fuel reserves are being prioritized for the war overseas. From what I hear, the Republican Army needs it more than we do.
+
+CAPTAIN: Unfortunately, non-critical domestic transportation has been grounded as a result. Apparently, we’re “non-critical”.
+
+CAPTAIN: After some… let’s call it “negotiation”, with the man in charge of transportation, I’ve arranged for us to take the next streetcar straight to the garrison.
+
+CAPTAIN: We’ll be receiving free bus passes- courtesy of the Amphiteran war machine.
+
+CAPTAIN: Grab your gear and get ready to move. I’m sure we’d all like to get to bed before nightfall.
+
+The Captain looks down to see the telephone in his hand- or what’s left of it.
+
+CAPTAIN: Would someone also let the front desk know that they’ll be needing a new phone for Room 141?
+
+<<fade Yarn 1>>
+
+Nervously, we all stand up and start grabbing our gear. Time to get the blood pumping.
+
+<<bg Yarn 1>>
+<<music Yarn 4>>
+<<fade Yarn 0>>
+
+It must have been a sight for everyone in the streetcar to see a wave of turquoise uniforms waddling into the vehicle.
+
+I hear shouts and apologies as people try to push past each other in the narrow corridor.
+
+Ah, right. Who to sit next to…
+
+HANNAH: Rachel? 
+
+Nope. She’s already seated with someone else.
+
+RACHEL: Oh no, sorry Hannah! We kinda got squished together!
+
+HANNAH: No worries! Maybe next time!
+
+Shoot. Alright, there has to be some seat that I can take…
+
+Maybe next to that Janet girl? That was her name, right?
+
+…
+
+No, everything’s literally filled. Great.
+
+As people start to settle in, I’m left as the only person without a seat. That’s what I get for letting everyone go in front of me.
+
+I’ll have to settle for standing for an hour. That’s fine, no deep vein thrombosis for me.
+
+But I can see everyone staring. Some people point. I hear murmurs. I’m sticking out like a sore thumb.
+
+???: You… okay up there?
+
+HANNAH: Yeah! Yeah, I’m fine, don’t worry about me!
+
+My hands start going clammy and sweaty. Is my foot shaking?
+
+Okay. Okay. Deep breaths. It’s going to be okay. Just hold on for an hour. They’ll stop caring in a few minutes. Just breathe…
+
+???: Are you looking for a seat, young lady?
+
+I swing around to see an old woman in a seat. She’d placed her purse on the seat next to her, but now she was beckoning me over.
+
+HANNAH: Yes! Could I sit with you please?
+
+LADY: Of course. Don't be shy.
+
+HANNAH: Thank you, ma’am!
+
+I gingerly sit down next to the lady, taking a look at my savior, and my new neighbor.
+
+She seems quite old, maybe in her 70s? Her hair’s gone mostly gray, but she seems pretty cheerful.
+
+Okay, just be polite. She seems sweet. This shouldn’t be too hard.
+
+LADY: I’m sorry, I should have offered earlier!
+
+LADY: It looks like you folks are on a migration somewhere, am I right, dear?
+
+HANNAH: Don’t worry at all, and yes, ma’am! We just graduated from our medical training earlier today.
+
+LADY: Oh, how delightful! I’m glad to see that there’s still some kick in the youth these days.
+
+LADY: What’s your name, sweetheart?
+
+HANNAH: I’m Hannah. What’s yours, ma’am?
+
+EDITH: You can call me Edith, sweetie. 
+
+HANNAH: Alright! How long have you lived here, Edith?
+
+EDITH: All my life. I was born in Los Martires, and I intend on staying in Los Martires.
+
+EDITH: You know, it’s so interesting to see how everything has changed. When I was a young girl, the city was so small compared to today! I remember when we would have to use horse carriages to get around.
+
+EDITH: Now look at us now! Streetcars and buses all over the place, skyscrapers and buildings… 
+
+EDITH: Oh, how things change…
+
+EDITH: Are you from around here, Hannah?
+
+HANNAH: Well, I’m actually from up North, from the upper valley. I lived in a farming town with my parents before I came down to join the DCD.
+
+HANNAH: Cattle and wheatfields are a lot different than streets on every corner, hehe.
+
+EDITH: Oh, you’re far from home! I’m glad to see some upstanding citizens in this country for once.
+
+HANNAH: Just doing my duty, ma’am!
+
+EDITH: I know you are, sweetheart. But, others…
+
+HANNAH: Ah… what do you mean by that?
+
+EDITH: The Troenans. My lord, those wretched devils. 
+
+EDITH: They smile at you, strike up a friendly conversation, and gain your trust. But, when you’re not looking, they stab you in the back. Just like that.
+
+EDITH: To think that so many of them were spying on us, before we even got into this war! That’s just what they do, the whole lot of them. 
+
+EDITH: I can’t believe we ever let them into this country. 
+
+EDITH: I’m glad the government did something about them, but now they're lettinghtem back out... 
+
+Ah…
+
+HANNAH: I never liked them either. I’m glad they’re locked up now.
+
+HANNAH: Traitors. The whole lot of them.
+
+EDITH: Truly. Two of my grandchildren are overseas now, fighting those wretches. I pray everyday they come back home safe and sound.
+
+EDITH: …
+
+EDITH: Oh, what am I saying? I’m sorry, sweetheart. There’s no use in me getting so worked up over those people.
+
+EDITH: I should tell you about my new garden! You said you helped your parents farm, right? The tomatoes I planted a while back are starting to grow beautifully…
+
+I pretend to nod and smile, answering the old lady back with only half-hearted energy.
+
+And to think you almost let your guard down around her. Just play along.
+
+I can feel myself growing more tired as we continue, trying to traverse through the conversation.
+
+What should I say next? How do I transition to a new topic?
+
+Should I laugh? Giggle?
+
+I feel like a puppet, dangling by its strings. Every single word, movement, is a conscious thought. 
+
+Breathe. Breathe. You’re going to be…
+
+<<sfx Yarn 1>>
+
+The bus screeches to a sudden halt. My head swings forward and bangs on the seat in front of me.
+
+HANNAH: Ow! Agh…
+
+EDITH: Oh my lord! Are you alright, dear?
+
+HANNAH: I’m… I'm alright, ma’am. Are you hurt?
+
+EDITH: I’m alright, but it looks like there’s a commotion outside.
+
+I hear the people inside the bus start bustling with concern.
+
+???: What's going on out there?
+
+???: Christ, there’s a pileup out there!
+
+I look outside the window.
+
+There are cars all over the road, crashed into one another. Oh gosh, is that a person lying on the road?
+
+CAPTAIN: Everyone, listen to me!
+
+The sound of the Captain’s voice brings me back from the scene.
+
+CAPTAIN: There’s been an accident on the street ahead. From what I’m hearing from the witnesses, it looks like the work of a drunk bastard. 
+
+CAPTAIN: Lucky for everyone, it looks like we’re in the right place at the right time. Grab your gear and head out.
+
+CAPTAIN: It may be sooner than expected, but this is what you’ve trained for.
+
+Without hesitation, we all grab our bags and start to rush out the streetcar door.
+
+It’s surreal. Just a few hours ago we graduated from class. Now we’re being thrown into the thick of it.
+
+HANNAH: Stay here, ma’am. We’ll be back soon.
+
+EDITH: You’ll do just fine, sweetheart. Go do what you do best.
+
+<<fade Yarn 1>>
+<<bg Yarn 6>>
+<<fade Yarn 0>>
+<<accessory Yarn 0 1>>
+
+
+We step out onto the street sidewalk, staring at the disaster in front of us. There’s cars and vehicles flipped over and on their sides, windows shattered, smoke spewing out of engines.
+
+<<enter Yarn 2>>
+
+CAPTAIN: Listen up! I understand this is sudden, but we can’t waste any time.
+
+CAPTAIN: I want a team to start searching for casualties among the wreckage. Keep the civilians calm, and bring the wounded to the street car.
+
+CAPTAIN: Everyone else, begin triage and medical care for the injured. I’ll call for an ambulance team to evacuate anyone in a stable condition.
+
+CAPTAIN: Expect to see fractures, lacerations, and heavy bleeding. Maybe even glass shards or metal fragments. 
+
+CAPTAIN: Keep calm, and do what you were trained to do. I have full faith in all of you. Get to work!
+
+Strapping on my helmet and bag, I rush into the scene. 
+
+This is it. This is really it. It’s one thing to train continuously on mannequins and actors, but this…
+
+Deep breaths. You can’t panic. People are counting on me.
+
+Let’s get started.                                   
+
+<<endScene Yarn>>
+===
+
+
+
+

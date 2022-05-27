@@ -527,11 +527,13 @@ MonoBehaviour:
   numbers: {fileID: 2141729590}
   fadeSpeed: 1
   chapters:
-  - {fileID: 7545569452688597077, guid: b47ddc7cf25721542b3785eafbd3d14a, type: 3}
   - {fileID: 7545569452688597077, guid: 938c6a2941e20f14a9edcb66ab8eab12, type: 3}
+  - {fileID: 7545569452688597077, guid: 1923a83b5e36b7e44ac74669aa4ca53d, type: 3}
+  - {fileID: 7545569452688597077, guid: bf68d3f83d45c734cab152d34bc04002, type: 3}
   chapterTitles:
-  - Start
   - Chapter-1-T-1
+  - Chapter-1-T-2
+  - Chapter-1-1-1
   Background_Renderer: {fileID: 1002560413}
   loadingScreen: {fileID: 2044180501}
   Backgrounds:

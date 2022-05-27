@@ -1,0 +1,252 @@
+
+title: Chapter-1-T-2
+tags: 
+position: 197,255
+---
+<<bg Yarn 3>>
+<<music Yarn 3>>
+<<mc Yarn 0>>
+<<startFade Yarn>>
+<<accessory Yarn 0 1>>
+At last.
+
+I stand back, exhausted and a bit in a daze.
+
+I wipe the blood- or rather, the red paint, off my hands. 
+
+<<enter Yarn 2>>
+<<expression Yarn 2 16>>
+CAPTAIN: That was a good show, son. 
+
+He lets a proud smile escape, and gives me a hefty pat on my shoulder.
+
+<<enter Yarn 1>>
+<<expression Yarn 1 1>>
+HANNAH: Eric! You did amazing!
+
+She hops up from the ground, dusting herself off and loosening the bandages I tied around her.
+
+<<expression Yarn 1 8>>
+ERIC: Ah… thanks.
+
+<<expression Yarn 1 2>>
+HANNAH: Of course!
+
+<<expression Yarn 0 40>>
+<<expression Yarn 1 8>>
+HANNAH: …hey, you’re looking a bit tired. You okay?
+
+<<expression Yarn 0 40>>
+ERIC: Yeah, I’m feeling a bit exhausted after that, honestly. I think I’ll go lay down for a moment.
+
+<<expression Yarn 0 24>>
+<<expression Yarn 2 40>>
+CAPTAIN: Not so fast. Where do you think you’re going, Wai?
+
+ERIC: Sir?
+
+CAPTAIN: Don’t you forget this is a partner exam. It’s your turn to be the patient. Get your rear in the backroom and get changed.
+
+<<expression Yarn 2 8>>
+HANNAH: Whoops. You can get your nap later. 
+
+<<expression Yarn 2 48>>
+HANNAH: Have fun~
+
+<<exit Yarn 1>>
+
+Dammit.
+
+<<music Yarn -1>>
+<<fade Yarn 1>>
+<<exit Yarn 0>>
+<<exit Yarn 2>>
+
+Hannah finished her practical with me in record time. 
+
+Despite her saying how worried she was, she passed with flying colors. 
+
+She probably could have gone a bit easier on the bandages. They were… tight, to say the least.
+
+After our turn, I moved my way to the back of the room, keeping quiet so as to not disturb the others during their practical. 
+
+People I’ve barely interacted with before give me a whispered “nice job” and “you did great”. Just common courtesies.
+
+I plaster a quick smile on my face and give a whispered “thanks” back in response. I can’t find the energy in me to mingle.
+
+I take a quick look back. Hannah’s already getting quite a bit of attention from the crowd, other students silently swarming her for any last minute tips.
+
+I sit back down on that old chair in the corner, and try to get some shut-eye.
+
+…
+
+<<music Yarn 1>>
+<<bg Yarn 0>>
+<<fade Yarn 0>>
+
+…no.
+
+No, not here. Not again. I can’t do this again.
+
+Fuck, I can barely move. I-I’m sinking. I can’t…
+
+Is that a light in the distance?
+
+Hey, Hey!
+
+Help me. Help me, please! Get me out of here-
+
+<<mc Yarn 0>>
+<<accessory Yarn 0>>
+<<bg Yarn 4>>
+<<music Yarn -1>>
+<<expression Yarn 0 32>>
+<<accessory Yarn 0 1>>
+
+…
+
+
+That dream again.
+
+<<expression Yarn 0 34>>
+…must be the post-test anxiety.
+
+<<expression Yarn 0 40>>
+
+I look around me. Everyone’s seated again, and I’m alone in the back. Guess no one wanted to disturb me. Funnily enough, I would have welcomed it.
+
+I spot Hannah seated at the front with some others. Must be her friends.
+
+<<enter Yarn 2>>
+<<expression Yarn 2 40>>
+CAPTAIN: Alright everyone. That wraps up the last of the practicals. 
+
+The Captain positions himself in the front of the room. He clears his throat, and after a small pause, he begins to speak.
+
+CAPTAIN: May I have your attention?
+
+<<music Yarn 0>>
+
+CAPTAIN: Ladies and Gentlemen, as I’m sure we all know, we live in times marked by violence. 
+
+CAPTAIN: Across the ocean, there are people dying every second to bullets. Bombs.
+
+CAPTAIN: Every year this war continues, the more destruction we bring upon ourselves.
+
+CAPTAIN: The duty of a medical technician is not to fan the flames of war. Rather, we serve to resist this brutality, and save those put in danger’s way. 
+
+CAPTAIN: We may not be at the front, but our job to ensure the safety of those at home is no less important.
+
+CAPTAIN: Mark my words, we do no harm. But we do know harm.
+
+CAPTAIN: I have seen how hard you have worked these past few months.
+
+<<expression Yarn 2 16>>
+<<expression Yarn 0 24>>
+
+CAPTAIN: I am proud to announce that every person in this room is now a medical technician of the Department of Civilian Defense. 
+
+<<expression Yarn 2 0>>
+CAPTAIN: Congratulations. You’ve earned it.
+
+The class stands up, cheering and clapping in a ferocious celebration.
+
+I can feel my hands go a bit numb.
+
+<<expression Yarn 0 32>>
+I… did it. I really did it.
+
+<<expression Yarn 0 40>>
+<<exit Yarn 2>>
+Everyone immediately begins to mingle and socialize with one another in the center of the room, Hannah included. I fumble by myself in the back of the room.
+
+It looks like there’s not much for me to do at this point.
+
+<<expression Yarn 0 42>>
+I get up from my seat, quietly trying to leave without making a fuss. Might as well try and get home early. I need some actual sleep.
+
+As I reach for the exit, a familiar voice interrupts me.
+
+HANNAH: Hey, Eric?
+
+<<expression Yarn 0 24>>
+ERIC: Hm?
+
+<<enter Yarn 1>>
+<<expression Yarn 1 8>>
+
+It’s Hannah. She caught up with me fast.
+
+<<expression Yarn 0 32>>
+I didn’t even think to say bye. God, I’m terrible…
+
+<<expression Yarn 1 9>>
+HANNAH: …I know I said it before back then, but you did great today.
+
+<<expression Yarn 0 8>>
+ERIC: Ah… thanks.
+
+<<expression Yarn 0 32>>
+ERIC: …
+
+<<expression Yarn 0 8>>
+ERIC: You did good too.
+
+ERIC: What was that about not feeling ready earlier?
+
+<<expression Yarn 1 11>>
+HANNAH: Thanks, hehe. Must have been the adrenaline that got me so pumped. 
+
+<<expression Yarn 0 32>>
+<<expression Yarn 1 8>>
+HANNAH: …
+
+<<expression Yarn 0 24>>
+<<expression Yarn 1 24>>
+HANNAH: Are you heading out now?
+
+<<expression Yarn 0 40>>
+ERIC: Yeah, I’m gonna catch the next streetcar home. I need to pack and get ready.
+
+ERIC: How about you?
+
+<<expression Yarn 1 0>>
+HANNAH: I’m taking the transport with everyone else who’s housed in the garrison, so I need to stay here. 
+
+<<expression Yarn 1 8>>
+HANNAH: I don’t want to keep you. You know I’m not local, but even I know the streetcars take forever to come around. 
+
+<<expression Yarn 1 2>>
+HANNAH: Make sure to rest! You need your sleep. I’ll see you later!
+
+ERIC: Y… yeah.
+
+ERIC: See you later.
+
+<<expression Yarn 1 3>>
+She flashes me a smile before she walks back to mingle with all the others.
+
+<<exit Yarn 1>>
+
+<<expression Yarn 0 32>>
+She’s a real handful, especially for someone like me who can barely handle conversation in general.
+ 
+<<expression Yarn 0 40>>
+But… I can tell she’s a sweet person. 
+
+Anyhow, she’s right. The streetcars are never around when you need them. 
+
+I open the door, and step outside to the world.
+
+<<fade Yarn 1>>
+
+I’m a medical technician now. The reality of it all still hasn’t quite set in.
+
+…
+
+<<expression Yarn 0 42>>
+I think they’d be proud.
+
+<<endScene>>
+===
+
