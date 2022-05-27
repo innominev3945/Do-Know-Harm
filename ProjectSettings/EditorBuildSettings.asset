@@ -17,4 +17,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Do Know Harm - Vivek.unity
     guid: 91f44f78bd168aa4bbd806da308ffaed
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: a60d17b0273bae242a47ef8e8b8db8fa, type: 2}
