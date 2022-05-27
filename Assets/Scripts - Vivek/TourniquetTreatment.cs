@@ -54,6 +54,8 @@ namespace TourniquetTreatmentClass
             bleedingWound.SetActive(false);
         }
 
+        public override string GetToolName() { return "Tourniquet"; }
+
         private void Update()
         {
             if (tourniquet.GetComponent<Tourniquet_Script>().GetHealed())

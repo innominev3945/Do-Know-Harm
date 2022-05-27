@@ -75,6 +75,8 @@ namespace ForcepsTreatmentClass
             disposal.SetActive(true);
         }
 
+        public override string GetToolName() { return "Forceps"; }
+
         // Update is called once per frame
         void Update()
         {

@@ -52,6 +52,8 @@ namespace ChestTreatmentClass
             chest.SetActive(true);
         }
 
+        public override string GetToolName() { return "Hand"; }
+
         // Update is called once per frame
         void Update()
         {

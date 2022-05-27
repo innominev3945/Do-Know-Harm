@@ -94,5 +94,10 @@ namespace InjuryClass
             }
         }
 
+        public string GetTreatableTool()
+        {
+            return treatments.Peek().GetToolName();
+        }
+
     }
 }

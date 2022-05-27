@@ -20,6 +20,7 @@ namespace PatientManagerClass
     public class PatientManager : MonoBehaviour
     {
         private string[] bodypartEnums = { "Head", "Chest", "Left Leg", "Right Leg", "Left Arm", "Right Arm" };
+        int currentView; // 1 = Viewing Head, 2 = Viewing Chest and Arms, 3 = Viewing Legs
 
         [SerializeField] VNVariableStorage numDeaths; // Storage for VN
         private bool[] patientStatus; // Mapping of the status (true = alive, false = dead) for all patients 
@@ -36,9 +37,8 @@ namespace PatientManagerClass
         private ButtonManager[] buttons; // Collection of the buttons used to switch between current patients in rotation
 
         private Queue<Tuple<Patient, Sprite, int>> nextPatients; // Patients that will enter after current patients are either healed or die
-        
-        private TextMeshProUGUI patientInjuryText;
-        private TextMeshProUGUI healthText;
+
+        private GameObject injuryInformation;
         private TextMeshProUGUI queueText; 
 
         private bool transitioning = false;
@@ -53,8 +53,7 @@ namespace PatientManagerClass
             currentPatient = null;
             bodyparts = null;
             patients = new Tuple<Patient, Sprite, int>[5];
-            patientInjuryText = GameObject.Find("Injury Information").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            healthText = GameObject.Find("Health").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            injuryInformation = GameObject.Find("Injury Information");
             queueText = GameObject.Find("Queue").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
             for (int i = 0; i < patients.Length; i++)
@@ -94,7 +93,6 @@ namespace PatientManagerClass
             {
                 currentPatient = patients[0];
                 bodyparts = currentPatient.Item1.GetBodyparts();
-                UpdateText();
                 gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
                 gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
             }
@@ -103,6 +101,8 @@ namespace PatientManagerClass
             currentPatient.Item1.StartTreatments();
 
             ViewHead();
+            currentView = 1;
+            UpdateInjuryInformation();
         }
 
         // Update is called once per frame
@@ -144,13 +144,13 @@ namespace PatientManagerClass
             } // If the current patient is healed, but there are no next patients to bring in, update the current patient's text to indicate that they're fully healed  
             else if (currentPatient.Item1.GetHealed() && nextPatients.Count == 0)
             { 
-                UpdateText();
+                //UpdateText();
             } // If the current patient is dead, but there are no next patients to bring in, update the current patient's text to indicate that they're dead 
             else if (currentPatient.Item1.GetHealth() == 0 && nextPatients.Count == 0)
             {
                 currentPatient.Item1.DestroyTreatmentObjects();
                 patientStatus[currentPatient.Item3] = false;
-                UpdateText();
+                //UpdateText();
             }
             // Switching out non-current patients
             for (int i = 0; i < patients.Length; i++)
@@ -200,10 +200,11 @@ namespace PatientManagerClass
             gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
             gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
             bodyparts = currentPatient.Item1.GetBodyparts();
-            UpdateText();
             currentPatient.Item1.UnpauseDamage();
             currentPatient.Item1.StartTreatments();
             ViewHead();
+            currentView = 1;
+            UpdateInjuryInformation();
             nextPatients.Dequeue();
             //yield return new WaitForSeconds(0.6f);
             transitioning = false;
@@ -222,8 +223,9 @@ namespace PatientManagerClass
             gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
             currentPatient.Item1.StartTreatments();
             bodyparts = currentPatient.Item1.GetBodyparts();
-            UpdateText();
             ViewHead();
+            currentView = 1;
+            UpdateInjuryInformation();
             yield return new WaitForSeconds(0.6f);
             transitioning = false;
         }
@@ -281,6 +283,8 @@ namespace PatientManagerClass
             Camera.main.transform.position = new Vector3(head.GetLocation().x, head.GetLocation().y, z);
             currentPatient.Item1.AbortTreatments();
             head.TreatInjuries();
+            currentView = 1;
+            UpdateInjuryInformation();
         }
 
         public void ViewChest()
@@ -292,6 +296,8 @@ namespace PatientManagerClass
             chest.TreatInjuries();
             bodyparts[4].TreatInjuries();
             bodyparts[5].TreatInjuries();
+            currentView = 2;
+            UpdateInjuryInformation();
         }
 
         public void ViewLegs()
@@ -303,6 +309,8 @@ namespace PatientManagerClass
             currentPatient.Item1.AbortTreatments();
             leftLeg.TreatInjuries();
             rightLeg.TreatInjuries();
+            currentView = 3;
+            UpdateInjuryInformation();
         }
         
         // Temporary method to initialize patients - in the future, create a read from file procedure to take data about a patient and initialize it
@@ -408,6 +416,71 @@ namespace PatientManagerClass
             nextPatients.Enqueue(new Tuple<Patient, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts6, 1f), Resources.Load<Sprite>("MaleBody"), 5));
         }
 
+        private void UpdateInjuryInformation()
+        {
+            for (int i = 0; i < injuryInformation.transform.childCount; i++)
+                injuryInformation.transform.GetChild(i).GetComponent<Image>().enabled = false;
+
+            if (currentPatient != null && !currentPatient.Item1.GetHealed() && currentPatient.Item1.GetHealth() != 0)
+            {
+                switch (currentView)
+                {
+                    case 1:
+                        List<string> headTools = bodyparts[0].GetToolNames();
+                        foreach (string tool in headTools)
+                        {
+                            if (tool == "Forceps")
+                                injuryInformation.transform.GetChild(0).GetComponent<Image>().enabled = true;
+                            else if (tool == "Gauze")
+                                injuryInformation.transform.GetChild(1).GetComponent<Image>().enabled = true;
+                            else if (tool == "Hand")
+                                injuryInformation.transform.GetChild(2).GetComponent<Image>().enabled = true;
+                            else if (tool == "Thermal Ointment")
+                                injuryInformation.transform.GetChild(3).GetComponent<Image>().enabled = true;
+                            else if (tool == "Bandage")
+                                injuryInformation.transform.GetChild(4).GetComponent<Image>().enabled = true;
+                        }
+                        break;
+                    case 2:
+                        List<string> chestArmTools = bodyparts[1].GetToolNames();
+                        chestArmTools.AddRange(bodyparts[4].GetToolNames());
+                        chestArmTools.AddRange(bodyparts[5].GetToolNames());
+                        foreach (string tool in chestArmTools)
+                        {
+                            if (tool == "Forceps")
+                                injuryInformation.transform.GetChild(0).GetComponent<Image>().enabled = true;
+                            else if (tool == "Gauze")
+                                injuryInformation.transform.GetChild(1).GetComponent<Image>().enabled = true;
+                            else if (tool == "Hand")
+                                injuryInformation.transform.GetChild(2).GetComponent<Image>().enabled = true;
+                            else if (tool == "Thermal Ointment")
+                                injuryInformation.transform.GetChild(3).GetComponent<Image>().enabled = true;
+                            else if (tool == "Bandage")
+                                injuryInformation.transform.GetChild(4).GetComponent<Image>().enabled = true;
+                        }
+                        break;
+                    case 3:
+                        List<string> legTools = bodyparts[2].GetToolNames();
+                        legTools.AddRange(bodyparts[3].GetToolNames());
+                        foreach (string tool in legTools)
+                        {
+                            if (tool == "Forceps")
+                                injuryInformation.transform.GetChild(0).GetComponent<Image>().enabled = true;
+                            else if (tool == "Gauze")
+                                injuryInformation.transform.GetChild(1).GetComponent<Image>().enabled = true;
+                            else if (tool == "Hand")
+                                injuryInformation.transform.GetChild(2).GetComponent<Image>().enabled = true;
+                            else if (tool == "Thermal Ointment")
+                                injuryInformation.transform.GetChild(3).GetComponent<Image>().enabled = true;
+                            else if (tool == "Bandage")
+                                injuryInformation.transform.GetChild(4).GetComponent<Image>().enabled = true;
+                        }
+                        break;
+                }
+            }
+        }
+
+        /*
         private void UpdateText()
         {
             if (currentPatient != null && !currentPatient.Item1.GetHealed())
@@ -433,5 +506,6 @@ namespace PatientManagerClass
             else if (currentPatient != null && currentPatient.Item1.GetHealed())
                 patientInjuryText.text = "Healed";
         }
+        */
     }
 }

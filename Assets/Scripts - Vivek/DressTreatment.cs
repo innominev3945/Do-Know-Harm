@@ -52,6 +52,8 @@ namespace DressTreatmentClass
             woundDress.SetActive(true);
         }
 
+        public override string GetToolName() { return "Bandage"; }
+
         // Update is called once per frame
         void Update()
         {
