@@ -16,7 +16,7 @@ public class VNManager : MonoBehaviour
     [SerializeField] DialogueRunner dialogue_runner;
     [SerializeField] CharacterManager characters;
     [SerializeField] jsonSaver storage;
-    [SerializeField] internal GameObject LoadScreen = null;
+    [SerializeField] public GameObject LoadScreen;
 
     //fading speed
     [SerializeField] private float fadeSpeed;
