@@ -26,6 +26,7 @@ public class EndOfGPScene : MonoBehaviour
     IEnumerator EndOfScene()
     {
         yield return new WaitForSeconds(5f);
-        GetComponent<ToScene>().LoadSelectedScene();
+        GetComponent<VNSceneNumbers>().setCurrentScene(GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
+        GetComponent<ToScene>().LoadSceneDepends();
     }
 }
