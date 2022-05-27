@@ -72,6 +72,8 @@ namespace BurnTreatmentClass
             burnWound.SetActive(true);
         }
 
+        public override string GetToolName() { return "Thermal Ointment"; }
+
         // Update is called once per frame
         void Update()
         {

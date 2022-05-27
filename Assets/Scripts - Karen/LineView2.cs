@@ -273,23 +273,30 @@ namespace Yarn.Unity
         internal TextMeshProUGUI lineText = null;
 
         [SerializeField]
-        public TextMeshProUGUI fadedText;
+        internal TextMeshProUGUI fadedText = null;
 
         [SerializeField]
-        public TextMeshProUGUI unfadedText;
+        internal TextMeshProUGUI unfadedText = null;
 
-        public void setLineText(int n)
+        [SerializeField] SpriteRenderer fadeScreen;
+
+        private int line_advancements = 0;
+
+
+        public void setLineText(int num)
         {
-            if (n == 0)
+            if (num == 1)
             {
-                lineText = fadedText;
+                fadedText.text = " ";
+                lineText = unfadedText;
             }
             else
             {
-                lineText = unfadedText;
-                fadedText.text = " ";
+                lineText = fadedText;
             }
         }
+
+
 
         /// <summary>
         /// Controls whether the <see cref="lineText"/> object will show the
@@ -424,7 +431,6 @@ namespace Yarn.Unity
 
         private void Start()
         {
-            lineText = fadedText;
             canvasGroup.alpha = 0;
         }
 
@@ -468,7 +474,6 @@ namespace Yarn.Unity
             
             // for now we are going to just immediately show everything
             // later we will make it fade in
-
             lineText.gameObject.SetActive(true);
             canvasGroup.gameObject.SetActive(true);
 
@@ -517,12 +522,30 @@ namespace Yarn.Unity
             StartCoroutine(RunLineInternal(dialogueLine, onDialogueLineFinished));
         }
 
+        public int getLineNumber()
+        {
+            return line_advancements;
+        }
+
+        public void resetLineNumber()
+        {
+            line_advancements = 0;
+        }
+
+        public void toggleTypewriter()
+        {
+            useTypewriterEffect = !useTypewriterEffect;
+        }
+
         private IEnumerator RunLineInternal(LocalizedLine dialogueLine, Action onDialogueLineFinished)
         {
             IEnumerator PresentLine()
             {
                 lineText.gameObject.SetActive(true);
                 canvasGroup.gameObject.SetActive(true);
+
+                //Debug.Log("Current line advancement: " + line_advancements);
+                line_advancements++;
 
                 // Hide the continue button until presentation is complete (if
                 // we have one).
@@ -637,6 +660,23 @@ namespace Yarn.Unity
                 // coroutine.
                 yield break;
             }
+            
+                
+                if (lineText == fadedText && fadeScreen.color.a < 0.99)
+                {
+                    Debug.Log("autoAdvance not dark screen detected");
+                    Color objectColor = fadeScreen.color;
+                    objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
+                    fadeScreen.color = objectColor;
+                }
+                else if (lineText == unfadedText && fadeScreen.color.a > 0.01)
+                {
+                    Debug.Log("autoAdvance not clear screen detected");
+                    Color objectColor = fadeScreen.color;
+                    objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
+                    fadeScreen.color = objectColor;
+                }
+            
 
             // Our presentation is complete; call the completion handler.
             onDialogueLineFinished();
@@ -679,4 +719,3 @@ namespace Yarn.Unity
         }
     }
 }
-

@@ -47,23 +47,31 @@ namespace GauzeTreatmentClass
         {
             treatmentStarted = true;
             //gauze.SetActive(true);
-            bloodPool.SetActive(true);
-            bleedingWound.SetActive(true);
+            if (bloodPool != null)
+                bloodPool.SetActive(true);
+            if (bleedingWound != null)
+                bleedingWound.SetActive(true);
         }
 
         public override void StopTreatment()
         {
             treatmentStarted = false;
             //gauze.SetActive(false);
-            bloodPool.SetActive(false);
-            bleedingWound.SetActive(false);
+            if (bloodPool != null)
+                bloodPool.SetActive(false);
+            if (bleedingWound != null)
+                bleedingWound.SetActive(false);
         }
 
         public override void ShowInjury()
         {
-            bloodPool.SetActive(true);
-            bleedingWound.SetActive(true);
+            if (bloodPool != null)
+                bloodPool.SetActive(true);
+            if (bleedingWound != null)
+                bleedingWound.SetActive(true);
         }
+
+        public override string GetToolName() { return "Gauze";  }
 
         // Update is called once per frame
         void Update()

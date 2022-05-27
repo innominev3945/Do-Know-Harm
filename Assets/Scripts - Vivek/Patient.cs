@@ -136,5 +136,13 @@ namespace PatientClass
                 amt += part.GetNumInjuries();
             return amt;
         }
+
+        public List<string> GetToolNames()
+        {
+            List<string> ret = new List<string>();
+            foreach (Bodypart part in bodyparts)
+                ret.AddRange(part.GetToolNames());
+            return ret;
+        }
     }
 }

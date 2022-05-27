@@ -105,6 +105,14 @@ namespace BodypartClass
             return ret;
         }
 
+        public List<string> GetToolNames()
+        {
+            List<string> ret = new List<string>();
+            foreach (Injury inj in injuries)
+                ret.Add(inj.GetTreatableTool());
+            return ret;
+        }
+
         // Update functionality that is called every timeInterval
         void Update()
         {
