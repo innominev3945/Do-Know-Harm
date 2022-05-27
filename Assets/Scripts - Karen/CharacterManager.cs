@@ -26,9 +26,13 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] SpriteRenderer CharacterExpression_1;
     [SerializeField] SpriteRenderer CharacterExpression_2;
     [SerializeField] SpriteRenderer CharacterExpression_3;
+    [SerializeField] SpriteRenderer CharacterAccessory_1;
+    [SerializeField] SpriteRenderer CharacterAccessory_2;
+    [SerializeField] SpriteRenderer CharacterAccessory_3;
 
     [SerializeField] SpriteRenderer MC;
     [SerializeField] SpriteRenderer MCExpr;
+    [SerializeField] SpriteRenderer MCAccessory;
     
     
 
@@ -46,6 +50,13 @@ public class CharacterManager : MonoBehaviour
     public Sprite[] CaptainOutfits;
     public Sprite[] ElderlyLady1Outfits;
     public Sprite[] AmphiteranMan1Outfits;
+
+    public Sprite[] HannahAccessories;
+    public Sprite[] EricAccessories;
+    public Sprite[] CaptainAccessories;
+    public Sprite[] ElderlyLady1Accessories;
+    public Sprite[] AmphiteranMan1Accessories;
+    
     
 
     //temporary storage to change sprites of a character
@@ -55,6 +66,8 @@ public class CharacterManager : MonoBehaviour
     private Sprite[] MCExpressions;
 
     private Sprite[] MCOutfit;
+
+    private Sprite[] MCAccessories;
     //array of sprite arrays for the sprites?
 
     //for each character, if they aren't loaded, stores -1
@@ -115,28 +128,33 @@ public class CharacterManager : MonoBehaviour
         //changes character sprite to the new character
         if(whichToChange == 0)
         {
-            StartCoroutine(ExitFade(CharacterRenderer_1, CharacterExpression_1));
+            StartCoroutine(ExitFade(CharacterRenderer_1, CharacterExpression_1, CharacterAccessory_1));
             temp = getCharacterOutfitArray(newCharacter);
             CharacterRenderer_1.sprite = temp[0];
             temp = getCharacterExpressionArray(newCharacter);
             CharacterExpression_1.sprite = temp[0];
-            StartCoroutine(EnterFade(CharacterRenderer_1, CharacterRenderer_1));
+            temp = getCharacterAccessoryArray(newCharacter);
+            StartCoroutine(EnterFade(CharacterRenderer_1, CharacterExpression_1, CharacterAccessory_1));
         }else if (whichToChange == 1)
         {
-            StartCoroutine(ExitFade(CharacterRenderer_2, CharacterExpression_2));
+            StartCoroutine(ExitFade(CharacterRenderer_2, CharacterExpression_2, CharacterAccessory_2));
             temp = getCharacterOutfitArray(newCharacter);
             CharacterRenderer_2.sprite = temp[0];
             temp = getCharacterExpressionArray(newCharacter);
             CharacterExpression_2.sprite = temp[0];
-            StartCoroutine(EnterFade(CharacterRenderer_2, CharacterExpression_2));
+            temp = getCharacterAccessoryArray(newCharacter);
+            CharacterAccessory_2.sprite = temp[0];
+            StartCoroutine(EnterFade(CharacterRenderer_2, CharacterExpression_2, CharacterAccessory_2));
         }else
         {
-            StartCoroutine(ExitFade(CharacterRenderer_3, CharacterExpression_3));
+            StartCoroutine(ExitFade(CharacterRenderer_3, CharacterExpression_3, CharacterAccessory_3));
             temp = getCharacterOutfitArray(newCharacter);
             CharacterRenderer_3.sprite = temp[0];
             temp = getCharacterExpressionArray(newCharacter);
             CharacterExpression_3.sprite = temp[0];
-            StartCoroutine(EnterFade(CharacterRenderer_3, CharacterExpression_3));
+            temp = getCharacterAccessoryArray(newCharacter);
+            CharacterAccessory_3.sprite = temp[0];
+            StartCoroutine(EnterFade(CharacterRenderer_3, CharacterExpression_3, CharacterAccessory_3));
         }
     
     }
@@ -176,6 +194,20 @@ public class CharacterManager : MonoBehaviour
             return AmphiteranMan1Outfits;
     }
 
+     private Sprite[] getCharacterAccessoryArray(int characterNumber)
+    {
+        if (characterNumber == 1)
+            return HannahAccessories;
+        if (characterNumber == 0)
+            return EricAccessories;
+        if (characterNumber == 2)
+            return CaptainAccessories;
+        if (characterNumber == 3)
+            return ElderlyLady1Accessories;
+        else
+            return AmphiteranMan1Accessories;
+    }
+
     void Awake()
     {
         for (int i = 0; i < numCharacters; i++)
@@ -188,7 +220,7 @@ public class CharacterManager : MonoBehaviour
 
     public void loadCharacter(int n)
     {
-        Debug.Log("Tryna load a character: " + n);
+        //Debug.Log("Tryna load a character: " + n);
         currCharacterNum++;
         //If there aren't any characters, load in character to center
         if (currCharacterNum == 1)
@@ -198,6 +230,7 @@ public class CharacterManager : MonoBehaviour
             //fade out to hide what's happening
             StartCoroutine(FadeOut(CharacterRenderer_1));
             StartCoroutine(FadeOut(CharacterExpression_1));
+            StartCoroutine(FadeOut(CharacterAccessory_1));
             
             //get the character's default base visual (remove later)
             //CharacterRenderer_1.sprite = CharacterBases[n];
@@ -207,14 +240,19 @@ public class CharacterManager : MonoBehaviour
             temp = getCharacterOutfitArray(n);
             characterLoads[n] = 0;
             CharacterRenderer_1.sprite = temp[0];
+        
             
 
 
             //Loads the expression array of the character
             temp = getCharacterExpressionArray(n);
-            characterLoads[n] = 0;
+            //characterLoads[n] = 0;
             CharacterExpression_1.sprite = temp[0];
-            StartCoroutine(EnterFade(CharacterRenderer_1, CharacterExpression_1));
+            
+            temp = getCharacterOutfitArray(n);
+            CharacterAccessory_1.sprite = temp[0];
+            
+            StartCoroutine(EnterFade(CharacterRenderer_1, CharacterExpression_1, CharacterAccessory_1));
             // FadeIn(CharacterExpression_1);
             // FadeIn(CharacterRenderer_1);
             loadedCharacters[0] = n;
@@ -226,9 +264,9 @@ public class CharacterManager : MonoBehaviour
         //and load the new character in
         else if (currCharacterNum == 2)
         {
-            CharacterRenderer_1.transform.position += Vector3.left * 500.0f;
+            CharacterRenderer_1.transform.position += Vector3.left * 400.0f;
 
-            CharacterRenderer_2.transform.position += Vector3.right * 500.0f;
+            CharacterRenderer_2.transform.position += Vector3.right * 400.0f;
 
 
             
@@ -236,6 +274,7 @@ public class CharacterManager : MonoBehaviour
             //hide all the nasty deets from the player
             StartCoroutine(FadeOut(CharacterRenderer_2));
             StartCoroutine(FadeOut(CharacterExpression_2));
+            StartCoroutine(FadeOut(CharacterAccessory_2));
             
             //load the base default sprite (TO REMOVE)
             //CharacterRenderer_2.sprite = CharacterBases[n];
@@ -248,10 +287,13 @@ public class CharacterManager : MonoBehaviour
            
 
             temp = getCharacterExpressionArray(n);
-            characterLoads[n] = 1;
+            //characterLoads[n] = 1;
             CharacterExpression_2.sprite = temp[0];
 
-            StartCoroutine(EnterFade(CharacterRenderer_2, CharacterExpression_2));
+            temp = getCharacterAccessoryArray(n);
+            CharacterAccessory_2.sprite = temp[0];
+
+            StartCoroutine(EnterFade(CharacterRenderer_2, CharacterExpression_2, CharacterAccessory_2));
             // FadeIn(CharacterRenderer_2);
             // FadeIn(CharacterExpression_2);
 
@@ -263,33 +305,32 @@ public class CharacterManager : MonoBehaviour
         }
         else if (currCharacterNum == 3)
         {
-            CharacterRenderer_1.transform.position += Vector3.left * 100.0f;
-            CharacterRenderer_2.transform.position += Vector3.left * 500.0f;
+            CharacterRenderer_1.transform.position += Vector3.left * 200.0f;
+            CharacterRenderer_2.transform.position += Vector3.left * 400.0f;
             CharacterRenderer_3.transform.position += Vector3.right * 600.0f;
 
 
             StartCoroutine(FadeOut(CharacterRenderer_3));
             StartCoroutine(FadeOut(CharacterExpression_3));
+            StartCoroutine(FadeOut(CharacterAccessory_3));
 
-            //TO REMOVE
-            //CharacterRenderer_3.sprite = CharacterBases[n];
 
-            //TO ADD
-            
+            characterLoads[n] = 2;   
             temp = getCharacterOutfitArray(n);
-            characterLoads[n] = 0;
             CharacterRenderer_1.sprite = temp[0];
             
 
 
             temp = getCharacterExpressionArray(n);
-            characterLoads[n] = 2;            
-            CharacterRenderer_3.sprite = temp[0];
+                     
+            CharacterExpression_3.sprite = temp[0];
 
 
-            // FadeIn(CharacterRenderer_3);
-            // FadeIn(CharacterExpression_3);
-            StartCoroutine(EnterFade(CharacterRenderer_3, CharacterExpression_3));
+            temp = getCharacterAccessoryArray(n);
+            CharacterAccessory_3.sprite = temp[0];
+
+
+            StartCoroutine(EnterFade(CharacterRenderer_3, CharacterExpression_3, CharacterAccessory_3));
 
             loadedCharacters[2] = n;
             //GameObject.transform(some position)
@@ -317,39 +358,45 @@ public class CharacterManager : MonoBehaviour
         {
             if (characterLocation == 2)
             {
-                CharacterRenderer_1.transform.position += Vector3.right * 100.0f;
-                CharacterRenderer_2.transform.position += Vector3.right * 500.0f;
+                CharacterRenderer_1.transform.position += Vector3.right * 200.0f;
+                CharacterRenderer_2.transform.position += Vector3.right * 400.0f;
                 CharacterRenderer_3.transform.position += Vector3.left * 600.0f;
                 CharacterRenderer_3.sprite = null;
                 CharacterExpression_3.sprite = null;
+                CharacterAccessory_3.sprite = null;
                 characterLoads[n] = -1;
                 loadedCharacters[2] = -1;
             }else if (characterLocation == 1)
             {
-                CharacterRenderer_1.transform.position += Vector3.right * 100.0f;
-                CharacterRenderer_2.transform.position += Vector3.right * 500.0f;
+                CharacterRenderer_1.transform.position += Vector3.right * 200.0f;
+                CharacterRenderer_2.transform.position += Vector3.right * 400.0f;
                 CharacterRenderer_3.transform.position += Vector3.left * 600.0f;
                 CharacterRenderer_2.sprite = CharacterRenderer_3.sprite;
                 CharacterExpression_2.sprite = CharacterExpression_3.sprite;
+                CharacterAccessory_2.sprite = CharacterAccessory_3.sprite;
                 CharacterRenderer_3.sprite = null;
                 CharacterExpression_3.sprite = null;
-                characterLoads[loadedCharacters[1]] = -1;
+                CharacterAccessory_3.sprite = null;
+                characterLoads[n] = -1;
                 characterLoads[loadedCharacters[2]] = 1;
                 loadedCharacters[1] = loadedCharacters[2];
                 loadedCharacters[2] = -1;
             }
             else if (characterLocation == 0)
             {
-                CharacterRenderer_1.transform.position += Vector3.right * 100.0f;
-                CharacterRenderer_2.transform.position += Vector3.right * 500.0f;
+                CharacterRenderer_1.transform.position += Vector3.right * 200.0f;
+                CharacterRenderer_2.transform.position += Vector3.right * 400.0f;
                 CharacterRenderer_3.transform.position += Vector3.left * 600.0f;
                 CharacterRenderer_1.sprite = CharacterRenderer_2.sprite;
                 CharacterExpression_1.sprite = CharacterExpression_2.sprite;
+                CharacterAccessory_1.sprite = CharacterAccessory_2.sprite;
                 CharacterRenderer_2.sprite = CharacterRenderer_3.sprite;
                 CharacterExpression_2.sprite = CharacterExpression_3.sprite;
+                CharacterAccessory_2.sprite = CharacterAccessory_3.sprite;
                 CharacterRenderer_3.sprite = null;
                 CharacterExpression_3.sprite = null;
-                characterLoads[loadedCharacters[0]] = -1;
+                CharacterAccessory_3.sprite = null;
+                characterLoads[n] = -1;
                 characterLoads[loadedCharacters[1]] = 0;
                 characterLoads[loadedCharacters[2]] = 1;
                 loadedCharacters[0] = loadedCharacters[1];
@@ -361,20 +408,23 @@ public class CharacterManager : MonoBehaviour
         {
             if (characterLocation == 1)
             {
-                CharacterRenderer_1.transform.position += Vector3.right * 500.0f;
-                CharacterRenderer_2.transform.position += Vector3.left * 500.0f;
+                CharacterRenderer_1.transform.position += Vector3.right * 400.0f;
+                CharacterRenderer_2.transform.position += Vector3.left * 400.0f;
                 CharacterRenderer_2.sprite = null;
                 CharacterExpression_2.sprite = null;
+                CharacterAccessory_2.sprite = null;
                 characterLoads[n] = -1;
                 loadedCharacters[1] = -1;
             }else if (characterLocation == 0)
             {
-                CharacterRenderer_1.transform.position += Vector3.right * 500.0f;
-                CharacterRenderer_2.transform.position += Vector3.left * 500.0f;
+                CharacterRenderer_1.transform.position += Vector3.right * 400.0f;
+                CharacterRenderer_2.transform.position += Vector3.left * 400.0f;
                 CharacterRenderer_1.sprite = CharacterRenderer_2.sprite;
                 CharacterExpression_1.sprite = CharacterExpression_2.sprite;
+                CharacterAccessory_1.sprite = CharacterAccessory_2.sprite;
                 CharacterRenderer_2.sprite = null;
                 CharacterExpression_2.sprite = null;
+                CharacterAccessory_2.sprite = null;
                 characterLoads[n] = -1;
                 characterLoads[loadedCharacters[1]] = 0;
                 loadedCharacters[0] = loadedCharacters[1];
@@ -383,9 +433,10 @@ public class CharacterManager : MonoBehaviour
             return;
         }else if (currCharacterNum == 0)
         {
-            Debug.Log("Removed Char 0");        
+            //Debug.Log("Removed Char 0");        
             CharacterRenderer_1.sprite = null;
             CharacterExpression_1.sprite = null;
+            CharacterAccessory_1.sprite = null;
             characterLoads[n] = -1;
             loadedCharacters[0] = -1;
             return;
@@ -449,6 +500,32 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+    public void changeAccessory(int characterNumber, int accessoryNumber)
+    {
+        
+        if (characterNumber == whichMC)
+        {
+            MCAccessory.sprite = MCAccessories[accessoryNumber];
+            return;
+        }
+        temp = getCharacterAccessoryArray(characterNumber);
+        int whereCharacter = characterLoads[characterNumber];
+        
+        if (whereCharacter == -1)
+        {
+            return;
+        }else if (whereCharacter == 0)
+        {
+            CharacterAccessory_1.sprite = temp[accessoryNumber];
+        }else if (whereCharacter == 1)
+        {
+            CharacterAccessory_2.sprite = temp[accessoryNumber];
+        }else if (whereCharacter == 2)
+        {
+            CharacterAccessory_3.sprite = temp[accessoryNumber];
+        }
+    }
+
     public void loadMC(int n)
     {
         whichMC = n;
@@ -457,23 +534,50 @@ public class CharacterManager : MonoBehaviour
             //MCOutfit = HannahOutfit;
             MCExpressions = HannahExpressions;
             MCOutfit = HannahOutfits;
+            MCAccessories = HannahAccessories;
         }else
         {
             //MCOutfit = EricOutfit;
             MCExpressions = EricExpressions;
             MCOutfit = EricOutfits;
+            MCAccessories = EricAccessories;
         }
 
         FadeOut(MC);
         FadeOut(MCExpr);
         MC.sprite = MCOutfit[0];
         MCExpr.sprite = MCExpressions[0];
+        MCAccessory.sprite = MCAccessories[0];
         
         // FadeIn(MC);
         // FadeIn(MCExpr);
-        StartCoroutine(EnterFade(MC, MCExpr));
+        StartCoroutine(EnterFade(MC, MCExpr, MCAccessory));
         return;
     }
+
+
+    public void clearCharacters()
+    {
+        if (loadedCharacters[2] != -1)
+        {
+            unloadCharacter(loadedCharacters[2]);
+        }
+        if (loadedCharacters[1] != -1)
+        {
+            unloadCharacter(loadedCharacters[1]);
+        }
+        if (loadedCharacters[0] != -1)
+        {
+            unloadCharacter(loadedCharacters[0]);
+        }
+        if (MCExpr.sprite != null)
+        {
+            MC.sprite = null;
+            MCExpr.sprite = null;
+            MCAccessory.sprite = null;
+        }
+    }
+
     
     IEnumerator FadeOut(SpriteRenderer spriteRenderer){
         Color objectColor = spriteRenderer.color;
@@ -503,35 +607,43 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    IEnumerator EnterFade(SpriteRenderer outfitRenderer, SpriteRenderer expressionRenderer){
+    IEnumerator EnterFade(SpriteRenderer outfitRenderer, SpriteRenderer expressionRenderer, SpriteRenderer accessoryRenderer){
         //Debug.Log("NYAAAAAAAAAH Attempted Fade");
         while (expressionRenderer.color.a < 1)
         {
             Color outfitColor = outfitRenderer.color;
             Color expressionColor = expressionRenderer.color;
+            Color accessoryColor = accessoryRenderer.color;
             float outfitFadeAmount = outfitColor.a + (CharacterFadeInSpeed * Time.deltaTime);
             float expressionFadeAmount = expressionColor.a + (CharacterFadeInSpeed * Time.deltaTime);
+            float accessoryFadeAmount = accessoryColor.a + (CharacterFadeInSpeed * Time.deltaTime);
 
             outfitColor = new Color(outfitColor.r, outfitColor.g, outfitColor.b, outfitFadeAmount);
             expressionColor = new Color(expressionColor.r, expressionColor.g, expressionColor.b, expressionFadeAmount);
+            accessoryColor = new Color(accessoryColor.r, accessoryColor.g, accessoryColor.b, accessoryFadeAmount);
             outfitRenderer.color = outfitColor;
             expressionRenderer.color = expressionColor;
+            accessoryRenderer.color = accessoryColor;
             yield return null;
         }
     }
-    IEnumerator ExitFade(SpriteRenderer outfitRenderer, SpriteRenderer expressionRenderer){
+    IEnumerator ExitFade(SpriteRenderer outfitRenderer, SpriteRenderer expressionRenderer, SpriteRenderer accessoryRenderer){
         //Debug.Log("NYAAAAAAAAAH Attempted Fade");
         while (outfitRenderer.color.a > 0)
         {
             Color outfitColor = outfitRenderer.color;
             Color expressionColor = expressionRenderer.color;
+            Color accessoryColor = accessoryRenderer.color;
             float outfitFadeAmount = outfitColor.a - (CharacterFadeInSpeed * Time.deltaTime);
             float expressionFadeAmount = expressionColor.a - (CharacterFadeInSpeed * Time.deltaTime);
+            float accessoryFadeAmount = accessoryColor.a - (CharacterFadeInSpeed * Time.deltaTime);
 
             outfitColor = new Color(outfitColor.r, outfitColor.g, outfitColor.b, outfitFadeAmount);
             expressionColor = new Color(expressionColor.r, expressionColor.g, expressionColor.b, expressionFadeAmount);
+            accessoryColor = new Color(accessoryColor.r, accessoryColor.g, accessoryColor.b, accessoryFadeAmount);
             outfitRenderer.color = outfitColor;
             expressionRenderer.color = expressionColor;
+            accessoryRenderer.color = accessoryColor;
             yield return null;
         }
     }

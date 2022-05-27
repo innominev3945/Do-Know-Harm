@@ -89,6 +89,7 @@ I scoop up my book for some last minute studying on the ride. Time to get going.
 <<music Yarn 4>>
 <<ambience Yarn 1>>
 <<mc Yarn 0>>
+<<accessory Yarn 0 1>>
 
 
 <<expression Yarn 0 42>>
@@ -358,8 +359,7 @@ We all know what that noise is.
 
 The door creaks open, and he walks in.
 
-???
-Attention!
+???: Attention!
 
 Without delay, as a single entity, we all stand and salute the Captain.
 
@@ -518,4 +518,6 @@ It’s time to do what I’ve been training to do for all these months. Let’s 
 
 <<fade Yarn 0>>
 
+
+<<endScene Yarn>>
 ===

@@ -280,6 +280,8 @@ namespace Yarn.Unity
 
         [SerializeField] SpriteRenderer fadeScreen;
 
+        private int line_advancements = 0;
+
 
         public void setLineText(int num)
         {
@@ -520,12 +522,30 @@ namespace Yarn.Unity
             StartCoroutine(RunLineInternal(dialogueLine, onDialogueLineFinished));
         }
 
+        public int getLineNumber()
+        {
+            return line_advancements;
+        }
+
+        public void resetLineNumber()
+        {
+            line_advancements = 0;
+        }
+
+        public void toggleTypewriter()
+        {
+            useTypewriterEffect = !useTypewriterEffect;
+        }
+
         private IEnumerator RunLineInternal(LocalizedLine dialogueLine, Action onDialogueLineFinished)
         {
             IEnumerator PresentLine()
             {
                 lineText.gameObject.SetActive(true);
                 canvasGroup.gameObject.SetActive(true);
+
+                //Debug.Log("Current line advancement: " + line_advancements);
+                line_advancements++;
 
                 // Hide the continue button until presentation is complete (if
                 // we have one).

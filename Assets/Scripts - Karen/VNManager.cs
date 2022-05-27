@@ -5,46 +5,84 @@ using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using Yarn.Unity;
+using System.IO;
 
 public class VNManager : MonoBehaviour
 {
+    //Scripts needed
     [SerializeField] LineView2 lineViewer;
-    
     [SerializeField] AudioManager audio;
     [SerializeField] SpriteRenderer fadeScreen;
+    [SerializeField] DialogueRunner dialogue_runner;
+    [SerializeField] CharacterManager characters;
+    [SerializeField] jsonSaver storage;
+
+    //fading speed
     [SerializeField] private float fadeSpeed;
 
-    private int currentFade = 0;
+    
+    //Yarn scenes
+    [SerializeField] YarnProject[] chapters;
+    [SerializeField] string[] chapterTitles;
 
-    static Color fadeColor;
-
-    private bool badFade = false;
-
-    void Start()
-    {
-        fadeColor = fadeScreen.color;
-        //StartCoroutine(FadeToBlack());
-    }
-
-    public Sprite[] Backgrounds;
-
-    private Coroutine fading;
-
-    private bool isFading {get{return fading != null;}}
 
     [SerializeField] SpriteRenderer Background_Renderer;
-    // Start is called before the first frame update
+    //VN backgrounds
+    public Sprite[] Backgrounds;
+
+    //saved scenes
+    private static int savedScene = 0;
+    private static int savedLine = 0;
+
+    //VN JSON save file location
+    string filepath { get { return Application.persistentDataPath + Path.DirectorySeparatorChar + "playerSave.json" ;} }
+
+    //current scene number (set before starting scene)
+    public static int current_scene = 1;
+
+    //starting fade number
+    private int currentFade = 0;
+
+    //keep track of fade screen's color
+    static Color fadeColor;
+
+    //checks for a bad fade (user is a click maniac)
+    private bool badFade = false;
+
+    //starts based on current scene
+    void Start()
+    {
+        //Sets the beginning fade screen on or off
+        fadeColor = fadeScreen.color;
+        //Loads up the scene signified by current_scene
+        LoadScene(current_scene);
+        //loadSave();
+        //resets line tracker to be used for loading and saving stuffs
+        lineViewer.resetLineNumber();
+
+    }
+
+    
+    //to keep track of fading coroutines
+    private Coroutine fading;
+
+    //checks wether in process of fading
+    private bool isFading {get{return fading != null;}}
+
+
+   
+    // changes background of VN
     public void changeBG(int n){
         Background_Renderer.sprite = Backgrounds[n];
         return;
     }
 
-    // [YarnCommand("custom_wait")]
-    // public void CustomWait()
-    // {
-    //     waiting = StartCoroutine(waitz());
-    // }
 
+    //*************************************
+    //fades to black if 0, unfades if 1
+    //Format in yarn:
+    //<<fade ObjectName fadeDirection>>
+    //*************************************
     [YarnCommand("fade")]
     public void Fade(int fadeNumber)
     {
@@ -67,6 +105,7 @@ public class VNManager : MonoBehaviour
         
     }
 
+    //Sets the beginning fade
     [YarnCommand("StartFade")]
     public void startingFade(int fadeNumber)
     {
@@ -86,12 +125,55 @@ public class VNManager : MonoBehaviour
         }
     }
 
-    // IEnumerator waitz(){
-    //     float waitTime = 5.0f;
-    //     yield return new WaitForSeconds(waitTime);
-    //     StopWaiting();
-    // }
+    //Loads the save file saved by the user
+    public void loadSave()
+    {
+        characters.clearCharacters();
+        storage.LoadFromFile(filepath);
+        int saved_scene = 0;
+        if (storage.TryGetValue<float>("$saved_scene", out var output))
+        {
+            //Debug.Log("output: {output}");
+            savedScene = Convert.ToInt32(output);
+        }
+        int saved_line = 0;
+        if (storage.TryGetValue<float>("$saved_line", out var output2))
+        {
+            //Debug.Log("output2: {output2}");
+            savedLine = Convert.ToInt32(output2);
+        }
+        lineViewer.toggleTypewriter();
+        lineViewer.resetLineNumber();
+        dialogue_runner.Stop();
+        LoadScene(savedScene);
+        //int temp_line = 0;
+        StartCoroutine(traverseLines());
+        Debug.Log("Saved Lines:" + savedLine);
+        if (currentFade == 1)
+        {
+            Color objectColor = fadeScreen.color;
+            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
+            fadeScreen.color = objectColor;
+        }
+        else
+        {
+            Color objectColor = fadeScreen.color;
+            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
+            fadeScreen.color = objectColor;
+        }
+        lineViewer.toggleTypewriter();
+        //currLine = savedLine;
+    }
 
+    //saves progress
+    public void saveLine()
+    {
+        storage.SetValue("$saved_scene", (float)current_scene);
+        storage.SetValue("$saved_line", (float)(lineViewer.getLineNumber() * 2 + 2));
+        storage.SaveToFile(filepath);
+    }
+
+    //stops fading Coroutine
     private void StopFading()
     {
         if(isFading)
@@ -102,7 +184,7 @@ public class VNManager : MonoBehaviour
     }
 
 
-
+    //Continues the VN scene
     void OnClick(InputValue value)
     {
         if (isFading && badFade)
@@ -115,40 +197,44 @@ public class VNManager : MonoBehaviour
         {   
             if(currentFade == 1 && fadeScreen.color.a > 0.01)
             {
-                Debug.Log("Bad fade detected");
+                //Debug.Log("Bad fade detected");
                 badFade = true;
                 Color objectColor = fadeScreen.color;
                 objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
                 fadeScreen.color = objectColor;
                 //StopFading();
-                Debug.Log("IsFading: " + isFading);
-                Debug.Log("Current fadeScreen color a 1: " + fadeScreen.color.a);
+                //Debug.Log("IsFading: " + isFading);
+                //Debug.Log("Current fadeScreen color a 1: " + fadeScreen.color.a);
             }
             else if (currentFade == 0 && fadeScreen.color.a < 0.99)
             {  
-                Debug.Log("Bad fade detected");
+                //Debug.Log("Bad fade detected");
                 //badFade = true;
                 Color objectColor = fadeScreen.color;
                 objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
                 fadeScreen.color = objectColor;
                 //StopFading();
-                Debug.Log("IsFading: " + isFading);
-                Debug.Log("Current fadeScreen color a 1: " + fadeScreen.color.a);
+                //Debug.Log("IsFading: " + isFading);
+                //Debug.Log("Current fadeScreen color a 1: " + fadeScreen.color.a);
             }
             else{
                 if(value.isPressed)
                 {
-                    Debug.Log("Current fadeScreen color a 2: " + fadeScreen.color.a);
+                    //Debug.Log("Current fadeScreen color a 2: " + fadeScreen.color.a);
                     audio.PlayClick();
                     //Debug.Log("meow");
                     lineViewer.OnContinueClicked();
+                    
+                    //currLine++;
+                    //Debug.Log(currLine);
                 }
             }
         }
     }
 
+    
     IEnumerator FadeToBlack(){
-        Debug.Log("Faded to black");
+        //Debug.Log("Faded to black");
         // while (fadeScreen.color.a < 1)
         // {
         //     Color objectColor = fadeScreen.color;
@@ -170,7 +256,7 @@ public class VNManager : MonoBehaviour
 
     IEnumerator FadeFromBlack(){
 
-        Debug.Log("Faded from black");
+        //Debug.Log("Faded from black");
         // while (fadeScreen.color.a > 0)
         // {
         //     Color objectColor = fadeScreen.color;
@@ -187,9 +273,46 @@ public class VNManager : MonoBehaviour
             yield return null;
         }
         
-        Debug.Log("Completed fade with fadeScreen.color.a: " + fadeScreen.color.a);
+        //Debug.Log("Completed fade with fadeScreen.color.a: " + fadeScreen.color.a);
         StopFading();
     }
-    // Update is called once per frame
+
+    IEnumerator traverseLines()
+    {
+        Debug.Log("Traverse Line's savedLine: " + savedLine);
+        for (int i = 0; i < savedLine; i++)
+        {
+            //Debug.Log(i);
+            lineViewer.OnContinueClicked();
+            yield return new WaitForSeconds(0.06f);
+        }
+    }
+
+
+    public void LoadScene(int sceneNumber)
+    {
+        //DialogueRunner dialogue_runner = FindObjectOfType<Yarn.Unity.DialogueRunner>();
+        //dialogue_runner.yarnProject = chapters[sceneNumber];
+        //dialogue_runner.startNode = chapterTitles[sceneNumber];
+        dialogue_runner.SetProject(chapters[sceneNumber]);
+        dialogue_runner.StartDialogue(chapterTitles[sceneNumber]);
+    }
+
+
+
+    [YarnCommand("endScene")]
+    public void endScene()
+    {
+        Debug.Log("meow");
+        //EXIT YARN FUNCTION
+        //END OF SCRIPT and there aren't any lines playing
+            //*****************************************************************************
+            //                         TO DO:   EXIT OUT OF SCENE
+            //GetComponent<ToScene>().LoadSceneByName("Do Know Harm - Vivek");
+            //******************************************************************************
+        //Or something
+    }
+
+    
     
 }

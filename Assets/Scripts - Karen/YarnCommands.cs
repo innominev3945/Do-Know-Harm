@@ -171,6 +171,18 @@ public class YarnCommands : MonoBehaviour
     }
 
     //*************************************
+    //Changes the accessory of a character to the specified accessory number
+    //Format in yarn:
+    //<<accessory ObjectName CharacterNumber AccessoryNumber>>
+    //*************************************
+    [YarnCommand("accessory")]
+    public void changeAccessory(int character_number, int accessory_number)
+    {
+        //Debug.Log("Accessory change attempted");
+        character.changeAccessory(character_number, accessory_number);
+    }
+
+    //*************************************
     //plays specified music as specified by MusicNumber
     //Format in yarn:
     //<<music ObjectName MusicNumber>>
