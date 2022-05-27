@@ -39,7 +39,6 @@ public class GPMenuScript : MonoBehaviour
                 escapeMenu.SetActive(false);
                 escapeMenuBackground.SetActive(false);
                 menuOpen = false;
-                Debug.Log("bruh");
             }
         }
     }
