@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using PatientManagerClass;
 using PatientClass;
+using ClothingClass;
 using System;
 using TMPro;
 
@@ -12,7 +13,7 @@ namespace ButtonManagerClass
     public class ButtonManager : MonoBehaviour
     {
         private Button button;
-        public Tuple<Patient, Sprite, int> patient;
+        public Tuple<Patient, Sprite, Sprite, int> patient;
 
         // Start is called before the first frame update
         void Start()
@@ -26,7 +27,7 @@ namespace ButtonManagerClass
         {
             if (patient != null)
             {
-                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("PatientNumbers/Patient" + (patient.Item3 + 1));
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("PatientNumbers/Patient" + (patient.Item4 + 1));
                 transform.GetChild(0).transform.localScale.Set(3f, 3f , 3f);
                 transform.GetChild(0).transform.position = new Vector3(transform.GetChild(0).transform.position.x, transform.GetChild(0).transform.position.y, -5);
             }

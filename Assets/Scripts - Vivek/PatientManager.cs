@@ -11,6 +11,7 @@ using DressTreatmentClass;
 using ChestTreatmentClass;
 using BurnTreatmentClass;
 using ButtonManagerClass;
+using ClothingClass;
 using System;
 using UnityEngine.UI;
 using TMPro;
@@ -28,14 +29,14 @@ namespace PatientManagerClass
         private Vector3 velocity = Vector3.zero;
 
         // Tuple: (1) Patient Object, (2) Patient Sprite, (3) Unique Patient ID
-        public Tuple<Patient, Sprite, int> currentPatient; // Patient on current screen
+        public Tuple<Patient, Sprite, Sprite, int> currentPatient; // Patient on current screen
         //[SerializeField] Tuple<Patient, Sprite, int> currentPatient; // Patient on current screen
         [SerializeField] Bodypart[] bodyparts; // Bodypart of the current patient on screen
 
-        private Tuple<Patient, Sprite, int>[] patients; // Collection of "current" patients in rotation
+        private Tuple<Patient, Sprite, Sprite, int>[] patients; // Collection of "current" patients in rotation
         private ButtonManager[] buttons; // Collection of the buttons used to switch between current patients in rotation
 
-        private Queue<Tuple<Patient, Sprite, int>> nextPatients; // Patients that will enter after current patients are either healed or die
+        private Queue<Tuple<Patient, Sprite, Sprite, int>> nextPatients; // Patients that will enter after current patients are either healed or die
         
         private TextMeshProUGUI patientInjuryText;
         private TextMeshProUGUI healthText;
@@ -48,11 +49,11 @@ namespace PatientManagerClass
         void Start()
         {
             // Initialize all variables
-            nextPatients = new Queue<Tuple<Patient, Sprite, int>>();
+            nextPatients = new Queue<Tuple<Patient, Sprite, Sprite, int>>();
             buttons = new ButtonManager[4];
             currentPatient = null;
             bodyparts = null;
-            patients = new Tuple<Patient, Sprite, int>[5];
+            patients = new Tuple<Patient, Sprite, Sprite, int>[5];
             patientInjuryText = GameObject.Find("Injury Information").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             healthText = GameObject.Find("Health").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             queueText = GameObject.Find("Queue").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -72,7 +73,7 @@ namespace PatientManagerClass
             for (int i = 0; i < patientStatus.Length; i++)
                 patientStatus[i] = true;
 
-            foreach (Tuple<Patient, Sprite, int> patient in nextPatients)
+            foreach (Tuple<Patient, Sprite, Sprite, int> patient in nextPatients)
             {
                 patient.Item1.AbortTreatments();
                 patient.Item1.PauseDamage();
@@ -87,6 +88,14 @@ namespace PatientManagerClass
                     buttons[i - 1].patient = patients[i];
                     buttons[i - 1].UpdateNumberIcon();
                 }
+
+                //GameObject temp = Instantiate(patients[i].Item3, new Vector3(0, 0, 5), Quaternion.identity, this.transform);
+                //temp.transform.SetSiblingIndex(1);
+                //temp.SetActive(false);
+                /*GameObject tempClothing = Instantiate(patients[i].Item3.getClothingObject(), new Vector3(0, 0, 5), Quaternion.identity, this.transform);
+                tempClothing.transform.SetSiblingIndex(1);
+                tempClothing.name = "suit" + i;
+                patients[i].Item3.disableClothingObject();*/
                 nextPatients.Dequeue();
             }
 
@@ -96,6 +105,8 @@ namespace PatientManagerClass
                 bodyparts = currentPatient.Item1.GetBodyparts();
                 UpdateText();
                 gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
+                gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = currentPatient.Item3;
+                gameObject.transform.GetChild(1).transform.position = new Vector3(0, 0, 5);
                 gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
             }
 
@@ -109,7 +120,7 @@ namespace PatientManagerClass
         void Update()
         {
             //Debug.Log("Number of Injuries: " + currentPatient.Item1.GetNumInjuries());
-            Debug.Log(nextPatients.Count);
+            //Debug.Log(nextPatients.Count);
             if (currentPatient.Item1 != null)
                 //healthText.text = currentPatient.Item1.GetHealth().ToString();
 
@@ -135,7 +146,7 @@ namespace PatientManagerClass
                 else
                 {
                     currentPatient.Item1.DestroyTreatmentObjects();
-                    patientStatus[currentPatient.Item3] = false;
+                    patientStatus[currentPatient.Item4] = false;
                     gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(this.gameObject);
                     Debug.Log("current patient dead or healed");
                     Debug.Log("Switching Patient");
@@ -149,7 +160,7 @@ namespace PatientManagerClass
             else if (currentPatient.Item1.GetHealth() == 0 && nextPatients.Count == 0)
             {
                 currentPatient.Item1.DestroyTreatmentObjects();
-                patientStatus[currentPatient.Item3] = false;
+                patientStatus[currentPatient.Item4] = false;
                 UpdateText();
             }
             // Switching out non-current patients
@@ -167,7 +178,7 @@ namespace PatientManagerClass
                         }
                     }
                     if (patients[i].Item1.GetHealth() == 0)
-                        patientStatus[patients[i].Item3] = false;
+                        patientStatus[patients[i].Item4] = false;
                     patients[i].Item1.DestroyTreatmentObjects();
                     Destroy(patients[i].Item1);
                     patients[i] = nextPatients.Peek();
@@ -179,7 +190,7 @@ namespace PatientManagerClass
                 else if (patients[i] != currentPatient && patients[i].Item1.GetHealth() == 0)
                 {
                     patients[i].Item1.DestroyTreatmentObjects();
-                    patientStatus[patients[i].Item3] = false;
+                    patientStatus[patients[i].Item4] = false;
                 }
             }
         }
@@ -196,9 +207,21 @@ namespace PatientManagerClass
                 }
             }
             Destroy(currentPatient.Item1);
+            Destroy(currentPatient.Item3);
             currentPatient = nextPatients.Peek();
             gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
             gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
+            gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = currentPatient.Item3;
+            if (currentPatient.Item1.GetClothesOpen())
+            {
+                gameObject.transform.GetChild(1).GetComponent<MaleClothingScript>().setState(true);
+            }
+            else
+            {
+                gameObject.transform.GetChild(1).GetComponent<MaleClothingScript>().setState(false);
+            }
+
+            gameObject.transform.GetChild(1).transform.position = new Vector3(0, 0, 5);
             bodyparts = currentPatient.Item1.GetBodyparts();
             UpdateText();
             currentPatient.Item1.UnpauseDamage();
@@ -213,12 +236,25 @@ namespace PatientManagerClass
         {
             gameObject.GetComponent<SaveDeathTransition>().PatientSwitchTransition(0.6f);
             yield return new WaitForSeconds(0.6f);
-            Tuple<Patient, Sprite, int> tmp = btn.patient;
+            Tuple<Patient, Sprite, Sprite, int> tmp = btn.patient;
             currentPatient.Item1.AbortTreatments();
+
             btn.patient = currentPatient;
             btn.UpdateNumberIcon();
             currentPatient = tmp;
             gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
+
+            gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = currentPatient.Item3;
+            if (currentPatient.Item1.GetClothesOpen())
+            {
+                gameObject.transform.GetChild(1).GetComponent<MaleClothingScript>().setState(true);
+            }
+            else
+            {
+                gameObject.transform.GetChild(1).GetComponent<MaleClothingScript>().setState(false);
+            }
+
+            gameObject.transform.GetChild(1).transform.position = new Vector3(0, 0, 5);
             gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
             currentPatient.Item1.StartTreatments();
             bodyparts = currentPatient.Item1.GetBodyparts();
@@ -226,6 +262,12 @@ namespace PatientManagerClass
             ViewHead();
             yield return new WaitForSeconds(0.6f);
             transitioning = false;
+        }
+
+        public void SetClothingOpen()
+        {
+            currentPatient.Item1.OpenClothes();
+            ViewHead();
         }
 
         public void SetNumDeaths()
@@ -242,7 +284,7 @@ namespace PatientManagerClass
         {
             if (nextPatients.Count == 0)
             {
-                foreach (Tuple<Patient, Sprite, int> patient in patients)
+                foreach (Tuple<Patient, Sprite, Sprite, int> patient in patients)
                 {
                     if (!(patient.Item1.GetHealed() || patient.Item1.GetHealth() == 0))
                         return false;
@@ -267,7 +309,7 @@ namespace PatientManagerClass
             if (!transitioning)
             {
                 transitioning = true;
-                Tuple<Patient, Sprite, int> tmp = btn.patient;
+                Tuple<Patient, Sprite, Sprite, int> tmp = btn.patient;
                 if (tmp == null)
                     return;
                 StartCoroutine(SwitchPatientHelper(btn));
@@ -280,7 +322,10 @@ namespace PatientManagerClass
             Bodypart head = bodyparts[0];
             Camera.main.transform.position = new Vector3(head.GetLocation().x, head.GetLocation().y, z);
             currentPatient.Item1.AbortTreatments();
-            head.TreatInjuries();
+            if (currentPatient.Item1.GetClothesOpen())
+            {
+                head.TreatInjuries();
+            }
         }
 
         public void ViewChest()
@@ -290,8 +335,11 @@ namespace PatientManagerClass
             Camera.main.transform.position = new Vector3(chest.GetLocation().x, chest.GetLocation().y, z);
             currentPatient.Item1.AbortTreatments();
             chest.TreatInjuries();
-            bodyparts[4].TreatInjuries();
-            bodyparts[5].TreatInjuries();
+            if (currentPatient.Item1.GetClothesOpen())
+            {
+                bodyparts[4].TreatInjuries();
+                bodyparts[5].TreatInjuries();
+            }
         }
 
         public void ViewLegs()
@@ -301,8 +349,11 @@ namespace PatientManagerClass
             Bodypart rightLeg = bodyparts[3];
             Camera.main.transform.position = new Vector3((leftLeg.GetLocation().x + rightLeg.GetLocation().x) / 2, leftLeg.GetLocation().y, z);
             currentPatient.Item1.AbortTreatments();
-            leftLeg.TreatInjuries();
-            rightLeg.TreatInjuries();
+            if (currentPatient.Item1.GetClothesOpen())
+            {
+                leftLeg.TreatInjuries();
+                rightLeg.TreatInjuries();
+            }
         }
         
         // Temporary method to initialize patients - in the future, create a read from file procedure to take data about a patient and initialize it
@@ -322,8 +373,8 @@ namespace PatientManagerClass
             laceration.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, laceration, 20f));
             parts1[2].AddInjury(laceration);
 
-            nextPatients.Enqueue(new Tuple<Patient, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts1, 1f), Resources.Load<Sprite>("MaleBody"), 0));
-            
+            nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts1, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 0));
+
 
             /* Creating Second Patient */
             Bodypart[] parts2 = new Bodypart[6];
@@ -341,7 +392,8 @@ namespace PatientManagerClass
             gze.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, gze, 0f));
             parts2[0].AddInjury(gze);
 
-            nextPatients.Enqueue(new Tuple<Patient, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts2, 1f), Resources.Load<Sprite>("MaleBody"), 1));
+            nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts2, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit2"), 1));
+
 
             /* Creating Third Patient */
             Bodypart[] parts3 = new Bodypart[6];
@@ -360,7 +412,8 @@ namespace PatientManagerClass
             burn.AddTreatment(BurnTreatment.MakeBurnTreatmentObject(this.gameObject, burn));
             parts3[1].AddInjury(burn);
 
-            nextPatients.Enqueue(new Tuple<Patient, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts3, 1f), Resources.Load<Sprite>("MaleBody"), 2));
+            nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts3, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit3"), 2));
+
 
             /* Creating Fourth Patient */
             Bodypart[] parts4 = new Bodypart[6];
@@ -375,7 +428,8 @@ namespace PatientManagerClass
             frcps.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, frcps, 180f));
             parts4[4].AddInjury(frcps);
 
-            nextPatients.Enqueue(new Tuple<Patient, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts4, 1f), Resources.Load<Sprite>("MaleBody"), 3));
+            nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts4, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit4"), 3));
+
 
             /* Creating Fifth Patient */
             Bodypart[] parts5 = new Bodypart[6];
@@ -390,7 +444,7 @@ namespace PatientManagerClass
             bndg.AddTreatment(DressTreatment.MakeDressTreatmentObject(this.gameObject, bndg));
             parts5[3].AddInjury(bndg);
 
-            nextPatients.Enqueue(new Tuple<Patient, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts5, 1f), Resources.Load<Sprite>("MaleBody"), 4));
+            nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts5, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit2"), 4));
 
             /* Creating Sixth Patient */
             Bodypart[] parts6 = new Bodypart[6];
@@ -405,7 +459,7 @@ namespace PatientManagerClass
             gauze.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, gauze, 90f));
             parts6[3].AddInjury(gauze);
 
-            nextPatients.Enqueue(new Tuple<Patient, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts6, 1f), Resources.Load<Sprite>("MaleBody"), 5));
+            nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts5, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit3"), 6));
         }
 
         private void UpdateText()

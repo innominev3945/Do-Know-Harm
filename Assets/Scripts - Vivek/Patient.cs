@@ -19,6 +19,7 @@ namespace PatientClass
         private float nextTime;
         private Bodypart[] bodyparts;
         private float health; // Health of ENTIRE Patient, weighted via the various Bodyparts 
+        private bool clothesOpen;
 
         private void OnDestroy()
         {
@@ -39,6 +40,7 @@ namespace PatientClass
             ret.nextTime = 0f;
             ret.bodyparts = parts; // Takes an array of Bodyparts as the parameter, so Bodyparts can be split and weighted as seen necessary 
             ret.health = 100;
+            ret.clothesOpen = false;
             return ret;
         }
 
@@ -46,6 +48,15 @@ namespace PatientClass
         public float GetHealth() { return health; }
         public Bodypart[] GetBodyparts() { return bodyparts; }
 
+        public bool GetClothesOpen()
+        {
+            return clothesOpen;
+        }
+
+        public void OpenClothes()
+        {
+            clothesOpen = true;
+        }
 
         public void AbortTreatments()
         {

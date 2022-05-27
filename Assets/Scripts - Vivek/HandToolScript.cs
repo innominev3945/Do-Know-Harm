@@ -24,7 +24,7 @@ public class HandToolScript : MonoBehaviour
     public void ClickOnTarget(InputAction.CallbackContext context) // change so that variable if mousepressed true is contained in handtool object (Here) and set action for mousePressed to collider funcs in tourniquet
     {
         //int layerMask = ~(LayerMask.GetMask("Draggable Object"));
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.zero, Mathf.Infinity, 1 << LayerMask.NameToLayer("Draggable Object"));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.zero, Mathf.Infinity, 1 << LayerMask.NameToLayer("Clothing")); //, 1 << LayerMask.NameToLayer("Draggable Object")
         if (context.started)
         {
             //Vector2 pos2D = Mouse.current.position.ReadValue(); // is there a way to rid this of mouse dependency? last line left that uses it
@@ -65,6 +65,15 @@ public class HandToolScript : MonoBehaviour
                         lastClickedObject = hit.collider.gameObject;
                     }
                 }
+                else if (hit.collider.gameObject.tag == "ClothingButton")
+                {
+                    hit.collider.gameObject.GetComponent<SuitButtonScript>().UndoButton();
+                }
+                else if (hit.collider.gameObject.tag == "ClothingFold")
+                {
+                    hit.collider.gameObject.transform.parent.GetComponent<MaleClothingScript>().setFoldHeld(true);
+                    lastClickedObject = hit.collider.gameObject;
+                }
             }
         }
         else if (context.canceled)
@@ -74,6 +83,11 @@ public class HandToolScript : MonoBehaviour
                 if (lastClickedObject.tag == "Tourniquet")
                 {
                     lastClickedObject.GetComponent<Tourniquet_Script>().mouseClickedFalse();
+                    lastClickedObject = null;
+                }
+                if (lastClickedObject.tag == "ClothingFold")
+                {
+                    lastClickedObject.transform.parent.GetComponent<MaleClothingScript>().setFoldHeld(false);
                     lastClickedObject = null;
                 }
             }

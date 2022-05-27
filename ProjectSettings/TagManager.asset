@@ -22,6 +22,9 @@ TagManager:
   - Button3
   - Button4
   - Tourniquet
+  - Hit Box (Gauze)
+  - ClothingButton
+  - ClothingFold
   layers:
   - Default
   - TransparentFX
