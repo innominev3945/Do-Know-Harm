@@ -5,7 +5,7 @@ using PatientManagerClass;
 
 public class EndOfGPScene : MonoBehaviour
 {
-    public bool called;
+    private bool called;
     void Start()
     {
         

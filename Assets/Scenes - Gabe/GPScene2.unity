@@ -388,6 +388,8 @@ MonoBehaviour:
   key1: musicVol
   key2: sfxVol
   key3: clickVol
+  key4: ambiVol
+  key5: txtSpeed
   defaultValue: 0
   onValueLoadedMusic:
     m_PersistentCalls:
@@ -482,6 +484,12 @@ MonoBehaviour:
   onValueLoadedClick:
     m_PersistentCalls:
       m_Calls: []
+  onValueLoadedAmbi:
+    m_PersistentCalls:
+      m_Calls: []
+  onValueLoadedTxtSpeed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1160464248214863250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +505,8 @@ MonoBehaviour:
   key1: musicVol
   key2: sfxVol
   key3: clickVol
+  key4: ambiVol
+  key5: txtSpeed
 --- !u!1 &1160464248214863254
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +831,8 @@ GameObject:
   - component: {fileID: 1870580169755125743}
   - component: {fileID: 1870580169755125741}
   - component: {fileID: 1870580169755125740}
+  - component: {fileID: 1870580169755125745}
+  - component: {fileID: 1870580169755125744}
   m_Layer: 0
   m_Name: PatientManager
   m_TagString: Untagged
@@ -1001,6 +1013,31 @@ MonoBehaviour:
   saveBanner: {fileID: 4425775334015124962}
   deathBanner: {fileID: 4425775334102866656}
   fadePanel: {fileID: 4425775333440598702}
+--- !u!114 &1870580169755125744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870580169755125739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3319f270ebd5034d897ba4536fe71db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: VN - Yarn no journal
+--- !u!114 &1870580169755125745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870580169755125739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f189e9c0882c049828799ca761f88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3987792465827345974
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class ToScene : MonoBehaviour
 
     [SerializeField] private string scene;
 
+
     public void LoadSelectedScene() // for the serializefield version
     {
         Debug.Log("Sending to " + scene);
@@ -19,5 +20,10 @@ public class ToScene : MonoBehaviour
     {
         Debug.Log("Sending to " + name);
         Loader.Load(name);
+    }
+
+    public void LoadSceneDepends()
+    {
+
     }
 }

@@ -2709,7 +2709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3319f270ebd5034d897ba4536fe71db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: MainMenu
+  scene: VN - Yarn no journal
 --- !u!114 &1166823361
 MonoBehaviour:
   m_ObjectHideFlags: 0
