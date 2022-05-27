@@ -112,7 +112,7 @@ namespace PatientManagerClass
         void Update()
         {
             //Debug.Log("Number of Injuries: " + currentPatient.Item1.GetNumInjuries());
-            Debug.Log(nextPatients.Count);
+            //Debug.Log(nextPatients.Count);
             if (currentPatient.Item1 != null)
                 //healthText.text = currentPatient.Item1.GetHealth().ToString();
 

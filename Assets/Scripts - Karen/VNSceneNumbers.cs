@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VNSceneNumbers : MonoBehaviour
 {
-    public static int curr_scene = 1;
+    public static int curr_scene = 0;
 
     public void setCurrentScene(int n)
     {
@@ -14,5 +14,15 @@ public class VNSceneNumbers : MonoBehaviour
     public int getCurrentScene()
     {
         return curr_scene;
+    }
+
+    private void Start()
+    {
+        Debug.Log(curr_scene);
+    }
+
+    public void IncrementCurrentScene()
+    {
+        curr_scene++;
     }
 }
