@@ -319,10 +319,10 @@ MonoBehaviour:
   wheel: {fileID: 5049375688069141904}
   NorthTool: {fileID: 8723020226205549635, guid: 245dbdc36c2d443c89273d53ae50d6fc, type: 3}
   SouthTool: {fileID: 7762077886955278406, guid: 2ae23a8d6aee7489c80dab36ef243d10, type: 3}
-  WestTool: {fileID: 5665525222876327343, guid: 1ae8c1a6d33547d40a971ddfe69a78c5, type: 3}
+  WestTool: {fileID: 9096168364550271408, guid: c49e5782f40ef364f80bd2a7ce2cc8ac, type: 3}
   EastTool: {fileID: 5974668805313062709, guid: aa919145e787dec429f8472a4c7b63da, type: 3}
-  NorthEastTool: {fileID: 9096168364550271408, guid: c49e5782f40ef364f80bd2a7ce2cc8ac, type: 3}
-  NorthWestTool: {fileID: 0}
+  NorthEastTool: {fileID: 5665525222876327343, guid: 1ae8c1a6d33547d40a971ddfe69a78c5, type: 3}
+  NorthWestTool: {fileID: 3009453062511910121, guid: 3884baf5c897dac4a91a2c5d9eb245d6, type: 3}
   SouthEastTool: {fileID: 0}
   SouthWestTool: {fileID: 0}
 --- !u!1 &5049375688239925111

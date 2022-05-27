@@ -9,6 +9,8 @@ public class PlayerPrefsFloatSaver : MonoBehaviour
     [SerializeField] private string key1 = "musicVol";
     [SerializeField] private string key2 = "sfxVol";
     [SerializeField] private string key3 = "clickVol";
+    [SerializeField] private string key4 = "ambiVol";
+    [SerializeField] private string key5 = "txtSpeed";
 
 
     public void SetFloatMusic(float value)
@@ -20,6 +22,14 @@ public class PlayerPrefsFloatSaver : MonoBehaviour
         PlayerPrefs.SetFloat(key2, value);
     }
     public void SetFloatClick(float value)
+    {
+        PlayerPrefs.SetFloat(key3, value);
+    }
+    public void SetFloatAmbi(float value)
+    {
+        PlayerPrefs.SetFloat(key3, value);
+    }
+    public void SetFloatTextSpd(float value)
     {
         PlayerPrefs.SetFloat(key3, value);
     }

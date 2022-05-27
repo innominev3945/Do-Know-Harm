@@ -21,8 +21,8 @@ public class VNSceneNumbers : MonoBehaviour
         Debug.Log(curr_scene);
     }
 
-    public void IncrementCurrentScene()
+    public void StartFromMenu()
     {
-        curr_scene++;
+        curr_scene = 1;
     }
 }

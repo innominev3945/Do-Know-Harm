@@ -1164,10 +1164,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4518165457762597996}
     m_Modifications:
-    - target: {fileID: 5049375688069141900, guid: c2d7f78411c5dc7478656d633efff263, type: 3}
-      propertyPath: NorthWestTool
-      value: 
-      objectReference: {fileID: 3009453062511910121, guid: 3884baf5c897dac4a91a2c5d9eb245d6, type: 3}
     - target: {fileID: 5049375688069141904, guid: c2d7f78411c5dc7478656d633efff263, type: 3}
       propertyPath: m_Pivot.x
       value: 0.4988188
@@ -2489,6 +2485,8 @@ GameObject:
   - component: {fileID: 1166823357}
   - component: {fileID: 1166823359}
   - component: {fileID: 1166823358}
+  - component: {fileID: 1166823361}
+  - component: {fileID: 1166823360}
   m_Layer: 0
   m_Name: PatientManager
   m_TagString: Untagged
@@ -2699,6 +2697,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showDebug: 0
   debugTextView: {fileID: 0}
+--- !u!114 &1166823360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166823353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3319f270ebd5034d897ba4536fe71db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: MainMenu
+--- !u!114 &1166823361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166823353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f189e9c0882c049828799ca761f88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  called: 0
 --- !u!1 &1178329764
 GameObject:
   m_ObjectHideFlags: 0
@@ -4516,6 +4540,8 @@ MonoBehaviour:
   key1: musicVol
   key2: sfxVol
   key3: clickVol
+  key4: ambiVol
+  key5: txtSpeed
   defaultValue: 0
   onValueLoadedMusic:
     m_PersistentCalls:
@@ -4610,6 +4636,12 @@ MonoBehaviour:
   onValueLoadedClick:
     m_PersistentCalls:
       m_Calls: []
+  onValueLoadedAmbi:
+    m_PersistentCalls:
+      m_Calls: []
+  onValueLoadedTxtSpeed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1981000059448721561
 Transform:
   m_ObjectHideFlags: 0
@@ -4639,6 +4671,8 @@ MonoBehaviour:
   key1: musicVol
   key2: sfxVol
   key3: clickVol
+  key4: ambiVol
+  key5: txtSpeed
 --- !u!82 &1981000059448721566
 AudioSource:
   m_ObjectHideFlags: 0

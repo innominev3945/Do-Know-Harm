@@ -14,8 +14,8 @@ public class SoundManagerScript : MonoBehaviour
         heartBeatSound1 = Resources.Load<AudioClip>("heartbeat1");
         heartBeatSound2 = Resources.Load<AudioClip>("heartbeat2");
         heartBeatSound3 = Resources.Load<AudioClip>("heartbeat3");
-        deadSound = Resources.Load<AudioClip>("death");
-        winSound = Resources.Load<AudioClip>("win");
+        deadSound = Resources.Load<AudioClip>("dieded");
+        winSound = Resources.Load<AudioClip>("notdieded");
 
         audioSrc = GetComponent<AudioSource>();
     }

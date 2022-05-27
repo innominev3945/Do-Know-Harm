@@ -39,9 +39,10 @@ public class Player : MonoBehaviour
     {
         pat = GameObject.Find("PatientManager").GetComponent<PatientManager>().currentPatient.Item1;
         numOfInjur = pat.GetNumInjuries();
+        currentHealth = pat.GetHealth();
         if (numOfInjur != 0)
             soundchangewon = false;
-        if (numOfInjur == 0)
+        if (numOfInjur == 0 && currentHealth > 0)
         {
             if (!soundchangewon)
             {
@@ -52,7 +53,6 @@ public class Player : MonoBehaviour
             healthBar.SetHealth(maxHealth);
             return;
         }
-        currentHealth = pat.GetHealth();
         //the following two lines make health decrease with time
         if (currentHealth > 0)
         {

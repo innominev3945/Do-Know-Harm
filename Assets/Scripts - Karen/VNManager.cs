@@ -449,7 +449,7 @@ public class VNManager : MonoBehaviour
         //END OF SCRIPT and there aren't any lines playing
             //*****************************************************************************
             //                         TO DO:   EXIT OUT OF SCENE
-            //GetComponent<ToScene>().LoadSceneByName("Do Know Harm - Vivek");
+            GetComponent<ToScene>().LoadSelectedScene();
             //******************************************************************************
         //Or something
     }
