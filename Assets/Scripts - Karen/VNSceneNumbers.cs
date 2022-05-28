@@ -23,6 +23,6 @@ public class VNSceneNumbers : MonoBehaviour
 
     public void StartFromMenu()
     {
-        curr_scene = 1;
+        curr_scene = 0;
     }
 }

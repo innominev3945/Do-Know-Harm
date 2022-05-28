@@ -1102,7 +1102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 
-  curr_scene_obj: {fileID: 0}
+  curr_scene_obj: {fileID: 2141729587}
 --- !u!1 &239338352
 GameObject:
   m_ObjectHideFlags: 0

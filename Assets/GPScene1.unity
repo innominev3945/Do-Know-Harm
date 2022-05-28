@@ -1382,10 +1382,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 709972610}
-  - component: {fileID: 709972609}
   - component: {fileID: 709972608}
   m_Layer: 0
-  m_Name: Test
+  m_Name: VNSceneNumberObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1401,18 +1400,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5add78b4a42bb943a0428aef7adeeeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &709972609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709972607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7e4d8d09bc9f5942938f7482f2abbcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &709972610
@@ -2711,7 +2698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: VN - Yarn no journal
-  curr_scene_obj: {fileID: 0}
+  curr_scene_obj: {fileID: 709972607}
 --- !u!114 &1166823361
 MonoBehaviour:
   m_ObjectHideFlags: 0

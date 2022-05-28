@@ -26,12 +26,14 @@ public class ToScene : MonoBehaviour
     public void LoadSceneDepends()
     {
         int a = curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene();
-        if (a == 1)
+        if (a == 0)
         {
+            curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
             LoadSceneByName("GPScene1");
         }
-        else if (a == 4)
+        else if (a == 3)
         {
+            curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
             LoadSceneByName("GPScene2");
         }
         else if (a == 5)
@@ -40,6 +42,7 @@ public class ToScene : MonoBehaviour
         }
         else
         {
+            curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
             LoadSceneByName("VN - Yarn no journal");
         }
     }
