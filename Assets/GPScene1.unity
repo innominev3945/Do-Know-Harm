@@ -2697,7 +2697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3319f270ebd5034d897ba4536fe71db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: VN - Yarn no journal
+  scene: GPScene2
   curr_scene_obj: {fileID: 709972607}
 --- !u!114 &1166823361
 MonoBehaviour:

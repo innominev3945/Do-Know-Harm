@@ -31,12 +31,12 @@ public class ToScene : MonoBehaviour
             curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
             LoadSceneByName("GPScene1");
         }
-        else if (a == 2)
+        else if (a == 5)
         {
             curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
             LoadSceneByName("Credits Scene");
         }
-        else if (a == 1)
+        else if (a == 3)
         {
             curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
             LoadSceneByName("GPScene2");
