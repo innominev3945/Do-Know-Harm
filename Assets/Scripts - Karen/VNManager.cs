@@ -68,8 +68,10 @@ public class VNManager : MonoBehaviour
         current_scene = numbers.getCurrentScene();
         //Loads up the scene signified by current_scene
         //LoadScreen.SetActive(true);
-        
+        Debug.Log("a");
         LoadScene(current_scene);
+
+        Debug.Log("b");
         loadingScreen.sprite = LoadSprites[0];
         
         //loadingScreen.deactivateLoading();

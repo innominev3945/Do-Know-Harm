@@ -26,20 +26,29 @@ public class ToScene : MonoBehaviour
     public void LoadSceneDepends()
     {
         int a = curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene();
-        if (a == 1)
+        if (a == 0)
         {
+            curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
             LoadSceneByName("GPScene1");
         }
-        else if (a == 4)
+        else if (a == 2)
         {
+            curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
+            LoadSceneByName("Credits Scene");
+        }
+        else if (a == 1)
+        {
+            curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
             LoadSceneByName("GPScene2");
         }
-        else if (a == 5)
+        else if (a == 6)
         {
-            
+            curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
+            LoadSceneByName("MainMenu");
         }
         else
         {
+            curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
             LoadSceneByName("VN - Yarn no journal");
         }
     }
