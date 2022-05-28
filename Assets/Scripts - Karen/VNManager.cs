@@ -453,7 +453,7 @@ public class VNManager : MonoBehaviour
         //END OF SCRIPT and there aren't any lines playing
             //*****************************************************************************
             //                         TO DO:   EXIT OUT OF SCENE
-            GetComponent<ToScene>().LoadSelectedScene();
+            GetComponent<ToScene>().LoadSceneDepends();
             //******************************************************************************
         //Or something
     }

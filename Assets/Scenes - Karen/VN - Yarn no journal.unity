@@ -798,10 +798,12 @@ MonoBehaviour:
   - {fileID: 7545569452688597077, guid: 938c6a2941e20f14a9edcb66ab8eab12, type: 3}
   - {fileID: 7545569452688597077, guid: 1923a83b5e36b7e44ac74669aa4ca53d, type: 3}
   - {fileID: 7545569452688597077, guid: bf68d3f83d45c734cab152d34bc04002, type: 3}
+  - {fileID: 7545569452688597077, guid: b47ddc7cf25721542b3785eafbd3d14a, type: 3}
   chapterTitles:
   - Chapter-1-T-1
   - Chapter-1-T-2
   - Chapter-1-1-1
+  - Start
   Background_Renderer: {fileID: 1002560413}
   loadingScreen: {fileID: 2044180501}
   Backgrounds:
@@ -1101,7 +1103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3319f270ebd5034d897ba4536fe71db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: Do Know Harm - Vivek
+  scene: 
+  curr_scene_obj: {fileID: 0}
 --- !u!1 &239338352
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,7 +2108,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 'Hi
+
+    Players
+
+    -Karen'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 935854a8170d5be449fd73857b5c9814, type: 2}
   m_sharedMaterial: {fileID: 578142031126487497, guid: 935854a8170d5be449fd73857b5c9814, type: 2}
@@ -2144,7 +2151,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 50
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -4132,7 +4139,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 50
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

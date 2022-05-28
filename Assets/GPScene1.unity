@@ -2487,6 +2487,7 @@ GameObject:
   - component: {fileID: 1166823358}
   - component: {fileID: 1166823361}
   - component: {fileID: 1166823360}
+  - component: {fileID: 1166823362}
   m_Layer: 0
   m_Name: PatientManager
   m_TagString: Untagged
@@ -2710,6 +2711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: VN - Yarn no journal
+  curr_scene_obj: {fileID: 0}
 --- !u!114 &1166823361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2722,7 +2724,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f189e9c0882c049828799ca761f88a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  called: 0
+--- !u!114 &1166823362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166823353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5add78b4a42bb943a0428aef7adeeeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1178329764
 GameObject:
   m_ObjectHideFlags: 0

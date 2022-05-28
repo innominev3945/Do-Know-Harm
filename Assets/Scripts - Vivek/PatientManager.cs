@@ -278,7 +278,7 @@ namespace PatientManagerClass
             foreach (bool status in patientStatus)
                 if (!status)
                     numDeadPatients++;
-            numDeaths.setNumberValue("$patientDeaths", (float)numDeadPatients);
+            numDeaths.setNumberValue("$PatDead_1_1", (float)numDeadPatients);
             numDeaths.Save();
         }
 
@@ -291,6 +291,7 @@ namespace PatientManagerClass
                     if (!(patient.Item1.GetHealed() || patient.Item1.GetHealth() == 0))
                         return false;
                 }
+                SetNumDeaths();
                 return true;
             }
             return false;

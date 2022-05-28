@@ -8,6 +8,7 @@ public class ToScene : MonoBehaviour
     // Attach this to a button (or some input), set the scene in the inspector, and set the onclick attribute appropriately to send the game to the desired scene
 
     [SerializeField] private string scene;
+    [SerializeField] private GameObject curr_scene_obj;
 
 
     public void LoadSelectedScene() // for the serializefield version
@@ -24,6 +25,22 @@ public class ToScene : MonoBehaviour
 
     public void LoadSceneDepends()
     {
-
+        int a = curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene();
+        if (a == 1)
+        {
+            LoadSceneByName("GPScene1");
+        }
+        else if (a == 4)
+        {
+            LoadSceneByName("GPScene2");
+        }
+        else if (a == 5)
+        {
+            
+        }
+        else
+        {
+            LoadSceneByName("VN - Yarn no journal");
+        }
     }
 }
