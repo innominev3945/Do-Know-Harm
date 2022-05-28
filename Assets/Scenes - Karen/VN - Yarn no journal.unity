@@ -807,12 +807,13 @@ MonoBehaviour:
   Background_Renderer: {fileID: 1002560413}
   loadingScreen: {fileID: 2044180501}
   Backgrounds:
-  - {fileID: 21300000, guid: d9023fa2ebe6a6a47924c0d40d4c9ad7, type: 3}
+  - {fileID: 21300000, guid: fec5c520624c78a4f824c1ccea37f7de, type: 3}
   - {fileID: 21300000, guid: 1bdeccb49f624cf41b944950571739ad, type: 3}
   - {fileID: 21300000, guid: 7e03b3ccfd54f3c4ea39d26b5a6a3a58, type: 3}
-  - {fileID: 21300000, guid: bc8b6c4632ed8fe44be82bed278ef48c, type: 3}
-  - {fileID: 21300000, guid: bc8b6c4632ed8fe44be82bed278ef48c, type: 3}
-  - {fileID: 21300000, guid: bc8b6c4632ed8fe44be82bed278ef48c, type: 3}
+  - {fileID: 21300000, guid: 7b8dc461cd2f953439da025a0252e629, type: 3}
+  - {fileID: 21300000, guid: 7b8dc461cd2f953439da025a0252e629, type: 3}
+  - {fileID: 21300000, guid: 1df20dafc203ea942b4bbfc1a9d99d70, type: 3}
+  - {fileID: 21300000, guid: abdd6e96fb3977141a7fb92e8c9ba4f4, type: 3}
   LoadSprites:
   - {fileID: 21300000, guid: 33415a7235b87824b9b6b1fa4ade3f97, type: 3}
   - {fileID: 21300000, guid: f4c1d458a5f0f964f854617608247ea8, type: 3}
@@ -1058,15 +1059,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c553ef5f310e6a84f839d89be35f4431, type: 3}
   SFX:
   - {fileID: 8300000, guid: 614eddc07826b3c418b10620eb93930a, type: 3}
-  - {fileID: 8300000, guid: 614eddc07826b3c418b10620eb93930a, type: 3}
-  - {fileID: 8300000, guid: 614eddc07826b3c418b10620eb93930a, type: 3}
+  - {fileID: 8300000, guid: 9f1870d926393744db0dc4767ce897cf, type: 3}
+  - {fileID: 8300000, guid: 9f1870d926393744db0dc4767ce897cf, type: 3}
   - {fileID: 8300000, guid: 614eddc07826b3c418b10620eb93930a, type: 3}
   - {fileID: 8300000, guid: 614eddc07826b3c418b10620eb93930a, type: 3}
   - {fileID: 8300000, guid: 614eddc07826b3c418b10620eb93930a, type: 3}
   Ambience:
-  - {fileID: 8300000, guid: 0dab1432707faba4089a7f48a0c46d01, type: 3}
-  - {fileID: 8300000, guid: 0dab1432707faba4089a7f48a0c46d01, type: 3}
-  - {fileID: 8300000, guid: 0dab1432707faba4089a7f48a0c46d01, type: 3}
+  - {fileID: 8300000, guid: 05fc7732e60f00b4bab96a4802914c16, type: 3}
+  - {fileID: 8300000, guid: 05fc7732e60f00b4bab96a4802914c16, type: 3}
+  - {fileID: 8300000, guid: 9f1870d926393744db0dc4767ce897cf, type: 3}
   click: {fileID: 8300000, guid: 39d1aeb8dd20b54449d66775e6ea1368, type: 3}
   BGM_Source: {fileID: 1964282056}
   Ambience_Source: {fileID: 406345697}
