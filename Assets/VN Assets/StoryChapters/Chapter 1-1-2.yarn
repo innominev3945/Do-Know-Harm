@@ -1,0 +1,179 @@
+title: Chapter-1-1-2
+tags: 
+---
+<<bg Yarn 6>>
+<<music Yarn 5>>
+<<mc Yarn 1>>
+<<accessory Yarn 1 1>>
+
+It’s done. 
+
+<<startFade Yarn>>
+
+<<expression Yarn 1 32>>
+I look at my hands.
+
+It’s… blood. Not paint. Actual blood.
+
+Of course it is. I was just stopping someone from bleeding to death with my bare hands. What did I expect?
+
+But I can’t turn my eyes away from the crimson glistening on my fingers. It’s a sickly feeling of warmth and tackiness. I see a drop of someone’s blood crawling down my fingers.
+
+<<if $PatDead_1_1 is 0>>
+	<<expression Yarn 1 34>>
+	Everyone under me made it today… but the reality of it all is crashing down on me.
+	<<expression Yarn 1 32>>
+	I’m responsible for people’s lives now. If I mess up, people are going to die. And there’s nothing I can do to bring them back.
+<<endif>>
+
+<<if $PatDead_1_1 is 1>>
+	Someone…
+	<<expression Yarn 1 39>>
+	Someone died.
+
+	In my arms. 
+
+	I can feel my hands trembling. The reality of it all is crashing down on me. I watched them die, their life draining from their eyes.
+
+	I can’t feel my legs. Anything.
+
+	I… I want to vomit.
+	<<expression Yarn 1 36>>
+	Did they have a family? Did they have kids?
+
+	I could have been faster. I could have been better. 
+
+	It’s my fault. And there’s nothing I can do to bring them back.
+<<endif>>
+
+<<if $PatDead_1_1 is 1>>
+	…
+
+	So many people…
+
+	I can feel my hands trembling. My nerves are turning cold and numb. 
+
+	I… I want to vomit.
+
+	I can’t feel my legs. Anything.
+
+	The reality of it all is crashing down on me. I watched them die, their life draining from their eyes.
+
+	How many kids are going to be waiting for their parents to come home? How many lives did I just destroy?
+
+	I could have been faster. I could have been better. 
+
+	It’s all my fault. There’s nothing I can do to bring them back.
+<<endif>>
+CAPTAIN: Grayman!
+<<expression Yarn 1 24>>
+
+Huh?
+
+<<enter Yarn 2>>
+
+<<if $PatDead_1_1 is 0>>
+	<<expression Yarn 1 24>>
+	HANNAH: Ah, Captain!
+<<endif>>
+
+<<if $PatDead_1_1 is 0>>
+	<<expression Yarn 1 32>>
+	HANNAH: Ah... Captain...
+<<endif>>
+
+CAPTAIN: Don’t space out on me just yet. You did some good work today.
+
+<<expression Yarn 1 32>>
+HANNAH: ...Thank you. Just doing my job, sir.
+
+He nods, and then looks at my hands, all bloodied.
+
+<<if $PatDead_1_1 is 0>>
+	I look up at him. There’s a look in his eyes… pity?
+	He must have known.
+<<endif>>
+
+CAPTAIN: Let me see your hands.
+
+<<expression Yarn 1 24>>
+I stick out my hands in front of him. He rummages for something in his gear.
+
+A water canteen.
+
+He pops the lid and dumps everything inside onto my stained hands. Slowly, the blood washes off my hands.
+
+<<if $PatDead_1_1 is 0>>
+	CAPTAIN: Overwhelmed?
+
+	<<expression Yarn 1 36>>
+	
+	I nod my head. Tears are welling in my eyes.
+
+	The Captain takes a deep breath, and looks up into the sky. As if he were reliving something.
+
+	CAPTAIN: It’s always a shock, the first time you do this. Training doesn't do crap to prepare you, I know.
+<<endif>>
+
+<<if $PatDead_1_1 is 1>>
+	CAPTAIN: Someone died today. Am I right?
+
+	<<expression Yarn 1 36>>
+	I nod my head. Tears are welling in my eyes.
+
+	The Captain takes a deep breath, and looks up into the sky. As if he were reliving something.
+
+	CAPTAIN: It’s always a shock, the first time someone… well… 
+
+	CAPTAIN: Training doesn't do crap to prepare you. I don’t know if it truly gets any better.
+<<endif>>
+
+<<if $PatDead_1_1 is 1>>
+	CAPTAIN: Some people died today. Am I right?
+	<<expression Yarn 1 36>>
+	I nod my head. Tears are welling in my eyes.
+
+	The Captain takes a deep breath, and looks up into the sky. As if he were reliving something.
+
+	CAPTAIN: It’s always a shock, the first time someone… well… 
+
+	CAPTAIN: Training doesn't do crap to prepare you. I don’t know if it truly gets any better.
+<<endif>>
+
+CAPTAIN: This is a hard job. Not everyone can do it. But you’re here. And I know you can.
+
+CAPTAIN: People are going to live because of what you did today. But it’s important to remember that you might not be able to save everyone. People might die on you, Hannah. 
+
+CAPTAIN: It’ll be cruel, and it’ll be unfair. And you might blame yourself for the rest of your life because you feel that you killed them.
+
+CAPTAIN: But remember that, whatever happens, you did the best you could. And no one can ask you to do any better than that. 
+
+He pauses, almost as if he was hesitating whether he should keep speaking.
+
+Then he turns to me, kneels, and looks me straight in the eyes.
+
+CAPTAIN: Your parents would be proud.
+
+<<expression Yarn 1 24>>
+
+Wh… What?
+
+I look at him. I’ve always seen the Captain as a hardened, non-nonsense man who wouldn’t hesitate to beat someone down verbally.
+
+Now, he looks… somber. Sorrowful.
+
+Those words weren’t just half-hearted encouragement.
+
+CAPTAIN: Head back to the bus when you’re ready. Nightfall runs on no one's schedule. And I’m sure Mrs. Edith is waiting for you.
+
+He gives me a pat on the back, stands up, and heads off to check in on the others.
+
+<<exit Yarn 2>>
+<<expression Yarn 1 24>>
+I turn towards the bus to see the old lady waving at me through the streetcar window, smiling.
+
+<<expression Yarn 1 32>>
+The Captain… he knows.
+
+<<endScene Yarn>>
+===
