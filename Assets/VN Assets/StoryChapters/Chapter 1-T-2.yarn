@@ -6,8 +6,8 @@ position: 197,255
 <<bg Yarn 3>>
 <<music Yarn 3>>
 <<mc Yarn 0>>
-<<startFade Yarn>>
 <<accessory Yarn 0 1>>
+<<StartFade Yarn 1>>
 At last.
 
 I stand back, exhausted and a bit in a daze.
@@ -47,10 +47,10 @@ ERIC: Sir?
 
 CAPTAIN: Don’t you forget this is a partner exam. It’s your turn to be the patient. Get your rear in the backroom and get changed.
 
-<<expression Yarn 2 8>>
+<<expression Yarn 1 8>>
 HANNAH: Whoops. You can get your nap later. 
 
-<<expression Yarn 2 48>>
+<<expression Yarn 1 48>>
 HANNAH: Have fun~
 
 <<exit Yarn 1>>
@@ -96,12 +96,13 @@ Hey, Hey!
 
 Help me. Help me, please! Get me out of here-
 
+
 <<mc Yarn 0>>
-<<accessory Yarn 0>>
+<<accessory Yarn 1 1>>
 <<bg Yarn 4>>
 <<music Yarn -1>>
 <<expression Yarn 0 32>>
-<<accessory Yarn 0 1>>
+<<fade Yarn 1>>
 
 …
 

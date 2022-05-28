@@ -2,7 +2,7 @@ title: Chapter-1-1-1
 tags: 
 position: 225,315
 ---
-
+<<StartFade Yarn 0>>
 
 Almost done…
 
@@ -11,7 +11,7 @@ And…
 There we go!
 
 <<bg Yarn 3>>
-<<startFade Yarn>>
+<<fade Yarn 1>>
 <<mc Yarn 1>>
 <<music Yarn 3>>
 
@@ -71,7 +71,7 @@ I’ll let him be. I can see he’s tired. He needs a nap.
 <<expression Yarn 1 34>>
 …time to deal with the horde.
 
-<<fade Yarn 1>>
+<<fade Yarn 0>>
 For the next hour or so, I watch the others take their practicals, tying bandages and tightening tourniquets on each other.
 
 I don’t see anybody struggle too badly. They’re all moving with muscle memory, focused on their task without a hitch. It takes a while, but eventually, everyone finishes. 
@@ -86,7 +86,7 @@ Either the Captain was feeling generous, or he just didn’t want to train us ag
 
 Fine by me, either way!
 
-<<fade Yarn 0>>
+<<fade Yarn 1>>
 
 
 After the Captain’s closing speech, the room collapses in on itself and explodes in conversation.
@@ -189,7 +189,7 @@ I put on another smile, squint my eyes a bit, and wave towards someone vaguely f
 The streetcars sure do take their sweet time to come around.
 
 <<music Yarn -1>>
-<<fade Yarn 1>>
+<<fade Yarn 0>>
 <<exit Yarn 1>>
 
 After an hour, the mingling came and went. Then we waited. Nothing.
@@ -220,7 +220,7 @@ OPERATOR: Y-yes, sir! I’m sorry, sir!
 
 <<mc Yarn 1>>
 <<bg Yarn 5>>
-<<fade Yarn 0>>
+<<fade Yarn 1>>
 
 For the next few minutes, the Captain screams his lungs out at the person on the other end of the line, with the occasional bang of his first- or the telephone in his fist.
 
@@ -252,13 +252,13 @@ The Captain looks down to see the telephone in his hand- or what’s left of it.
 
 CAPTAIN: Would someone also let the front desk know that they’ll be needing a new phone for Room 141?
 
-<<fade Yarn 1>>
+<<fade Yarn 0>>
 
 Nervously, we all stand up and start grabbing our gear. Time to get the blood pumping.
 
 <<bg Yarn 1>>
 <<music Yarn 4>>
-<<fade Yarn 0>>
+<<fade Yarn 1>>
 
 It must have been a sight for everyone in the streetcar to see a wave of turquoise uniforms waddling into the vehicle.
 
@@ -428,9 +428,9 @@ HANNAH: Stay here, ma’am. We’ll be back soon.
 
 EDITH: You’ll do just fine, sweetheart. Go do what you do best.
 
-<<fade Yarn 1>>
-<<bg Yarn 6>>
 <<fade Yarn 0>>
+<<bg Yarn 6>>
+<<fade Yarn 1>>
 <<accessory Yarn 0 1>>
 
 

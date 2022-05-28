@@ -8,54 +8,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
-  LastImportHadImplicitStringIDs: 0
-  LastImportHadAnyStrings: 0
-  isSuccessfullyParsed: 0
-  parseErrorMessages:
-  - "Assets/VN Assets/StoryChapters/Chapter 1-1-2.yarn: 22:17: Error: Unexpected
-    \"is\" while reading a function call\r\n<<if PatDead_1_1 is 0>>\r\r\n                
-    ^^\r\n"
-  - "Assets/VN Assets/StoryChapters/Chapter 1-1-2.yarn: 28:17: Error: Unexpected
-    \"is\" while reading a function call\r\n<<if PatDead_1_1 is 1>>\r\r\n                
-    ^^\r\n"
-  - "Assets/VN Assets/StoryChapters/Chapter 1-1-2.yarn: 47:17: Error: Unexpected
-    \"is\" while reading a function call\r\n<<if PatDead_1_1 is >1>>\r\r\n                
-    ^^\r\n"
-  - "Assets/VN Assets/StoryChapters/Chapter 1-1-2.yarn: 47:20: Error: extraneous
-    input '>' expecting {'true', 'false', 'null', OPERATOR_LOGICAL_NOT, '-', '(',
-    STRING, FUNC_ID, VAR_ID, NUMBER}\r\n<<if PatDead_1_1 is >1>>\r\r\n                   
-    ^\r\n"
-  - "Assets/VN Assets/StoryChapters/Chapter 1-1-2.yarn: 73:17: Error: Unexpected
-    \"is\" while reading a function call\r\n<<if PatDead_1_1 is 0>>\r\r\n                
-    ^^\r\n"
-  - "Assets/VN Assets/StoryChapters/Chapter 1-1-2.yarn: 77:17: Error: Unexpected
-    \"is\" while reading a function call\r\n<<if PatDead_1_1 is >0>>\r\r\n                
-    ^^\r\n"
-  - "Assets/VN Assets/StoryChapters/Chapter 1-1-2.yarn: 77:20: Error: extraneous
-    input '>' expecting {'true', 'false', 'null', OPERATOR_LOGICAL_NOT, '-', '(',
-    STRING, FUNC_ID, VAR_ID, NUMBER}\r\n<<if PatDead_1_1 is >0>>\r\r\n                   
-    ^\r\n"
-  - "Assets/VN Assets/StoryChapters/Chapter 1-1-2.yarn: 88:17: Error: Unexpected
-    \"is\" while reading a function call\r\n<<if PatDead_1_1 is >0>>\r\r\n                
-    ^^\r\n"
-  - "Assets/VN Assets/StoryChapters/Chapter 1-1-2.yarn: 88:20: Error: extraneous
-    input '>' expecting {'true', 'false', 'null', OPERATOR_LOGICAL_NOT, '-', '(',
-    STRING, FUNC_ID, VAR_ID, NUMBER}\r\n<<if PatDead_1_1 is >0>>\r\r\n                   
-    ^\r\n"
-  - "Assets/VN Assets/StoryChapters/Chapter 1-1-2.yarn: 101:17: Error: Unexpected
-    \"is\" while reading a function call\r\n<<if PatDead_1_1 is 0>>\r\r\n                
-    ^^\r\n"
-  - "Assets/VN Assets/StoryChapters/Chapter 1-1-2.yarn: 112:17: Error: Unexpected
-    \"is\" while reading a function call\r\n<<if PatDead_1_1 is 1>>\r\r\n                
-    ^^\r\n"
-  - "Assets/VN Assets/StoryChapters/Chapter 1-1-2.yarn: 124:17: Error: Unexpected
-    \"is\" while reading a function call\r\n<<if PatDead_1_1 is >1>>\r\r\n                
-    ^^\r\n"
-  - "Assets/VN Assets/StoryChapters/Chapter 1-1-2.yarn: 124:20: Error: extraneous
-    input '>' expecting {'true', 'false', 'null', OPERATOR_LOGICAL_NOT, '-', '(',
-    STRING, FUNC_ID, VAR_ID, NUMBER}\r\n<<if PatDead_1_1 is >1>>\r\r\n                   
-    ^\r\n"
-  - "Assets/VN Assets/StoryChapters/Chapter 1-1-2.yarn: 150:2: Error: Command text
-    expected\r\n<<>>\r\r\n  ^^\r\n"
-  - "Assets/VN Assets/StoryChapters/Chapter 1-1-2.yarn: 172:0: Error: Expected an
-    <<endif>> to match the <<if>> statement on line 101\r\n===\r\r\n^^^\r\n"
+  LastImportHadImplicitStringIDs: 1
+  LastImportHadAnyStrings: 1
+  isSuccessfullyParsed: 1
+  parseErrorMessages: []
