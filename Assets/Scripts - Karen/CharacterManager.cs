@@ -608,7 +608,27 @@ public class CharacterManager : MonoBehaviour
     }
 
     IEnumerator EnterFade(SpriteRenderer outfitRenderer, SpriteRenderer expressionRenderer, SpriteRenderer accessoryRenderer){
-        //Debug.Log("NYAAAAAAAAAH Attempted Fade");
+        // Color objectColor = outfitRenderer.color;
+        // objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
+        // outfitRenderer.color = objectColor;
+        // //outfitRenderer.a = 1;
+        // objectColor = expressionRenderer.color;
+        // objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
+        // expressionRenderer.color = objectColor;
+
+
+        // objectColor = accessoryRenderer.color;
+        // objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
+        // accessoryRenderer.color = objectColor;
+        // //expressionRenderer.color = objectColor;
+        // //outfitRenderer.color = objectColor;
+        // //accessoryColor.a = 1;
+
+        // // outfitRenderer.color = outfitColor;
+        // // expressionRenderer.color = expressionColor;
+        // // accessoryRenderer.color = accessoryColor;
+        // yield return null;
+        // //Debug.Log("NYAAAAAAAAAH Attempted Fade");
         while (expressionRenderer.color.a < 1)
         {
             Color outfitColor = outfitRenderer.color;
