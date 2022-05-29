@@ -19,13 +19,13 @@ public class EndOfGPScene : MonoBehaviour
             called = true;
             Debug.Log("Ending Scene in 5 seconds");
             StartCoroutine(EndOfScene());
-            GetComponent<VNSceneNumbers>().setCurrentScene(GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
+            //GetComponent<VNSceneNumbers>().setCurrentScene(GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
         }
     }
 
     IEnumerator EndOfScene()
     {
         yield return new WaitForSeconds(5f);
-        GetComponent<ToScene>().LoadSelectedScene();
+        GetComponent<ToScene>().LoadSceneDepends();
     }
 }

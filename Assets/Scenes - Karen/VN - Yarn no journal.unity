@@ -3229,7 +3229,7 @@ GameObject:
   - component: {fileID: 1104434347}
   - component: {fileID: 1104434346}
   m_Layer: 0
-  m_Name: Settings
+  m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3637,7 +3637,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Settings
+  m_text: Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5872,6 +5872,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1807528559}
     m_Modifications:
+    - target: {fileID: 4293150993373061227, guid: a587507b9a253bb448dcce579855e52e, type: 3}
+      propertyPath: m_Name
+      value: Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293150993373061237, guid: a587507b9a253bb448dcce579855e52e, type: 3}
+      propertyPath: m_text
+      value: Menu
+      objectReference: {fileID: 0}
     - target: {fileID: 4293150993506830233, guid: a587507b9a253bb448dcce579855e52e, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
