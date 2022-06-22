@@ -60,9 +60,10 @@ namespace ForcepsClass
 
         private void OnTriggerStay2D(Collider2D collision)
         {
+            Debug.Log("Collision occured");
             if (collision.gameObject.tag == "Foreign Object")
             {
-                // Debug.Log("Forceps are on foreign object");
+                Debug.Log("Forceps are on foreign object");
                 onForeignObject = true;
                 if (mousePressed)
                 {
@@ -76,7 +77,7 @@ namespace ForcepsClass
         {
             if (collision.gameObject.tag == "Foreign Object")
             {
-                // Debug.Log("Forceps no longer on foreign object");
+                Debug.Log("Forceps no longer on foreign object");
                 onForeignObject = false;
             }
         }

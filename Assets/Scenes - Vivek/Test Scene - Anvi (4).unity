@@ -422,6 +422,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Forceps
       objectReference: {fileID: 0}
+    - target: {fileID: 5974668805313062710, guid: aa919145e787dec429f8472a4c7b63da, type: 3}
+      propertyPath: m_SleepingMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5974668805313062711, guid: aa919145e787dec429f8472a4c7b63da, type: 3}
       propertyPath: m_RootOrder
       value: 1
