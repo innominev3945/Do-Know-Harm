@@ -2298,7 +2298,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d7f7f1445049b0741a446d644352d09b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b3eb379fc57cee14a8c4304a346c6472, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8500,6 +8500,8 @@ MonoBehaviour:
   key1: musicVol
   key2: sfxVol
   key3: clickVol
+  key4: ambiVol
+  key5: txtSpeed
   defaultValue: 0
   onValueLoadedMusic:
     m_PersistentCalls:
@@ -8594,6 +8596,12 @@ MonoBehaviour:
   onValueLoadedClick:
     m_PersistentCalls:
       m_Calls: []
+  onValueLoadedAmbi:
+    m_PersistentCalls:
+      m_Calls: []
+  onValueLoadedTxtSpeed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8260197663340295958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8609,6 +8617,8 @@ MonoBehaviour:
   key1: musicVol
   key2: sfxVol
   key3: clickVol
+  key4: ambiVol
+  key5: txtSpeed
 --- !u!114 &8884881711254416744
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -51,6 +51,7 @@ namespace PatientManagerClass
         {
             // Initialize all variables
             nextPatients = new Queue<Tuple<Patient, Sprite, Sprite, int>>();
+            
             buttons = new ButtonManager[4];
             currentPatient = null;
             bodyparts = null;
@@ -70,7 +71,9 @@ namespace PatientManagerClass
             // Adds the current level's patients to the nextPatient queue
             if (SceneManager.GetActiveScene().name == "GPScene1")
                 Init1();
-            else 
+            else if (SceneManager.GetActiveScene().name == "GPScene3")
+                Init3();
+            else
                 Init2();
 
 
@@ -100,6 +103,7 @@ namespace PatientManagerClass
             if (patients[0] != null)
             {
                 currentPatient = patients[0];
+                Debug.Log("Health: " + currentPatient.Item1.GetHealth());
                 bodyparts = currentPatient.Item1.GetBodyparts();
                 gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentPatient.Item2;
                 gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = currentPatient.Item3;
@@ -124,6 +128,9 @@ namespace PatientManagerClass
                 //healthText.text = currentPatient.Item1.GetHealth().ToString();
 
             queueText.text = "Upcoming Patients: " + nextPatients.Count;
+
+
+            //Debug.Log("Health: " + currentPatient.Item1.GetHealth());
 
             // Handles switching out patients if they are either fully healed of their injuries or are dead
             // Switching out current patient 
@@ -389,9 +396,14 @@ namespace PatientManagerClass
                 Injury laceration3 = new Injury(0.1f, new Vector2(parts1[0].GetLocation().x - 1.2f, parts1[0].GetLocation().y), "Laceration");
                 laceration3.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, laceration3, 0f));
                 parts1[0].AddInjury(laceration3);
-                Injury laceration4 = new Injury(0.1f, new Vector2(parts1[0].GetLocation().x, parts1[0].GetLocation().y - 2f), "Laceration");
+
+                /*Injury laceration4 = new Injury(0.1f, new Vector2(parts1[0].GetLocation().x, parts1[0].GetLocation().y - 2f), "Laceration");
                 laceration4.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, laceration4, 180f));
-                parts1[0].AddInjury(laceration4);
+                parts1[0].AddInjury(laceration4);*/
+
+                Injury burn1 = new Injury(0.1f, new Vector2(parts1[0].GetLocation().x - 1.2f, parts1[0].GetLocation().y - 2f), "Burn");
+                burn1.AddTreatment(BurnTreatment.MakeBurnTreatmentObject(this.gameObject, burn1));
+                parts1[0].AddInjury(burn1);
 
                 Injury lacerationShard1 = new Injury(1f, new Vector2(parts1[2].GetLocation().x + 1.7f, parts1[2].GetLocation().y + 2f), "Laceration");
                 lacerationShard1.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, lacerationShard1, 0f));
@@ -428,9 +440,143 @@ namespace PatientManagerClass
                 Injury laceration3 = new Injury(0.1f, new Vector2(parts1[0].GetLocation().x + 1f, parts1[0].GetLocation().y - 0.5f), "Laceration");
                 laceration3.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, laceration3, 0f));
                 parts1[0].AddInjury(laceration3);
-                Injury laceration4 = new Injury(0.1f, new Vector2(parts1[0].GetLocation().x, parts1[0].GetLocation().y - 3f), "Laceration");
+                /*Injury laceration4 = new Injury(0.1f, new Vector2(parts1[0].GetLocation().x, parts1[0].GetLocation().y - 3f), "Laceration");
                 laceration4.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, laceration4, 180f));
-                parts1[0].AddInjury(laceration4);
+                parts1[0].AddInjury(laceration4);*/
+
+                Injury chestComp = new Injury(0.1f, new Vector2(parts1[0].GetLocation().x, parts1[0].GetLocation().y - 3f), "Chest Compression");
+                chestComp.AddTreatment(ChestTreatment.MakeChestTreatmentObject(this.gameObject, chestComp));
+                parts1[0].AddInjury(chestComp);
+
+                Injury lacerationShard1 = new Injury(1f, new Vector2(parts1[3].GetLocation().x + 1.7f, parts1[3].GetLocation().y + 2.1f), "Laceration");
+                lacerationShard1.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, lacerationShard1, 0f));
+                lacerationShard1.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, lacerationShard1, 180f));
+                parts1[3].AddInjury(lacerationShard1);
+
+                Injury lacerationShard2 = new Injury(1f, new Vector2(parts1[2].GetLocation().x - 1f, parts1[2].GetLocation().y + 1.9f), "Laceration");
+                lacerationShard2.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, lacerationShard2, 0f));
+                lacerationShard2.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, lacerationShard2, 180f));
+                parts1[2].AddInjury(lacerationShard2);
+
+
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts1, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 1));
+            }
+
+            if (true)
+            {
+                Bodypart[] parts3 = new Bodypart[6];
+                parts3[0] = Bodypart.MakeBodypartObject(this.gameObject, 0.7f, 1f, new Vector2(0f, 4.5f)); // Head
+                parts3[1] = Bodypart.MakeBodypartObject(this.gameObject, 0.5f, 1f, new Vector2(0f, -2f)); // Chest
+                parts3[2] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-0.5f, -12)); // Left leg 
+                parts3[3] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(0.5f, -12)); // Right leg 
+                parts3[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
+                parts3[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
+
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts3, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit3"), 2));
+            }
+
+            if (true)
+            {
+                Bodypart[] parts4 = new Bodypart[6];
+                parts4[0] = Bodypart.MakeBodypartObject(this.gameObject, 0.7f, 1f, new Vector2(0f, 4.5f)); // Head
+                parts4[1] = Bodypart.MakeBodypartObject(this.gameObject, 0.5f, 1f, new Vector2(0f, -2f)); // Chest
+                parts4[2] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-0.5f, -12)); // Left leg 
+                parts4[3] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(0.5f, -12)); // Right leg 
+                parts4[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
+                parts4[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
+
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts4, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit4"), 3));
+            }
+
+            if (true)
+            {
+                Bodypart[] parts4 = new Bodypart[6];
+                parts4[0] = Bodypart.MakeBodypartObject(this.gameObject, 0.7f, 1f, new Vector2(0f, 4.5f)); // Head
+                parts4[1] = Bodypart.MakeBodypartObject(this.gameObject, 0.5f, 1f, new Vector2(0f, -2f)); // Chest
+                parts4[2] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-0.5f, -12)); // Left leg 
+                parts4[3] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(0.5f, -12)); // Right leg 
+                parts4[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
+                parts4[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
+
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts4, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit4"), 4));
+            }
+
+        }
+
+        private void Init3()
+        {
+            /* Creating First Patient */
+            if (true) // Putting them in if block because i'm lazy and like to reuse variable names :)
+            {
+                Bodypart[] parts1 = new Bodypart[6];
+                parts1[0] = Bodypart.MakeBodypartObject(this.gameObject, 0.7f, 1f, new Vector2(0f, 4.5f)); // Head
+                parts1[1] = Bodypart.MakeBodypartObject(this.gameObject, 0.5f, 1f, new Vector2(0f, -2f)); // Chest
+                parts1[2] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-0.5f, -12)); // Left leg 
+                parts1[3] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(0.5f, -12)); // Right leg 
+                parts1[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
+                parts1[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
+
+
+                Injury laceration1 = new Injury(0.5f, new Vector2(parts1[1].GetLocation().x + 1f, parts1[1].GetLocation().y + 2f), "Laceration");
+                laceration1.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, laceration1, 180f));
+                parts1[1].AddInjury(laceration1);
+                Injury laceration2 = new Injury(0.5f, new Vector2(parts1[1].GetLocation().x - 1f, parts1[1].GetLocation().y + 3f), "Laceration");
+                laceration2.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, laceration2, 0f));
+                parts1[1].AddInjury(laceration2);
+                Injury laceration3 = new Injury(0.1f, new Vector2(parts1[0].GetLocation().x - 1.2f, parts1[0].GetLocation().y), "Laceration");
+                laceration3.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, laceration3, 0f));
+                parts1[0].AddInjury(laceration3);
+
+                /*Injury laceration4 = new Injury(0.1f, new Vector2(parts1[0].GetLocation().x, parts1[0].GetLocation().y - 2f), "Laceration");
+                laceration4.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, laceration4, 180f));
+                parts1[0].AddInjury(laceration4);*/
+
+                Injury burn1 = new Injury(0.1f, new Vector2(parts1[0].GetLocation().x - 1.2f, parts1[0].GetLocation().y - 2f), "Burn");
+                burn1.AddTreatment(BurnTreatment.MakeBurnTreatmentObject(this.gameObject, burn1));
+                parts1[0].AddInjury(burn1);
+
+                Injury lacerationShard1 = new Injury(1f, new Vector2(parts1[2].GetLocation().x + 1.7f, parts1[2].GetLocation().y + 2f), "Laceration");
+                lacerationShard1.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, lacerationShard1, 0f));
+                lacerationShard1.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, lacerationShard1, 180f));
+                parts1[2].AddInjury(lacerationShard1);
+
+                Injury lacerationShard2 = new Injury(1f, new Vector2(parts1[2].GetLocation().x - 1f, parts1[2].GetLocation().y + 2f), "Laceration");
+                lacerationShard2.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, lacerationShard2, 0f));
+                lacerationShard2.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, lacerationShard2, 180f));
+                parts1[2].AddInjury(lacerationShard2);
+
+
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts1, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 0));
+            }
+
+            /* Creating Second Patient */
+            if (true)
+            {
+                Bodypart[] parts1 = new Bodypart[6];
+                parts1[0] = Bodypart.MakeBodypartObject(this.gameObject, 0.7f, 1f, new Vector2(0f, 4.5f)); // Head
+                parts1[1] = Bodypart.MakeBodypartObject(this.gameObject, 0.5f, 1f, new Vector2(0f, -2f)); // Chest
+                parts1[2] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-0.5f, -12)); // Left leg 
+                parts1[3] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(0.5f, -12)); // Right leg 
+                parts1[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
+                parts1[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
+
+
+                Injury laceration1 = new Injury(0.5f, new Vector2(parts1[1].GetLocation().x - 1f, parts1[1].GetLocation().y + 2f), "Laceration");
+                laceration1.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, laceration1, 180f));
+                parts1[1].AddInjury(laceration1);
+                Injury laceration2 = new Injury(0.5f, new Vector2(parts1[1].GetLocation().x + 1f, parts1[1].GetLocation().y + 3f), "Laceration");
+                laceration2.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, laceration2, 0f));
+                parts1[1].AddInjury(laceration2);
+                Injury laceration3 = new Injury(0.1f, new Vector2(parts1[0].GetLocation().x + 1f, parts1[0].GetLocation().y - 0.5f), "Laceration");
+                laceration3.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, laceration3, 0f));
+                parts1[0].AddInjury(laceration3);
+                /*Injury laceration4 = new Injury(0.1f, new Vector2(parts1[0].GetLocation().x, parts1[0].GetLocation().y - 3f), "Laceration");
+                laceration4.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, laceration4, 180f));
+                parts1[0].AddInjury(laceration4);*/
+
+                Injury chestComp = new Injury(0.1f, new Vector2(parts1[0].GetLocation().x, parts1[0].GetLocation().y - 3f), "Chest Compression");
+                chestComp.AddTreatment(ChestTreatment.MakeChestTreatmentObject(this.gameObject, chestComp));
+                parts1[0].AddInjury(chestComp);
 
                 Injury lacerationShard1 = new Injury(1f, new Vector2(parts1[3].GetLocation().x + 1.7f, parts1[3].GetLocation().y + 2.1f), "Laceration");
                 lacerationShard1.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, lacerationShard1, 0f));
