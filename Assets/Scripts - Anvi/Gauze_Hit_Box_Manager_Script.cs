@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gauze_Hit_Box_Manager_Script : MonoBehaviour
 {
-    class hitBox
+    public class hitBox
     {
         float xCoord;
         float yCoord;
@@ -135,8 +135,10 @@ public class Gauze_Hit_Box_Manager_Script : MonoBehaviour
     void Start()
     {
         // initialize struct lists
+        /*
         allHitBoxes = new List<hitBox>();
         allWounds = new List<wound>();
+        */
 
         /*
         // TODO: Every time the gauze is used, specify the locations of the hitboxes below (for the current patient)
@@ -188,6 +190,40 @@ public class Gauze_Hit_Box_Manager_Script : MonoBehaviour
         allHitBoxes.Add(new hitBox(xCoord, yCoord, allWounds.Count));
 
         allWounds.Add(new wound(1));
+    }
+
+    public void addAllHitBoxes(List<float> hitBoxesXtemp, List<float> hitBoxesYtemp, List<int> woundIDs)
+    {
+        if (hitBoxesXtemp.Count == 0 && hitBoxesYtemp.Count == 0 && woundIDs.Count == 0)
+        {
+            return;
+        }
+
+        allHitBoxes = new List<hitBox>();
+        allWounds = new List<wound>();
+        hitBoxesX = new List<float>();
+        hitBoxesY = new List<float>();
+
+        int prevWoundID = woundIDs[0];
+        int boxesPerWound = 0;
+
+        for (int i = 0; i < woundIDs.Count; i++)
+        {
+            if (prevWoundID != woundIDs[i])
+            {
+                allWounds.Add(new wound(boxesPerWound));
+                boxesPerWound = 0;
+                prevWoundID = woundIDs[i];
+            }
+
+            hitBoxesX.Add(hitBoxesXtemp[i]);
+            hitBoxesY.Add(hitBoxesYtemp[i]);
+            allHitBoxes.Add(new hitBox(hitBoxesXtemp[i], hitBoxesYtemp[i], woundIDs[i]));
+            boxesPerWound++;
+
+            Debug.Log("X: " + hitBoxesX[i] + "\nY: " + hitBoxesY[i] + "\nID: " + woundIDs[i]);
+        }
+        allWounds.Add(new wound(boxesPerWound));
     }
 
     // Update is called once per frame

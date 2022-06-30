@@ -45,7 +45,7 @@ public class Gauze_Hit_Box_Collider_Script : MonoBehaviour
         else
         {
             string other = collision.gameObject.name;
-            Debug.Log("Colliding with something else: " + other);
+            // Debug.Log("Colliding with something else: " + other);
         }
     }
 
@@ -59,7 +59,7 @@ public class Gauze_Hit_Box_Collider_Script : MonoBehaviour
         else
         {
             string other = collision.gameObject.name;
-            Debug.Log("Leaving collision with something else: " + other);
+            // Debug.Log("Leaving collision with something else: " + other);
         }
     }
 

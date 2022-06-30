@@ -44,7 +44,7 @@ namespace Gauze
         void Start()
         {
             // obtain hit box positions and create hit boxes
-            gauzeHitBoxManager = GameObject.Find("Gauze Hit Box Manager");
+            gauzeHitBoxManager = GameObject.FindWithTag("Gauze Hit Box Manager");
             List<float> positionsX = gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxLocationsX();
             List<float> positionsY = gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxLocationsY();
             for (int i = 0; i < positionsX.Count; i++)
