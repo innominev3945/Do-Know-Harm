@@ -19,6 +19,14 @@ namespace PatientClass
         private float nextTime;
         private Bodypart[] bodyparts;
         private float health; // Health of ENTIRE Patient, weighted via the various Bodyparts 
+        private bool clothesOpen;
+
+        private void OnDestroy()
+        {
+            foreach (Bodypart bodypart in bodyparts)
+                if (bodypart != null)
+                    Destroy(bodypart);
+        }
 
         // Constructor
         // Unity, being the helpful engine, doesn't like to have normal Constructors work properly when dealing with
@@ -32,12 +40,23 @@ namespace PatientClass
             ret.nextTime = 0f;
             ret.bodyparts = parts; // Takes an array of Bodyparts as the parameter, so Bodyparts can be split and weighted as seen necessary 
             ret.health = 100;
+            ret.clothesOpen = false;
             return ret;
         }
 
         //Accessors
         public float GetHealth() { return health; }
         public Bodypart[] GetBodyparts() { return bodyparts; }
+
+        public bool GetClothesOpen()
+        {
+            return clothesOpen;
+        }
+
+        public void OpenClothes()
+        {
+            clothesOpen = true;
+        }
 
         public void AbortTreatments()
         {
@@ -57,6 +76,8 @@ namespace PatientClass
 
         public bool GetHealed()
         {
+            if (health == 0)
+                return false;
             foreach (Bodypart bodypart in bodyparts)
             {
                 if (!bodypart.GetHealed())
@@ -99,6 +120,29 @@ namespace PatientClass
                     health = 0;
                 nextTime += timeInterval;
             }
+        }
+
+        public void DestroyTreatmentObjects()
+        {
+            foreach (Bodypart bodypart in bodyparts)
+                if (bodypart != null)
+                    bodypart.DestroyTreatmentObjects();
+        }
+
+        public int GetNumInjuries()
+        {
+            int amt = 0;
+            foreach (Bodypart part in bodyparts)
+                amt += part.GetNumInjuries();
+            return amt;
+        }
+
+        public List<string> GetToolNames()
+        {
+            List<string> ret = new List<string>();
+            foreach (Bodypart part in bodyparts)
+                ret.AddRange(part.GetToolNames());
+            return ret;
         }
     }
 }

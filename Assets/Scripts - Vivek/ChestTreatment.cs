@@ -11,6 +11,12 @@ namespace ChestTreatmentClass
     {
         public GameObject chest;
 
+        private void OnDestroy()
+        {
+            if (chest != null)
+                Destroy(chest);
+        }
+
         public static ChestTreatment MakeChestTreatmentObject(GameObject ob, Injury inj) 
         {
             ChestTreatment ret = ob.AddComponent<ChestTreatment>();
@@ -45,6 +51,8 @@ namespace ChestTreatmentClass
         {
             chest.SetActive(true);
         }
+
+        public override string GetToolName() { return "Hand"; }
 
         // Update is called once per frame
         void Update()

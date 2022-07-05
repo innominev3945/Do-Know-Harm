@@ -8,6 +8,8 @@ public class ToScene : MonoBehaviour
     // Attach this to a button (or some input), set the scene in the inspector, and set the onclick attribute appropriately to send the game to the desired scene
 
     [SerializeField] private string scene;
+    [SerializeField] private GameObject curr_scene_obj;
+
 
     public void LoadSelectedScene() // for the serializefield version
     {
@@ -19,5 +21,35 @@ public class ToScene : MonoBehaviour
     {
         Debug.Log("Sending to " + name);
         Loader.Load(name);
+    }
+
+    public void LoadSceneDepends()
+    {
+        int a = curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene();
+        if (a == 0)
+        {
+            curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
+            LoadSceneByName("GPScene1");
+        }
+        else if (a == 5)
+        {
+            curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
+            LoadSceneByName("Credits Scene");
+        }
+        else if (a == 3)
+        {
+            curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
+            LoadSceneByName("GPScene2");
+        }
+        else if (a == 6)
+        {
+            curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
+            LoadSceneByName("MainMenu");
+        }
+        else
+        {
+            curr_scene_obj.GetComponent<VNSceneNumbers>().setCurrentScene(curr_scene_obj.GetComponent<VNSceneNumbers>().getCurrentScene() + 1);
+            LoadSceneByName("VN - Yarn no journal");
+        }
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine.Audio;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -17,27 +18,70 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] AudioSource Click_Sound;
 
+
+    public Slider BGM_volume;
+
+    public Slider Ambience_volume;
+
+    public Slider SFX_volume;
+
+    public Slider Click_volume;
+
+
+    public void Start()
+    {
+        BGM_volume.onValueChanged.AddListener (delegate {ValueChangeCheckBGM ();});
+        Ambience_volume.onValueChanged.AddListener (delegate {ValueChangeCheckAmbience ();});
+        SFX_volume.onValueChanged.AddListener (delegate {ValueChangeCheckSFX ();});
+        Click_volume.onValueChanged.AddListener (delegate {ValueChangeCheckClick ();});
+    }
+
+    public void ValueChangeCheckBGM()
+    {
+        BGM_Volume = BGM_volume.value;
+        BGM_Source.volume = BGM_Volume;
+        
+    }
+    public void ValueChangeCheckAmbience()
+    {
+        Ambience_Volume = Ambience_volume.value;
+        Ambience_Source.volume = BGM_Volume;
+    }
+    public void ValueChangeCheckSFX()
+    {
+        SFX_Volume = SFX_volume.value;
+        SFX_Source.volume = SFX_Volume;
+        
+    }
+    public void ValueChangeCheckClick()
+    {
+        Click_Volume = Click_volume.value;
+        Click_Sound.volume = Click_Volume;
+        
+    }
+
     //********************************************************************************************************
     //              FAAAAAUUUUSSSSSTIIIIIIIINEEEEEEEEEEEEEEEEEEEEEEEEE HEEEEEEEERRRRRRREEEEEEEEEEEEEEEEEE
     //              3 Sound adjustment parameters
     //*********************************************************************************************************
-    public float BGM_Volume;// to change background music volume
-    public float SFX_Volume;// to change sound effects volume
-    public float Click_Volume; // change click sound
+    private static float BGM_Volume = 0.5f;// to change background music volume
+    private static float SFX_Volume = 0.5f;// to change sound effects volume
+    private static float Click_Volume = 0.5f; // change click sound
+    private static float Ambience_Volume = 0.5f;
 
     void Awake()
     {
         Click_Sound.clip = click;
-    }
-    void Update()
-    {
-        BGM_Source.volume = BGM_Volume;
-        SFX_Source.volume = SFX_Volume;
-        Click_Sound.volume = Click_Volume;
-        Ambience_Source.volume = BGM_Volume;
         BGM_Source.loop = true;
         Ambience_Source.loop = true;
     }
+    // void Update()
+    // {
+    //     BGM_Source.volume = BGM_Volume;
+    //     SFX_Source.volume = SFX_Volume;
+    //     Click_Sound.volume = Click_Volume;
+    //     Ambience_Source.volume = BGM_Volume;        
+    // }
 
     // Update is called once per frame
     public void PlayBGM(int n)
@@ -72,5 +116,21 @@ public class AudioManager : MonoBehaviour
     public void PlayClick()
     {
         Click_Sound.Play();
+    }
+
+    public void muteAll()
+    {
+        BGM_Source.volume = 0;
+        SFX_Source.volume = 0;
+        Click_Sound.volume = 0;
+        Ambience_Source.volume = 0;  
+    }
+
+    public void unmuteAll()
+    {
+        BGM_Source.volume = BGM_Volume;
+        SFX_Source.volume = SFX_Volume;
+        Click_Sound.volume = Click_Volume;
+        Ambience_Source.volume = BGM_Volume;
     }
 }

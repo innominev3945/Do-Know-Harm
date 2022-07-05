@@ -19,7 +19,7 @@ namespace TreatmentClass
 
         public virtual void StartTreatment() { treatmentStarted = true; }
         public virtual void StopTreatment() { treatmentStarted = false; }
-
         public virtual void ShowInjury() { }
+        public virtual string GetToolName() { return ""; }
     }
 }

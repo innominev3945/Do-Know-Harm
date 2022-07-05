@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9096168364550271414}
   - component: {fileID: 9096168364550271415}
   - component: {fileID: 9096168364550271418}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Bandage
   m_TagString: Mouse
   m_Icon: {fileID: 0}
@@ -72,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -253013955
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0.7924528, g: 0.71320754, b: 0.71320754, a: 1}
@@ -229,3 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62de38946514b984aa79814d5bb86246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  circle: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  wound: {fileID: 0}
+  bandageWhite: {fileID: 2100000, guid: b06d6b47b16bfe74094c1c718af83155, type: 2}

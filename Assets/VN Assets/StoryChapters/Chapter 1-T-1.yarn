@@ -1,0 +1,525 @@
+title: Chapter-1-T-1
+tags: 
+position: -303.00001525878906,275
+---
+<<music Yarn 1>>
+<<ambience Yarn 0>>
+<<bg Yarn 0>>
+<<StartFade Yarn 1>>
+
+
+I... 
+
+I can’t breathe. 
+
+
+
+The waves, the current. It’s surrounding me, enveloping me whole until all my senses are numb. 
+
+I can hear the thunder cracking in the distance. The waves crash on top of me, sending me spiraling underneath the surface. 
+
+I paddle my way back to the top, only to be pushed back down into the depths.
+
+I’m powerless to the elements. I’m thrown around like a doll, unable to find any sort of respite in the assault.
+
+I’m falling. I’m sinking. I kick as hard as I possibly can, clawing at the water around me, desperately trying to remain on the surface. 
+
+My limbs feel raw from my flailing, but I keep resisting. The waves are grabbing hold of me, dragging me under to the black beneath me.
+
+I can’t fight back. I’m sinking. I can’t breathe. I gulp for air only to engulf the ocean into my lungs. 
+
+I choke and gag, vomiting out fluid.
+
+I can’t think anymore. It hurts. I’m scared. 
+
+I’m...
+
+
+
+
+<<fade Yarn 0>>
+I’m...
+
+
+<<music Yarn -1>>
+<<ambience Yarn -1>>
+<<bg Yarn 1>>
+
+<<sfx Yarn 0>>
+
+
+<<fade Yarn 1>>
+Hah...
+
+
+
+I scan around me in a fit, looking to see where I am.
+
+My- my bedroom.
+
+Right. Just a dream. A dream.
+
+I shut off the alarm clock that’s still ringing. 
+
+I’m not exactly well-rested after what just happened, but I don’t have the luxury of time to doze back off.
+
+I can barely muster the willpower to pry myself out of the bed. My eyelids are heavy, and I can almost hear my joints groaning as I stand up.
+
+A book tumbles off of the sheets and falls to the floor.
+
+“DCD Medical Technician Training Handbook”
+
+Crap, I must have fallen asleep studying. Maybe I should have opted for some late-night caffeine after all.
+
+I take a look at the room around me. Messy as always. I’ll deal with that tomorrow. 
+
+...probably. I’ve got somewhere to be today.
+
+The test... oh God, the test’s in two hours.
+
+I quickly button on the uniform I laid out yesterday night. It’s dyed a gritty turquoise, accented with reds and browns. Snug, but with just enough give for it to not suffocate me.
+
+<<fade Yarn 0>>
+
+
+I scoop up my book for some last minute studying on the ride. Time to get going. Better not be late.
+
+<<fade Yarn 1>>
+<<bg Yarn 2>>
+<<music Yarn 4>>
+<<ambience Yarn 1>>
+<<mc Yarn 0>>
+<<accessory Yarn 0 1>>
+
+
+<<expression Yarn 0 42>>
+Alright, let’s see here.
+
+<<expression Yarn 0 40>>
+Bleeding from a wound can usually be stopped by applying a sterile dressing...
+
+Infection is very likely to take place if a wound touches the ground, or if anything else unsanitary touches or gets into it...
+
+Turning page after page, I find myself immersed in my textbook, attempting to absorb every detail as if it’s the last time I’ll see it. 
+
+<<expression Yarn 0 42>>
+Dammit, Eric, you’ve been slacking. This isn’t like you to cram last minute.
+
+Despite the urgency of my situation, I fall into a trance, lost in the sea of words in front of me and gently rocked by the motions and rumbles of the streetcar.
+
+It’s almost meditative. Despite being surrounded by the machinations of the city around me, I’m in my own world. My own personal bubble.
+
+<<expression Yarn 0 24>>
+That is until I’m thrown back to reality by a tap on my shoulder.
+
+MAN: Hey there, pal. Whatcha reading?
+
+What? Who?
+
+<<expression Yarn 0 32>>
+Oh no. Someone’s trying to small talk.
+
+<<expression Yarn 0 34>>
+Okay. Stay calm. Judging by his tone, the man sounds like a respectable person. But, I’m really not in the mood for banter.
+
+<<expression Yarn 0 40>>
+I try not to make eye contact. That usually gives them the hint that I’m not interested.
+
+I still need to respond though. Dammit. What to say, what to say...
+
+ERIC: Uh... a book.
+
+A... 
+
+<<expression Yarn 0 32>>
+A book? 
+
+<<expression Yarn 0 34>>
+What kind of answer is that? Christ, pull yourself together for once.
+
+MAN: Haha, right. Guess I meant to ask you what you’re reading about.
+
+I bet he’s already regretting starting a conversation with me. 
+
+I don’t blame him.
+
+<<expression Yarn 0 40>>
+ERIC: Er... well... first aid... and all that.
+
+ERIC: It's nothing relatively interesting. 
+
+MAN: Pretty advanced for a kid to be reading. You going in the DCD or something?
+
+<<expression Yarn 0 32>>
+Please. Go away.
+
+<<expression Yarn 0 40>>
+ERIC: Mhm. I’ve got a test today.
+
+The man gives a thunderous whistle, seemingly impressed.
+
+MAN: Talking to a real smartie-pants, aren’t I? Pretty darn smart. I’ll leave you to study, kid.
+
+He gives me a hefty pat on the shoulder, and shuffles away.
+
+My eyes are still glued to the textbook. 
+
+<<expression Yarn 0 42>>
+The man was nice enough, considering.
+
+But finally, I have some space and quiet.
+
+I glance at the pages to finish the section I left off on-
+
+<<expression Yarn 0 24>>
+CONDUCTOR: Next stop, Department of Civilian Defense! 
+
+<<expression Yarn 0 34>>
+Perfect. Wonderful. I’m done for.
+
+<<fade Yarn 0>>
+
+
+<<ambience Yarn -1>>
+<<bg Yarn 2>>
+
+<<expression Yarn 0 42>>
+Holding the textbook tight between my arms, I step into the lecture room. 
+
+<<fade Yarn 1>>
+
+
+<<expression Yarn 0 40>>
+With tables and desks neatly aligned into uniform rows, it’s quite spacious having been converted from an old government building.
+
+Letting go of the breath I didn’t realize I was holding, I scan the room and search for an empty seat.
+
+There, in the corner. An unoccupied desk in the back. It’s perfect.
+
+Walking over, trying to avoid the notice of anyone else in the room, I pull out the old chair.
+
+It’s an old, rickety thing. It seems barely capable of holding its own weight, much less me.
+
+I sit myself down, ignoring the ear wrenching squeal that comes from the chair.
+
+<<expression Yarn 0 42>>
+It doesn’t immediately collapse. Good.
+
+<<expression Yarn 0 40>>
+I’m a few minutes early. Taking advantage of the few moments I have to myself, I flip open the textbook and start cramming.
+
+<<expression Yarn 0 42>>
+Where was I... tourniquet applications, that’s right.
+
+<<expression Yarn 0 40>>
+To stop profuse bleeding in a limb laceration, place a tourniquet proximal to the-
+
+GIRL: Ah, gosh, just barely made it!
+
+A girl noisily plops down on the desk right next to me.
+
+<<expression Yarn 0 32>>
+I... quite literally chose the most isolated seat in the room. Why is this happening?
+
+<<expression Yarn 0 34>>
+I keep my eyes glued to the book, trying to avoid eye contact. Maybe she won’t initiate anything if I just...
+
+GIRL: Oh, hey there! How are you feeling? Are you ready for the test?
+
+<<expression Yarn 0 32>>
+This never works.
+
+<<expression Yarn 0 40>>
+ERIC: I... guess.
+
+GIRL: Better than me, at least. I feel so unprepared! 
+
+GIRL: I spent all last night staying up and reading through all the chapters again. Barely got a wink of sleep! 
+
+GIRL: Maybe I would have been better off just sleeping, but I probably wouldn’t have been able to anyways.
+
+GIRL: I don’t know... I know I studied everything, but I still feel like a sitting duck.
+
+ERIC: Oh dear lord, she’s a chatterbox.
+
+ERIC: I’m sure you studied the best you could.
+
+GIRL: Ah... maybe? I feel like I could have paid more attention. But I guess that’s all moot now, just gotta try my best. 
+
+GIRL: Just curious, where are you from, by the way?
+
+ERIC: Local. I take the streetcar here.
+
+GIRL: Ooo, that’s great! I’m not from around here, so I’m just dorming in the DCD barracks for now. 
+
+ERIC: I see.
+
+GIRL: Yup! It’s a new experience, but I think I’m getting along pretty well here.
+
+GIRL: Hope I pass. If I don’t, I’m afraid they might kick me out and... well, that’d be complicated, hehe.
+
+GIRL: Oh, is that the textbook you’re reading?
+
+ERIC: Mhm. I’ve been trying to cram a bit.
+
+ERIC: ...
+
+<<expression Yarn 0 32>>
+ERIC: I... should... uhh... really get back to studying now.
+
+GIRL: Oh- Oh my gosh, I’m so sorry! 
+
+ERIC: I’ll leave you alone, I’m sorry for bothering you.
+
+<<expression Yarn 0 40>>
+ERIC: No, it’s alright.
+
+She withdraws from the conversation, leaving me to my own work.
+
+She’s gone quiet. Peace and space.
+
+I suppose that’s what I wanted, but...
+
+Peeking away from my textbook, I decide to take a quick glance at the girl.
+
+<<expression Yarn 0 32>>
+I don’t feel so good anymore.
+
+She looks pretty dejected. She’s looking down at her lap, twiddling her fingers. A stark contrast to how she was just a second ago.
+
+<<expression Yarn 0 34>>
+Wonderful job, Eric. You really know how to keep a conversation, huh?
+
+...
+
+<<expression Yarn 0 40>>
+Ah, screw it.
+
+ERIC: What’s your name?
+
+GIRL: Hannah!
+
+GIRL: Didn’t you have to study? I don’t want to distract you or anything.
+
+ERIC: No, don’t worry. Five minutes isn’t going to change anything. 
+
+ERIC: I should have introduced myself earlier, I’m Eric.
+
+HANNAH: It’s nice to meet you.
+
+ERIC: Nice to meet you too.
+
+<<expression Yarn 0 32>>
+I legitimately can’t remember the last time I introduced myself like that.
+
+<<expression Yarn 0 40>>
+Now that I’ve chosen to actually invest myself in a conversation, I begin to pay more attention to the girl in front of me.
+
+<<music Yarn 2>>
+<<enter Yarn 1>>
+<<expression Yarn 1 0>>
+The first thing I notice is her ginger hair. She’s a bit shorter than me, but probably has about ten times the energy inside of her.
+
+<<expression Yarn 1 3>>
+I can see her bouncing her legs excitedly, as she flashes me a pearly smile.
+
+<<expression Yarn 1 0>>
+Looks like she’s cheered right up. That’s good.
+
+I’ve seen her before- she’s that girl who’s friends with everyone. I’ve never seen her walking around class without another person next to her.
+
+Somehow I’d never actually come face to face with her before. Granted, I always avoid people whenever possible. I almost never talk to anyone in this class.
+
+<<expression Yarn 0 32>>
+Can’t imagine what that’s like, being so chatty. I barely have the energy to keep myself in a single conversation.
+
+<<expression Yarn 0 40>>
+ERIC: You said you weren’t from here, right?
+
+<<expression Yarn 1 8>>
+HANNAH: Oh! Well, uh, I got a special commission to join the DCD. 
+
+<<expression Yarn 1 0>>
+HANNAH: I wanted to do something to help out the war effort, so down I came and here I am!
+
+ERIC: Wow, that’s interesting. Most people usually just talk about the food and the beaches.
+
+<<expression Yarn 1 8>>
+HANNAH: Well, it’s not like that isn’t nice as well, hehe. Honestly, I wish I had more time to explore...
+
+<<expression Yarn 1 24>>
+<<music Yarn -1>>
+She gets no further before the sound of heavy footsteps rings through the air. It’s a solid clack, almost like horse hooves on solid concrete.
+
+We both freeze. Out of the corner of my eyes, I see the rest of the class quickly ending their own conversations to scramble to their seats.
+
+<<exit Yarn 1>>
+
+We all know what that noise is.
+
+The door creaks open, and he walks in.
+
+???: Attention!
+
+Without delay, as a single entity, we all stand and salute the Captain.
+
+<<enter Yarn 2>>
+<<music Yarn 3>>
+<<expression Yarn 2 40>>
+Captain Stone.
+
+He walks down the row up to the front of the room, commanding authority from the entirety of the class.
+
+He’s a large man, to say the least. His hair has turned a silver gray from age, but that’s not to say he’s frail. 
+
+From head to toe, anyone can tell that this man is a pack leader. His eyes glisten and shine with confidence and pride. 
+
+His uniform hides it well, but his body is incredibly well built. It’s clear that he actively keeps himself in good shape.
+
+At a glance, he can probably pass for those old marble statues at the history museums.
+
+It’s clear he’s on a different level than us. Any man would be chock full of jealousy and envy.
+
+<<expression Yarn 0 32>>
+...that’s what the girl who sat next to me on the first day of class said. Ad verbatim.
+
+<<expression Yarn 0 34>>
+I promptly moved seats the next day.
+
+<<expression Yarn 0 40>>
+The Captain’s voice snaps me out of whatever in the world I was just thinking about.
+
+CAPTAIN: At ease.
+
+We relax, and return back to our seats.
+
+Captain Stone stands before us, his hand tucked into his coat.
+
+CAPTAIN: Ladies and gentlemen, it’s been a long journey. 
+
+CAPTAIN: You’ve been holed up in this damn room for the past six months, studying and working your asses off.
+
+CAPTAIN: I promise you, none of your efforts are in vain.
+
+CAPTAIN: Today’s the day where you show off everything you know. 
+
+CAPTAIN: I’m sure you already know, but this final practical exam will cover everything we’ve drilled during our time together. 
+
+CAPTAIN: You are well-prepared, and I have full confidence in you.
+
+<<expression Yarn 2 16>>
+CAPTAIN: Show me the results of your hard work.
+
+The classroom erupts into a thunderous, “Yes sir!”
+
+<<expression Yarn 2 40>>
+<<expression Yarn 0 32>>
+Oh... God. This is really it. The final stretch to the finish line.
+
+<<expression Yarn 0 34>>
+I'm almost done. Don’t screw up now.
+
+<<expression Yarn 0 40>>
+
+CAPTAIN: Everyone, one last thing before we begin.
+
+CAPTAIN: As you all know, cooperation is crucial in medical aid and emergency rescue.
+
+CAPTAIN: That’s why this exam will be conducted in pairs. You have twenty seconds to find a buddy.
+
+Pair up, no problem.
+
+...
+
+<<expression Yarn 0 33>>
+Wait, I’m sorry, WHAT?
+
+<<expression Yarn 0 32>>
+<<expression Yarn 2 16>>
+CAPTAIN: Don’t think I don’t see you dawdling over there, Wai. Time starts now.
+
+CAPTAIN: 20...
+
+CAPTAIN: 19...
+
+<<expression Yarn 0 34>>
+Called me out. Guess he knew I was always the quiet type. 
+
+<<expression Yarn 0 40>>
+I see everyone around me immediately finding partners to work with.
+
+<<expression Yarn 0 32>>
+This isn’t good. I barely talk to anyone here, where am I supposed to-
+
+<<enter Yarn 1>>
+<<expression Yarn 1 8>>
+HANNAH: Hey, wanna buddy up?
+
+<<expression Yarn 0 34>>
+I’m saved.
+
+<<expression Yarn 0 40>>
+ERIC: Y-yeah, sure, I’d love to.
+
+<<expression Yarn 1 1>>
+HANNAH: Awesome! We’re going to smash this test!
+
+<<expression Yarn 1 8>>
+HANNAH: ...
+
+<<expression Yarn 1 9>>
+HANNAH: Uh, I know I said I wasn’t feeling all that ready, but I'll do my best!
+
+
+<<expression Yarn 1 8>>
+ERIC: Don’t worry. I’m sure we’ll be fine.
+
+<<expression Yarn 1 24>>
+CAPTAIN: Time’s up. It seems everyone’s all buddied up. Let’s get right into the briefing.
+
+CAPTAIN: As I mentioned before, this exam will be simulating various different emergency scenarios that you can expect to find yourself in.
+
+CAPTAIN: Be prepared to use all your skills that were taught to you.
+
+<<expression Yarn 1 40>>
+CAPTAIN: Here’s the situation. You’re walking around downtown, when you see a car in the road swerve and hit the curb.
+
+CAPTAIN: You rush to the scene to find people pulling the passengers out of the vehicle. It appears that only two people have been injured.
+
+CAPTAIN: From what you can gather from the witnesses, the driver fell unconscious at the wheel. 
+
+CAPTAIN: They can’t tell you anything more than that- you’ll have to gather information on the spot.
+
+CAPTAIN: Patient 1 will be a mannequin. Patient 2 will be your partner acting the role.
+
+CAPTAIN: Wai, you’ll be going first.
+
+ERIC: Yes, sir!
+
+<<expression Yarn 0 32>>
+First? He’s really on me today.
+
+<<expression Yarn 0 40>>
+CAPTAIN: Grayman, get yourself setup in the backroom and a fresh uniform. We’ll be using mock blood and paint for your injuries.
+
+<<exit Yarn 2>>
+
+HANNAH: Yes, sir!
+
+<<expression Yarn 1 0>>
+HANNAH: Good luck, Eric! You got this!
+
+<<exit Yarn 1>>
+She skips away, leaving the room to get changed. 
+
+<<expression Yarn 0 32>>
+Moment of truth, I suppose.
+
+<<expression Yarn 0 42>>
+It’s time to do what I’ve been training to do for all these months. Let’s get this over with.
+
+<<fade Yarn 0>>
+
+
+<<endScene Yarn>>
+===

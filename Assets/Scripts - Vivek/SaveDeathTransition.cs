@@ -105,11 +105,12 @@ public class SaveDeathTransition : MonoBehaviour
             }
             yield return null;
         }
-        gameObject.GetComponent<PatientManager>().PatientSaveDeathTransitionHelper2();
+        PatientSwitchTransition(0.6f);
         yield return new WaitForSeconds(0.6f);
         stretcher.SetActive(false);
         stretcher.transform.position = stretcherStartPos;
         patient.transform.position = patientStartPos;
+        gameObject.GetComponent<PatientManager>().PatientSaveDeathTransitionHelper2();
     }
 
     IEnumerator MoveDeadPatient(GameObject patient)
@@ -136,11 +137,12 @@ public class SaveDeathTransition : MonoBehaviour
             }
             yield return null;
         }
-        gameObject.GetComponent<PatientManager>().PatientSaveDeathTransitionHelper2();
+        PatientSwitchTransition(0.6f);
         yield return new WaitForSeconds(0.6f);
         stretcher.SetActive(false);
         stretcher.transform.position = stretcherStartPos;
         patient.transform.position = patientStartPos;
+        gameObject.GetComponent<PatientManager>().PatientSaveDeathTransitionHelper2();
     }
 
     /*IEnumerator MoveDeadPatient()

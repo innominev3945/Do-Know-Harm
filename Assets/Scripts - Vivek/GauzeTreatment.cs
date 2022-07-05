@@ -13,17 +13,25 @@ namespace GauzeTreatmentClass
         private GameObject bloodPool;
         private GameObject bleedingWound;
 
-        public static GauzeTreatment MakeGauzeTreatmentObject(GameObject ob, Injury inj)
+        private void OnDestroy()
+        {
+            if (bloodPool != null)
+                Destroy(bloodPool);
+            if (bleedingWound != null)
+                Destroy(bleedingWound);
+        }
+        public static GauzeTreatment MakeGauzeTreatmentObject(GameObject ob, Injury inj, float rotation)
         {
             GauzeTreatment ret = ob.AddComponent<GauzeTreatment>();
+            Quaternion q = Quaternion.Euler(0, 0, rotation);
             ret.treatmentStarted = false;
             ret.vitalSpike = false;
             ret.injury = inj;
 
             //ret.gauze = Instantiate((UnityEngine.Object)Resources.Load("Gauze"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
-            ret.bloodPool = Instantiate((UnityEngine.Object)Resources.Load("BloodPool"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            ret.bloodPool = Instantiate((UnityEngine.Object)Resources.Load("BloodPool"), ret.injury.GetLocation(), q) as GameObject;
             ret.bloodPool.transform.parent = ob.transform;
-            ret.bleedingWound = Instantiate((UnityEngine.Object)Resources.Load("BleedingWound"), ret.injury.GetLocation(), Quaternion.identity) as GameObject;
+            ret.bleedingWound = Instantiate((UnityEngine.Object)Resources.Load("BleedingWound"), ret.injury.GetLocation(), q) as GameObject;
             ret.bleedingWound.transform.parent = ob.transform;
 
             return ret;
@@ -39,23 +47,31 @@ namespace GauzeTreatmentClass
         {
             treatmentStarted = true;
             //gauze.SetActive(true);
-            bloodPool.SetActive(true);
-            bleedingWound.SetActive(true);
+            if (bloodPool != null)
+                bloodPool.SetActive(true);
+            if (bleedingWound != null)
+                bleedingWound.SetActive(true);
         }
 
         public override void StopTreatment()
         {
             treatmentStarted = false;
             //gauze.SetActive(false);
-            bloodPool.SetActive(false);
-            bleedingWound.SetActive(false);
+            if (bloodPool != null)
+                bloodPool.SetActive(false);
+            if (bleedingWound != null)
+                bleedingWound.SetActive(false);
         }
 
         public override void ShowInjury()
         {
-            bloodPool.SetActive(true);
-            bleedingWound.SetActive(true);
+            if (bloodPool != null)
+                bloodPool.SetActive(true);
+            if (bleedingWound != null)
+                bleedingWound.SetActive(true);
         }
+
+        public override string GetToolName() { return "Gauze";  }
 
         // Update is called once per frame
         void Update()

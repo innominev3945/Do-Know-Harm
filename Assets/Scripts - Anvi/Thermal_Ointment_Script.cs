@@ -38,7 +38,7 @@ namespace ThermalOintmentClass
             getTriggerTag = false;
             exit = false;
             numTimes = 0;
-            totalNumTimes = 3;
+            totalNumTimes = 6;
             triggerTag = "";
             mouseHeldInTriggerCounter = 0;
 
@@ -96,35 +96,38 @@ namespace ThermalOintmentClass
 
         public void ApplyOintment(InputAction.CallbackContext context)
         {
-            if (context.started)
+            if (initialHitbox != null && otherHitbox != null)
             {
-                getTriggerTag = true;
-
-                //Debug.Log("Started");
-            }
-            else if (context.canceled)
-            {
-                // reset if mouse button released
-                mouseHeldDown = false;
-                enteredOtherTrigger = false;
-                exit = false;
-                numTimes = 0;
-                triggerTag = "";
-                getTriggerTag = false;
-                mouseHeldInTriggerCounter = 0;
-
-                if (initialHitbox.transform.position.x != hitbox1X && initialHitbox.transform.position.y != hitbox1Y)
+                if (context.started)
                 {
-                    // assume that player will start with trigger 1 (for initial hit box)
-                    GameObject temp = initialHitbox;
-                    initialHitbox = otherHitbox;
-                    otherHitbox = temp;
+                    getTriggerTag = true;
+
+                    //Debug.Log("Started");
                 }
+                else if (context.canceled)
+                {
+                    // reset if mouse button released
+                    mouseHeldDown = false;
+                    enteredOtherTrigger = false;
+                    exit = false;
+                    numTimes = 0;
+                    triggerTag = "";
+                    getTriggerTag = false;
+                    mouseHeldInTriggerCounter = 0;
 
-                initialHitbox.GetComponent<SpriteRenderer>().enabled = true;
-                otherHitbox.GetComponent<SpriteRenderer>().enabled = true;
+                    if (initialHitbox.transform.position.x != hitbox1X && initialHitbox.transform.position.y != hitbox1Y)
+                    {
+                        // assume that player will start with trigger 1 (for initial hit box)
+                        GameObject temp = initialHitbox;
+                        initialHitbox = otherHitbox;
+                        otherHitbox = temp;
+                    }
 
-                Debug.Log("mouseHeldDown = false");
+                    initialHitbox.GetComponent<SpriteRenderer>().enabled = true;
+                    otherHitbox.GetComponent<SpriteRenderer>().enabled = true;
+
+                    Debug.Log("mouseHeldDown = false");
+                }
             }
         }
 
@@ -161,6 +164,7 @@ namespace ThermalOintmentClass
                     {
                         enteredOtherTrigger = false;
                         numTimes++;
+                        Camera.main.GetComponent<SFXPlaying>().SFXstepClear();
                         Debug.Log("numTimes: " + numTimes);
                         if (numTimes >= totalNumTimes)
                         {

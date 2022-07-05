@@ -22,11 +22,9 @@ TagManager:
   - Button3
   - Button4
   - Tourniquet
-  - Tape Pivot
   - Hit Box (Gauze)
-  - Hit Box (Tape) 1
-  - Hit Box (Tape) 2
-  - Gauze Hit Box Manager
+  - ClothingButton
+  - ClothingFold
   layers:
   - Default
   - TransparentFX

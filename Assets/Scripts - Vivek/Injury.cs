@@ -16,6 +16,21 @@ namespace InjuryClass
         private Queue<Treatment> treatments; // Queue of treatments - as soon as one treatment is finished, the next one in priority is to be started 
         private string injuryName;
 
+        ~Injury()
+        {
+            foreach (Treatment treatment in treatments)
+                if (treatment != null)
+                    GameObject.Destroy(treatment);
+        }
+
+        public void DestroyTreatmentObjects()
+        {
+            foreach (Treatment treatment in treatments)
+                if (treatment != null)
+                    GameObject.Destroy(treatment);
+            treatments.Clear();
+        }
+
         public Injury(float severity, Vector2 loc, string name)
         {
             injurySeverity = severity;
@@ -53,8 +68,11 @@ namespace InjuryClass
         // Holds the treatment of an Injury by stopping the Treatment of the topmost item in the Queue (this still preserves all progress in treating the injury) 
         public void AbortTreatment()
         {
-            beingTreated = false;
-            treatments.Peek().StopTreatment();
+            if (treatments.Count != 0)
+            {
+                beingTreated = false;
+                treatments.Peek().StopTreatment();
+            }
         }
 
         public void AddTreatment(Treatment treatment) 
@@ -65,7 +83,7 @@ namespace InjuryClass
 
         public void RemoveTreatment()
         {
-            if (beingTreated)
+            if (beingTreated && treatments.Count != 0)
             {
                 treatments.Dequeue();
                 if (treatments.Count != 0)
@@ -74,6 +92,13 @@ namespace InjuryClass
                     beingTreated = false;
                 Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
             }
+        }
+
+        public string GetTreatableTool()
+        {
+            if (treatments.Count != 0)
+                return treatments.Peek().GetToolName();
+            return "";
         }
 
     }

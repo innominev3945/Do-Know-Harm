@@ -166,29 +166,35 @@ public class Tool_Wheel_Script : MonoBehaviour
 
         if (northEastTriggerTimer > 0 && !northEastSelected)
         {
-            if (current != null)
+            if (arrayOfTools[1] != null)
             {
-                Destroy(current);
+                if (current != null)
+                {
+                    Destroy(current);
+                }
+
+                current = Instantiate(arrayOfTools[1], mousePosition, Quaternion.identity);
+
+                highlightTransform.localRotation = Quaternion.Euler(0, 0, -45f);
+
+                changeToolFlags(ref northEastSelected);
             }
-
-            current = Instantiate(arrayOfTools[1], mousePosition, Quaternion.identity);
-
-            highlightTransform.localRotation = Quaternion.Euler(0, 0, -45f);
-
-            changeToolFlags(ref northEastSelected);
         }
         else if (northWestTriggerTimer > 0 && !northWestSelected)
         {
-            if (current != null)
+            if (arrayOfTools[7] != null)
             {
-                Destroy(current);
+                if (current != null)
+                {
+                    Destroy(current);
+                }
+
+                current = Instantiate(arrayOfTools[7], mousePosition, Quaternion.identity);
+
+                highlightTransform.localRotation = Quaternion.Euler(0, 0, 45f);
+
+                changeToolFlags(ref northWestSelected);
             }
-
-            current = Instantiate(arrayOfTools[7], mousePosition, Quaternion.identity);
-
-            highlightTransform.localRotation = Quaternion.Euler(0, 0, 45f);
-
-            changeToolFlags(ref northWestSelected);
         }
         else
         {
@@ -200,15 +206,18 @@ public class Tool_Wheel_Script : MonoBehaviour
     {
         if (northEastTriggerTimer <= 0 && northWestTriggerTimer <= 0 && !northSelected)
         {
-            if (current != null)
+            if (arrayOfTools[0] != null)
             {
-                Destroy(current);
+                if (current != null)
+                {
+                    Destroy(current);
+                }
+
+                current = Instantiate(arrayOfTools[0], mousePosition, Quaternion.identity);
+                highlightTransform.localRotation = Quaternion.Euler(0, 0, 0f);
+
+                changeToolFlags(ref northSelected);
             }
-
-            current = Instantiate(arrayOfTools[0], mousePosition, Quaternion.identity);
-            highlightTransform.localRotation = Quaternion.Euler(0, 0, 0f);
-
-            changeToolFlags(ref northSelected);
         }
     }
 
@@ -219,29 +228,35 @@ public class Tool_Wheel_Script : MonoBehaviour
 
         if (southEastTriggerTimer > 0 && !southEastSelected)
         {
-            if (current != null)
+            if (arrayOfTools[3] != null)
             {
-                Destroy(current);
+                if (current != null)
+                {
+                    Destroy(current);
+                }
+
+                current = Instantiate(arrayOfTools[3], mousePosition, Quaternion.identity);
+
+                highlightTransform.localRotation = Quaternion.Euler(0, 0, -135f);
+
+                changeToolFlags(ref southEastSelected);
             }
-
-            current = Instantiate(arrayOfTools[3], mousePosition, Quaternion.identity);
-
-            highlightTransform.localRotation = Quaternion.Euler(0, 0, -135f);
-
-            changeToolFlags(ref southEastSelected);
         }
         else if (southWestTriggerTimer > 0 && !southWestSelected)
         {
-            if (current != null)
+            if (arrayOfTools[5] != null)
             {
-                Destroy(current);
+                if (current != null)
+                {
+                    Destroy(current);
+                }
+
+                current = Instantiate(arrayOfTools[5], mousePosition, Quaternion.identity);
+
+                highlightTransform.localRotation = Quaternion.Euler(0, 0, 135f);
+
+                changeToolFlags(ref southWestSelected);
             }
-
-            current = Instantiate(arrayOfTools[5], mousePosition, Quaternion.identity);
-
-            highlightTransform.localRotation = Quaternion.Euler(0, 0, 135f);
-
-            changeToolFlags(ref southWestSelected);
         }
         else
         {
@@ -253,15 +268,18 @@ public class Tool_Wheel_Script : MonoBehaviour
     {
         if (southEastTriggerTimer <= 0 && southWestTriggerTimer <= 0 && !southSelected)
         {
-            if (current != null)
+            if (arrayOfTools[4] != null)
             {
-                Destroy(current);
+                if (current != null)
+                {
+                    Destroy(current);
+                }
+
+                current = Instantiate(arrayOfTools[4], mousePosition, Quaternion.identity);
+                highlightTransform.localRotation = Quaternion.Euler(0, 0, 180f);
+
+                changeToolFlags(ref southSelected);
             }
-
-            current = Instantiate(arrayOfTools[4], mousePosition, Quaternion.identity);
-            highlightTransform.localRotation = Quaternion.Euler(0, 0, 180f);
-
-            changeToolFlags(ref southSelected);
         }
     }
 
@@ -272,29 +290,35 @@ public class Tool_Wheel_Script : MonoBehaviour
 
         if (northEastTriggerTimer > 0 && !northEastSelected)
         {
-            if (current != null)
+            if (arrayOfTools[1] != null)
             {
-                Destroy(current);
+                if (current != null)
+                {
+                    Destroy(current);
+                }
+
+                current = Instantiate(arrayOfTools[1], mousePosition, Quaternion.identity);
+
+                highlightTransform.localRotation = Quaternion.Euler(0, 0, -45f);
+
+                changeToolFlags(ref northEastSelected);
             }
-
-            current = Instantiate(arrayOfTools[1], mousePosition, Quaternion.identity);
-
-            highlightTransform.localRotation = Quaternion.Euler(0, 0, -45f);
-
-            changeToolFlags(ref northEastSelected);
         }
         else if (southEastTriggerTimer > 0 && !southEastSelected)
         {
-            if (current != null)
+            if (arrayOfTools[3] != null)
             {
-                Destroy(current);
+                if (current != null)
+                {
+                    Destroy(current);
+                }
+
+                current = Instantiate(arrayOfTools[3], mousePosition, Quaternion.identity);
+
+                highlightTransform.localRotation = Quaternion.Euler(0, 0, -135f);
+
+                changeToolFlags(ref southEastSelected);
             }
-
-            current = Instantiate(arrayOfTools[3], mousePosition, Quaternion.identity);
-
-            highlightTransform.localRotation = Quaternion.Euler(0, 0, -135f);
-
-            changeToolFlags(ref southEastSelected);
         }
         else
         {
@@ -306,15 +330,18 @@ public class Tool_Wheel_Script : MonoBehaviour
     {
         if (northEastTriggerTimer <= 0 && southEastTriggerTimer <= 0 && !eastSelected)
         {
-            if (current != null)
+            if (arrayOfTools[2] != null)
             {
-                Destroy(current);
+                if (current != null)
+                {
+                    Destroy(current);
+                }
+
+                current = Instantiate(arrayOfTools[2], mousePosition, Quaternion.identity);
+                highlightTransform.localRotation = Quaternion.Euler(0, 0, -90f);
+
+                changeToolFlags(ref eastSelected);
             }
-
-            current = Instantiate(arrayOfTools[2], mousePosition, Quaternion.identity);
-            highlightTransform.localRotation = Quaternion.Euler(0, 0, -90f);
-
-            changeToolFlags(ref eastSelected);
         }
     }
 
@@ -325,29 +352,35 @@ public class Tool_Wheel_Script : MonoBehaviour
 
         if (northWestTriggerTimer > 0 && !northWestSelected)
         {
-            if (current != null)
+            if (arrayOfTools[7] != null)
             {
-                Destroy(current);
+                if (current != null)
+                {
+                    Destroy(current);
+                }
+
+                current = Instantiate(arrayOfTools[7], mousePosition, Quaternion.identity);
+
+                highlightTransform.localRotation = Quaternion.Euler(0, 0, 45f);
+
+                changeToolFlags(ref northWestSelected);
             }
-
-            current = Instantiate(arrayOfTools[7], mousePosition, Quaternion.identity);
-
-            highlightTransform.localRotation = Quaternion.Euler(0, 0, 45f);
-
-            changeToolFlags(ref northWestSelected);
         }
         else if (southWestTriggerTimer > 0 && !southWestSelected)
         {
-            if (current != null)
+            if (arrayOfTools[5] != null)
             {
-                Destroy(current);
+                if (current != null)
+                {
+                    Destroy(current);
+                }
+
+                current = Instantiate(arrayOfTools[5], mousePosition, Quaternion.identity);
+
+                highlightTransform.localRotation = Quaternion.Euler(0, 0, 135f);
+
+                changeToolFlags(ref southWestSelected);
             }
-
-            current = Instantiate(arrayOfTools[5], mousePosition, Quaternion.identity);
-
-            highlightTransform.localRotation = Quaternion.Euler(0, 0, 135f);
-
-            changeToolFlags(ref southWestSelected);
         }
         else
         {
@@ -359,15 +392,18 @@ public class Tool_Wheel_Script : MonoBehaviour
     {
         if (northWestTriggerTimer <= 0 && southWestTriggerTimer <= 0 && !westSelected)
         {
-            if (current != null)
+            if (arrayOfTools[6] != null)
             {
-                Destroy(current);
+                if (current != null)
+                {
+                    Destroy(current);
+                }
+
+                current = Instantiate(arrayOfTools[6], mousePosition, Quaternion.identity);
+                highlightTransform.localRotation = Quaternion.Euler(0, 0, 90f);
+
+                changeToolFlags(ref westSelected);
             }
-
-            current = Instantiate(arrayOfTools[6], mousePosition, Quaternion.identity);
-            highlightTransform.localRotation = Quaternion.Euler(0, 0, 90f);
-
-            changeToolFlags(ref westSelected);
         }
     }
 

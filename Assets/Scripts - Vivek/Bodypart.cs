@@ -20,6 +20,7 @@ namespace BodypartClass
         private List<Injury> injuries; // Injuries that impact the health of the body part 
         private bool damagePause;
 
+
         // Constructor 
         // Unity, being the helpful engine, doesn't like to have normal Constructors work properly when dealing with
         // Monobehaviour scripts, so instead of creating a Patient object using the Patient() constructor, use 
@@ -44,6 +45,12 @@ namespace BodypartClass
 
         public Vector2 GetLocation() { return location; }
 
+        public void DestroyTreatmentObjects()
+        {
+            foreach (Injury injury in injuries)
+                if (injury != null)
+                    injury.DestroyTreatmentObjects();
+        }
         public bool GetHealed() 
         {
             foreach (Injury injury in injuries)
@@ -83,6 +90,11 @@ namespace BodypartClass
             damagePause = false;
         }
 
+        public int GetNumInjuries()
+        {
+            return injuries.Count;
+        }
+
         public List<string> GetInjuryNames()
         {
             List<string> ret = new List<string>();
@@ -90,6 +102,14 @@ namespace BodypartClass
             {
                 ret.Add(inj.GetName());
             }
+            return ret;
+        }
+
+        public List<string> GetToolNames()
+        {
+            List<string> ret = new List<string>();
+            foreach (Injury inj in injuries)
+                ret.Add(inj.GetTreatableTool());
             return ret;
         }
 

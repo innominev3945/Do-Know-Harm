@@ -1,0 +1,64 @@
+﻿title: Start
+
+---
+<<bg Yarn 0>>
+<<fade Yarn 0>>
+Hannah: And here we go again...
+
+<<mc Yarn 0>>
+
+<<enter Yarn 1>>
+Karen: Yap... here we go again
+
+<<fade Yarn 1>>
+
+Eric: What's going on here?
+
+
+<<bg Yarn 1>>
+
+???: Attention!
+
+<<enter Yarn 2>>
+Captain Stone: Karen, remind yourself that names can have a space.
+
+<<outfit Yarn 1 1>>
+
+<<outfit Yarn 0 1>>
+
+<<expr Yarn 2 1>>
+
+
+<<set $tester to 1>>
+
+Karen: Yessir! Of course sir!
+
+<<expr Yarn 0 1>>
+
+Captain Stone: Goodbye.
+
+<<if $KarenWantsC6Xiao is 7>>
+    <<bg Yarn 0>>
+    Karen: That was odd...
+<<endif>>
+
+<<exit Yarn 2>>
+Karen: So, how's the choice mechanism working?
+-> Eh
+    ...
+-> Great!
+    That's good to hear.
+-> Blech
+    TT
+
+
+<<music Yarn 1>>
+Wow!
+My first ever Yarn script in Unity!
+
+-> Gosh!
+-> Incredible!
+-> I'm amazed!
+
+Anyway, time to get writing!
+===
