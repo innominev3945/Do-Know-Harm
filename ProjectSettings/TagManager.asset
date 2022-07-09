@@ -25,6 +25,7 @@ TagManager:
   - Hit Box (Gauze)
   - ClothingButton
   - ClothingFold
+  - SyretteHitbox
   layers:
   - Default
   - TransparentFX

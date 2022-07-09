@@ -20,6 +20,7 @@ namespace PatientClass
         private Bodypart[] bodyparts;
         private float health; // Health of ENTIRE Patient, weighted via the various Bodyparts 
         private bool clothesOpen;
+        private bool debugHealth;
 
         private void OnDestroy()
         {
@@ -41,6 +42,7 @@ namespace PatientClass
             ret.bodyparts = parts; // Takes an array of Bodyparts as the parameter, so Bodyparts can be split and weighted as seen necessary 
             ret.health = 100;
             ret.clothesOpen = false;
+            ret.debugHealth = false;
             return ret;
         }
 
@@ -105,21 +107,49 @@ namespace PatientClass
         // Update functionality that is called every timeInterval 
         public void Update()
         {
+            /*if ((Time.time - nextTime) > timeInterval)
+            {
+                nextTime = Time.time;
+            }
             if (Time.time >= nextTime)
             {
                 float total = 0f; // Total HP loss calculated via weighted severity of Bodyparts 
                 float deducted = 0f; // Adjustment to keep Patient's health less than or equal to 100 (also allows for the Patient to die if a critically weighted 
-                // Bodypart dies, such as the head or torso)
+                                     // Bodypart dies, such as the head or torso)
                 foreach (Bodypart bodypart in bodyparts) // Iterate through all of the Patient's Bodyparts to update health 
                 {
                     total += bodypart.GetHealth() * bodypart.GetSeverityMultiplier();
                     deducted += bodypart.GetSeverityMultiplier() * 100;
                 }
+                if (debugHealth)
+                {
+                    Debug.Log("Total: " + total + ", Deducted: " + deducted + ", Result: " + (100 + total - deducted));
+                }
                 health = 100 + total - deducted;
                 if (health < 0)
                     health = 0;
                 nextTime += timeInterval;
+            }*/
+            float total = 0f; // Total HP loss calculated via weighted severity of Bodyparts 
+            float deducted = 0f; // Adjustment to keep Patient's health less than or equal to 100 (also allows for the Patient to die if a critically weighted 
+                                 // Bodypart dies, such as the head or torso)
+            foreach (Bodypart bodypart in bodyparts) // Iterate through all of the Patient's Bodyparts to update health 
+            {
+                total += bodypart.GetHealth() * bodypart.GetSeverityMultiplier();
+                deducted += bodypart.GetSeverityMultiplier() * 100;
             }
+            if (debugHealth)
+            {
+                Debug.Log("Total: " + total + ", Deducted: " + deducted + ", Result: " + (100 + total - deducted));
+            }
+            health = 100 + total - deducted;
+            if (health < 0)
+                health = 0;
+        }
+
+        public void ToggleHealthDebug()
+        {
+            debugHealth = !debugHealth;
         }
 
         public void DestroyTreatmentObjects()
@@ -143,6 +173,40 @@ namespace PatientClass
             foreach (Bodypart part in bodyparts)
                 ret.AddRange(part.GetToolNames());
             return ret;
+        }
+
+        public void BoostHealth(float amount)
+        {
+            //health += amount;
+            /*foreach (Bodypart bodypart in bodyparts)
+            {
+                bodypart.BoostHealth(amount);
+            }*/
+            StartCoroutine(RaiseHealth(amount, health + 10));
+            /*foreach (Bodypart bodypart in bodyparts)
+            {
+                bodypart.BoostHealth(amount);
+            }*/
+        }
+
+        IEnumerator RaiseHealth(float amount, float targetHealth)
+        {
+            float startTime = Time.time;
+            if (targetHealth > 99)
+                targetHealth = 99;
+            while (health <= targetHealth || (Time.time - startTime) > 3f)
+            {
+                if (health + (amount / 200) < 100)
+                {
+                    //health += (amount / 200);
+                    foreach (Bodypart bodypart in bodyparts)
+                    {
+                        bodypart.BoostHealth(amount / 200);
+                    }
+                }
+                yield return null;
+            }
+            //Debug.Log("Boosted Health to " + health);
         }
     }
 }
