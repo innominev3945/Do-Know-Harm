@@ -47,6 +47,7 @@ namespace ForcepsClass
             if (context.started) // && onForeignObject
             {
                 mousePressed = true;
+                //Debug.Log("mousePressed");
                 sprender.sprite = forcepsClosed;
             }
             else if (context.canceled)
