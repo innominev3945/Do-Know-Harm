@@ -71,6 +71,8 @@ public class VNManager : MonoBehaviour
         
         LoadScene(current_scene);
         loadingScreen.sprite = LoadSprites[0];
+
+
         
         //loadingScreen.deactivateLoading();
         //LoadScreen.gameObject.SetActive(false);
@@ -78,6 +80,13 @@ public class VNManager : MonoBehaviour
         //resets line tracker to be used for loading and saving stuffs
         lineViewer.resetLineNumber();
         
+    }
+
+    void Awake()
+    {
+        current_scene = numbers.getCurrentScene();
+        audio.setChapter(current_scene);
+        Debug.Log("Set to " + current_scene);
     }
 
     
@@ -440,6 +449,7 @@ public class VNManager : MonoBehaviour
         //dialogue_runner.startNode = chapterTitles[sceneNumber];
         dialogue_runner.SetProject(chapters[sceneNumber]);
         dialogue_runner.StartDialogue(chapterTitles[sceneNumber]);
+        audio.setChapter(sceneNumber);
         //LoadScreen.gameObject.SetActive(false);
     }
 
@@ -448,7 +458,7 @@ public class VNManager : MonoBehaviour
     [YarnCommand("endScene")]
     public void endScene()
     {
-        Debug.Log("meow");
+        //Debug.Log("meow");
         //EXIT YARN FUNCTION
         //END OF SCRIPT and there aren't any lines playing
             //*****************************************************************************
