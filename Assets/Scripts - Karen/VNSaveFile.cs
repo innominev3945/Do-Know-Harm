@@ -1,182 +1,182 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using BookCurlPro;
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
+// using UnityEngine.UI;
+// using BookCurlPro;
 
-public class VNSaveFile : MonoBehaviour
-{
-    // Start is called before the first frame update
-    //public static VNSaveFile Instance;
-
-
-    private int num_People_Pages = 0;
-    private int num_Place_Pages = 0;
-    private int num_Org_Pages = 0;
-    private int num_Inj_Treat_Pages = 0;
-
-    private int num_People_Paper = 0;
-    private int num_Place_Paper = 0;
-    private int num_Org_Paper = 0;
-    private int num_Inj_Treat_Paper = 0;
+// public class VNSaveFile : MonoBehaviour
+// {
+//     // Start is called before the first frame update
+//     //public static VNSaveFile Instance;
 
 
-    enum ChapterType {People, Places, Organizations, InjuriesAndTreatment};
-    //page class: stores page info
-    private class page{
-        public Sprite pageImage;
-        public bool isLoaded = false;
-        public ChapterType type;
-    }
+//     private int num_People_Pages = 0;
+//     private int num_Place_Pages = 0;
+//     private int num_Org_Pages = 0;
+//     private int num_Inj_Treat_Pages = 0;
 
-    [SerializeField] private page[] pages;
-
-    //private PlayerProgress loadedData;
+//     private int num_People_Paper = 0;
+//     private int num_Place_Paper = 0;
+//     private int num_Org_Paper = 0;
+//     private int num_Inj_Treat_Paper = 0;
 
 
-    private class PlayerProgress
-    {
-        public List<Sprite> People_Pages = new List<Sprite>();
-        public List<Sprite> Organization_Pages = new List<Sprite>();
-        public List<Sprite> Place_Pages = new List<Sprite>();
-        public List<Sprite> Injuries_and_Treatment_Pages = new List<Sprite>();
-    }
+//     enum ChapterType {People, Places, Organizations, InjuriesAndTreatment};
+//     //page class: stores page info
+//     private class page{
+//         public Sprite pageImage;
+//         public bool isLoaded = false;
+//         public ChapterType type;
+//     }
 
-    // public saveVNProgress(){
-    //     PlayerProgress saveData = new PlayerProgress();
+//     [SerializeField] private page[] pages;
 
-    //     saveData.People_Pages = People_Pages;
-
-    //     saveData.Organization_Pages = Organization_Pages;
-
-    //     saveData.Place_Pages = Place_Pages;
-
-    //     saveData.Injuries_and_Treatment_Pages = Injuries_and_Treatment_Pages;
-
-    //     DataSaver.saveData(saveData, "VNSaveData");
-    // }
-
-    // public loadVNProgess(){
-    //     loadedData = DataSaver.loadData<PlayerProgress>("players");
-    // }
+//     //private PlayerProgress loadedData;
 
 
-    static List<Sprite> People_Pages = new List<Sprite>();
-    static List<Sprite> Organization_Pages = new List<Sprite>();
-    static List<Sprite> Place_Pages = new List<Sprite>();
-    static List<Sprite> Injuries_and_Treatment_Pages = new List<Sprite>();
+//     private class PlayerProgress
+//     {
+//         public List<Sprite> People_Pages = new List<Sprite>();
+//         public List<Sprite> Organization_Pages = new List<Sprite>();
+//         public List<Sprite> Place_Pages = new List<Sprite>();
+//         public List<Sprite> Injuries_and_Treatment_Pages = new List<Sprite>();
+//     }
+
+//     // public saveVNProgress(){
+//     //     PlayerProgress saveData = new PlayerProgress();
+
+//     //     saveData.People_Pages = People_Pages;
+
+//     //     saveData.Organization_Pages = Organization_Pages;
+
+//     //     saveData.Place_Pages = Place_Pages;
+
+//     //     saveData.Injuries_and_Treatment_Pages = Injuries_and_Treatment_Pages;
+
+//     //     DataSaver.saveData(saveData, "VNSaveData");
+//     // }
+
+//     // public loadVNProgess(){
+//     //     loadedData = DataSaver.loadData<PlayerProgress>("players");
+//     // }
 
 
-    /*private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
+//     static List<Sprite> People_Pages = new List<Sprite>();
+//     static List<Sprite> Organization_Pages = new List<Sprite>();
+//     static List<Sprite> Place_Pages = new List<Sprite>();
+//     static List<Sprite> Injuries_and_Treatment_Pages = new List<Sprite>();
 
-        //Instance = this;
-        //DontDestroyOnLoad(gameObject);
-    }*/
 
-    public void unlockPage(int n){
-        if(n >= pages.Length || n < 0)
-        {
-            Debug.Log("Page out of range");
-            return;
-        }
+//     /*private void Awake()
+//     {
+//         if (Instance != null)
+//         {
+//             Destroy(gameObject);
+//             return;
+//         }
+
+//         //Instance = this;
+//         //DontDestroyOnLoad(gameObject);
+//     }*/
+
+//     public void unlockPage(int n){
+//         if(n >= pages.Length || n < 0)
+//         {
+//             Debug.Log("Page out of range");
+//             return;
+//         }
         
-        if(pages[n].isLoaded)
-        {
-            Debug.Log("Page already loaded");
-            return;
-        }
+//         if(pages[n].isLoaded)
+//         {
+//             Debug.Log("Page already loaded");
+//             return;
+//         }
         
 
-        //TODO: edit this!
-        page temp = pages[n];
+//         //TODO: edit this!
+//         page temp = pages[n];
 
-        if (temp.type == ChapterType.InjuriesAndTreatment)
-        {
-            Injuries_and_Treatment_Pages.Add(temp.pageImage);
-            return;
-        }
-        else if (temp.type == ChapterType.People)
-        {
-            People_Pages.Add(temp.pageImage);
-            return;
-        }
-        else if(temp.type == ChapterType.Places)
-        {
-            Place_Pages.Add(temp.pageImage);
-        }
-        else if (temp.type == ChapterType.Organizations)
-        {
-            Organization_Pages.Add(temp.pageImage);
-            return;
-        }
+//         if (temp.type == ChapterType.InjuriesAndTreatment)
+//         {
+//             Injuries_and_Treatment_Pages.Add(temp.pageImage);
+//             return;
+//         }
+//         else if (temp.type == ChapterType.People)
+//         {
+//             People_Pages.Add(temp.pageImage);
+//             return;
+//         }
+//         else if(temp.type == ChapterType.Places)
+//         {
+//             Place_Pages.Add(temp.pageImage);
+//         }
+//         else if (temp.type == ChapterType.Organizations)
+//         {
+//             Organization_Pages.Add(temp.pageImage);
+//             return;
+//         }
 
 
-        Debug.Log("Not a noted category");
-        return;
-    }
-
-    
-    // Update is called once per frame
-
+//         Debug.Log("Not a noted category");
+//         return;
+//     }
 
     
-    public GameObject FrontPagePrefab;
-    public GameObject BackPagePrefab;
+//     // Update is called once per frame
 
-    [SerializeField] private BookPro book;
-
-    VNSaveFile JournalEntries;
-
-    private int pageCount = 0;
-
-    private Image tempImage;
 
     
-    private void AddPaper(ChapterType section)
-    {
-        GameObject frontPage = Instantiate(FrontPagePrefab);
-        GameObject backPage = Instantiate(BackPagePrefab);
-        frontPage.transform.SetParent(book.transform, false);
-        backPage.transform.SetParent(book.transform, false);
-        Paper newPaper = new Paper();
-        newPaper.Front = frontPage;
-        newPaper.Back = backPage;
-        Paper[] papers = new Paper[book.papers.Length + 1];
+//     public GameObject FrontPagePrefab;
+//     public GameObject BackPagePrefab;
+
+//     [SerializeField] private BookPro book;
+
+//     VNSaveFile JournalEntries;
+
+//     private int pageCount = 0;
+
+//     private Image tempImage;
+
+    
+//     private void AddPaper(ChapterType section)
+//     {
+//         GameObject frontPage = Instantiate(FrontPagePrefab);
+//         GameObject backPage = Instantiate(BackPagePrefab);
+//         frontPage.transform.SetParent(book.transform, false);
+//         backPage.transform.SetParent(book.transform, false);
+//         Paper newPaper = new Paper();
+//         newPaper.Front = frontPage;
+//         newPaper.Back = backPage;
+//         Paper[] papers = new Paper[book.papers.Length + 1];
 
 
-        int n = 1;
-        if(section == ChapterType.People)
-        {
-            n += num_People_Paper;
-        }
-        for (int i = 0; i < n; i++)
-        {
-            papers[i] = book.papers[i];
-        }
+//         int n = 1;
+//         if(section == ChapterType.People)
+//         {
+//             n += num_People_Paper;
+//         }
+//         for (int i = 0; i < n; i++)
+//         {
+//             papers[i] = book.papers[i];
+//         }
 
 
 
-        for (int i = n + 1; i < book.papers.Length; i++)
-        {
-            papers[i] = book.papers[i];
-        }
-        papers[papers.Length - 1] = newPaper;
-        book.papers = papers;
-        //update the flipping range to contain the new added paper
-        book.EndFlippingPaper = book.papers.Length - 1;
-        book.UpdatePages();
-    }
+//         for (int i = n + 1; i < book.papers.Length; i++)
+//         {
+//             papers[i] = book.papers[i];
+//         }
+//         papers[papers.Length - 1] = newPaper;
+//         book.papers = papers;
+//         //update the flipping range to contain the new added paper
+//         book.EndFlippingPaper = book.papers.Length - 1;
+//         book.UpdatePages();
+//     }
     
     
 
 
-}
+// }
 
 
 
