@@ -114,6 +114,20 @@ public class YarnForGameplay : MonoBehaviour
         return;
     }
 
+    [YarnCommand("Accessory")]
+    public void changeaccessory(int accessory_number)
+    {
+        character.changeAccessory(accessory_number);
+        return;
+    }
+
+    [YarnCommand("EndScript")]
+    public void endSegment()
+    {
+        //pass control back to the gameplay (disable self...)
+        return;
+    }
+
 
 
 }

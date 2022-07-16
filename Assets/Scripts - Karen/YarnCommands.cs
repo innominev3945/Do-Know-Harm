@@ -249,6 +249,13 @@ public class YarnCommands : MonoBehaviour
         return;
     }
 
+    [YarnCommand("vo")]
+    public void playVOLine(int voNum)
+    {
+        audioManager.playVoice(voNum);
+        return;
+    }
+
     //[YarnCommand("")]
 
 
