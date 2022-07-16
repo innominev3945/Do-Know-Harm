@@ -147,7 +147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: MainMenu
-  curr_scene_obj: {fileID: 0}
 --- !u!1 &4293150993131648751
 GameObject:
   m_ObjectHideFlags: 0

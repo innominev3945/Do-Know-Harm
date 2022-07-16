@@ -1,54 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2852710972875486482
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 121311426503193608}
-  - component: {fileID: 3301375582812305402}
-  m_Layer: 0
-  m_Name: GameplayDialogueManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &121311426503193608
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2852710972875486482}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3436644322033185933}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3301375582812305402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2852710972875486482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7319dd58a86c7d4d96f3bf939d01e53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue_runner: {fileID: 3436644322033185935}
-  lineViewer: {fileID: 3436644323188255899}
-  chapters:
-  - {fileID: 7545569452688597077, guid: b47ddc7cf25721542b3785eafbd3d14a, type: 3}
-  dialogueTitles:
-  - Start
 --- !u!1 &3436644322033185930
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,7 +37,6 @@ Transform:
   - {fileID: 3436644323808207186}
   - {fileID: 3436644322825682602}
   - {fileID: 3436644322958358441}
-  - {fileID: 121311426503193608}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,13 +52,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bec29c0a230741bdac901dba8da47ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yarnProject: {fileID: 0}
+  yarnProject: {fileID: 7545569452688597077, guid: 74385cef36898b34f9da33bfa63eb88e, type: 3}
   _variableStorage: {fileID: 0}
   dialogueViews:
   - {fileID: 3436644323188255899}
   - {fileID: 3436644324099055158}
   startNode: Start
-  startAutomatically: 0
+  startAutomatically: 1
   runSelectedOptionAsLine: 0
   lineProvider: {fileID: 0}
   verboseLogging: 1
@@ -662,10 +612,9 @@ MonoBehaviour:
   Ambience_Source: {fileID: 3436644322825682605}
   SFX_Source: {fileID: 3436644322958358440}
   Click_Sound: {fileID: 3436644322349885076}
-  BGM_volume: {fileID: 0}
-  Ambience_volume: {fileID: 0}
-  SFX_volume: {fileID: 0}
-  Click_volume: {fileID: 0}
+  BGM_Volume: 0.5
+  SFX_Volume: 0.5
+  Click_Volume: 0.5
 --- !u!114 &3436644322771547494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,43 +645,24 @@ MonoBehaviour:
   fadeSpeed: 0
   MC: {fileID: 3436644323389490339}
   MCExpr: {fileID: 3436644323223481125}
-  MCAccessory: {fileID: 1337133452181131317}
   HannahExpressions:
-  - {fileID: 21300000, guid: 61dc0a38adb69f247b3eeeb9ae3bf34a, type: 3}
-  - {fileID: 21300000, guid: 0f6cca2b4f6a2f04d9adede90f153077, type: 3}
-  - {fileID: 21300000, guid: 153a15336328381449f1ed352b324e64, type: 3}
-  - {fileID: 21300000, guid: 419973c39dfb6614d8c7ed5f2482c3c0, type: 3}
-  - {fileID: 21300000, guid: 8253a67dd94931b41b79760b525bfce6, type: 3}
-  - {fileID: 21300000, guid: a5a208928486b9942bd230daa37792e2, type: 3}
-  - {fileID: 21300000, guid: 40bc1a3747518c64ab2a5162f5132ac0, type: 3}
-  - {fileID: 21300000, guid: 6c8b3405938ac9c4c9f02e00e7b28a34, type: 3}
-  - {fileID: 21300000, guid: a1edb8555d26e714685a03aedfbe3404, type: 3}
-  - {fileID: 21300000, guid: 823b5a61c8ec5c644b058c8c4c36b5e1, type: 3}
-  - {fileID: 21300000, guid: b7daeb3e94deb654281f06f4741e247b, type: 3}
+  - {fileID: 21300000, guid: 67f40547ca13a0f43b075dd21c40f865, type: 3}
+  - {fileID: 21300000, guid: 96d44141bf1c1fc4c926307d83ea30ce, type: 3}
+  - {fileID: 21300000, guid: be981bbbb9057c846a15d76129ed1b5a, type: 3}
   EricExpressions:
-  - {fileID: 21300000, guid: 98a7f46fd127b15449750f4283543eda, type: 3}
-  - {fileID: 21300000, guid: 7e99490511b3ecb42acbdfa11a174d6c, type: 3}
-  - {fileID: 21300000, guid: 20362c75181b5694386c7e239c13019d, type: 3}
+  - {fileID: 21300000, guid: 443ca42cb713c7c40af210ab67a85933, type: 3}
+  - {fileID: 21300000, guid: 1776c3ca87bff9a47adbaba2d90f784c, type: 3}
+  - {fileID: 21300000, guid: 8e1da3dd25e62cb4f8c20b9265f946e0, type: 3}
   CaptainExpressions:
-  - {fileID: 21300000, guid: 092b52cdae751b6488f61fcd80a35aaf, type: 3}
+  - {fileID: 21300000, guid: 279e953581cf18849ac0a168e39e06ce, type: 3}
   HannahOutfits:
   - {fileID: 21300000, guid: 39ac47e39700648439f3d3b084931c60, type: 3}
   - {fileID: 21300000, guid: 7a5f70b2b658a1a4996110476cff7864, type: 3}
   EricOutfits:
-  - {fileID: 21300000, guid: 1eb3f4abc1730ba45b0b4bf91e40ac5b, type: 3}
+  - {fileID: 21300000, guid: 66a2f8e86c1209d4b8caa57d4e75f3eb, type: 3}
   - {fileID: 21300000, guid: 619aaa81742504548b3a39ca2a82f752, type: 3}
   CaptainOutfits:
   - {fileID: 21300000, guid: 7bb25c0366dd90242b4c5d7561328ec7, type: 3}
-  HannahAccessories:
-  - {fileID: 21300000, guid: 1a13bb3a2f5f12d4c890f1e06f387188, type: 3}
-  - {fileID: 21300000, guid: 33415a7235b87824b9b6b1fa4ade3f97, type: 3}
-  EricAccessories:
-  - {fileID: 21300000, guid: 26c72b9103490f14c98197d7401ad627, type: 3}
-  - {fileID: 21300000, guid: 33415a7235b87824b9b6b1fa4ade3f97, type: 3}
-  - {fileID: 21300000, guid: 217585d2088f6a745a046d13374a2132, type: 3}
-  - {fileID: 21300000, guid: d95d094775a5c7442baf8fb2add1f84b, type: 3}
-  CaptainAccessories:
-  - {fileID: 21300000, guid: 33415a7235b87824b9b6b1fa4ade3f97, type: 3}
 --- !u!114 &3436644322771547493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1486,7 +1416,6 @@ RectTransform:
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 3436644323223481124}
-  - {fileID: 2989415511713879120}
   m_Father: {fileID: 3436644323806653691}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2451,85 +2380,3 @@ SortingGroup:
   m_SortingLayerID: 976181001
   m_SortingLayer: 2
   m_SortingOrder: 0
---- !u!1 &5488892078678870989
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2989415511713879120}
-  - component: {fileID: 1337133452181131317}
-  m_Layer: 3
-  m_Name: MC Accessory
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2989415511713879120
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5488892078678870989}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3436644323389490366}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1337133452181131317
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5488892078678870989}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1493937129
-  m_SortingLayer: 3
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0

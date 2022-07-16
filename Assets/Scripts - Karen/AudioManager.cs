@@ -10,10 +10,6 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] Ambience;
     public AudioClip click;
 
-    public AudioClip[] Chapter1_T_1VO;
-
-    private AudioClip[] chapterVO;
-
     [SerializeField] AudioSource BGM_Source;
 
     [SerializeField] AudioSource Ambience_Source;
@@ -22,7 +18,6 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] AudioSource Click_Sound;
 
-    [SerializeField] AudioSource Voice_Line;
 
     public Slider BGM_volume;
 
@@ -32,7 +27,6 @@ public class AudioManager : MonoBehaviour
 
     public Slider Click_volume;
 
-    //public Slider Voice_volume;
 
     public void Start()
     {
@@ -57,7 +51,7 @@ public class AudioManager : MonoBehaviour
     {
         SFX_Volume = SFX_volume.value;
         SFX_Source.volume = SFX_Volume;
-        Voice_Line.volume = SFX_Volume;
+        
     }
     public void ValueChangeCheckClick()
     {
@@ -129,8 +123,7 @@ public class AudioManager : MonoBehaviour
         BGM_Source.volume = 0;
         SFX_Source.volume = 0;
         Click_Sound.volume = 0;
-        Ambience_Source.volume = 0;
-        Voice_Line.volume = 0;  
+        Ambience_Source.volume = 0;  
     }
 
     public void unmuteAll()
@@ -139,26 +132,5 @@ public class AudioManager : MonoBehaviour
         SFX_Source.volume = SFX_Volume;
         Click_Sound.volume = Click_Volume;
         Ambience_Source.volume = BGM_Volume;
-        Voice_Line.volume = SFX_Volume;
-    }
-
-    public void playVoice(int voice_line_num)
-    {
-        Debug.Log("Attempting to play clip " + voice_line_num);
-        Voice_Line.clip = chapterVO[voice_line_num];
-        Voice_Line.Play();
-    }
-
-    public void setChapter(int chapterNum)
-    {
-        Debug.Log("Attempted to set chapter");
-        if (chapterNum == 0)
-        {
-            chapterVO = Chapter1_T_1VO;
-        }
-        else
-        {
-            chapterVO = Chapter1_T_1VO;
-        }
     }
 }

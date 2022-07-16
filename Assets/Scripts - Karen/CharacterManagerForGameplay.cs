@@ -21,7 +21,6 @@ public class CharacterManagerForGameplay : MonoBehaviour
 
     [SerializeField] SpriteRenderer MC;
     [SerializeField] SpriteRenderer MCExpr;
-    [SerializeField] SpriteRenderer MCAccessory;
     
     
 
@@ -37,10 +36,6 @@ public class CharacterManagerForGameplay : MonoBehaviour
     public Sprite[] EricOutfits;
     public Sprite[] CaptainOutfits;
 
-    public Sprite[] HannahAccessories;
-    public Sprite[] EricAccessories;
-    public Sprite[] CaptainAccessories;
-
     
 
     //temporary storage to change sprites of a character
@@ -51,12 +46,25 @@ public class CharacterManagerForGameplay : MonoBehaviour
 
     private Sprite[] MCOutfit;
 
-    private Sprite[] MCAccessories;
+
+
+
+
+    // void Awake()
+    // {
+    //     for (int i = 0; i < numCharacters; i++)
+    //     {
+    //         characterLoads[i] = -1;
+    //     }
+    //     //MC.size += new Vector2(1.0f, 1.0f);
+    // }
+
 
 
 
     public void changeExpression(int expressionNumber)
     {
+
         //MC.sprite = MCExpressions[expressionNumber];
         MCExpr.sprite = MCExpressions[expressionNumber];
         return;
@@ -71,41 +79,30 @@ public class CharacterManagerForGameplay : MonoBehaviour
         return;
     }
 
-    public void changeAccessory(int accessoryNumber)
-    {
-        MCAccessory.sprite = MCAccessories[accessoryNumber];
-        return;
-    }
-
     public void loadMC(int n)
     {
         //MCOutfit = HannahOutfit;
         if (n == 1)
         {
-            MCExpressions = HannahExpressions;            
+            MCExpressions = HannahExpressions;
+            
             MCOutfit = HannahOutfits;
-            MCAccessories = HannahAccessories;
             MCExpr.sprite = MCExpressions[0];
             MC.sprite = MCOutfit[0];
-            MCAccessory.sprite = MCAccessories[0];
         }
         else if (n == 0)
         {
             MCExpressions = EricExpressions;
             MCOutfit = EricOutfits;
-            MCAccessories = EricAccessories;
             MCExpr.sprite = MCExpressions[0];
             MC.sprite = MCOutfit[0];
-            MCAccessory.sprite = MCAccessories[0];
         }
         else
         {
             MCExpressions = CaptainExpressions;
             MCOutfit = CaptainOutfits;
-            MCAccessories = CaptainAccessories;
             MCExpr.sprite = MCExpressions[0];
             MC.sprite = MCOutfit[0];
-            MCAccessory.sprite = MCAccessories[0];
         }
         
     }
