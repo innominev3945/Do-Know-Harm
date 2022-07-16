@@ -201,6 +201,30 @@ namespace PatientManagerClass
             }
         }
 
+        public void BoostPatientHealth(float amount)
+        {
+            currentPatient.Item1.BoostHealth(amount);
+        }
+
+        public bool BoostHealthOnCooldown()
+        {
+            return currentPatient.Item1.IsHealthBoostOnCooldown();
+        }
+
+        public void DebugCurrentPatientHealth()
+        {
+            currentPatient.Item1.ToggleHealthDebug();
+        }
+
+        public void PauseSceneDamage()
+        {
+            currentPatient.Item1.PauseDamage();
+            for (int i = 0; i < patients.Length; i++)
+            {
+                patients[i].Item1.PauseDamage();
+            }
+        }
+
         public void PatientSaveDeathTransitionHelper2() // called by MoveSavedPatient of SaveDeathTransition script when saved patient is moved offscreen
         {
             //StartCoroutine(PatientSaveDeathTransitionHelper3());

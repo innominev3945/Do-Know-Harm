@@ -116,6 +116,10 @@ namespace BodypartClass
         // Update functionality that is called every timeInterval
         void Update()
         {
+            if ((Time.time - nextTime) > timeInterval)
+            {
+                nextTime = Time.time;
+            }
             if (Time.time >= nextTime)
             {
                 if (injuries.Count != 0)
@@ -144,6 +148,28 @@ namespace BodypartClass
                 nextTime += timeInterval; 
             }
         }
+
+        public void BoostHealth(float amount)
+        {
+            health += amount;
+            if (health > 100)
+            {
+                health = 100;
+            }
+        }
+
+        /*IEnumerator RaiseHealth(float amount)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                if (health + (amount / 100) < 100)
+                {
+                    health += (amount / 100);
+                }
+            }
+            //Debug.Log("Bodypart boosted to " + health);
+            yield return null;
+        }*/
 
     }
 }
