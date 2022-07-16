@@ -102,7 +102,7 @@ BoxCollider2D:
   m_Offset: {x: 0.04037285, y: 0.005046636}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.51, y: 0.82}
     oldSize: {x: 16, y: 16}
     newSize: {x: 5.4, y: 9.6}
     adaptiveTilingThreshold: 0.5
@@ -120,7 +120,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8898890721031136807}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -189,7 +189,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3099635226330775241}
         m_TargetAssemblyTypeName: SyretteClass.Syrette_Script, Assembly-CSharp
-        m_MethodName: RemoveObject
+        m_MethodName: SyretteInjection
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

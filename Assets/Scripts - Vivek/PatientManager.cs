@@ -201,9 +201,14 @@ namespace PatientManagerClass
             }
         }
 
-        public void BoostPatientHealth()
+        public void BoostPatientHealth(float amount)
         {
-            currentPatient.Item1.BoostHealth(10);
+            currentPatient.Item1.BoostHealth(amount);
+        }
+
+        public bool BoostHealthOnCooldown()
+        {
+            return currentPatient.Item1.IsHealthBoostOnCooldown();
         }
 
         public void DebugCurrentPatientHealth()

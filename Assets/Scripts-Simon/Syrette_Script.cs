@@ -7,23 +7,21 @@ namespace SyretteClass
 {
     public class Syrette_Script : MonoBehaviour
     {
-        private Vector3 mousePosition;
+        private Vector2 mousePosition;
 
         [SerializeField] private bool mousePressed;
-        private bool onForeignObject;
-        private bool dragForeignObject;
-        GameObject currentForeignObject;
         [SerializeField] private Sprite SyretteOpen;
         [SerializeField] private Sprite SyretteClosed;
         private SpriteRenderer sprender;
+        private float clickStartTime;
+        private bool injecting;
+        private GameObject triggeredHitbox;
 
         // Start is called before the first frame update
         void Start()
         {
             mousePressed = false;
-            onForeignObject = false;
-            dragForeignObject = false;
-            currentForeignObject = null;
+            injecting = false;
             sprender = this.GetComponent<SpriteRenderer>();
             sprender.sprite = SyretteOpen;
         }
@@ -31,36 +29,59 @@ namespace SyretteClass
         // Update is called once per frame
         void Update()
         {
-            mousePosition = Mouse.current.position.ReadValue();
-            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            transform.position = Vector2.Lerp(transform.position, mousePosition, 1);
-
-
-            if (currentForeignObject != null && dragForeignObject)
+            if (injecting)
             {
-                currentForeignObject.transform.position = Vector2.Lerp(transform.position, mousePosition, 1);
+                if (Time.time > (clickStartTime + 2f)) // time to hold syrette in seconds
+                {
+                    injecting = false;
+                    triggeredHitbox.GetComponent<SyretteHitboxScript>().SyretteOnHit();
+                    triggeredHitbox = null;
+                }
+            }
+            else
+            {
+                mousePosition = Mouse.current.position.ReadValue();
+                mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+                mousePosition = new Vector3(mousePosition.x, mousePosition.y, 0);
+                transform.position = mousePosition;
             }
         }
 
-        public void RemoveObject(InputAction.CallbackContext context)
+        public void SyretteInjection(InputAction.CallbackContext context)
         {
             if (context.started) // && onForeignObject
             {
                 mousePressed = true;
-                Debug.Log("mousePressed");
-                sprender.sprite = SyretteClosed;
+                int layerMask = ~(LayerMask.GetMask("Patient"));
+                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, Mathf.Infinity, 1 << LayerMask.NameToLayer("Patient"));
+                if (hit.collider != null)
+                {
+                    if (hit.collider.gameObject.tag == "SyretteHitbox")
+                    {
+                        if (!hit.collider.gameObject.GetComponent<SyretteHitboxScript>().BoostHealthOnCooldown())
+                        {
+                            triggeredHitbox = hit.collider.gameObject;
+                            injecting = true;
+                            clickStartTime = Time.time;
+                            sprender.sprite = SyretteClosed;
+                        }
+                        else
+                        {
+                            Debug.Log("Syrette on cooldown!");
+                        }
+                    }
+                }
             }
             else if (context.canceled)
             {
+                injecting = false;
                 mousePressed = false;
-                Debug.Log("mouseNotPressed");
-                dragForeignObject = false;
-                currentForeignObject = null;
+                //Debug.Log("mouseNotPressed");
                 sprender.sprite = SyretteOpen;
             }
         }
 
-        private void OnTriggerStay2D(Collider2D collision)
+        /*private void OnTriggerStay2D(Collider2D collision)
         {
             if (collision.gameObject.tag == "Foreign Object")
             {
@@ -81,6 +102,6 @@ namespace SyretteClass
                 // Debug.Log("Forceps no longer on foreign object");
                 onForeignObject = false;
             }
-        }
+        }*/
     }
 }

@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 365034581}
   - component: {fileID: 365034582}
   - component: {fileID: 365034583}
+  - component: {fileID: 365034584}
   m_Layer: 11
   m_Name: SyretteHitboxAbdomen
   m_TagString: SyretteHitbox
@@ -275,6 +276,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &365034584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365034580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cae96042dee28e4ea8eb56b3c50b9fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patientManager: {fileID: 1870580169755125739}
 --- !u!1 &755822353
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +300,7 @@ GameObject:
   - component: {fileID: 755822354}
   - component: {fileID: 755822355}
   - component: {fileID: 755822356}
+  - component: {fileID: 755822357}
   m_Layer: 11
   m_Name: SyretteHitboxRightArm
   m_TagString: SyretteHitbox
@@ -384,6 +399,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &755822357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755822353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cae96042dee28e4ea8eb56b3c50b9fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patientManager: {fileID: 1870580169755125739}
 --- !u!1 &814104552
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,6 +768,7 @@ GameObject:
   - component: {fileID: 1665180233}
   - component: {fileID: 1665180234}
   - component: {fileID: 1665180235}
+  - component: {fileID: 1665180236}
   m_Layer: 11
   m_Name: SyretteHitboxLeftArm
   m_TagString: SyretteHitbox
@@ -838,6 +867,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1665180236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665180232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cae96042dee28e4ea8eb56b3c50b9fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patientManager: {fileID: 1870580169755125739}
 --- !u!1 &1914163715
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,6 +970,7 @@ GameObject:
   - component: {fileID: 2033592334}
   - component: {fileID: 2033592335}
   - component: {fileID: 2033592336}
+  - component: {fileID: 2033592337}
   m_Layer: 11
   m_Name: SyretteHitboxLeftLeg
   m_TagString: SyretteHitbox
@@ -1026,6 +1069,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2033592337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033592333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cae96042dee28e4ea8eb56b3c50b9fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patientManager: {fileID: 1870580169755125739}
 --- !u!1 &2107153825
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,6 +1093,7 @@ GameObject:
   - component: {fileID: 2107153826}
   - component: {fileID: 2107153827}
   - component: {fileID: 2107153828}
+  - component: {fileID: 2107153829}
   m_Layer: 11
   m_Name: SyretteHitboxRightLeg
   m_TagString: SyretteHitbox
@@ -1135,6 +1192,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2107153829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107153825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cae96042dee28e4ea8eb56b3c50b9fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patientManager: {fileID: 1870580169755125739}
 --- !u!1 &64170512077114272
 GameObject:
   m_ObjectHideFlags: 0
@@ -9314,7 +9384,7 @@ MonoBehaviour:
   EastTool: {fileID: 5974668805313062709, guid: aa919145e787dec429f8472a4c7b63da, type: 3}
   NorthEastTool: {fileID: 9096168364550271408, guid: c49e5782f40ef364f80bd2a7ce2cc8ac, type: 3}
   NorthWestTool: {fileID: 3009453062511910121, guid: 3884baf5c897dac4a91a2c5d9eb245d6, type: 3}
-  SouthEastTool: {fileID: 0}
+  SouthEastTool: {fileID: 8898890721031136807, guid: c822dc55e59f4f244b2f474aa24a03f2, type: 3}
   SouthWestTool: {fileID: 0}
 --- !u!222 &8897282555729214334
 CanvasRenderer:

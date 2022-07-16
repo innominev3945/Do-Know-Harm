@@ -15,12 +15,14 @@ namespace PatientClass
 {
     public class Patient : MonoBehaviour
     {
-        private float timeInterval; // Time interval for how often a Patient's health will update 
-        private float nextTime;
+        private float timeInterval; // Time interval for how often a Patient's health will update - obsolete
+        // see bodypart script for timeInterval use instead
+        private float setTime;
         private Bodypart[] bodyparts;
         private float health; // Health of ENTIRE Patient, weighted via the various Bodyparts 
         private bool clothesOpen;
         private bool debugHealth;
+        private bool healthBoostOnCooldown;
 
         private void OnDestroy()
         {
@@ -38,11 +40,12 @@ namespace PatientClass
         {
             Patient ret = ob.AddComponent<Patient>();
             ret.timeInterval = interval;
-            ret.nextTime = 0f;
+            ret.setTime = 0f;
             ret.bodyparts = parts; // Takes an array of Bodyparts as the parameter, so Bodyparts can be split and weighted as seen necessary 
             ret.health = 100;
             ret.clothesOpen = false;
             ret.debugHealth = false;
+            ret.healthBoostOnCooldown = false;
             return ret;
         }
 
@@ -145,6 +148,10 @@ namespace PatientClass
             health = 100 + total - deducted;
             if (health < 0)
                 health = 0;
+            if (Time.time > (setTime + 10f))
+            {
+                healthBoostOnCooldown = false;
+            }
         }
 
         public void ToggleHealthDebug()
@@ -182,6 +189,8 @@ namespace PatientClass
             {
                 bodypart.BoostHealth(amount);
             }*/
+            healthBoostOnCooldown = true;
+            setTime = Time.time;
             StartCoroutine(RaiseHealth(amount, health + 10));
             /*foreach (Bodypart bodypart in bodyparts)
             {
@@ -189,12 +198,17 @@ namespace PatientClass
             }*/
         }
 
+        public bool IsHealthBoostOnCooldown()
+        {
+            return healthBoostOnCooldown;
+        }
+
         IEnumerator RaiseHealth(float amount, float targetHealth)
         {
             float startTime = Time.time;
             if (targetHealth > 99)
                 targetHealth = 99;
-            while (health <= targetHealth || (Time.time - startTime) > 3f)
+            while (health <= targetHealth && (Time.time - startTime) < 3f)
             {
                 if (health + (amount / 200) < 100)
                 {
