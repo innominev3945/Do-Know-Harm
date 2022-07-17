@@ -10,27 +10,36 @@ public class JournalPageManager : MonoBehaviour
     //public static VNSaveFile Instance;
 
 
-    // private int num_People_Pages = 0;
-    // private int num_Place_Pages = 0;
-    // private int num_Org_Pages = 0;
-    // private int num_Inj_Treat_Pages = 0;
+    private int num_People_Pages = 3;
+    private int num_Place_Pages = 13;
+    private int num_Org_Pages = 23;
+    private int num_Inj_Treat_Pages = 33;
 
-    // private int num_People_Paper = 0;
-    // private int num_Place_Paper = 0;
-    // private int num_Org_Paper = 0;
-    // private int num_Inj_Treat_Paper = 0;
+     
+    public GameObject FrontPagePrefab;
+    public GameObject BackPagePrefab;
+
+    [SerializeField] private BookPro book;
 
     public int basePageNum = 4;
 
+
+    private GameObject temp;
     private int numPages;
+
+    private int n = 0;
 
     private int numPaper;
 
     private int currPageIndex = 0;
 
+    private Image pageImage;
 
+    public enum ChapterType {People, Places, Organizations, InjuriesAndTreatment};
 
     public Sprite[] pageSprites;
+    public ChapterType[] pageTypes;
+    public Image[] pageImages;
 
     void Start()
     {
@@ -38,10 +47,7 @@ public class JournalPageManager : MonoBehaviour
         numPages = basePageNum;
     }
     
-
-
-    //public enum ChapterType {People, Places, Organizations, InjuriesAndTreatment};
-    //page class: stores page info
+//page class: stores page info
     // public class page{
     //     public Sprite pageImage;
     //     public bool isLoaded = false;
@@ -104,7 +110,7 @@ public class JournalPageManager : MonoBehaviour
         //DontDestroyOnLoad(gameObject);
     }*/
 
-    public void unlockPage(int n){
+    public void unlockPage(int bleh){
         Debug.Log("nya");
         if(n >= pageSprites.Length || n < 0)
         {
@@ -112,12 +118,90 @@ public class JournalPageManager : MonoBehaviour
             return;
         }
         
-        if (numPages * 2 >= numPaper)
-        {
-            AddPaper();
-        }
+        // if (numPages * 2 >= numPaper)
+        // {
+        //     AddPaper();
+        // }
 
-        numPages++;
+        
+        if(pageTypes[n] == ChapterType.InjuriesAndTreatment)        
+        {
+            num_Inj_Treat_Pages++;
+            if(num_Inj_Treat_Pages%2 == 1)
+            {
+                //Debug.Log("a");
+                pageImages[num_Inj_Treat_Pages].sprite = pageSprites[n];
+                //temp = book.papers[num_Inj_Treat_Pages/2].Front;
+                //pageImage = book.papers[num_Inj_Treat_Pages/2].Front.GetComponent<Image>().sprite;// = pageSprites[n];
+                //pageImage.sprite = pageSprites[n];
+            }
+            else
+            {
+                //Debug.Log("b");
+                pageImages[num_Inj_Treat_Pages].sprite = pageSprites[n];
+                //temp = book.papers[num_Inj_Treat_Pages/2].Back;
+                //pageImage = book.papers[num_Inj_Treat_Pages/2].Back.GetComponent<Image>().sprite;// = pageSprites[n];
+                //pageImage.sprite = pageSprites[n];
+            }            
+        }
+        else if(pageTypes[n] == ChapterType.People)        
+        {
+            num_People_Pages++;
+            if(num_People_Pages%2 == 1)
+            {
+                pageImages[num_People_Pages].sprite = pageSprites[n];
+                //temp = book.papers[num_People_Pages/2].Front;
+                //pageImage = book.papers[num_People_Pages/2].Front.GetComponent<Image>().sprite;// = pageSprites[n];
+                //pageImage.sprite = pageSprites[n];
+            }
+            else
+            {
+                pageImages[num_People_Pages].sprite = pageSprites[n];
+                //temp = book.papers[num_People_Pages/2].Back;
+                //pageImage = book.papers[num_People_Pages/2].Back.GetComponent<Image>().sprite;// = pageSprites[n];
+                //pageImage.sprite = pageSprites[n];
+            }  
+        }
+        else if(pageTypes[n] == ChapterType.Places)        
+        {
+            num_Place_Pages++;
+            if(num_Place_Pages%2 == 1)
+            {
+                pageImages[num_Place_Pages].sprite = pageSprites[n];
+                //temp = book.papers[num_Place_Pages/2].Front;
+                //pageImage = book.papers[num_Place_Pages/2].Front.GetComponent<Image>().sprite;// = pageSprites[n];
+                //pageImage.sprite = pageSprites[n];
+            }
+            else
+            {
+                pageImages[num_Place_Pages].sprite = pageSprites[n];
+                //temp = book.papers[num_Place_Pages/2].Back;
+                //pageImage = book.papers[num_Place_Pages/2].Back.GetComponent<Image>().sprite;// = pageSprites[n];
+                //pageImage.sprite = pageSprites[n];
+            } 
+            
+        }
+        else      
+        {
+            num_Org_Pages++;
+            if(num_Org_Pages%2 == 1)
+            {
+                pageImages[num_Org_Pages].sprite = pageSprites[n];
+                //temp = book.papers[num_Org_Pages/2].Front;
+                //pageImage = book.papers[num_Org_Pages/2].Front.GetComponent<Image>().sprite;// = pageSprites[n];
+                //pageImage.sprite = pageSprites[n];
+            }
+            else
+            {
+                pageImages[num_Org_Pages].sprite = pageSprites[n];
+                //temp = book.papers[num_Org_Pages/2].Back;
+                //pageImage = book.papers[num_Org_Pages/2].Back.GetComponent<Image>().sprite;// = pageSprites[n];
+                //pageImage.sprite = pageSprites[n];
+            } 
+        }
+        
+
+        n++;
 
 
 
@@ -160,11 +244,7 @@ public class JournalPageManager : MonoBehaviour
     // Update is called once per frame
 
 
-    
-    public GameObject FrontPagePrefab;
-    public GameObject BackPagePrefab;
-
-    [SerializeField] private BookPro book;
+        
 
     //public page[] pages;
 
@@ -212,27 +292,27 @@ public class JournalPageManager : MonoBehaviour
         
     // }
     
-        public void AddPaper()
-        {
-            GameObject frontPage = Instantiate(FrontPagePrefab);
-            GameObject backPage = Instantiate(BackPagePrefab);
-            frontPage.transform.SetParent(book.transform, false);
-            backPage.transform.SetParent(book.transform, false);
-            Paper newPaper = new Paper();
-            newPaper.Front = frontPage;
-            newPaper.Back = backPage;
-            Paper[] papers = new Paper[book.papers.Length + 1];
-            for (int i = 0; i < book.papers.Length; i++)
-            {
-                papers[i] = book.papers[i];
-            }
-            papers[papers.Length - 1] = newPaper;
-            book.papers = papers;
-            //update the flipping range to contain the new added paper
-            book.EndFlippingPaper = book.papers.Length - 1;
-            book.UpdatePages();
-            numPaper++;
-        }
+        // public void AddPaper()
+        // {
+        //     GameObject frontPage = Instantiate(FrontPagePrefab);
+        //     GameObject backPage = Instantiate(BackPagePrefab);
+        //     frontPage.transform.SetParent(book.transform, false);
+        //     backPage.transform.SetParent(book.transform, false);
+        //     Paper newPaper = new Paper();
+        //     newPaper.Front = frontPage;
+        //     newPaper.Back = backPage;
+        //     Paper[] papers = new Paper[book.papers.Length + 1];
+        //     for (int i = 0; i < book.papers.Length; i++)
+        //     {
+        //         papers[i] = book.papers[i];
+        //     }
+        //     papers[papers.Length - 1] = newPaper;
+        //     book.papers = papers;
+        //     //update the flipping range to contain the new added paper
+        //     book.EndFlippingPaper = book.papers.Length - 1;
+        //     book.UpdatePages();
+        //     numPaper++;
+        // }
 
 
 }

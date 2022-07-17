@@ -279,6 +279,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1172694178}
+    - target: {fileID: 3436644322771547492, guid: 4fd9f76c152bda74589e4e2236c64c2e, type: 3}
+      propertyPath: fadeSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3436644323213811000, guid: 4fd9f76c152bda74589e4e2236c64c2e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

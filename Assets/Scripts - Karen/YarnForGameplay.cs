@@ -121,6 +121,7 @@ public class YarnForGameplay : MonoBehaviour
         return;
     }
 
+    //GABE
     [YarnCommand("EndScript")]
     public void endSegment()
     {

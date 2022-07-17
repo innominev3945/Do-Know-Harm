@@ -21,6 +21,7 @@ public class GameplayDialogueManager : MonoBehaviour
 
 
     //saved scenes
+    //GABE - set this, may need to meet up with Calvin + Karen to figure out the numbering system
     public static int chapterID = 0;
     public static int dialogueID = 0;
 
