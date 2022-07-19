@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using Yarn.Unity;
 using System.IO;
+using TMPro;
+using UnityEngine.UI;
 
 public class GameplayDialogueManager : MonoBehaviour
 {
@@ -18,6 +20,15 @@ public class GameplayDialogueManager : MonoBehaviour
     //Yarn scenes
     [SerializeField] YarnProject[] chapters;
     [SerializeField] string[] dialogueTitles;
+
+    [SerializeField] AudioManager audio;
+    [SerializeField] CharacterManagerForGameplay cmfg;
+
+    [SerializeField] TextMeshProUGUI dialoguetext;
+    [SerializeField] TextMeshProUGUI nametext;
+
+    [SerializeField] Image dialogueBox;
+    [SerializeField] Image nameBox;
 
 
     //saved scenes
@@ -50,6 +61,33 @@ public class GameplayDialogueManager : MonoBehaviour
     //     }
     // }
 
+    public void hideVN(){
+        audio.muteAll();
+        cmfg.hideMC();
+        Color objectColor = dialogueBox.color;
+        objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
+        dialogueBox.color = objectColor;
+
+        objectColor = nameBox.color;
+        objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
+        nameBox.color = objectColor;
+
+        nametext.text = "";
+        dialoguetext.text = "";
+    }
+
+    public void showVN(){
+        audio.unmuteAll();
+        cmfg.showMC();
+
+        Color objectColor = dialogueBox.color;
+        objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
+        dialogueBox.color = objectColor;
+
+        objectColor = nameBox.color;
+        objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
+        nameBox.color = objectColor;
+    }
 
     
 
