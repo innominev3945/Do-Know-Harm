@@ -14,7 +14,6 @@ namespace BookCurlPro.Examples
         //public InputField pageNumInputField;
         public void GotoPage()
         {
-
             //int pageNum = int.Parse(pageNumInputField.text);
             if (pageNum < 0) pageNum = 0;
             if (pageNum > flipper.ControledBook.papers.Length * 2) pageNum = flipper.ControledBook.papers.Length * 2 - 1;

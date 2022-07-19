@@ -54,6 +54,34 @@ public class CharacterManagerForGameplay : MonoBehaviour
     private Sprite[] MCAccessories;
 
 
+    public void hideMC(){
+        Color objectColor = MCExpr.color;
+        objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
+        MCExpr.color = objectColor;
+
+        objectColor = MC.color;
+        objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
+        MC.color = objectColor;
+
+        objectColor = MCAccessory.color;
+        objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
+        MCAccessory.color = objectColor;
+    }
+
+    public void showMC(){
+        Color objectColor = MCExpr.color;
+        objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
+        MCExpr.color = objectColor;
+
+        objectColor = MC.color;
+        objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
+        MC.color = objectColor;
+
+        objectColor = MCAccessory.color;
+        objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
+        MCAccessory.color = objectColor;
+    }
+
 
     public void changeExpression(int expressionNumber)
     {
