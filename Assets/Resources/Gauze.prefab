@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: -253013955
   m_SortingLayer: 10
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4984923765706312686, guid: 2118a30e158ce854e83b63ff474cf24b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6b20819c311234dd3914905dfb7517bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.6156863}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,6 +106,11 @@ MonoBehaviour:
   gauzeHitBoxCollider: {fileID: 6937333998593828931, guid: 74c48d53f1b0d4befb6fbe920408a85f, type: 3}
   gauzeImage: {fileID: 6786973600921594002, guid: a4ccbdc36a82244b1857da8ed11f97f1, type: 3}
   allHitBoxes: []
+  gauze0: {fileID: 21300000, guid: 6b20819c311234dd3914905dfb7517bc, type: 3}
+  gauze1: {fileID: 21300000, guid: f54242427ccf449be9af16478664b631, type: 3}
+  gauze2: {fileID: 21300000, guid: 8134ef8590d06408694dcdbbe13136cb, type: 3}
+  gauze3: {fileID: 21300000, guid: d2025fdaedb8a420ebd966ca82acf4e5, type: 3}
+  gauze4: {fileID: 21300000, guid: fd409b6cdba404e058f37163ae16d0a9, type: 3}
 --- !u!58 &8723020226205549639
 CircleCollider2D:
   m_ObjectHideFlags: 0

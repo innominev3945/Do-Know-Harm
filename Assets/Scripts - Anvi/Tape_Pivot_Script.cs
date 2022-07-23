@@ -8,14 +8,16 @@ public class Tape_Pivot_Script : MonoBehaviour
     [SerializeField] GameObject hitBox2;
     [SerializeField] GameObject tapePrefab;
     GameObject tape;
+    GameObject HB1;
+    GameObject HB2;
 
     // Start is called before the first frame update
     void Start()
     {
         tape = GameObject.Find("Tape");
 
-        Instantiate(hitBox1, new Vector3(2, 0, 0), Quaternion.identity);
-        Instantiate(hitBox2, new Vector3(0, 2, 0), Quaternion.identity);
+        HB1 = Instantiate(hitBox1, new Vector3(2, 0, 0), Quaternion.identity);
+        HB2 = Instantiate(hitBox2, new Vector3(0, 2, 0), Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -34,5 +36,11 @@ public class Tape_Pivot_Script : MonoBehaviour
             tape = Instantiate(tapePrefab, new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z), Quaternion.identity);
             tape.transform.parent = transform;
         }
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(HB1);
+        Destroy(HB2);
     }
 }

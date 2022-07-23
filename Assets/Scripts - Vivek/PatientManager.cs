@@ -8,6 +8,7 @@ using TreatmentClass;
 using ForcepsTreatmentClass;
 using GauzeTreatmentClass;
 using DressTreatmentClass;
+using DressingTreatmentClass;
 using ChestTreatmentClass;
 using BurnTreatmentClass;
 using ButtonManagerClass;
@@ -45,7 +46,16 @@ namespace PatientManagerClass
 
         private bool transitioning = false;
 
+        private Vector3 currentPosition;
+        private Vector3 destination;
+        private float timePassed;
+        private float cameraLerpDuration;
+        private bool headLerp;
+        private bool chestLerp;
+        private bool legsLerp;
+
         private bool levelComplete;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -113,6 +123,14 @@ namespace PatientManagerClass
 
 
             currentPatient.Item1.StartTreatments();
+
+            currentPosition = Vector3.zero;
+            destination = Vector3.zero;
+            timePassed = 0;
+            cameraLerpDuration = 0.25f;
+            headLerp = false;
+            chestLerp = false;
+            legsLerp = false;
 
             ViewHead();
             currentView = 1;
@@ -197,6 +215,56 @@ namespace PatientManagerClass
                 {
                     patients[i].Item1.DestroyTreatmentObjects();
                     patientStatus[patients[i].Item4] = false;
+                }
+            }
+
+            // Move camera
+            if (headLerp)
+            {
+                chestLerp = false;
+                legsLerp = false;
+
+                if (timePassed < cameraLerpDuration)
+                {
+                    Camera.main.transform.position = Vector3.Lerp(currentPosition, destination, timePassed / cameraLerpDuration);
+                    timePassed += Time.deltaTime;
+                }
+                else
+                {
+                    Camera.main.transform.position = destination;
+                    headLerp = false;
+                }
+            }
+            else if (chestLerp)
+            {
+                headLerp = false;
+                legsLerp = false;
+
+                if (timePassed < cameraLerpDuration)
+                {
+                    Camera.main.transform.position = Vector3.Lerp(currentPosition, destination, timePassed / cameraLerpDuration);
+                    timePassed += Time.deltaTime;
+                }
+                else
+                {
+                    Camera.main.transform.position = destination;
+                    chestLerp = false;
+                }
+            }
+            else if (legsLerp)
+            {
+                headLerp = false;
+                chestLerp = false;
+
+                if (timePassed < cameraLerpDuration)
+                {
+                    Camera.main.transform.position = Vector3.Lerp(currentPosition, destination, timePassed / cameraLerpDuration);
+                    timePassed += Time.deltaTime;
+                }
+                else
+                {
+                    Camera.main.transform.position = destination;
+                    legsLerp = false;
                 }
             }
         }
@@ -330,7 +398,13 @@ namespace PatientManagerClass
         {
             float z = Camera.main.transform.position.z;
             Bodypart head = bodyparts[0];
-            Camera.main.transform.position = new Vector3(head.GetLocation().x, head.GetLocation().y, z);
+
+            currentPosition = Camera.main.transform.position;
+            destination = new Vector3(head.GetLocation().x, head.GetLocation().y, z);
+            timePassed = 0;
+            headLerp = true;
+            
+            // Camera.main.transform.position = new Vector3(head.GetLocation().x, head.GetLocation().y, z);
             currentPatient.Item1.AbortTreatments();
             if (currentPatient.Item1.GetClothesOpen())
             {
@@ -344,7 +418,13 @@ namespace PatientManagerClass
         {
             float z = Camera.main.transform.position.z;
             Bodypart chest = bodyparts[1];
-            Camera.main.transform.position = new Vector3(chest.GetLocation().x, chest.GetLocation().y, z);
+
+            currentPosition = Camera.main.transform.position;
+            destination = new Vector3(chest.GetLocation().x, chest.GetLocation().y, z);
+            timePassed = 0;
+            chestLerp = true;
+
+            // Camera.main.transform.position = new Vector3(chest.GetLocation().x, chest.GetLocation().y, z);
             currentPatient.Item1.AbortTreatments();
             if (currentPatient.Item1.GetClothesOpen())
             {
@@ -361,7 +441,13 @@ namespace PatientManagerClass
             float z = Camera.main.transform.position.z;
             Bodypart leftLeg = bodyparts[2];
             Bodypart rightLeg = bodyparts[3];
-            Camera.main.transform.position = new Vector3((leftLeg.GetLocation().x + rightLeg.GetLocation().x) / 2, leftLeg.GetLocation().y, z);
+
+            currentPosition = Camera.main.transform.position;
+            destination = new Vector3((leftLeg.GetLocation().x + rightLeg.GetLocation().x) / 2, leftLeg.GetLocation().y, z);
+            timePassed = 0;
+            legsLerp = true;
+
+            // Camera.main.transform.position = new Vector3((leftLeg.GetLocation().x + rightLeg.GetLocation().x) / 2, leftLeg.GetLocation().y, z);
             currentPatient.Item1.AbortTreatments();
             if (currentPatient.Item1.GetClothesOpen())
             {
@@ -660,6 +746,10 @@ namespace PatientManagerClass
                 parts[0].AddInjury(laceration4);
                 Injury laceration5 = new Injury(0.1f, new Vector2(parts[0].GetLocation().x - 1f, parts[0].GetLocation().y - 0.5f), "Laceration");
                 laceration5.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, laceration5, 180f));
+
+                // TODO: following is new addition
+                laceration5.AddTreatment(DressingTreatment.MakeDressingTreatmentObject(this.gameObject, laceration5));
+
                 parts[0].AddInjury(laceration5);
                 Injury laceration6 = new Injury(0.1f, new Vector2(parts[0].GetLocation().x + 0.5f, parts[0].GetLocation().y - 2f), "Laceration");
                 laceration6.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, laceration6, 180f));

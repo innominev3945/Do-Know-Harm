@@ -374,6 +374,10 @@ PrefabInstance:
       propertyPath: wound
       value: 
       objectReference: {fileID: 2053996363}
+    - target: {fileID: 6916518142669834184, guid: 2a1ed233c52674bdfb7bd20ae9d5a164, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6916518142669834185, guid: 2a1ed233c52674bdfb7bd20ae9d5a164, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -477,6 +481,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8668418650210736194, guid: fb3b28fb58bdb07488d449eb2f110ab2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668418650210736195, guid: fb3b28fb58bdb07488d449eb2f110ab2, type: 3}
+      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

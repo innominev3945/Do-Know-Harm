@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class GauzeTreatementManagementTest : MonoBehaviour
 {
-    private GameObject gauzeHitBoxManager;
+    private GameObject gauzeHitBoxManager1;
+    private GameObject gauzeHitBoxManager2;
 
     // Start is called before the first frame update
     void Start()
     {
-        gauzeHitBoxManager = Instantiate((UnityEngine.Object)Resources.Load("Gauze Hit Box Manager"), new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        gauzeHitBoxManager1 = Instantiate((UnityEngine.Object)Resources.Load("Gauze Hit Box Manager"), new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
 
         List<float> hitBoxesX = new List<float>();
         List<float> hitBoxesY = new List<float>();
@@ -27,19 +28,27 @@ public class GauzeTreatementManagementTest : MonoBehaviour
         hitBoxesY.Add(-1.66f);
         woundIDs.Add(0);
 
-        hitBoxesX.Add(4.79f);
-        hitBoxesY.Add(2.96f);
-        woundIDs.Add(1);
+        gauzeHitBoxManager1.GetComponent<Gauze_Hit_Box_Manager_Script>().addAllHitBoxes(hitBoxesX, hitBoxesY, woundIDs);
 
-        hitBoxesX.Add(6.05f);
-        hitBoxesY.Add(2.96f);
-        woundIDs.Add(1);
+        gauzeHitBoxManager2 = Instantiate((UnityEngine.Object)Resources.Load("Gauze Hit Box Manager"), new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
 
-        hitBoxesX.Add(7.24f);
-        hitBoxesY.Add(2.96f);
-        woundIDs.Add(1);
+        List<float> hitBoxesX2 = new List<float>();
+        List<float> hitBoxesY2 = new List<float>();
+        List<int> woundIDs2 = new List<int>();
 
-        gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().addAllHitBoxes(hitBoxesX, hitBoxesY, woundIDs);
+        hitBoxesX2.Add(4.79f);
+        hitBoxesY2.Add(2.96f);
+        woundIDs2.Add(0);
+
+        hitBoxesX2.Add(6.05f);
+        hitBoxesY2.Add(2.96f);
+        woundIDs2.Add(0);
+
+        hitBoxesX2.Add(7.24f);
+        hitBoxesY2.Add(2.96f);
+        woundIDs2.Add(0);
+
+        gauzeHitBoxManager2.GetComponent<Gauze_Hit_Box_Manager_Script>().addAllHitBoxes(hitBoxesX2, hitBoxesY2, woundIDs2);
     }
 
     // Update is called once per frame

@@ -66,6 +66,7 @@ public class Tape_Script : MonoBehaviour
             if (insideBox1 && insideBox2)
             {
                 Destroy(this);
+                // TODO: indicate that tape has successfully been laid down
             }
             else
             {

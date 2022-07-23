@@ -15,7 +15,7 @@ namespace Gauze
 
         [SerializeField] private int numClicks;
         private float timePassed;
-        [SerializeField] int totalClicks;
+        private int totalClicks;
         [SerializeField] float timeLimit;
         private bool mouseButtonDown;
         private bool rightmouseButtonDown;
@@ -25,13 +25,28 @@ namespace Gauze
         private bool mouseHeldInBloodPoolCollider;
         [SerializeField] float shrinkScale;
 
+        // TODO: have gauze hitbox manager manage the creation of hitboxes
         [SerializeField] GameObject hitbox;
         [SerializeField] GameObject gauzeHitBoxCollider;
         GameObject gauzeCollider;
         [SerializeField] GameObject gauzeImage;
         public List<GameObject> allHitBoxes;
 
-        GameObject gauzeHitBoxManager;
+        [SerializeField] Sprite gauze0;
+        [SerializeField] Sprite gauze1;
+        [SerializeField] Sprite gauze2;
+        [SerializeField] Sprite gauze3;
+        [SerializeField] Sprite gauze4;
+        // [SerializeField] Sprite cooldown;
+        private List<Sprite> gauzeSprites;
+        private SpriteRenderer sprender;
+        private int currentGauzeSprite;
+
+        GameObject[] gauzeHitBoxManagers;
+
+        private int lockBleedingWound;
+
+        private bool undergoDressing;
 
         private bool healed;
 
@@ -40,25 +55,65 @@ namespace Gauze
         // 2. when applying gauze squares to cover the wound
         public bool GetHealed() { return healed; }
 
+        public bool doingDressing()
+        {
+            return undergoDressing;
+        }
+
+        public void changeDressing(bool state)
+        {
+            undergoDressing = state;
+        }
+
         // Start is called before the first frame update
         void Start()
         {
-            // obtain hit box positions and create hit boxes
-            gauzeHitBoxManager = GameObject.FindWithTag("Gauze Hit Box Manager");
-            List<float> positionsX = gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxLocationsX();
-            List<float> positionsY = gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxLocationsY();
-            for (int i = 0; i < positionsX.Count; i++)
+            Debug.Log("Perform start method");
+
+            gauzeSprites = new List<Sprite>();
+            gauzeSprites.Add(gauze0);
+            gauzeSprites.Add(gauze1);
+            gauzeSprites.Add(gauze2);
+            gauzeSprites.Add(gauze3);
+            gauzeSprites.Add(gauze4);
+
+            currentGauzeSprite = 0;
+
+            sprender = gameObject.GetComponent<SpriteRenderer>();
+            sprender.sprite = gauzeSprites[currentGauzeSprite];
+
+            undergoDressing = false;
+            // TODO: fix Unity Exception
+            if (GameObject.FindWithTag("Gauze Hit Box Manager") != null)
             {
-                allHitBoxes.Add(Instantiate(hitbox, new Vector3(positionsX[i], positionsY[i], 0), Quaternion.identity));
+                undergoDressing = true;
             }
 
-            gauzeCollider = Instantiate(gauzeHitBoxCollider, new Vector3(0, 0, 0), Quaternion.identity);
+            if (undergoDressing)
+            {
+                /*
+                // obtain hit box positions and create hit boxes
+                gauzeHitBoxManager = GameObject.FindWithTag("Gauze Hit Box Manager");
+                List<float> positionsX = gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxLocationsX();
+                List<float> positionsY = gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxLocationsY();
+                // List<bool> hitBoxNotCovered = gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxNotCovered();
+                for (int i = 0; i < positionsX.Count; i++)
+                {
+                    // if (hitBoxNotCovered[i])
+                        allHitBoxes.Add(Instantiate(hitbox, new Vector3(positionsX[i], positionsY[i], 0), Quaternion.identity));
+                }
+                */
+                gauzeCollider = Instantiate(gauzeHitBoxCollider, new Vector3(0, 0, 0), Quaternion.identity);
+                
+            }
 
             numClicks = 0;
             timePassed = 0;
 
             totalClicks = 12;
             timeLimit = 3;
+
+            Debug.Log("Initialized totalClicks to: " + totalClicks);
 
             mouseButtonDown = false;
             rightmouseButtonDown = false;
@@ -69,6 +124,8 @@ namespace Gauze
             mouseHeldInBloodPoolCollider = false;
 
             shrinkScale = -0.3f;
+
+            lockBleedingWound = 0;
 
             healed = false;
         }
@@ -94,13 +151,18 @@ namespace Gauze
                 if (gauzeCollider.GetComponent<Gauze_Hit_Box_Collider_Script>().insideHitBox())
                 {
                     Debug.Log("Inside hit box function");
-                    if (rightmouseButtonDown)
+                    if (rightmouseButtonDown && sprender.sprite == gauzeSprites[0])
                     {
                         Debug.Log("Placed down gauze square");
                         float xCoord = gauzeCollider.GetComponent<Gauze_Hit_Box_Collider_Script>().getCollisionX();
                         float yCoord = gauzeCollider.GetComponent<Gauze_Hit_Box_Collider_Script>().getCollisionY();
                         Instantiate(gauzeImage, new Vector3(xCoord, yCoord, 0), Quaternion.identity);
-                        gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().notifyHitBoxCovered(xCoord, yCoord);
+                        // gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().notifyHitBoxCovered(xCoord, yCoord);
+                        gauzeHitBoxManagers = GameObject.FindGameObjectsWithTag("Gauze Hit Box Manager");
+                        foreach (GameObject manager in gauzeHitBoxManagers)
+                        {
+                            manager.GetComponent<Gauze_Hit_Box_Manager_Script>().notifyHitBoxCovered(xCoord, yCoord);
+                        }
 
                         // to make sure this body of code is executed only once and not multiple times for a single right mouse click
                         rightmouseButtonDown = false;
@@ -131,6 +193,14 @@ namespace Gauze
             }
             else if (/*context.performed || */context.canceled)
             {
+                /*
+                if (mouseHeldInBloodPoolCollider && currentGauzeSprite <= 3)
+                {
+                    currentGauzeSprite++;
+                    sprender.sprite = gauzeSprites[currentGauzeSprite];
+                }
+                */
+
                 mouseHeldBloodPool = false;
                 mouseHeldInBloodPoolCounter = 0;
                 mouseHeldInBloodPoolCollider = false;
@@ -162,25 +232,50 @@ namespace Gauze
                     Debug.Log("numClicks: " + numClicks);
                 }
                 timePassed = timePassed + Time.deltaTime;
-                // Debug.Log("timePassed: " + timePassed);
-                Debug.Log("Colliding");
+                Debug.Log("timePassed: " + timePassed + "\ntimeLimit: " + timeLimit);
+                // Debug.Log("Colliding");
                 if (timePassed >= timeLimit)
                 {
                     if (numClicks >= totalClicks)
                     {
-                        healed = true;
-                        GameObject obChild = collision.gameObject.transform.GetChild(0).gameObject;
-                        if (obChild != null)
-                            obChild.tag = "Healed";
-                        // TODO: change wound sprite to indicate less blood
-                        //GameObject wound = GameObject.Find("Bleeding Wound");
-                        //wound.GetComponent<SpriteRenderer>().color = Color.grey;
-                        Debug.Log("Successfully stopped bleeding by applying pressure on wound");
+                        Debug.Log("numClicks: " + numClicks);
+                        Debug.Log("totalClicks: " + totalClicks);
+
+                        lockBleedingWound++;
+
+                        if (lockBleedingWound == 1)
+                        {
+                            healed = true;
+
+                            GameObject obChild = collision.gameObject.transform.GetChild(0).gameObject;
+                            Debug.Log("healed: " + obChild.tag);
+                            if (obChild != null)
+                                obChild.tag = "Healed";
+                            Debug.Log("healed: " + obChild.tag);
+
+                            // TODO: change wound sprite to indicate less blood
+                            //GameObject wound = GameObject.Find("Bleeding Wound");
+                            //wound.GetComponent<SpriteRenderer>().color = Color.grey;
+
+                            if (currentGauzeSprite <= 3)
+                            {
+                                currentGauzeSprite++;
+                                sprender.sprite = gauzeSprites[currentGauzeSprite];
+                            }
+                            if (currentGauzeSprite == 4)
+                            {
+                                StartCoroutine(gauzeIsDead());
+                            }
+
+                            Debug.Log("Successfully stopped bleeding by applying pressure on wound");
+                        }
                     }
                     else
                     {
                         numClicks = 0;
                         timePassed = 0;
+
+                        lockBleedingWound = 0;
                     }
                 }
             }
@@ -204,10 +299,42 @@ namespace Gauze
                     }
                     else
                     {
-                        Camera.main.GetComponent<SFXPlaying>().SFXstepClear();
-                        Destroy(collision.gameObject);
+                        // TODO: fix error associated with the below line
+                        //Camera.main.GetComponent<SFXPlaying>().SFXstepClear();
+                        Debug.Log("Will destory blood pool");
+                        collision.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                        collision.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                        // Destroy(collision.gameObject);
+
+                        // Mark blood pool as healed
+                        GameObject obChild = collision.gameObject.transform.GetChild(0).gameObject;
+                        Debug.Log("healed: " + obChild.tag);
+                        if (obChild != null)
+                            obChild.tag = "Healed";
+                        Debug.Log("healed: " + obChild.tag);
+
+                        if (currentGauzeSprite <= 3)
+                        {
+                            currentGauzeSprite++;
+                            sprender.sprite = gauzeSprites[currentGauzeSprite];
+                        }
+                        if (currentGauzeSprite == 4)
+                        {
+                            StartCoroutine(gauzeIsDead());
+                        }
                     }
                 }
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.tag == "Bleeding Wound")
+            {
+                numClicks = 0;
+                timePassed = 0;
+
+                lockBleedingWound = 0;
             }
         }
 
@@ -222,6 +349,28 @@ namespace Gauze
             {
                 Destroy(gauzeCollider);
             }
+        }
+
+        private IEnumerator gauzeIsDead()
+        {
+            Debug.Log("Start cooldown");
+            Collider2D gauzeCollider = gameObject.GetComponent<CircleCollider2D>();
+            GameObject toolWheel = GameObject.Find("Wheel");
+            gauzeCollider.enabled = false;
+            if (toolWheel != null)
+            {
+                toolWheel.GetComponent<Tool_Wheel_Script>().setDeactivation(true);
+            }
+            yield return new WaitForSecondsRealtime(5);
+            gauzeCollider.enabled = true;
+            if (toolWheel != null)
+            {
+                toolWheel.GetComponent<Tool_Wheel_Script>().setDeactivation(false);
+            }
+            Debug.Log("End cooldown");
+
+            currentGauzeSprite = 0;
+            sprender.sprite = gauzeSprites[currentGauzeSprite];
         }
     }
 }

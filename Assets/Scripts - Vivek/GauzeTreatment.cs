@@ -50,7 +50,10 @@ namespace GauzeTreatmentClass
             if (bloodPool != null)
                 bloodPool.SetActive(true);
             if (bleedingWound != null)
+            {
                 bleedingWound.SetActive(true);
+                bleedingWound.GetComponent<BoxCollider2D>().enabled = false;
+            }
         }
 
         public override void StopTreatment()
@@ -76,8 +79,18 @@ namespace GauzeTreatmentClass
         // Update is called once per frame
         void Update()
         {
+            if (treatmentStarted && bloodPool.transform.GetChild(0).tag == "Healed")
+            {
+                if (bleedingWound != null)
+                {
+                    bleedingWound.GetComponent<BoxCollider2D>().enabled = true;
+                }
+            }
+
             if (treatmentStarted && bleedingWound.transform.GetChild(0).tag == "Healed") //gauze.GetComponent<Gauze_Script>().GetHealed())
             {
+                Debug.Log("Bloodpool and bleeding wound removed");
+
                 injury.RemoveTreatment();
                 Camera.main.GetComponent<SFXPlaying>().SFXinjuryClear();
                 treatmentStarted = false;

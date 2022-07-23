@@ -39,6 +39,13 @@ public class Tool_Wheel_Script : MonoBehaviour
     private bool westSelected;
     private bool northWestSelected;
 
+    private bool deactivate;
+
+    public void setDeactivation(bool set)
+    {
+        deactivate = set;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +82,8 @@ public class Tool_Wheel_Script : MonoBehaviour
         southWestSelected = false;
         westSelected = false;
         northWestSelected = false;
+
+        deactivate = false;
     }
 
     // Update is called once per frame
@@ -137,30 +146,55 @@ public class Tool_Wheel_Script : MonoBehaviour
 
     public void SelectNorthEastTool()
     {
+        if (deactivate)
+        {
+            return;
+        }
+
         Debug.Log("Select northeast tool");
         northEastTriggerTimer = 0.5f;
     }
 
     public void SelectNorthWestTool()
     {
+        if (deactivate)
+        {
+            return;
+        }
+
         Debug.Log("Select northwest tool");
         northWestTriggerTimer = 0.5f;
     }
 
     public void SelectSouthEastTool()
     {
+        if (deactivate)
+        {
+            return;
+        }
+
         Debug.Log("Select southeast tool");
         southEastTriggerTimer = 0.5f;
     }
 
     public void SelectSouthWestTool()
     {
+        if (deactivate)
+        {
+            return;
+        }
+
         Debug.Log("Select southwest tool");
         southWestTriggerTimer = 0.5f;
     }
 
     public void SelectNorthTool()
     {
+        if (deactivate)
+        {
+            return;
+        }
+
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
@@ -204,7 +238,11 @@ public class Tool_Wheel_Script : MonoBehaviour
 
     public void SelectNorthToolHelper()
     {
-        if (northEastTriggerTimer <= 0 && northWestTriggerTimer <= 0 && !northSelected)
+        // ***NOTE***
+        // Assume that gauze will always be the north tool
+        // Gauze is a special case where it can be reselected even if we currently have that tool selected
+
+        if (northEastTriggerTimer <= 0 && northWestTriggerTimer <= 0 /*&& !northSelected*/)
         {
             if (arrayOfTools[0] != null)
             {
@@ -223,6 +261,11 @@ public class Tool_Wheel_Script : MonoBehaviour
 
     public void SelectSouthTool()
     {
+        if (deactivate)
+        {
+            return;
+        }
+
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
@@ -285,6 +328,11 @@ public class Tool_Wheel_Script : MonoBehaviour
 
     public void SelectEastTool()
     {
+        if (deactivate)
+        {
+            return;
+        }
+
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
@@ -347,6 +395,11 @@ public class Tool_Wheel_Script : MonoBehaviour
 
     public void SelectWestTool()
     {
+        if (deactivate)
+        {
+            return;
+        }
+
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 

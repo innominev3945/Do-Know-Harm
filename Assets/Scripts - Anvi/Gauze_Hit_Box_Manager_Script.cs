@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Gauze_Hit_Box_Manager_Script : MonoBehaviour
 {
+    [SerializeField] GameObject hitbox;
+    private List<GameObject> allHitBoxesGameObjects;
+
     public class hitBox
     {
         float xCoord;
@@ -49,6 +52,7 @@ public class Gauze_Hit_Box_Manager_Script : MonoBehaviour
 
     public List<float> hitBoxesX;
     public List<float> hitBoxesY;
+    public List<bool> hitBoxNotCovered;
 
     public List<float> allHitBoxLocationsX()
     {
@@ -57,6 +61,10 @@ public class Gauze_Hit_Box_Manager_Script : MonoBehaviour
     public List<float> allHitBoxLocationsY()
     {
         return hitBoxesY;
+    }
+    public List<bool> allHitBoxNotCovered()
+    {
+        return hitBoxNotCovered;
     }
 
     public class wound
@@ -112,6 +120,8 @@ public class Gauze_Hit_Box_Manager_Script : MonoBehaviour
                     if (!allHitBoxes[i].isGauzeApplied())
                     {
                         allHitBoxes[i].setGauzeApplied();
+                        allHitBoxesGameObjects[i].GetComponent<SpriteRenderer>().enabled = false;
+                        // hitBoxNotCovered[i] = false;
                         int ID = allHitBoxes[i].getID();
 
                         Debug.Log("Wound ID associated with hit box found: " + ID);
@@ -200,9 +210,11 @@ public class Gauze_Hit_Box_Manager_Script : MonoBehaviour
         }
 
         allHitBoxes = new List<hitBox>();
+        allHitBoxesGameObjects = new List<GameObject>();
         allWounds = new List<wound>();
         hitBoxesX = new List<float>();
         hitBoxesY = new List<float>();
+        // hitBoxNotCovered = new List<bool>();
 
         int prevWoundID = woundIDs[0];
         int boxesPerWound = 0;
@@ -218,13 +230,38 @@ public class Gauze_Hit_Box_Manager_Script : MonoBehaviour
 
             hitBoxesX.Add(hitBoxesXtemp[i]);
             hitBoxesY.Add(hitBoxesYtemp[i]);
+            // hitBoxNotCovered.Add(true);
             allHitBoxes.Add(new hitBox(hitBoxesXtemp[i], hitBoxesYtemp[i], woundIDs[i]));
+
+            allHitBoxesGameObjects.Add(Instantiate(hitbox, new Vector3(hitBoxesXtemp[i], hitBoxesYtemp[i], 0), Quaternion.identity));
+
             boxesPerWound++;
 
             Debug.Log("X: " + hitBoxesX[i] + "\nY: " + hitBoxesY[i] + "\nID: " + woundIDs[i]);
         }
         allWounds.Add(new wound(boxesPerWound));
+
+        /*
+        List<float> positionsX = allHitBoxLocationsX();
+        List<float> positionsY = allHitBoxLocationsY();
+        // List<bool> hitBoxNotCovered = gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().allHitBoxNotCovered();
+        for (int i = 0; i < positionsX.Count; i++)
+        {
+            // if (hitBoxNotCovered[i])
+            allHitBoxesGameObjects.Add(Instantiate(hitbox, new Vector3(positionsX[i], positionsY[i], 0), Quaternion.identity));
+        }
+        */
     }
+
+    /*
+    public void cleanUp()
+    {
+        allHitBoxes = null;
+        allWounds = null;
+        hitBoxesX = null;
+        hitBoxesY = null;
+    }
+    */
 
     // Update is called once per frame
     void Update()

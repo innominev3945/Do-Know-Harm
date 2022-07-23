@@ -43,5 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ad0c7ba0c2448099bd07e4dde9fc4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitbox: {fileID: 4254575839729413508, guid: 5d588dfecc456425ab7c98478f20a982, type: 3}
   hitBoxesX: []
   hitBoxesY: []
+  hitBoxNotCovered: 
