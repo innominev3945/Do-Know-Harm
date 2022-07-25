@@ -26,8 +26,8 @@ namespace TapingTreatmentClass
             ret.vitalSpike = false;
             ret.injury = inj;
 
-            ret.hitBox1 = Instantiate((UnityEngine.Object)Resources.Load("Hit Box (Tape) 1"), new Vector2(ret.injury.GetLocation().x - 2f, ret.injury.GetLocation().y), Quaternion.identity) as GameObject;
-            ret.hitBox2 = Instantiate((UnityEngine.Object)Resources.Load("Hit Box (Tape) 12"), new Vector2(ret.injury.GetLocation().x + 2f, ret.injury.GetLocation().y), Quaternion.identity) as GameObject;
+            ret.hitBox1 = Instantiate((UnityEngine.Object)Resources.Load("Hit Box (Tape) 1"), new Vector3(ret.injury.GetLocation().x - 2f, ret.injury.GetLocation().y, 0), Quaternion.identity) as GameObject;
+            ret.hitBox2 = Instantiate((UnityEngine.Object)Resources.Load("Hit Box (Tape) 2"), new Vector3(ret.injury.GetLocation().x + 2f, ret.injury.GetLocation().y, 0), Quaternion.identity) as GameObject;
 
             return ret;
         }
@@ -72,7 +72,14 @@ namespace TapingTreatmentClass
         // Update is called once per frame
         void Update()
         {
-
+            if (treatmentStarted && hitBox1.tag == "Healed" && hitBox2.tag == "Healed")
+            {
+                injury.RemoveTreatment();
+                treatmentStarted = false;
+                Destroy(hitBox1);
+                Destroy(hitBox2);
+                Destroy(this);
+            }
         }
     }
 }

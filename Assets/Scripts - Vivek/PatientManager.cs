@@ -9,6 +9,7 @@ using ForcepsTreatmentClass;
 using GauzeTreatmentClass;
 using DressTreatmentClass;
 using DressingTreatmentClass;
+using TapingTreatmentClass;
 using ChestTreatmentClass;
 using BurnTreatmentClass;
 using ButtonManagerClass;
@@ -749,6 +750,7 @@ namespace PatientManagerClass
 
                 // TODO: following is new addition
                 laceration5.AddTreatment(DressingTreatment.MakeDressingTreatmentObject(this.gameObject, laceration5));
+                laceration5.AddTreatment(TapingTreatment.MakeTapingTreatmentObject(this.gameObject, laceration5));
 
                 parts[0].AddInjury(laceration5);
                 Injury laceration6 = new Injury(0.1f, new Vector2(parts[0].GetLocation().x + 0.5f, parts[0].GetLocation().y - 2f), "Laceration");

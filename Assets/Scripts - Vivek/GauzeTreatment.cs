@@ -45,6 +45,8 @@ namespace GauzeTreatmentClass
 
         public override void StartTreatment()
         {
+            Debug.Log("Start Gauze Treatment");
+
             treatmentStarted = true;
             //gauze.SetActive(true);
             if (bloodPool != null)

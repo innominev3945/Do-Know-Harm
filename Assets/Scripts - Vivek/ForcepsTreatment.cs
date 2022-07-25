@@ -52,6 +52,8 @@ namespace ForcepsTreatmentClass
 
         public override void StartTreatment()
         {
+            Debug.Log("Start Forceps Treatment");
+
             treatmentStarted = true;
             //forceps.SetActive(true);
             foreignObject.SetActive(true);

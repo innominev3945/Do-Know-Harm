@@ -59,16 +59,18 @@ namespace DressingTreatmentClass
 
         public override void StartTreatment()
         {
+            Debug.Log("Start Dressing Treatment");
+
             treatmentStarted = true;
             gauzeHitBoxManager.SetActive(true);
+            gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().enableHitBoxes();
         }
 
         public override void StopTreatment()
         {
             treatmentStarted = false;
             gauzeHitBoxManager.SetActive(false);
-
-            // TODO: disable hitboxes
+            gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().disableHitBoxes();
         }
 
         public override void ShowInjury()
@@ -83,6 +85,8 @@ namespace DressingTreatmentClass
         {
             if (treatmentStarted && gauzeHitBoxManager.GetComponent<Gauze_Hit_Box_Manager_Script>().getAllWounds()[0].isAllHitBoxesCovered())
             {
+                Debug.Log("Dressing Treatment Done");
+
                 injury.RemoveTreatment();
                 treatmentStarted = false;
                 Destroy(gauzeHitBoxManager);

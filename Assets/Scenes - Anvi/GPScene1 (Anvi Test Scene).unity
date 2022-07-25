@@ -1164,6 +1164,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4518165457762597996}
     m_Modifications:
+    - target: {fileID: 5049375688069141900, guid: c2d7f78411c5dc7478656d633efff263, type: 3}
+      propertyPath: SouthEastTool
+      value: 
+      objectReference: {fileID: 4140110065449908249, guid: 4cf82bd25cace43c682d57015dbed4b4, type: 3}
     - target: {fileID: 5049375688069141904, guid: c2d7f78411c5dc7478656d633efff263, type: 3}
       propertyPath: m_Pivot.x
       value: 0.4988188

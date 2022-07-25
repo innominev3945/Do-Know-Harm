@@ -55,6 +55,7 @@ namespace Gauze
         // 2. when applying gauze squares to cover the wound
         public bool GetHealed() { return healed; }
 
+        /*
         public bool doingDressing()
         {
             return undergoDressing;
@@ -64,6 +65,7 @@ namespace Gauze
         {
             undergoDressing = state;
         }
+        */
 
         // Start is called before the first frame update
         void Start()
@@ -84,7 +86,7 @@ namespace Gauze
 
             undergoDressing = false;
             // TODO: fix Unity Exception
-            if (GameObject.FindWithTag("Gauze Hit Box Manager") != null)
+            if (!undergoDressing && GameObject.FindWithTag("Gauze Hit Box Manager") != null)
             {
                 undergoDressing = true;
             }
@@ -142,6 +144,16 @@ namespace Gauze
                 if (mouseHeldInBloodPoolCounter < 5)
                 {
                     mouseHeldInBloodPoolCounter++;
+                }
+            }
+
+            // TODO: fix Unity Exception
+            if (!undergoDressing)
+            {
+                if (GameObject.FindWithTag("Gauze Hit Box Manager") != null)
+                {
+                    undergoDressing = true;
+                    gauzeCollider = Instantiate(gauzeHitBoxCollider, new Vector3(0, 0, 0), Quaternion.identity);
                 }
             }
 

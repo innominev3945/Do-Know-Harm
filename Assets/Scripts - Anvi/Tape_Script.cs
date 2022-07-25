@@ -15,6 +15,9 @@ public class Tape_Script : MonoBehaviour
     private bool insideBox1;
     private bool insideBox2;
 
+    private GameObject currentBox1;
+    private GameObject currentBox2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,9 @@ public class Tape_Script : MonoBehaviour
 
         insideBox1 = false;
         insideBox2 = false;
+
+        currentBox1 = null;
+        currentBox2 = null;
     }
 
     // Update is called once per frame
@@ -61,12 +67,22 @@ public class Tape_Script : MonoBehaviour
         }
         else if (context.canceled)
         {
+            Debug.Log("Tape context canceled");
             stretchTape = false;
 
             if (insideBox1 && insideBox2)
             {
-                Destroy(this);
+                Debug.Log("Tape context canceled - inside both boxes");
                 // TODO: indicate that tape has successfully been laid down
+                if (currentBox1 != null)
+                {
+                    currentBox1.tag = "Healed";
+                }
+                if (currentBox2 != null)
+                {
+                    currentBox2.tag = "Healed";
+                }
+                Destroy(this);
             }
             else
             {
@@ -84,10 +100,12 @@ public class Tape_Script : MonoBehaviour
         if (collision.gameObject.tag == "Hit Box (Tape) 1")
         {
             insideBox1 = true;
+            currentBox1 = collision.gameObject;
         }
         else if (collision.gameObject.tag == "Hit Box (Tape) 2")
         {
             insideBox2 = true;
+            currentBox2 = collision.gameObject;
         }
     }
 
@@ -96,10 +114,12 @@ public class Tape_Script : MonoBehaviour
         if (collision.gameObject.tag == "Hit Box (Tape) 1")
         {
             insideBox1 = false;
+            currentBox1 = null;
         }
         else if (collision.gameObject.tag == "Hit Box (Tape) 2")
         {
             insideBox2 = false;
+            currentBox2 = null;
         }
     }
 }
