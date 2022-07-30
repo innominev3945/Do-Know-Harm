@@ -29,6 +29,9 @@ public class GameplayDialogueManager : MonoBehaviour
 
     [SerializeField] Image dialogueBox;
     [SerializeField] Image nameBox;
+    [SerializeField] Image vnBackground;
+
+    [SerializeField] GameObject ui;
 
 
     //saved scenes
@@ -44,6 +47,7 @@ public class GameplayDialogueManager : MonoBehaviour
     void Start()
     {        
         LoadDialogueSegments(chapterID, dialogueID);
+        hideVN();
     }
 
 
@@ -72,6 +76,12 @@ public class GameplayDialogueManager : MonoBehaviour
         objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
         nameBox.color = objectColor;
 
+        objectColor = vnBackground.color;
+        objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
+        vnBackground.color = objectColor;
+
+        ui.GetComponent<Canvas>().enabled = false;
+
         nametext.text = "";
         dialoguetext.text = "";
     }
@@ -87,9 +97,16 @@ public class GameplayDialogueManager : MonoBehaviour
         objectColor = nameBox.color;
         objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
         nameBox.color = objectColor;
+
+        objectColor = vnBackground.color;
+        objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0.75f);
+        vnBackground.color = objectColor;
+
+        ui.GetComponent<Canvas>().enabled = true;
+
     }
 
-    
+
 
     //Loads scene specified by sceneNumber
     public void LoadDialogueSegments(int chapterID, int segmentID)

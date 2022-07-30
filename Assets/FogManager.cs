@@ -14,6 +14,7 @@ public class FogManager : MonoBehaviour
     private bool gasActive;
     private float startAlpha;
     private bool inTransition;
+    [SerializeField] private GameObject gasMask;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class FogManager : MonoBehaviour
         bloodEffectImage = bloodEffect.GetComponent<Image>();
         setTime = -1; // negative num (or -1) is set as a null-like value
         inTransition = false;
+        gasMask.SetActive(false);
     }
 
     // Update is called once per frame
@@ -64,7 +66,7 @@ public class FogManager : MonoBehaviour
     public IEnumerator WearGasMaskSeq()
     {
         Debug.Log("wearseq started");
-        //add code to enable gasmask sprite
+        gasMask.SetActive(true); // add transition effects here
         float bloodAlpha = bloodEffectImage.color.a;
         Color temp1 = bloodEffectImage.color;
         while (bloodAlpha > 0)
@@ -126,6 +128,27 @@ public class FogManager : MonoBehaviour
         {
             inTransition = true;
             StartCoroutine(WearGasMaskSeq());
+        }
+    }
+
+    public void RemoveGasMask()
+    {
+        if (gasMaskWorn && !inTransition)
+        {
+            gasMask.SetActive(false);
+            gasMaskWorn = false;
+        }
+    }
+    //bruh
+    public void ToggleGasMask()
+    {
+        if (gasMaskWorn && !inTransition)
+        {
+            RemoveGasMask();
+        }
+        else if (!gasMaskWorn && !inTransition)
+        {
+            WearGasMask();
         }
     }
 }

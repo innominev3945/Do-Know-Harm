@@ -46,6 +46,11 @@ namespace PatientManagerClass
         private bool transitioning = false;
 
         private bool levelComplete;
+
+        [SerializeField] private GameObject gameplayDialogueManager;
+
+        [SerializeField] private GameObject patientHitboxObj;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -113,10 +118,21 @@ namespace PatientManagerClass
 
 
             currentPatient.Item1.StartTreatments();
+            if (currentPatient.Item1.isPatientMale())
+            {
+                //patientHitboxObj.GetComponent<SyretteHitboxManager>().SetMaleHitboxes();
+            }
+            else
+            {
+                //patientHitboxObj.GetComponent<SyretteHitboxManager>().SetFemaleHitboxes();
+            }
 
             ViewHead();
             currentView = 1;
             UpdateInjuryInformation();
+
+
+            // TRIGGER 1, MISSION START
         }
 
         // Update is called once per frame
@@ -143,6 +159,10 @@ namespace PatientManagerClass
                 Debug.Log("Switching Patient");
                 if (currentPatient.Item1.GetHealed())
                 {
+
+                    // TRIGGER 4, PATIENT SAVED
+                    // check related methods here and on SaveDeathTransition for possibly better locations
+
                     currentPatient.Item1.DestroyTreatmentObjects();
                     gameObject.GetComponent<SaveDeathTransition>().currentPatientSaved(this.gameObject);
                     Debug.Log("current patient dead or healed");
@@ -151,6 +171,11 @@ namespace PatientManagerClass
                 }
                 else
                 {
+
+                    // TRIGGER 5, PATIENT LOST
+                    // check related methods here and on SaveDeathTransition for possibly better locations
+                    // May need other identical or separate trigger for patient loss when not under treatment
+
                     currentPatient.Item1.DestroyTreatmentObjects();
                     patientStatus[currentPatient.Item4] = false;
                     gameObject.GetComponent<SaveDeathTransition>().currentPatientDeath(this.gameObject);
@@ -223,6 +248,24 @@ namespace PatientManagerClass
             {
                 patients[i].Item1.PauseDamage();
             }
+
+            GameplayDialogueManager.chapterID = 0;
+            GameplayDialogueManager.dialogueID = 0;
+            //gameplayDialogueManager.GetComponent<GameplayDialogueManager>().LoadDialogueSegments(0, 0);
+            gameplayDialogueManager.GetComponent<GameplayDialogueManager>().showVN();
+
+            Debug.Log(GameplayDialogueManager.chapterID);
+        }
+
+        public void UnpauseSceneDamage()
+        {
+            currentPatient.Item1.UnpauseDamage();
+            for (int i = 0; i < patients.Length; i++)
+            {
+                patients[i].Item1.UnpauseDamage();
+            }
+
+            gameplayDialogueManager.GetComponent<GameplayDialogueManager>().hideVN();
         }
 
         public void PatientSaveDeathTransitionHelper2() // called by MoveSavedPatient of SaveDeathTransition script when saved patient is moved offscreen
@@ -288,6 +331,14 @@ namespace PatientManagerClass
 
             gameObject.transform.GetChild(0).transform.position = new Vector3(0, 0, 5);
             currentPatient.Item1.StartTreatments();
+            if (currentPatient.Item1.isPatientMale())
+            {
+                patientHitboxObj.GetComponent<SyretteHitboxManager>().SetMaleHitboxes();
+            }
+            else
+            {
+                patientHitboxObj.GetComponent<SyretteHitboxManager>().SetFemaleHitboxes();
+            }
             bodyparts = currentPatient.Item1.GetBodyparts();
             ViewHead();
             currentView = 1;
@@ -324,6 +375,8 @@ namespace PatientManagerClass
                 }
                 SetNumDeaths();
                 return true;
+
+                // TRIGGER 2, MISSION END
             }
             return false;
         }
@@ -346,6 +399,10 @@ namespace PatientManagerClass
                 Tuple<Patient, Sprite, Sprite, int> tmp = btn.patient;
                 if (tmp == null)
                     return;
+
+                // TRIGGER 3, SWITCH PATIENT
+                // may need to use patient specific info
+
                 StartCoroutine(SwitchPatientHelper(btn));
             }
         }
@@ -440,7 +497,7 @@ namespace PatientManagerClass
                 parts1[2].AddInjury(lacerationShard2);
 
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts1, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 0));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts1, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 0));
             }
 
             /* Creating Second Patient */
@@ -483,7 +540,7 @@ namespace PatientManagerClass
                 parts1[2].AddInjury(lacerationShard2);
 
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts1, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 1));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts1, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 1));
             }
 
             if (true)
@@ -496,7 +553,7 @@ namespace PatientManagerClass
                 parts3[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
                 parts3[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts3, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit3"), 2));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts3, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit3"), 2));
             }
 
             if (true)
@@ -509,7 +566,7 @@ namespace PatientManagerClass
                 parts4[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
                 parts4[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts4, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit4"), 3));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts4, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit4"), 3));
             }
 
             if (true)
@@ -522,7 +579,7 @@ namespace PatientManagerClass
                 parts4[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
                 parts4[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts4, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit4"), 4));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts4, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit4"), 4));
             }
 
         }
@@ -570,7 +627,7 @@ namespace PatientManagerClass
                 parts1[2].AddInjury(lacerationShard2);
 
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts1, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 0));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts1, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 0));
             }
 
             /* Creating Second Patient */
@@ -613,7 +670,7 @@ namespace PatientManagerClass
                 parts1[2].AddInjury(lacerationShard2);
 
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts1, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 1));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts1, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 1));
             }
 
             if (true)
@@ -626,7 +683,7 @@ namespace PatientManagerClass
                 parts3[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
                 parts3[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts3, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit3"), 2));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts3, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit3"), 2));
             }
 
             if (true)
@@ -639,7 +696,7 @@ namespace PatientManagerClass
                 parts4[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
                 parts4[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts4, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit4"), 3));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts4, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit4"), 3));
             }
 
             if (true)
@@ -652,7 +709,7 @@ namespace PatientManagerClass
                 parts4[4] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(-6.1f, -6.9f)); // Left arm
                 parts4[5] = Bodypart.MakeBodypartObject(this.gameObject, 0.1f, 1f, new Vector2(4.7f, -6.9f)); // Right arm
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts4, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit4"), 4));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts4, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit4"), 4));
             }
 
         }
@@ -690,7 +747,7 @@ namespace PatientManagerClass
                 parts[0].AddInjury(laceration6);
 
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 0));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts, 1f, false), Resources.Load<Sprite>("FemaleBody1A"), Resources.Load<Sprite>("MaleSuit1"), 0));
             }
 
             // Patient 2
@@ -717,7 +774,7 @@ namespace PatientManagerClass
                 forceps3.AddTreatment(ForcepsTreatment.MakeForcepsTreatmentObject(this.gameObject, forceps3, 180f));
                 parts[4].AddInjury(forceps3);
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 1));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 1));
             }
 
             // Patient 3
@@ -745,7 +802,7 @@ namespace PatientManagerClass
                 parts[3].AddInjury(laceration3);
 
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 2));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 2));
             }
 
             // Patient 4
@@ -777,7 +834,7 @@ namespace PatientManagerClass
                 parts[3].AddInjury(forceps4);
 
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 3));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 3));
             }
             // Patient 5
             if (true)
@@ -802,7 +859,7 @@ namespace PatientManagerClass
                 laceration3.AddTreatment(GauzeTreatment.MakeGauzeTreatmentObject(this.gameObject, laceration3, 180f));
                 parts[2].AddInjury(laceration3);
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 4));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 4));
             }
 
             // Patient 6
@@ -841,7 +898,7 @@ namespace PatientManagerClass
 
 
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 5));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 5));
             }
 
             // Patient 7
@@ -875,7 +932,7 @@ namespace PatientManagerClass
                 parts[0].AddInjury(laceration6);
 
 
-                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts, 1f), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 6));
+                nextPatients.Enqueue(new Tuple<Patient, Sprite, Sprite, int>(Patient.MakePatientObject(this.gameObject, parts, 1f, true), Resources.Load<Sprite>("MaleBody"), Resources.Load<Sprite>("MaleSuit1"), 6));
 
 
             }

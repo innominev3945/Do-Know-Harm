@@ -23,6 +23,7 @@ namespace PatientClass
         private bool clothesOpen;
         private bool debugHealth;
         private bool healthBoostOnCooldown;
+        private bool isMale;
 
         private void OnDestroy()
         {
@@ -36,7 +37,7 @@ namespace PatientClass
         // Monobehaviour scripts, so instead of creating a Patient object using the Patient() constructor, use 
         // the MakePatientObject() method instead 
         public static Patient MakePatientObject(GameObject ob /*This is the GameObject that Patient is being attached to, so when using it in a driver program, use the "this" keyword*/,
-            Bodypart[] parts, float interval)
+            Bodypart[] parts, float interval, bool isPatientMale)
         {
             Patient ret = ob.AddComponent<Patient>();
             ret.timeInterval = interval;
@@ -46,6 +47,7 @@ namespace PatientClass
             ret.clothesOpen = false;
             ret.debugHealth = false;
             ret.healthBoostOnCooldown = false;
+            ret.isMale = isPatientMale;
             return ret;
         }
 
@@ -105,6 +107,11 @@ namespace PatientClass
             {
                 part.UnpauseDamage();
             }
+        }
+
+        public bool isPatientMale()
+        {
+            return isMale;
         }
 
         // Update functionality that is called every timeInterval 
